@@ -5,6 +5,5 @@ public class hello{
         //hello
 	    System.out.println("Edgar sucks");
 	    System.out.println("Buzz also sucks");
-        System.out.println("W Buzz. W Edgar");
     }
 }
