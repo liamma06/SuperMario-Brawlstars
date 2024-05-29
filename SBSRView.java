@@ -97,7 +97,6 @@ public class SBSRView implements ActionListener{
         	UsernameField.setFont(new Font("Arial", Font.PLAIN, 30));
         	ConnectPanel.add(UsernameField);
 
-<<<<<<< HEAD
         	IPLabel = new JLabel("IP:");
         	IPLabel.setSize(200,50);
   	        IPLabel.setLocation(350,150);
@@ -108,7 +107,6 @@ public class SBSRView implements ActionListener{
         	ipField.setSize(500,200);
         	ipField.setLocation(100,200);
         	ConnectPanel.add(ipField);
-=======
         IPLabel = new JLabel("IP:");
         IPLabel.setSize(200,50);
         IPLabel.setLocation(340,150);
@@ -120,7 +118,6 @@ public class SBSRView implements ActionListener{
         ipField.setLocation(100,200);
         ipField.setFont(new Font("Arial", Font.PLAIN, 40));
         ConnectPanel.add(ipField);
->>>>>>> 9bee23e26655c10e3a07f0fe6f1d98d3914c14cd
 
         PortLabel = new JLabel("Port:");
         PortLabel.setSize(200,50);
