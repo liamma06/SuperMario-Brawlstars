@@ -24,8 +24,8 @@ public class SBSRView implements ActionListener{
 
     //Connect screen
     public JPanel ConnectPanel = new JPanel();
-    public JTextField ipField;
-    public JTextField portField;
+	public JTextField ipField;
+	public JTextField portField;
 	public JButton ConnectButton;
     public JButton BackButton;
     public JLabel ConnectionStatusLabel;
@@ -34,6 +34,7 @@ public class SBSRView implements ActionListener{
     public JLabel PortLabel;
     public JTextField UsernameField;
     public String strUsername; 
+
     SuperSocketMaster ssm;
 
     //Methods
@@ -41,14 +42,14 @@ public class SBSRView implements ActionListener{
         if(evt.getSource() == ConnectMenuButton){
             theframe.setContentPane(ConnectPanel);
             theframe.revalidate();
-        }if(evt.getSource() == BackButton){
-            theframe.setContentPane(MenuPanel);
-            theframe.revalidate();
         }else if(evt.getSource() == ConnectButton){
-			    //System.out.println("Connect Button Pressed");
+			//System.out.println("Connect Button Pressed");
 			if(ipField.getText().equals("") && portField.getText().equals("")){
 				ConnectionStatusLabel.setText("Enter a port number and/or IP Address\n");
-			}else if(ipField.getText().equals("") && !portField.getText().equals("")){
+			}else if(evt.getSource() == BackButton){
+                theframe.setContentPane(MenuPanel);
+                theframe.revalidate();
+            }else if(ipField.getText().equals("") && !portField.getText().equals("")){
 				//ConnectionStatusLabel.setText("Starting chat in server mode\n");
 				ssm = new SuperSocketMaster(Integer.parseInt(portField.getText()),this);
 				ssm.connect();
@@ -81,8 +82,6 @@ public class SBSRView implements ActionListener{
         ConnectMenuButton.addActionListener(this);
         MenuPanel.add(ConnectMenuButton);
 
-        
-
         HelpMenuButton = new JButton("Help");
         HelpMenuButton.setSize(300,60);
         HelpMenuButton.setLocation(490,600);
@@ -93,7 +92,7 @@ public class SBSRView implements ActionListener{
 
         BackButton = new JButton("Back");
         BackButton.setSize(200,75);
-        BackButton.setLocation(50,550);
+        BackButton.setLocation(50,600);
         BackButton.addActionListener(this);
         ConnectPanel.add(BackButton);
 
