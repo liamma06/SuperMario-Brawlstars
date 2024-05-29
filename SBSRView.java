@@ -41,7 +41,7 @@ public class SBSRView implements ActionListener{
             theframe.setContentPane(ConnectPanel);
             theframe.revalidate();
         }else if(evt.getSource() == ConnectButton){
-			//System.out.println("Connect Button Pressed");
+			    //System.out.println("Connect Button Pressed");
 			if(ipField.getText().equals("") && portField.getText().equals("")){
 				ConnectionStatusLabel.setText("Enter a port number and/or IP Address\n");
 			}else if(ipField.getText().equals("") && !portField.getText().equals("")){
@@ -118,6 +118,7 @@ public class SBSRView implements ActionListener{
         portField = new JTextField();
         portField.setSize(500,200);
         portField.setLocation(680,200);
+        portField.setFont(new Font("Arial", Font.PLAIN, 40));
         ConnectPanel.add(portField);
 
         ConnectButton = new JButton("Connect");
