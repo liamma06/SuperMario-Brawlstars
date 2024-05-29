@@ -12,91 +12,92 @@ import javax.swing.event.*;
 
 //Defining
 public class SBSRView implements ActionListener{
+    //Properties
 
-	//Properties
-	public JFrame theframe = new JFrame("Super Mario Brawlstars");
+    public JFrame theframe = new JFrame("Super Mario Brawlstars");
 
-	//Main Menu
-	public JPanel MenuPanel = new JPanel();
-	public JButton PlayMenuButton;
-	public JButton ConnectMenuButton;
-	public JButton HelpMenuButton;
+    //main menu
+    public JPanel MenuPanel = new JPanel();
+    public JButton PlayMenuButton;
+    public JButton ConnectMenuButton;
+    public JButton HelpMenuButton;
 
-	//Connect Screen
-	public JPanel ConnectPanel = new JPanel();
+    //Connect screen
+    public JPanel ConnectPanel = new JPanel();
 	public JTextField ipField;
 	public JTextField portField;
 	public JButton ConnectButton;
-    	public JLabel ConnectionStatusLabel;
-	public JLabel UsernameLabel;
- 	public JLabel IPLabel;
-	public JLabel PortLabel;
-	public JTextField UsernameField;
-	public String strUsername; 
-    	SuperSocketMaster ssm;
+    public JLabel ConnectionStatusLabel;
+    public JLabel UsernameLabel;
+    public JLabel IPLabel;
+    public JLabel PortLabel;
+    public JTextField UsernameField;
+    public String strUsername; 
+    SuperSocketMaster ssm;
 
-    	//Methods
-    	public void actionPerformed(ActionEvent evt){
-        	if(evt.getSource() == ConnectMenuButton){
-			theframe.setContentPane(ConnectPanel);
-			theframe.revalidate();
-        	} else if(evt.getSource() == ConnectButton){
-		//System.out.println("Connect Button Pressed");
+    //Methods
+    public void actionPerformed(ActionEvent evt){
+        if(evt.getSource() == ConnectMenuButton){
+            theframe.setContentPane(ConnectPanel);
+            theframe.revalidate();
+        }else if(evt.getSource() == ConnectButton){
+			    //System.out.println("Connect Button Pressed");
 			if(ipField.getText().equals("") && portField.getText().equals("")){
 				ConnectionStatusLabel.setText("Enter a port number and/or IP Address\n");
-			} else if(ipField.getText().equals("") && !portField.getText().equals("")){
+			}else if(ipField.getText().equals("") && !portField.getText().equals("")){
 				//ConnectionStatusLabel.setText("Starting chat in server mode\n");
 				ssm = new SuperSocketMaster(Integer.parseInt(portField.getText()),this);
 				ssm.connect();
-	                	ConnectionStatusLabel.setText("(HOST) Your IP:" + ssm.getMyAddress());
-			} else if(!ipField.getText().equals("") && !portField.getText().equals("")){
-        		        //ConnectionStatusLabel.setText("Starting chat in client  mode\n");
+                ConnectionStatusLabel.setText("(HOST) Your IP:" + ssm.getMyAddress());
+			}else if(!ipField.getText().equals("") && !portField.getText().equals("")){
+                //ConnectionStatusLabel.setText("Starting chat in client  mode\n");
 				ssm = new SuperSocketMaster(ipField.getText(),Integer.parseInt(portField.getText()),this);
 				ssm.connect();
-                		ConnectionStatusLabel.setText("(Client) Connected to: " + ipField.getText());
-           		} else if(!ipField.getText().equals("") && portField.getText().equals("")){
-                		 ConnectionStatusLabel.setText("Need a portnumber or port/ip \n");
-              		}
+                ConnectionStatusLabel.setText("(Client) Connected to: " + ipField.getText());
+            }else if(!ipField.getText().equals("") && portField.getText().equals("")){
+                 ConnectionStatusLabel.setText("Need a portnumber or port/ip \n");
+            }
 		}
-    	}
+    }
 
-	//Constructor
-	public SBSRView(){
-        	MenuPanel.setPreferredSize(new Dimension(1280,720));
-       		MenuPanel.setLayout(null);
+    //Constructor
+    public SBSRView(){
+        MenuPanel.setPreferredSize(new Dimension(1280,720));
+        MenuPanel.setLayout(null);
 
-       		//Menu options 
-	        PlayMenuButton = new JButton("Play");
-    	    	PlayMenuButton.setSize(300,60);
-       		PlayMenuButton.setLocation(490,400);
-        	MenuPanel.add(PlayMenuButton);
+        //Menu options 
+        PlayMenuButton = new JButton("Play");
+        PlayMenuButton.setSize(300,60);
+        PlayMenuButton.setLocation(490,400);
+        MenuPanel.add(PlayMenuButton);
 
-        	ConnectMenuButton = new JButton("Connect");
-        	ConnectMenuButton.setSize(300,60);
-        	ConnectMenuButton.setLocation(490,500);
-        	ConnectMenuButton.addActionListener(this);
-       		MenuPanel.add(ConnectMenuButton);
+        ConnectMenuButton = new JButton("Connect");
+        ConnectMenuButton.setSize(300,60);
+        ConnectMenuButton.setLocation(490,500);
+        ConnectMenuButton.addActionListener(this);
+        MenuPanel.add(ConnectMenuButton);
 
-        	HelpMenuButton = new JButton("Help");
-        	HelpMenuButton.setSize(300,60);
-        	HelpMenuButton.setLocation(490,600);
-        	MenuPanel.add(HelpMenuButton);
+        HelpMenuButton = new JButton("Help");
+        HelpMenuButton.setSize(300,60);
+        HelpMenuButton.setLocation(490,600);
+        MenuPanel.add(HelpMenuButton);
 
-	        //ConnectPanel
-        	ConnectPanel.setLayout(null);
+        //ConnectPanel
+        ConnectPanel.setLayout(null);
 
-  	  	UsernameLabel = new JLabel("Username:");
-  	      	UsernameLabel.setSize(200,50);
-   	     	UsernameLabel.setLocation(50,50);
-        	UsernameLabel.setFont(new Font("Arial", Font.BOLD,30));
-        	ConnectPanel.add(UsernameLabel);
+        UsernameLabel = new JLabel("Username:");
+        UsernameLabel.setSize(200,50);
+        UsernameLabel.setLocation(50,50);
+        UsernameLabel.setFont(new Font("Arial", Font.BOLD,30));
+        ConnectPanel.add(UsernameLabel);
 
-        	UsernameField = new JTextField();
-        	UsernameField.setSize(250,50);
-        	UsernameField.setLocation(210,50);
-        	UsernameField.setFont(new Font("Arial", Font.PLAIN, 30));
-        	ConnectPanel.add(UsernameField);
+        UsernameField = new JTextField();
+        UsernameField.setSize(250,50);
+        UsernameField.setLocation(210,50);
+        UsernameField.setFont(new Font("Arial", Font.PLAIN, 30));
+        ConnectPanel.add(UsernameField);
 
+<<<<<<< HEAD
         	IPLabel = new JLabel("IP:");
         	IPLabel.setSize(200,50);
   	        IPLabel.setLocation(350,150);
@@ -112,6 +113,13 @@ public class SBSRView implements ActionListener{
 		IPLabel.setLocation(340,150);
         	IPLabel.setFont(new Font("Arial", Font.BOLD,30));
         	ConnectPanel.add(IPLabel);
+=======
+        IPLabel = new JLabel("IP:");
+        IPLabel.setSize(200,50);
+        IPLabel.setLocation(340,150);
+        IPLabel.setFont(new Font("Arial", Font.BOLD,30));
+        ConnectPanel.add(IPLabel);
+>>>>>>> 70a3f276e4415c671eb3ac21acb370c14b0d8d12
 
         	ipField = new JTextField();
         	ipField.setSize(500,200);
@@ -125,10 +133,18 @@ public class SBSRView implements ActionListener{
         	PortLabel.setFont(new Font("Arial", Font.BOLD,30));
         	ConnectPanel.add(PortLabel);
 
+<<<<<<< HEAD
         	portField = new JTextField();
         	portField.setSize(500,200);
         	portField.setLocation(680,200);
         	ConnectPanel.add(portField);
+=======
+        portField = new JTextField();
+        portField.setSize(500,200);
+        portField.setLocation(680,200);
+        portField.setFont(new Font("Arial", Font.PLAIN, 40));
+        ConnectPanel.add(portField);
+>>>>>>> 70a3f276e4415c671eb3ac21acb370c14b0d8d12
 
        		ConnectButton = new JButton("Connect");
         	ConnectButton.setSize(300,100);
@@ -142,6 +158,7 @@ public class SBSRView implements ActionListener{
         	ConnectionStatusLabel.setLocation(900,100);
         	ConnectPanel.add(ConnectionStatusLabel);
         
+<<<<<<< HEAD
         	//putting the panel inside the frame
         	theframe.setContentPane(MenuPanel);
         	theframe.pack();
@@ -149,6 +166,15 @@ public class SBSRView implements ActionListener{
         	theframe.setVisible(true);
         	theframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
+=======
+        //putting the panel inside the frame
+        theframe.setContentPane(MenuPanel);
+        theframe.pack();
+        theframe.setResizable(false);
+        theframe.setVisible(true);
+        theframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+>>>>>>> 70a3f276e4415c671eb3ac21acb370c14b0d8d12
 
     	public static void main(String[] args){
         	new SBSRView();
