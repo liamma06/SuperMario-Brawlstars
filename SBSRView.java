@@ -29,15 +29,35 @@ public class SBSRView implements ActionListener{
 	public JButton ConnectButton;
     public JLabel ConnectionStatusLabel;
     public JLabel UsernameLabel;
+    public JLabel IPLabel;
+    public JLabel PortLabel;
     public JTextField UsernameField;
     public String strUsername; 
+    SuperSocketMaster ssm;
 
     //Methods
     public void actionPerformed(ActionEvent evt){
         if(evt.getSource() == ConnectMenuButton){
             theframe.setContentPane(ConnectPanel);
             theframe.revalidate();
-        }
+        }else if(evt.getSource() == ConnectButton){
+			//System.out.println("Connect Button Pressed");
+			if(ipField.getText().equals("") && portField.getText().equals("")){
+				ConnectionStatusLabel.setText("Enter a port number and/or IP Address\n");
+			}else if(ipField.getText().equals("") && !portField.getText().equals("")){
+				//ConnectionStatusLabel.setText("Starting chat in server mode\n");
+				ssm = new SuperSocketMaster(Integer.parseInt(portField.getText()),this);
+				ssm.connect();
+                ConnectionStatusLabel.setText("(HOST) Your IP:" + ssm.getMyAddress());
+			}else if(!ipField.getText().equals("") && !portField.getText().equals("")){
+                //ConnectionStatusLabel.setText("Starting chat in client  mode\n");
+				ssm = new SuperSocketMaster(ipField.getText(),Integer.parseInt(portField.getText()),this);
+				ssm.connect();
+                ConnectionStatusLabel.setText("(Client) Connected to: " + ipField.getText());
+            }else if(!ipField.getText().equals("") && portField.getText().equals("")){
+                 ConnectionStatusLabel.setText("Need a portnumber or port/ip \n");
+            }
+		}
     }
 
     //Constructor
@@ -66,20 +86,49 @@ public class SBSRView implements ActionListener{
         ConnectPanel.setLayout(null);
 
         UsernameLabel = new JLabel("Username:");
-        UsernameLabel.setSize(150,50);
+        UsernameLabel.setSize(200,50);
         UsernameLabel.setLocation(50,50);
+        UsernameLabel.setFont(new Font("Arial", Font.BOLD,30));
         ConnectPanel.add(UsernameLabel);
 
         UsernameField = new JTextField();
-        UsernameField.setSize(200,50);
-        UsernameField.setLocation(120,50);
+        UsernameField.setSize(250,50);
+        UsernameField.setLocation(210,50);
+        UsernameField.setFont(new Font("Arial", Font.PLAIN, 30));
         ConnectPanel.add(UsernameField);
 
+        IPLabel = new JLabel("IP:");
+        IPLabel.setSize(200,50);
+        IPLabel.setLocation(350,150);
+        IPLabel.setFont(new Font("Arial", Font.BOLD,30));
+        ConnectPanel.add(IPLabel);
+
         ipField = new JTextField();
-        ipField.setSize(200,200);
-        ipField.setLocation(120,200);
+        ipField.setSize(500,200);
+        ipField.setLocation(100,200);
         ConnectPanel.add(ipField);
 
+        PortLabel = new JLabel("Port:");
+        PortLabel.setSize(200,50);
+        PortLabel.setLocation(930,150);
+        PortLabel.setFont(new Font("Arial", Font.BOLD,30));
+        ConnectPanel.add(PortLabel);
+
+        portField = new JTextField();
+        portField.setSize(500,200);
+        portField.setLocation(680,200);
+        ConnectPanel.add(portField);
+
+        ConnectButton = new JButton("Connect");
+        ConnectButton.setSize(100,100);
+        ConnectButton.setLocation(640, 550);
+        ConnectButton.addActionListener(this);
+        ConnectPanel.add(ConnectButton);
+
+        ConnectionStatusLabel = new JLabel("liam");
+        ConnectionStatusLabel.setSize(300,100);
+        ConnectionStatusLabel.setLocation(900,100);
+        ConnectPanel.add(ConnectionStatusLabel);
         
         //putting the panel inside the frame
         theframe.setContentPane(MenuPanel);
