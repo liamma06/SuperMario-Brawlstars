@@ -24,8 +24,8 @@ public class SBSRView implements ActionListener{
 
     //Connect screen
     public JPanel ConnectPanel = new JPanel();
-	public JTextField ipField;
-	public JTextField portField;
+    public JTextField ipField;
+    public JTextField portField;
 	public JButton ConnectButton;
     public JLabel ConnectionStatusLabel;
     public JLabel UsernameLabel;
@@ -129,8 +129,9 @@ public class SBSRView implements ActionListener{
         ConnectPanel.add(ConnectButton);
 
         ConnectionStatusLabel = new JLabel("");
-        ConnectionStatusLabel.setSize(300,100);
-        ConnectionStatusLabel.setLocation(900,100);
+        ConnectionStatusLabel.setSize(400,100);
+        ConnectionStatusLabel.setLocation(850,20);
+        ConnectionStatusLabel.setFont(new Font("Arial", Font.PLAIN, 20));
         ConnectPanel.add(ConnectionStatusLabel);
         
         //putting the panel inside the frame
