@@ -24,8 +24,8 @@ public class SBSRView implements ActionListener{
 
     //Connect screen
     public JPanel ConnectPanel = new JPanel();
-	public JTextField ipField;
-	public JTextField portField;
+    public JTextField ipField;
+    public JTextField portField;
 	public JButton ConnectButton;
     public JButton BackButton;
     public JLabel ConnectionStatusLabel;
@@ -33,8 +33,10 @@ public class SBSRView implements ActionListener{
     public JLabel IPLabel;
     public JLabel PortLabel;
     public JTextField UsernameField;
-    public String strUsername; 
-
+    public String strHostUsername;
+    public String strClientUsername; 
+    public Boolean blnHost = false;
+    public int intNumPlayers = 0;
     SuperSocketMaster ssm;
 
     //Methods
@@ -42,27 +44,42 @@ public class SBSRView implements ActionListener{
         if(evt.getSource() == ConnectMenuButton){
             theframe.setContentPane(ConnectPanel);
             theframe.revalidate();
+        }else if(evt.getSource() == BackButton){
+            theframe.setContentPane(MenuPanel);
+            theframe.revalidate();
         }else if(evt.getSource() == ConnectButton){
-			//System.out.println("Connect Button Pressed");
+			    //System.out.println("Connect Button Pressed");
 			if(ipField.getText().equals("") && portField.getText().equals("")){
 				ConnectionStatusLabel.setText("Enter a port number and/or IP Address\n");
-			}else if(evt.getSource() == BackButton){
-                theframe.setContentPane(MenuPanel);
-                theframe.revalidate();
-            }else if(ipField.getText().equals("") && !portField.getText().equals("")){
+			}else if(ipField.getText().equals("") && !portField.getText().equals("") && UsernameField.getText().equals("")){
+                ConnectionStatusLabel.setText("Enter Username");
+            }else if(ipField.getText().equals("") && !portField.getText().equals("") && !UsernameField.getText().equals("")){
 				//ConnectionStatusLabel.setText("Starting chat in server mode\n");
 				ssm = new SuperSocketMaster(Integer.parseInt(portField.getText()),this);
 				ssm.connect();
+                strHostUsername = UsernameField.getText();
+                System.out.println(strHostUsername);
                 ConnectionStatusLabel.setText("(HOST) Your IP:" + ssm.getMyAddress());
-			}else if(!ipField.getText().equals("") && !portField.getText().equals("")){
+                blnHost = true;
+                intNumPlayers =1;
+			}else if(!ipField.getText().equals("") && !portField.getText().equals("") && UsernameField.getText().equals("")){
+                ConnectionStatusLabel.setText("Enter Username");
+            }else if(!ipField.getText().equals("") && !portField.getText().equals("")&& !UsernameField.getText().equals("")){
                 //ConnectionStatusLabel.setText("Starting chat in client  mode\n");
 				ssm = new SuperSocketMaster(ipField.getText(),Integer.parseInt(portField.getText()),this);
 				ssm.connect();
+                strClientUsername = UsernameField.getText();
+                System.out.println(strClientUsername);
                 ConnectionStatusLabel.setText("(Client) Connected to: " + ipField.getText());
+                blnHost = false;
+                intNumPlayers +=1;
             }else if(!ipField.getText().equals("") && portField.getText().equals("")){
-                 ConnectionStatusLabel.setText("Need a portnumber or port/ip \n");
+                ConnectionStatusLabel.setText("Need a portnumber or port/ip \n");
             }
-		}
+		}else if(evt.getSource()== PlayMenuButton && intNumPlayers >=2){
+            System.out.println("Host pressed play");
+
+        }
     }
 
     //Constructor
@@ -74,6 +91,7 @@ public class SBSRView implements ActionListener{
         PlayMenuButton = new JButton("Play");
         PlayMenuButton.setSize(300,60);
         PlayMenuButton.setLocation(490,400);
+        PlayMenuButton.addActionListener(this);
         MenuPanel.add(PlayMenuButton);
 
         ConnectMenuButton = new JButton("Connect");
@@ -81,6 +99,8 @@ public class SBSRView implements ActionListener{
         ConnectMenuButton.setLocation(490,500);
         ConnectMenuButton.addActionListener(this);
         MenuPanel.add(ConnectMenuButton);
+
+        
 
         HelpMenuButton = new JButton("Help");
         HelpMenuButton.setSize(300,60);
@@ -92,7 +112,7 @@ public class SBSRView implements ActionListener{
 
         BackButton = new JButton("Back");
         BackButton.setSize(200,75);
-        BackButton.setLocation(50,600);
+        BackButton.setLocation(50,550);
         BackButton.addActionListener(this);
         ConnectPanel.add(BackButton);
 
