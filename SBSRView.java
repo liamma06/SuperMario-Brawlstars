@@ -107,52 +107,52 @@ public class SBSRView implements ActionListener{
         	ipField.setSize(500,200);
         	ipField.setLocation(100,200);
         	ConnectPanel.add(ipField);
-        IPLabel = new JLabel("IP:");
-        IPLabel.setSize(200,50);
-        IPLabel.setLocation(340,150);
-        IPLabel.setFont(new Font("Arial", Font.BOLD,30));
-        ConnectPanel.add(IPLabel);
+	        IPLabel = new JLabel("IP:");
+        	IPLabel.setSize(200,50);
+		IPLabel.setLocation(340,150);
+        	IPLabel.setFont(new Font("Arial", Font.BOLD,30));
+        	ConnectPanel.add(IPLabel);
 
-        ipField = new JTextField();
-        ipField.setSize(500,200);
-        ipField.setLocation(100,200);
-        ipField.setFont(new Font("Arial", Font.PLAIN, 40));
-        ConnectPanel.add(ipField);
+        	ipField = new JTextField();
+        	ipField.setSize(500,200);
+        	ipField.setLocation(100,200);
+        	ipField.setFont(new Font("Arial", Font.PLAIN, 40));
+        	ConnectPanel.add(ipField);
 
-        PortLabel = new JLabel("Port:");
-        PortLabel.setSize(200,50);
-        PortLabel.setLocation(900,150);
-        PortLabel.setFont(new Font("Arial", Font.BOLD,30));
-        ConnectPanel.add(PortLabel);
+        	PortLabel = new JLabel("Port:");
+        	PortLabel.setSize(200,50);
+        	PortLabel.setLocation(900,150);
+        	PortLabel.setFont(new Font("Arial", Font.BOLD,30));
+        	ConnectPanel.add(PortLabel);
 
-        portField = new JTextField();
-        portField.setSize(500,200);
-        portField.setLocation(680,200);
-        ConnectPanel.add(portField);
+        	portField = new JTextField();
+        	portField.setSize(500,200);
+        	portField.setLocation(680,200);
+        	ConnectPanel.add(portField);
 
-        ConnectButton = new JButton("Connect");
-        ConnectButton.setSize(300,100);
-        ConnectButton.setLocation(490, 500);
-        ConnectButton.setFont(new Font("Arial", Font.BOLD, 30));
-        ConnectButton.addActionListener(this);
-        ConnectPanel.add(ConnectButton);
+       		ConnectButton = new JButton("Connect");
+        	ConnectButton.setSize(300,100);
+     	   	ConnectButton.setLocation(490, 500);
+        	ConnectButton.setFont(new Font("Arial", Font.BOLD, 30));
+        	ConnectButton.addActionListener(this);
+        	ConnectPanel.add(ConnectButton);
 
-        ConnectionStatusLabel = new JLabel("");
-        ConnectionStatusLabel.setSize(300,100);
-        ConnectionStatusLabel.setLocation(900,100);
-        ConnectPanel.add(ConnectionStatusLabel);
+        	ConnectionStatusLabel = new JLabel("");
+        	ConnectionStatusLabel.setSize(300,100);
+        	ConnectionStatusLabel.setLocation(900,100);
+        	ConnectPanel.add(ConnectionStatusLabel);
         
-        //putting the panel inside the frame
-        theframe.setContentPane(MenuPanel);
-        theframe.pack();
-        theframe.setResizable(false);
-        theframe.setVisible(true);
-        theframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-}
+        	//putting the panel inside the frame
+        	theframe.setContentPane(MenuPanel);
+        	theframe.pack();
+	        theframe.setResizable(false);
+        	theframe.setVisible(true);
+        	theframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
 
-    public static void main(String[] args){
-        new SBSRView();
-    }
+    	public static void main(String[] args){
+        	new SBSRView();
+   	}
 }
 
 
