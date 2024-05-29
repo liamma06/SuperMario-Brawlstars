@@ -97,6 +97,7 @@ public class SBSRView implements ActionListener{
         	UsernameField.setFont(new Font("Arial", Font.PLAIN, 30));
         	ConnectPanel.add(UsernameField);
 
+<<<<<<< HEAD
         	IPLabel = new JLabel("IP:");
         	IPLabel.setSize(200,50);
   	        IPLabel.setLocation(350,150);
@@ -107,10 +108,23 @@ public class SBSRView implements ActionListener{
         	ipField.setSize(500,200);
         	ipField.setLocation(100,200);
         	ConnectPanel.add(ipField);
+=======
+        IPLabel = new JLabel("IP:");
+        IPLabel.setSize(200,50);
+        IPLabel.setLocation(340,150);
+        IPLabel.setFont(new Font("Arial", Font.BOLD,30));
+        ConnectPanel.add(IPLabel);
+
+        ipField = new JTextField();
+        ipField.setSize(500,200);
+        ipField.setLocation(100,200);
+        ipField.setFont(new Font("Arial", Font.PLAIN, 40));
+        ConnectPanel.add(ipField);
+>>>>>>> 9bee23e26655c10e3a07f0fe6f1d98d3914c14cd
 
         PortLabel = new JLabel("Port:");
         PortLabel.setSize(200,50);
-        PortLabel.setLocation(930,150);
+        PortLabel.setLocation(900,150);
         PortLabel.setFont(new Font("Arial", Font.BOLD,30));
         ConnectPanel.add(PortLabel);
 
@@ -120,12 +134,13 @@ public class SBSRView implements ActionListener{
         ConnectPanel.add(portField);
 
         ConnectButton = new JButton("Connect");
-        ConnectButton.setSize(100,100);
-        ConnectButton.setLocation(640, 550);
+        ConnectButton.setSize(300,100);
+        ConnectButton.setLocation(490, 500);
+        ConnectButton.setFont(new Font("Arial", Font.BOLD, 30));
         ConnectButton.addActionListener(this);
         ConnectPanel.add(ConnectButton);
 
-        ConnectionStatusLabel = new JLabel("liam");
+        ConnectionStatusLabel = new JLabel("");
         ConnectionStatusLabel.setSize(300,100);
         ConnectionStatusLabel.setLocation(900,100);
         ConnectPanel.add(ConnectionStatusLabel);
