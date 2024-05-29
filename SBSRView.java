@@ -97,76 +97,42 @@ public class SBSRView implements ActionListener{
         UsernameField.setFont(new Font("Arial", Font.PLAIN, 30));
         ConnectPanel.add(UsernameField);
 
-<<<<<<< HEAD
-        	IPLabel = new JLabel("IP:");
-        	IPLabel.setSize(200,50);
-  	        IPLabel.setLocation(350,150);
-	        IPLabel.setFont(new Font("Arial", Font.BOLD,30));
-        	ConnectPanel.add(IPLabel);
-
-        	ipField = new JTextField();
-        	ipField.setSize(500,200);
-        	ipField.setLocation(100,200);
-        	ConnectPanel.add(ipField);
-	        IPLabel = new JLabel("IP:");
-        	IPLabel.setSize(200,50);
-		IPLabel.setLocation(340,150);
-        	IPLabel.setFont(new Font("Arial", Font.BOLD,30));
-        	ConnectPanel.add(IPLabel);
-=======
         IPLabel = new JLabel("IP:");
         IPLabel.setSize(200,50);
         IPLabel.setLocation(340,150);
         IPLabel.setFont(new Font("Arial", Font.BOLD,30));
         ConnectPanel.add(IPLabel);
->>>>>>> 70a3f276e4415c671eb3ac21acb370c14b0d8d12
 
-        	ipField = new JTextField();
-        	ipField.setSize(500,200);
-        	ipField.setLocation(100,200);
-        	ipField.setFont(new Font("Arial", Font.PLAIN, 40));
-        	ConnectPanel.add(ipField);
+        ipField = new JTextField();
+        ipField.setSize(500,200);
+        ipField.setLocation(100,200);
+        ipField.setFont(new Font("Arial", Font.PLAIN, 40));
+        ConnectPanel.add(ipField);
 
-        	PortLabel = new JLabel("Port:");
-        	PortLabel.setSize(200,50);
-        	PortLabel.setLocation(900,150);
-        	PortLabel.setFont(new Font("Arial", Font.BOLD,30));
-        	ConnectPanel.add(PortLabel);
+        PortLabel = new JLabel("Port:");
+        PortLabel.setSize(200,50);
+        PortLabel.setLocation(900,150);
+        PortLabel.setFont(new Font("Arial", Font.BOLD,30));
+        ConnectPanel.add(PortLabel);
 
-<<<<<<< HEAD
-        	portField = new JTextField();
-        	portField.setSize(500,200);
-        	portField.setLocation(680,200);
-        	ConnectPanel.add(portField);
-=======
         portField = new JTextField();
         portField.setSize(500,200);
         portField.setLocation(680,200);
         portField.setFont(new Font("Arial", Font.PLAIN, 40));
         ConnectPanel.add(portField);
->>>>>>> 70a3f276e4415c671eb3ac21acb370c14b0d8d12
 
-       		ConnectButton = new JButton("Connect");
-        	ConnectButton.setSize(300,100);
-     	   	ConnectButton.setLocation(490, 500);
-        	ConnectButton.setFont(new Font("Arial", Font.BOLD, 30));
-        	ConnectButton.addActionListener(this);
-        	ConnectPanel.add(ConnectButton);
+        ConnectButton = new JButton("Connect");
+        ConnectButton.setSize(300,100);
+        ConnectButton.setLocation(490, 500);
+        ConnectButton.setFont(new Font("Arial", Font.BOLD, 30));
+        ConnectButton.addActionListener(this);
+        ConnectPanel.add(ConnectButton);
 
-        	ConnectionStatusLabel = new JLabel("");
-        	ConnectionStatusLabel.setSize(300,100);
-        	ConnectionStatusLabel.setLocation(900,100);
-        	ConnectPanel.add(ConnectionStatusLabel);
+        ConnectionStatusLabel = new JLabel("");
+        ConnectionStatusLabel.setSize(300,100);
+        ConnectionStatusLabel.setLocation(900,100);
+        ConnectPanel.add(ConnectionStatusLabel);
         
-<<<<<<< HEAD
-        	//putting the panel inside the frame
-        	theframe.setContentPane(MenuPanel);
-        	theframe.pack();
-	        theframe.setResizable(false);
-        	theframe.setVisible(true);
-        	theframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
-=======
         //putting the panel inside the frame
         theframe.setContentPane(MenuPanel);
         theframe.pack();
@@ -174,11 +140,10 @@ public class SBSRView implements ActionListener{
         theframe.setVisible(true);
         theframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
->>>>>>> 70a3f276e4415c671eb3ac21acb370c14b0d8d12
 
-    	public static void main(String[] args){
-        	new SBSRView();
-   	}
+    public static void main(String[] args){
+        new SBSRView();
+    }
 }
 
 
