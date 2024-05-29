@@ -58,6 +58,7 @@ public class SBSRView implements ActionListener{
 				ssm = new SuperSocketMaster(Integer.parseInt(portField.getText()),this);
 				ssm.connect();
                 strHostUsername = UsernameField.getText();
+                UsernameField.setEnabled(false);
                 System.out.println(strHostUsername);
                 ConnectionStatusLabel.setText("(HOST) Your IP:" + ssm.getMyAddress());
                 blnHost = true;
@@ -69,6 +70,7 @@ public class SBSRView implements ActionListener{
 				ssm = new SuperSocketMaster(ipField.getText(),Integer.parseInt(portField.getText()),this);
 				ssm.connect();
                 strClientUsername = UsernameField.getText();
+                UsernameField.setEnabled(false);
                 System.out.println(strClientUsername);
                 ConnectionStatusLabel.setText("(Client) Connected to: " + ipField.getText());
                 blnHost = false;
