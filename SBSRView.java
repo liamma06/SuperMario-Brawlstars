@@ -76,7 +76,7 @@ public class SBSRView implements ActionListener{
             }else if(!ipField.getText().equals("") && portField.getText().equals("")){
                 ConnectionStatusLabel.setText("Need a portnumber or port/ip \n");
             }
-		}else if(evt.getSource()== PlayMenuButton && intNumPlayers >=2){
+		}else if(evt.getSource()== PlayMenuButton && blnHost == true){
             System.out.println("Host pressed play");
 
         }
