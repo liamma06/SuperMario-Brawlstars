@@ -27,6 +27,7 @@ public class SBSRView implements ActionListener{
     public JTextField ipField;
     public JTextField portField;
 	public JButton ConnectButton;
+    public JButton BackButton;
     public JLabel ConnectionStatusLabel;
     public JLabel UsernameLabel;
     public JLabel IPLabel;
@@ -39,6 +40,9 @@ public class SBSRView implements ActionListener{
     public void actionPerformed(ActionEvent evt){
         if(evt.getSource() == ConnectMenuButton){
             theframe.setContentPane(ConnectPanel);
+            theframe.revalidate();
+        }if(evt.getSource() == BackButton){
+            theframe.setContentPane(MenuPanel);
             theframe.revalidate();
         }else if(evt.getSource() == ConnectButton){
 			    //System.out.println("Connect Button Pressed");
@@ -77,6 +81,8 @@ public class SBSRView implements ActionListener{
         ConnectMenuButton.addActionListener(this);
         MenuPanel.add(ConnectMenuButton);
 
+        
+
         HelpMenuButton = new JButton("Help");
         HelpMenuButton.setSize(300,60);
         HelpMenuButton.setLocation(490,600);
@@ -84,6 +90,12 @@ public class SBSRView implements ActionListener{
 
         //ConnectPanel
         ConnectPanel.setLayout(null);
+
+        BackButton = new JButton("Back");
+        BackButton.setSize(200,75);
+        BackButton.setLocation(50,550);
+        BackButton.addActionListener(this);
+        ConnectPanel.add(BackButton);
 
         UsernameLabel = new JLabel("Username:");
         UsernameLabel.setSize(200,50);
