@@ -102,8 +102,6 @@ public class SBSRView implements ActionListener{
         ConnectMenuButton.addActionListener(this);
         MenuPanel.add(ConnectMenuButton);
 
-        
-
         HelpMenuButton = new JButton("Help");
         HelpMenuButton.setSize(300,60);
         HelpMenuButton.setLocation(490,600);
