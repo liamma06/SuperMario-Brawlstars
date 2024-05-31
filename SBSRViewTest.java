@@ -11,7 +11,7 @@ import java.awt.event.*;
 import javax.swing.event.*;
 
 //Defining
-public class SBSRView implements ActionListener{
+public class SBSRViewTest implements ActionListener{
     //Properties
 
     public JFrame theframe = new JFrame("Super Mario Brawlstars");
@@ -38,7 +38,11 @@ public class SBSRView implements ActionListener{
     public Boolean blnHost = false;
     public int intNumPlayers = 0;
 
+    public String strConnectionStatus;
+
     SuperSocketMaster ssm;
+
+    SBSRModelControl MC;
 
     //Play screen
     public JPanel MapPanel = new JPanel();
@@ -53,7 +57,10 @@ public class SBSRView implements ActionListener{
             theframe.setContentPane(MenuPanel);
             theframe.revalidate();
         }else if(evt.getSource() == ConnectButton){
-			    //System.out.println("Connect Button Pressed");
+			//System.out.println("Connect Button Pressed");
+
+            strConnectionStatus = MC.connection(ipField.getText(),portField.getText(),UsernameField.getText());
+
 			if(ipField.getText().equals("") && portField.getText().equals("")){
 				ConnectionStatusLabel.setText("Enter a port number and/or IP Address\n");
 			}else if(ipField.getText().equals("") && !portField.getText().equals("") && UsernameField.getText().equals("")){
@@ -96,7 +103,7 @@ public class SBSRView implements ActionListener{
     }
 
     //Constructor
-    public SBSRView(){
+    public SBSRViewTest(){
         MenuPanel.setPreferredSize(new Dimension(1280,720));
         MenuPanel.setLayout(null);
 
