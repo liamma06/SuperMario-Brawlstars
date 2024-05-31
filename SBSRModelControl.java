@@ -14,9 +14,9 @@ public class SBSRModelControl{
 		}else if(ipField.equals("") && !portField.equals("") && !UsernameField.equals("")){
 			//ConnectionStatusLabel.setText("Starting chat in server mode\n");
 			try{
-				ssm = new SuperSocketMaster(Integer.parseInt(portField),this);
+				ssm = new SuperSocketMaster(8080,this);
 				ssm.connect();
-			}catch(NumberFormatException){
+			}catch(NumberFormatException e){
 				ssm = new SuperSocketMaster(8080, this);
 			}
 			strHostUsername = UsernameField.getText();
@@ -25,11 +25,11 @@ public class SBSRModelControl{
 			ConnectionStatusLabel.setText("(HOST) Your IP:" + ssm.getMyAddress());
 			blnHost = true;
 			intNumPlayers =1;
-		}else if(!ipField.getText().equals("") && !portField.getText().equals("") && UsernameField.getText().equals("")){
-			ConnectionStatusLabel.setText("Enter Username");
-		}else if(!ipField.getText().equals("") && !portField.getText().equals("")&& !UsernameField.getText().equals("")){
+		}else if(!ipField.equals("") && !portField.equals("") && UsernameField.equals("")){
+			strConnectionResult.equals("Enter Username");
+		}else if(!ipField.equals("") && !portField.equals("")&& !UsernameField.equals("")){
 			//ConnectionStatusLabel.setText("Starting chat in client  mode\n");
-			ssm = new SuperSocketMaster(ipField.getText(),Integer.parseInt(portField.getText()),this);
+			ssm = new SuperSocketMaster(ipField,Integer.parseInt(portField),this);
 			ssm.connect();
 			strClientUsername = UsernameField.getText();
 			UsernameField.setEnabled(false);
@@ -37,8 +37,8 @@ public class SBSRModelControl{
 			ConnectionStatusLabel.setText("(Client) Connected to: " + ipField.getText());
 			blnHost = false;
 			intNumPlayers +=1;
-		}else if(!ipField.getText().equals("") && portField.getText().equals("")){
-			ConnectionStatusLabel.setText("Need a portnumber or port/ip \n");
+		}else if(!ipField.equals("") && portField.equals("")){
+			strConnectionResult.equals("Need a portnumber or port/ip \n");
 		}
 		return strConnectionResult;
 

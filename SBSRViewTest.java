@@ -192,7 +192,7 @@ public class SBSRViewTest implements ActionListener{
     }
 
     public static void main(String[] args){
-        new SBSRView();
+        new SBSRViewTest();
     }
 }
 

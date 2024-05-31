@@ -35,13 +35,23 @@ public class SBSRView implements ActionListener{
     public JTextField UsernameField;
     public String strHostUsername;
     public String strClientUsername; 
-    public Boolean blnHost = false;
+    public Boolean blnHost = true;
     public int intNumPlayers = 0;
+
+    //map screen
+    public JPanel MapPanel = new JPanel();
+    public JLabel Map1Label;
+    public JLabel Map2Label;
+    public JButton Map1Button;
+    public JButton Map2Button;
+
+    //Play screen 
+    public JPanel PlayPanel = new JPanel();
+
 
     SuperSocketMaster ssm;
 
-    //Play screen
-    public JPanel MapPanel = new JPanel();
+    
     
 
     //Methods
@@ -91,7 +101,12 @@ public class SBSRView implements ActionListener{
             }else if(blnHost == false){
                 System.out.println("you are not host");
             }
-
+        }else if(evt.getSource() == Map1Button){
+            theframe.setContentPane(PlayPanel);
+            theframe.revalidate();
+        }else if(evt.getSource() == Map2Button){
+            theframe.setContentPane(PlayPanel);
+            theframe.revalidate();
         }
     }
 
@@ -118,14 +133,35 @@ public class SBSRView implements ActionListener{
         HelpMenuButton.setLocation(490,600);
         MenuPanel.add(HelpMenuButton);
 
-        //ConnectPanel
-        ConnectPanel.setLayout(null);
+        //Map Panel
+        MapPanel.setLayout(null);
 
-        BackButton = new JButton("Back");
-        BackButton.setSize(200,75);
-        BackButton.setLocation(50,550);
-        BackButton.addActionListener(this);
-        ConnectPanel.add(BackButton);
+        Map1Label = new JLabel("Map 1");
+        Map1Label.setSize(200,50);
+        Map1Label.setLocation(300,75);
+        Map1Label.setFont(new Font("Arial",Font.BOLD,30));
+        MapPanel.add(Map1Label);
+
+        Map2Label = new JLabel("Map 2");
+        Map2Label.setSize(200,50);
+        Map2Label.setLocation(880,75);
+        Map2Label.setFont(new Font("Arial",Font.BOLD,30));
+        MapPanel.add(Map2Label);
+
+        Map1Button = new JButton("Select");
+        Map1Button.setSize(200,50);
+        Map1Button.setLocation(250,550);
+        Map1Button.setFont(new Font("Arial",Font.PLAIN,20));
+        Map1Button.addActionListener(this);
+        MapPanel.add(Map1Button);
+
+        Map2Button = new JButton("Select");
+        Map2Button.setSize(200,50);
+        Map2Button.setLocation(830,550);
+        Map2Button.setFont(new Font("Arial",Font.PLAIN,20));
+        Map2Button.addActionListener(this);
+        MapPanel.add(Map2Button);
+
 
         UsernameLabel = new JLabel("Username:");
         UsernameLabel.setSize(200,50);
