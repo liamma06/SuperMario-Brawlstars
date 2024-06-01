@@ -69,18 +69,26 @@ public class SBSRModelControl implements ActionListener{
 
 	//overridding action listener
 	public void actionPerformed(ActionEvent evt){
+		//Connect menu button
 		if(evt.getSource() == view.ConnectMenuButton){
 			view.theframe.setContentPane(view.ConnectPanel);
 			view.theframe.revalidate();
+		//back button
 		}else if(evt.getSource() == view.BackButton){
 			view.theframe.setContentPane(view.MenuPanel);
 			view.theframe.revalidate();
+		//Help Menu button
+		}else if(evt.getSource() == view.HelpMenuButton){
+			view.theframe.setContentPane(view.HelpPanel);
+		//Connect button
 		}else if(evt.getSource() == view.ConnectButton){
 			strIp = view.ipField.getText();
 			strPort = view.portField.getText();
 			strUsername = view.UsernameField.getText();
+			//getting the status result from the connect method
 			String strResult = connect(strIp, strPort, strUsername);
 			view.ConnectionStatusLabel.setText(strResult);
+		//Play menu button
 		}else if(evt.getSource() == view.PlayMenuButton){
 			if(blnHost){
 				view.theframe.setContentPane(view.MapPanel);
@@ -88,12 +96,12 @@ public class SBSRModelControl implements ActionListener{
 			} else{
 				System.out.println("You are not Host or have not connected yet");
 			}
+		//Map selection
 		}else if (evt.getSource() == view.Map1Button || evt.getSource() == view.Map2Button){
 			view.theframe.setContentPane(view.PlayPanel);
 			view.theframe.revalidate();
-			view.ChatArea.append(strHostUsername+ " has joined\n");
-			view.ChatArea.append(strClientUsername+" has joined\n");
 			ssm.sendText("play");
+		//Text input 
 		}else if(evt.getSource() == view.ChatTextInput){
 			if(blnHost == true){
 				ssm.sendText("chat,"+strHostUsername+","+view.ChatTextInput.getText());
@@ -104,6 +112,7 @@ public class SBSRModelControl implements ActionListener{
 				view.ChatArea.append(strClientUsername+": "+view.ChatTextInput.getText()+ "\n");
 				view.ChatTextInput.setText("");
 			}
+		//Detecting SSM 
 		}else if(evt.getSource() == ssm){
 			ssmMessage = ssm.readText().split(",");
 			if(ssmMessage[0].equals("play")){
@@ -135,10 +144,14 @@ public class SBSRModelControl implements ActionListener{
 		view.Map1Button.addActionListener(this);
 		view.Map2Button.addActionListener(this);
 
+		//Help page
+		view.HelpMenuButton.addActionListener(this);
+
 		//Chat
 		view.ChatTextInput.addActionListener(this);
 	}
 
+	//Main program
 	public static void main(String[] args){
 		SBSRViewTest view = new SBSRViewTest();
 		new SBSRModelControl(view);

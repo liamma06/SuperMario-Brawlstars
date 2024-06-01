@@ -46,6 +46,9 @@ public class SBSRViewTest{
     public JButton Map1Button;
     public JButton Map2Button;
 
+    //Help screen
+    public JPanel HelpPanel = new JPanel();
+
     
     //Methods
 
@@ -154,6 +157,9 @@ public class SBSRViewTest{
         Map2Button.setFont(new Font("Arial",Font.PLAIN,20));
         MapPanel.add(Map2Button);
 
+        //Help Panel
+        HelpPanel.setLayout(null);
+
         //Play screen 
         PlayPanel.setLayout(null);
 
@@ -172,6 +178,10 @@ public class SBSRViewTest{
         ChatTextInput.setSize(350,50);
         ChatTextInput.setLocation(850,450);
         PlayPanel.add(ChatTextInput);
+
+        
+
+
 
         //putting the panel inside the frame
         theframe.setContentPane(MenuPanel);
