@@ -15,9 +15,12 @@ public class SBSRModelControl implements ActionListener{
 	public String strUsername;
 	public String strResult;
 
+	//splitting ssm messages -> mode(chat/play/game),user(host/client),action(message/game input),xcord,ycord
+	String[] ssmMessage;
+
 	SBSRViewTest view;
 	SuperSocketMaster ssm;
-	String[] ssmMessage;
+	
 
 	
 	//Methods
@@ -83,11 +86,13 @@ public class SBSRModelControl implements ActionListener{
 				view.theframe.setContentPane(view.MapPanel);
 				view.theframe.revalidate();
 			} else{
-				System.out.println("You are not Host");
+				System.out.println("You are not Host or have not connected yet");
 			}
 		}else if (evt.getSource() == view.Map1Button || evt.getSource() == view.Map2Button){
 			view.theframe.setContentPane(view.PlayPanel);
 			view.theframe.revalidate();
+			view.ChatArea.append(strHostUsername+ " has joined\n");
+			view.ChatArea.append(strClientUsername+" has joined\n");
 			ssm.sendText("play");
 		}else if(evt.getSource() == view.ChatTextInput){
 			if(blnHost == true){

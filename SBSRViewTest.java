@@ -161,7 +161,7 @@ public class SBSRViewTest{
         ChatArea = new JTextArea();
         ChatArea.setSize(350,400);
         ChatArea.setLocation(850,50);
-        ChatArea.setEnabled(false);
+        ChatArea.setEditable(false);
         PlayPanel.add(ChatArea);
 
         ChatScroll.setSize(350,400);
