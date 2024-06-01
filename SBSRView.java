@@ -162,7 +162,9 @@ public class SBSRView implements ActionListener{
         Map2Button.addActionListener(this);
         MapPanel.add(Map2Button);
 
+        //Play Screen
 
+        //Connection screen
         UsernameLabel = new JLabel("Username:");
         UsernameLabel.setSize(200,50);
         UsernameLabel.setLocation(50,50);
