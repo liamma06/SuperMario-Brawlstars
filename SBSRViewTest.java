@@ -35,6 +35,9 @@ public class SBSRViewTest{
 
     //Play screen
     public JPanel PlayPanel = new JPanel();
+    public JTextArea ChatArea;
+    public JScrollPane ChatScroll = new JScrollPane(ChatArea);
+    public JTextField ChatTextInput;
 
     //map screen
     public JPanel MapPanel = new JPanel();
@@ -150,7 +153,26 @@ public class SBSRViewTest{
         Map2Button.setLocation(830,550);
         Map2Button.setFont(new Font("Arial",Font.PLAIN,20));
         MapPanel.add(Map2Button);
+
+        //Play screen 
+        PlayPanel.setLayout(null);
+
+        //Chat
+        ChatArea = new JTextArea();
+        ChatArea.setSize(350,400);
+        ChatArea.setLocation(850,50);
+        ChatArea.setEnabled(false);
+        PlayPanel.add(ChatArea);
+
+        ChatScroll.setSize(350,400);
+		ChatScroll.setLocation(850,50);
+		PlayPanel.add(ChatScroll);
         
+        ChatTextInput = new JTextField();
+        ChatTextInput.setSize(350,50);
+        ChatTextInput.setLocation(850,450);
+        PlayPanel.add(ChatTextInput);
+
         //putting the panel inside the frame
         theframe.setContentPane(MenuPanel);
         theframe.pack();

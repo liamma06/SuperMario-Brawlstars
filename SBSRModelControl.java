@@ -17,6 +17,7 @@ public class SBSRModelControl implements ActionListener{
 
 	SBSRViewTest view;
 	SuperSocketMaster ssm;
+	String[] ssmMessage;
 
 	
 	//Methods
@@ -82,16 +83,30 @@ public class SBSRModelControl implements ActionListener{
 				view.theframe.setContentPane(view.MapPanel);
 				view.theframe.revalidate();
 			} else{
-				view.ConnectionStatusLabel.setText("You are not Host");
+				System.out.println("You are not Host");
 			}
 		}else if (evt.getSource() == view.Map1Button || evt.getSource() == view.Map2Button){
 			view.theframe.setContentPane(view.PlayPanel);
 			view.theframe.revalidate();
-			ssm.sendText("Play");
+			ssm.sendText("play");
+		}else if(evt.getSource() == view.ChatTextInput){
+			if(blnHost == true){
+				ssm.sendText("chat,"+strHostUsername+","+view.ChatTextInput.getText());
+				view.ChatArea.append(strHostUsername+": "+view.ChatTextInput.getText()+ "\n");
+				view.ChatTextInput.setText("");
+			}else if(blnHost == false){
+				ssm.sendText("chat,"+strClientUsername+","+view.ChatTextInput.getText());
+				view.ChatArea.append(strClientUsername+": "+view.ChatTextInput.getText()+ "\n");
+				view.ChatTextInput.setText("");
+			}
 		}else if(evt.getSource() == ssm){
-			if(ssm.readText().equals("Play")){
+			ssmMessage = ssm.readText().split(",");
+			if(ssmMessage[0].equals("play")){
 				view.theframe.setContentPane(view.PlayPanel);
 				view.theframe.revalidate();
+				System.out.println("Host has selected map, Game starts");
+			}else if(ssmMessage[0].equals("chat")){
+				view.ChatArea.append(ssmMessage[1] + ": " + ssmMessage[2] + "\n");
 			}
 		}
 	}
@@ -114,6 +129,9 @@ public class SBSRModelControl implements ActionListener{
 		//Map page
 		view.Map1Button.addActionListener(this);
 		view.Map2Button.addActionListener(this);
+
+		//Chat
+		view.ChatTextInput.addActionListener(this);
 	}
 
 	public static void main(String[] args){
