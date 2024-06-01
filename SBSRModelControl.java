@@ -8,19 +8,20 @@ public class SBSRModelControl implements ActionListener{
 	public String strConnectionResult;
 	public String strHostUsername;
 	public String strClientUsername;
-	public boolean blnHost = true;
+	public boolean blnHost = false;
 	public int intNumPlayers = 0;
 	public String strIp;
 	public String strPort;
 	public String strUsername;
 	public String strResult;
 
-
 	SBSRViewTest view;
 	SuperSocketMaster ssm;
 
 	
 	//Methods
+
+	//setting up connection
 	public String connect(String ipField, String portField, String UsernameField){
 		if(ipField.equals("") && portField.equals("")){
 			strConnectionResult = "Enter a port number and/or IP Address\n";
@@ -36,6 +37,7 @@ public class SBSRModelControl implements ActionListener{
 				strConnectionResult = "(HOST) Your IP:" + ssm.getMyAddress();
 				blnHost = true;
 				intNumPlayers = 1;
+				view.UsernameField.setEnabled(false);
 			}catch(NumberFormatException e){
 				strConnectionResult = "Invalid Port Number";
 			}
@@ -47,10 +49,11 @@ public class SBSRModelControl implements ActionListener{
 				ssm = new SuperSocketMaster(ipField,Integer.parseInt(portField),this);
 				ssm.connect();
 				strClientUsername = UsernameField;
-				System.out.println("Client" +strClientUsername);
+				System.out.println("Client: " +strClientUsername);
 				strConnectionResult = "(Client) Connected to: " + ipField;
 				blnHost = false;
 				intNumPlayers +=1;
+				view.UsernameField.setEnabled(false);
 			}catch(NumberFormatException e){
 				strConnectionResult = "Invalid Port Number";
 			}
@@ -58,9 +61,9 @@ public class SBSRModelControl implements ActionListener{
 			strConnectionResult.equals("Need a portnumber or port/ip \n");
 		}
 		return strConnectionResult;
-
 	}
 
+	//overridding action listener
 	public void actionPerformed(ActionEvent evt){
 		if(evt.getSource() == view.ConnectMenuButton){
 			view.theframe.setContentPane(view.ConnectPanel);
@@ -84,6 +87,12 @@ public class SBSRModelControl implements ActionListener{
 		}else if (evt.getSource() == view.Map1Button || evt.getSource() == view.Map2Button){
 			view.theframe.setContentPane(view.PlayPanel);
 			view.theframe.revalidate();
+			ssm.sendText("Play");
+		}else if(evt.getSource() == ssm){
+			if(ssm.readText().equals("Play")){
+				view.theframe.setContentPane(view.PlayPanel);
+				view.theframe.revalidate();
+			}
 		}
 	}
 
@@ -91,7 +100,7 @@ public class SBSRModelControl implements ActionListener{
 	public SBSRModelControl(SBSRViewTest view){
 		this.view = view;
 
-		//Action listeners
+		// adding Action listeners
 
 		//Main Menu
 		view.PlayMenuButton.addActionListener(this);

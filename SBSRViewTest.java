@@ -48,8 +48,7 @@ public class SBSRViewTest{
 
     //Constructor
     public SBSRViewTest(){
-        
-
+    
         //Menu options 
         MenuPanel.setPreferredSize(new Dimension(1280,720));
         MenuPanel.setLayout(null);
