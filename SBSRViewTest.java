@@ -177,10 +177,6 @@ public class SBSRViewTest{
         ChatTextInput.setLocation(850,450);
         PlayPanel.add(ChatTextInput);
 
-        
-
-
-
         //putting the panel inside the frame
         theframe.setContentPane(MenuPanel);
         theframe.pack();
