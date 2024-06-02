@@ -26,7 +26,7 @@ public class SBSRViewTest{
     public JTextField ipField;
     public JTextField portField;
 	public JButton ConnectButton;
-    public JButton BackButton;
+    public JButton BackConnectButton;
     public JLabel ConnectionStatusLabel;
     public JLabel UsernameLabel;
     public JLabel IPLabel;
@@ -125,10 +125,10 @@ public class SBSRViewTest{
         ConnectionStatusLabel.setFont(new Font("Arial", Font.PLAIN, 20));
         ConnectPanel.add(ConnectionStatusLabel);
 
-        BackButton = new JButton("Back");
-        BackButton.setSize(200,75);
-        BackButton.setLocation(50,550);
-        ConnectPanel.add(BackButton);
+        BackConnectButton = new JButton("Back");
+        BackConnectButton.setSize(200,75);
+        BackConnectButton.setLocation(50,550);
+        ConnectPanel.add(BackConnectButton);
 
         //Map Panel
         MapPanel.setLayout(null);

@@ -74,7 +74,7 @@ public class SBSRModelControl implements ActionListener{
 			view.theframe.setContentPane(view.ConnectPanel);
 			view.theframe.revalidate();
 		//back button
-		}else if(evt.getSource() == view.BackButton){
+		}else if(evt.getSource() == view.BackConnectButton){
 			view.theframe.setContentPane(view.MenuPanel);
 			view.theframe.revalidate();
 		//Help Menu button
@@ -138,7 +138,7 @@ public class SBSRModelControl implements ActionListener{
 		
 		//Connect Page
 		view.ConnectButton.addActionListener(this);
-		view.BackButton.addActionListener(this);
+		view.BackConnectButton.addActionListener(this);
 
 		//Map page
 		view.Map1Button.addActionListener(this);
