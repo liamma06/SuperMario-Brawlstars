@@ -36,7 +36,7 @@ public class SBSRViewTest{
     //Play screen
     public JPanel PlayPanel = new JPanel();
     public JTextArea ChatArea;
-    public JScrollPane ChatScroll = new JScrollPane(ChatArea);
+    public JScrollPane ChatScroll;
     public JTextField ChatTextInput;
 
     //map screen
@@ -165,11 +165,9 @@ public class SBSRViewTest{
 
         //Chat
         ChatArea = new JTextArea();
-        ChatArea.setSize(350,400);
-        ChatArea.setLocation(850,50);
         ChatArea.setEditable(false);
-        PlayPanel.add(ChatArea);
 
+        ChatScroll = new JScrollPane(ChatArea);
         ChatScroll.setSize(350,400);
 		ChatScroll.setLocation(850,50);
 		PlayPanel.add(ChatScroll);
