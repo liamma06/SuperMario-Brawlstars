@@ -124,24 +124,32 @@ public class SBSRModelControl implements ActionListener{
 			view.theframe.setContentPane(view.PlayPanel);
 			view.theframe.revalidate();
 			ssm.sendText("connection,"+strHostUsername);
+			view.ChatArea.append(strHostUsername + " has connected\n");
+			intPlayersReady += 1;
 		}else if(evt.getSource() == view.Character2Button && blnHost){
 			intHostCharacter= 2;
 			System.out.println("Host Character: El Primo");
 			view.theframe.setContentPane(view.PlayPanel);
 			view.theframe.revalidate();
 			ssm.sendText("connection,"+strHostUsername);
+			view.ChatArea.append(strHostUsername + " has connected\n");
+			intPlayersReady += 1;
 		}else if(evt.getSource() == view.Character1Button){
 			intClientCharacter = 1;
 			System.out.println("Client Character: Colt");
 			view.theframe.setContentPane(view.PlayPanel);
 			view.theframe.revalidate();
 			ssm.sendText("connection,"+strClientUsername);
+			view.ChatArea.append(strClientUsername + " has connected\n");
+			intPlayersReady += 1;
 		}else if(evt.getSource() == view.Character2Button){
 			intClientCharacter = 2;
 			System.out.println("Client Character: El Primo");
 			view.theframe.setContentPane(view.PlayPanel);
 			view.theframe.revalidate();
 			ssm.sendText("connection,"+strClientUsername);
+			view.ChatArea.append(strClientUsername + " has connected\n");
+			intPlayersReady += 1;
 		//Text input 
 		}else if(evt.getSource() == view.ChatTextInput){
 			if(blnHost == true){
@@ -168,6 +176,9 @@ public class SBSRModelControl implements ActionListener{
 				intPlayersReady += 1;
 				view.ChatArea.append(ssmMessage[1] + " has connected\n");
 				System.out.println("Players Ready: "+intPlayersReady);
+				if(intPlayersReady == 2){
+					System.out.println("Both players are ready");
+				}
 			}else{
 				System.out.println("Invalid SSM message");
 			}
