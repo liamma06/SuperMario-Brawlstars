@@ -24,7 +24,10 @@ public class SBSRModelControl implements ActionListener{
 	public int intHostCharacter = 0;
 	public int intClientCharacter = 0;
 
-	//splitting ssm messages -> mode(chat/charcter/play/game),user(host/client),action(message/game input),xcord,ycord
+	//Play
+	public int intPlayersReady = 0;
+
+	//splitting ssm messages -> mode(chat/charcter/play/game/connection),user(host/client),action(message/game input),xcord,ycord
 	String[] ssmMessage;
 
 	SBSRViewTest view;
@@ -120,21 +123,25 @@ public class SBSRModelControl implements ActionListener{
 			System.out.println("Host Character: Colt");
 			view.theframe.setContentPane(view.PlayPanel);
 			view.theframe.revalidate();
+			ssm.sendText("connection,"+strHostUsername);
 		}else if(evt.getSource() == view.Character2Button && blnHost){
 			intHostCharacter= 2;
 			System.out.println("Host Character: El Primo");
 			view.theframe.setContentPane(view.PlayPanel);
 			view.theframe.revalidate();
+			ssm.sendText("connection,"+strHostUsername);
 		}else if(evt.getSource() == view.Character1Button){
 			intClientCharacter = 1;
 			System.out.println("Client Character: Colt");
 			view.theframe.setContentPane(view.PlayPanel);
 			view.theframe.revalidate();
+			ssm.sendText("connection,"+strClientUsername);
 		}else if(evt.getSource() == view.Character2Button){
 			intClientCharacter = 2;
 			System.out.println("Client Character: El Primo");
 			view.theframe.setContentPane(view.PlayPanel);
 			view.theframe.revalidate();
+			ssm.sendText("connection,"+strClientUsername);
 		//Text input 
 		}else if(evt.getSource() == view.ChatTextInput){
 			if(blnHost == true){
@@ -149,12 +156,20 @@ public class SBSRModelControl implements ActionListener{
 		//Detecting SSM 
 		}else if(evt.getSource() == ssm){
 			ssmMessage = ssm.readText().split(",");
+			//sending both host and client to the play screen
 			if(ssmMessage[0].equals("character")){
 				view.theframe.setContentPane(view.CharacterPanel);
 				view.theframe.revalidate();
 				System.out.println("Host has selected map, character selection");
+			//Getting chat responses
 			}else if(ssmMessage[0].equals("chat")){
 				view.ChatArea.append(ssmMessage[1] + ": " + ssmMessage[2] + "\n");
+			}else if(ssmMessage[0].equals("connection")){
+				intPlayersReady += 1;
+				view.ChatArea.append(ssmMessage[1] + " has connected\n");
+				System.out.println("Players Ready: "+intPlayersReady);
+			}else{
+				System.out.println("Invalid SSM message");
 			}
 		}
 	}
