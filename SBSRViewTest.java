@@ -9,6 +9,8 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import javax.swing.event.*;
+import java.awt.image.*;
+import java.awt.*;
 
 //Defining
 public class SBSRViewTest{
@@ -34,17 +36,27 @@ public class SBSRViewTest{
     public JTextField UsernameField;
 
     //Play screen
+    //Play(Chat screen)
     public JPanel PlayPanel = new JPanel();
     public JTextArea ChatArea;
     public JScrollPane ChatScroll;
     public JTextField ChatTextInput;
 
+    //Play(game screen)
+    
     //map screen
     public JPanel MapPanel = new JPanel();
     public JLabel Map1Label;
     public JLabel Map2Label;
     public JButton Map1Button;
     public JButton Map2Button;
+
+    //Character selection screen
+    public JPanel CharacterPanel = new JPanel();
+    public JLabel Character1Label;
+    public JLabel Character2Label;
+    public JButton Character1Button;
+    public JButton Character2Button;    
 
     //Help screen
     public JPanel HelpPanel = new JPanel();
@@ -157,13 +169,40 @@ public class SBSRViewTest{
         Map2Button.setFont(new Font("Arial",Font.PLAIN,20));
         MapPanel.add(Map2Button);
 
+        //Character Panel 
+        CharacterPanel.setLayout(null);
+
+        Character1Label = new JLabel("Colt");
+        Character1Label.setSize(200,50);
+        Character1Label.setLocation(300,75);
+        Character1Label.setFont(new Font("Arial",Font.BOLD,30));
+        CharacterPanel.add(Character1Label);
+
+        Character2Label = new JLabel("El Primo");
+        Character2Label.setSize(200,50);
+        Character2Label.setLocation(880,75);
+        Character2Label.setFont(new Font("Arial",Font.BOLD,30));
+        CharacterPanel.add(Character2Label);
+
+        Character1Button = new JButton("Select");
+        Character1Button.setSize(200,50);
+        Character1Button.setLocation(250,550);
+        Character1Button.setFont(new Font("Arial",Font.PLAIN,20));
+        CharacterPanel.add(Character1Button);
+
+        Character2Button = new JButton("Select");
+        Character2Button.setSize(200,50);
+        Character2Button.setLocation(830,550);
+        Character2Button.setFont(new Font("Arial",Font.PLAIN,20));
+        CharacterPanel.add(Character2Button);
+
         //Help Panel
         HelpPanel.setLayout(null);
 
         //Play screen 
         PlayPanel.setLayout(null);
 
-        //Chat
+        //Play(Chat screen)
         ChatArea = new JTextArea();
         ChatArea.setEditable(false);
 

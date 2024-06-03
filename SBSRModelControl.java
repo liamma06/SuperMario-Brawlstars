@@ -1,6 +1,8 @@
 import java.io.*;
 import java.awt.event.*;
 
+
+
 public class SBSRModelControl implements ActionListener{
 	//Properties
 
@@ -15,13 +17,18 @@ public class SBSRModelControl implements ActionListener{
 	public String strUsername;
 	public String strResult;
 
-	//splitting ssm messages -> mode(chat/play/game),user(host/client),action(message/game input),xcord,ycord
+	//Map selection
+	public int intMapSelection = 0;
+
+	//Chacter selection
+	public int intHostCharacter = 0;
+	public int intClientCharacter = 0;
+
+	//splitting ssm messages -> mode(chat/charcter/play/game),user(host/client),action(message/game input),xcord,ycord
 	String[] ssmMessage;
 
 	SBSRViewTest view;
 	SuperSocketMaster ssm;
-	
-
 	
 	//Methods
 
@@ -97,10 +104,37 @@ public class SBSRModelControl implements ActionListener{
 				System.out.println("You are not Host or have not connected yet");
 			}
 		//Map selection
-		}else if (evt.getSource() == view.Map1Button || evt.getSource() == view.Map2Button){
+		}else if (evt.getSource() == view.Map1Button){
+			intMapSelection = 1;
+			view.theframe.setContentPane(view.CharacterPanel);
+			view.theframe.revalidate();
+			ssm.sendText("character");
+		}else if(evt.getSource() == view.Map2Button){
+			intMapSelection = 2;
+			view.theframe.setContentPane(view.CharacterPanel);
+			view.theframe.revalidate();
+			ssm.sendText("character");
+		//Character selection
+		}else if(evt.getSource() == view.Character1Button && blnHost){
+			intHostCharacter = 1;
+			System.out.println("Host Character: Colt");
 			view.theframe.setContentPane(view.PlayPanel);
 			view.theframe.revalidate();
-			ssm.sendText("play");
+		}else if(evt.getSource() == view.Character2Button && blnHost){
+			intHostCharacter= 2;
+			System.out.println("Host Character: El Primo");
+			view.theframe.setContentPane(view.PlayPanel);
+			view.theframe.revalidate();
+		}else if(evt.getSource() == view.Character1Button){
+			intClientCharacter = 1;
+			System.out.println("Client Character: Colt");
+			view.theframe.setContentPane(view.PlayPanel);
+			view.theframe.revalidate();
+		}else if(evt.getSource() == view.Character2Button){
+			intClientCharacter = 2;
+			System.out.println("Client Character: El Primo");
+			view.theframe.setContentPane(view.PlayPanel);
+			view.theframe.revalidate();
 		//Text input 
 		}else if(evt.getSource() == view.ChatTextInput){
 			if(blnHost == true){
@@ -115,10 +149,10 @@ public class SBSRModelControl implements ActionListener{
 		//Detecting SSM 
 		}else if(evt.getSource() == ssm){
 			ssmMessage = ssm.readText().split(",");
-			if(ssmMessage[0].equals("play")){
-				view.theframe.setContentPane(view.PlayPanel);
+			if(ssmMessage[0].equals("character")){
+				view.theframe.setContentPane(view.CharacterPanel);
 				view.theframe.revalidate();
-				System.out.println("Host has selected map, Game starts");
+				System.out.println("Host has selected map, character selection");
 			}else if(ssmMessage[0].equals("chat")){
 				view.ChatArea.append(ssmMessage[1] + ": " + ssmMessage[2] + "\n");
 			}
@@ -146,6 +180,10 @@ public class SBSRModelControl implements ActionListener{
 
 		//Help page
 		view.HelpMenuButton.addActionListener(this);
+
+		//Character page
+		view.Character1Button.addActionListener(this);
+		view.Character2Button.addActionListener(this);
 
 		//Chat
 		view.ChatTextInput.addActionListener(this);
