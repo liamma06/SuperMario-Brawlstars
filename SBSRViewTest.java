@@ -43,6 +43,7 @@ public class SBSRViewTest{
     public JTextField ChatTextInput;
 
     //Play(game screen)
+
     
     //map screen
     public JPanel MapPanel = new JPanel();
@@ -61,7 +62,9 @@ public class SBSRViewTest{
     //Help screen
     public JPanel HelpPanel = new JPanel();
 
-    
+    AnimationPanel Animation;
+
+
     //Methods
 
     //Constructor
