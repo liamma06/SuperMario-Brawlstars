@@ -1,4 +1,6 @@
+import java.awt.*;
 import java.io.*;
+<<<<<<< HEAD
 
 import javax.swing.JPanel;
 
@@ -17,6 +19,11 @@ import java.awt.*;
 import javax.swing.*;
 import javax.imageio.*;
 import java.awt.image.*;
+=======
+import javax.swing.*;
+import java.awt.event.*;
+import javax.swing.event.*;
+>>>>>>> cf78f6a267133e9d7c482fd6015db26e8551ea42
 
 public class SBSRModelControl implements ActionListener{
 	//Properties
@@ -57,6 +64,10 @@ public class SBSRModelControl implements ActionListener{
 	String[] ssmMessage;
 	SBSRViewTest view;
 	SuperSocketMaster ssm;
+
+	//AnimationPanel
+	AnimationPanelTest AniPanel = new AnimationPanelTest();
+	public Timer theTimer = new Timer(1000/60,this);
 	
 	//Methods
 
@@ -122,6 +133,7 @@ public class SBSRModelControl implements ActionListener{
 		}		
 		if (intPlayersReady == 2){
 			System.out.println("Both players are ready");
+<<<<<<< HEAD
 			try{
 				BufferedReader mapFile = new BufferedReader(new FileReader("Map1.csv")); 
 				imgGrass = ImageIO.read(new File("Colt.jpg"));
@@ -202,6 +214,9 @@ public class SBSRModelControl implements ActionListener{
 			}
 		}
 
+=======
+			theTimer.start();
+>>>>>>> cf78f6a267133e9d7c482fd6015db26e8551ea42
 		}
 	}
 
@@ -263,10 +278,14 @@ public class SBSRModelControl implements ActionListener{
 			view.ChatArea.append(intPlayersReady + " joined\n");
 			view.ChatArea.append(strUsername + " has connected\n");
 			
+<<<<<<< HEAD
 			
 
 			checkPlay(null);
 
+=======
+			checkPlay();
+>>>>>>> cf78f6a267133e9d7c482fd6015db26e8551ea42
 		}else if(evt.getSource() == view.Character2Button){
 			if(blnHost){
 				intHostCharacter = 2;
@@ -284,10 +303,15 @@ public class SBSRModelControl implements ActionListener{
 			view.ChatArea.append(intPlayersReady + " joined\n");
 			view.ChatArea.append(strUsername + " has connected\n");
 			
+<<<<<<< HEAD
 
 			checkPlay(null);
 			
 		//Text input 
+=======
+			checkPlay();
+		//Text input Chat
+>>>>>>> cf78f6a267133e9d7c482fd6015db26e8551ea42
 		}else if(evt.getSource() == view.ChatTextInput){
 			if(blnHost == true){
 				ssm.sendText("chat,"+strHostUsername+","+view.ChatTextInput.getText());
@@ -298,6 +322,10 @@ public class SBSRModelControl implements ActionListener{
 				view.ChatArea.append(strClientUsername+": "+view.ChatTextInput.getText()+ "\n");
 				view.ChatTextInput.setText("");
 			}
+		}else if(evt.getSource() == theTimer){
+			
+			System.out.println("Timer is running");
+			AniPanel.repaint();
 		//Detecting SSM 
 		}else if(evt.getSource() == ssm){
 			ssmMessage = ssm.readText().split(",");
@@ -309,15 +337,21 @@ public class SBSRModelControl implements ActionListener{
 			//Getting chat responses
 			}else if(ssmMessage[0].equals("chat")){
 				view.ChatArea.append(ssmMessage[1] + ": " + ssmMessage[2] + "\n");
+			//Getting connection responses
 			}else if(ssmMessage[0].equals("connection")){
 				intPlayersReady += 1;
 				view.ChatArea.append(ssmMessage[1] + " has connected\n");
 				System.out.println("Players Ready: "+intPlayersReady);
+<<<<<<< HEAD
 				try{
 				checkPlay(null);
 				}catch(NullPointerException e){
 
 			}
+=======
+
+				checkPlay();
+>>>>>>> cf78f6a267133e9d7c482fd6015db26e8551ea42
 
 			}else{
 				System.out.println("Invalid SSM message");
@@ -328,6 +362,10 @@ public class SBSRModelControl implements ActionListener{
 	//Constructor
 	public SBSRModelControl(SBSRViewTest view){
 		this.view = view;
+
+		view.PlayPanel.add(AniPanel);
+		view.PlayPanel.repaint();
+		view.PlayPanel.revalidate();
 
 		// adding Action listeners
 

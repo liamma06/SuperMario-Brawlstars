@@ -44,6 +44,7 @@ public class SBSRViewTest{
     public JTextField ChatTextInput;
 
     //Play(game screen)
+
     
     //map screen
     public JPanel MapPanel = new JPanel();
@@ -63,10 +64,13 @@ public class SBSRViewTest{
     public JPanel HelpPanel = new JPanel();
 
     
-    
+    //Methods
+
     //Constructor
     public SBSRViewTest(){
-    
+        
+        
+
         //Menu options 
         MenuPanel.setPreferredSize(new Dimension(1280,720));
         MenuPanel.setLayout(null);
