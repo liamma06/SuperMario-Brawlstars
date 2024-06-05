@@ -1,7 +1,22 @@
 import java.io.*;
+
+import javax.swing.JPanel;
+
 import java.awt.event.*;
 
+import java.awt.image.BufferedImage;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
+
+import java.awt.*;
+
+import java.awt.geom.AffineTransform;
+import java.io.*;
+import java.awt.*;
+import javax.swing.*;
+import javax.imageio.*;
+import java.awt.image.*;
 
 public class SBSRModelControl implements ActionListener{
 	//Properties
@@ -27,9 +42,19 @@ public class SBSRModelControl implements ActionListener{
 	//Play
 	public int intPlayersReady = 0;
 
+	public String strLine;		
+	public String strSplit[];
+	public int intRowNum;
+	public int intColumnNum;	
+	public int intColumnNum2;
+	public int intRowNum2;
+	public String strMap[][] = new String[20][20];
+	BufferedImage imgGrass = null;
+    BufferedImage imgAir = null;
+    BufferedImage imgBrick = null;
+	
 	//splitting ssm messages -> mode(chat/charcter/play/game/connection),user(host/client),action(message/game input),xcord,ycord
 	String[] ssmMessage;
-
 	SBSRViewTest view;
 	SuperSocketMaster ssm;
 	
@@ -78,9 +103,105 @@ public class SBSRModelControl implements ActionListener{
 	}
 
 	//check play method
-	public void checkPlay(){
-		if(intPlayersReady == 2){
+	public void checkPlay(Graphics g){
+		//Graphics2D g2d = (Graphics2D) g;
+		try{
+			BufferedReader mapFile = new BufferedReader(new FileReader("Map1.csv")); 
+			imgGrass = ImageIO.read(new File("Colt.jpg"));
+			imgAir = ImageIO.read(new File("Shelly.jpg"));
+			imgBrick = ImageIO.read(new File("Brick.png"));
+			strLine = mapFile.readLine();
+			//Methods
+
+		}catch(IOException e){
+	
+		}catch(ArrayIndexOutOfBoundsException e){
+
+		}catch(NullPointerException e){
+
+		}		
+		if (intPlayersReady == 2){
 			System.out.println("Both players are ready");
+			try{
+				BufferedReader mapFile = new BufferedReader(new FileReader("Map1.csv")); 
+				imgGrass = ImageIO.read(new File("Colt.jpg"));
+            	imgAir = ImageIO.read(new File("Shelly.jpg"));
+            	imgBrick = ImageIO.read(new File("Brick.png"));
+				//Methods
+
+			}catch(IOException e){
+		
+			}catch(ArrayIndexOutOfBoundsException e){
+
+			}
+			for(intRowNum = 0; intRowNum < 20; intRowNum++){
+			
+				// reads the line of text from the map file, returns a string, and puts it into the variable strLine
+				try{
+					BufferedReader mapFile = new BufferedReader(new FileReader("Map1.csv")); 
+					imgGrass = ImageIO.read(new File("Colt.jpg"));
+					imgAir = ImageIO.read(new File("Shelly.jpg"));
+					imgBrick = ImageIO.read(new File("Brick.png"));
+					strLine = mapFile.readLine();
+					//Methods
+	
+				}catch(IOException e){
+			
+				}catch(ArrayIndexOutOfBoundsException e){
+	
+				}catch(NullPointerException e){
+
+				}
+				
+						   
+			   for(intColumnNum = 0; intColumnNum < 100; intColumnNum++){
+				   // Need a 1d array to split that line based on commas
+				   try{
+				   strSplit = strLine.split(",");
+				   }catch(NullPointerException e){
+
+				   }
+				   // copy to the 2d array
+				   try{
+				   strMap[intRowNum][intColumnNum] = strSplit[intColumnNum]; 
+					}catch(NullPointerException e){
+
+				}
+			   }
+		
+		   }
+			
+		for(intRowNum2 = 0; intRowNum2 < 20; intRowNum2++){
+			
+			for(intColumnNum2 = 0; intColumnNum2 < 20; intColumnNum2++){
+				
+				if(strMap[intRowNum2][intColumnNum2].equals("g")){
+					g.drawImage(imgGrass, (20 * intColumnNum2), ((20 * intRowNum2) + 100),null);
+					
+				}
+				
+				if(strMap[intRowNum2][intColumnNum2].equals("a")){
+					g.drawImage(imgAir, (20 * intColumnNum2), ((20 * intRowNum2) + 100),null);
+					
+				}
+				
+				if(strMap[intRowNum2][intColumnNum2].equals("b")){
+					g.drawImage(imgBrick, (20 * intColumnNum2), ((20 * intRowNum2) + 100),null);
+					
+				}
+				
+				/*if(strMap[intRowNum2][intColumnNum2].equals("h")){
+					con.drawImage(imgHealth, (20 * intColumnNum2), ((20 * intRowNum2) + 100));
+					
+				}
+				
+				if(strMap[intRowNum2][intColumnNum2].equals("f")){
+					con.drawImage(imgForce, (20 * intColumnNum2), ((20 * intRowNum2) + 100));
+					
+				}*/
+			}
+		}
+
 		}
 	}
 
@@ -144,7 +265,7 @@ public class SBSRModelControl implements ActionListener{
 			
 			
 
-			checkPlay();
+			checkPlay(null);
 
 		}else if(evt.getSource() == view.Character2Button){
 			if(blnHost){
@@ -164,7 +285,7 @@ public class SBSRModelControl implements ActionListener{
 			view.ChatArea.append(strUsername + " has connected\n");
 			
 
-			checkPlay();
+			checkPlay(null);
 			
 		//Text input 
 		}else if(evt.getSource() == view.ChatTextInput){
@@ -192,8 +313,11 @@ public class SBSRModelControl implements ActionListener{
 				intPlayersReady += 1;
 				view.ChatArea.append(ssmMessage[1] + " has connected\n");
 				System.out.println("Players Ready: "+intPlayersReady);
-				
-				checkPlay();
+				try{
+				checkPlay(null);
+				}catch(NullPointerException e){
+
+			}
 
 			}else{
 				System.out.println("Invalid SSM message");
