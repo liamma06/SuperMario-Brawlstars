@@ -1,7 +1,8 @@
+import java.awt.*;
 import java.io.*;
+import javax.swing.*;
 import java.awt.event.*;
-
-
+import javax.swing.event.*;
 
 public class SBSRModelControl implements ActionListener{
 	//Properties
@@ -32,6 +33,10 @@ public class SBSRModelControl implements ActionListener{
 
 	SBSRViewTest view;
 	SuperSocketMaster ssm;
+
+	//AnimationPanel
+	AnimationPanelTest AniPanel = new AnimationPanelTest();
+	public Timer theTimer = new Timer(1000/60,this);
 	
 	//Methods
 
@@ -81,6 +86,7 @@ public class SBSRModelControl implements ActionListener{
 	public void checkPlay(){
 		if(intPlayersReady == 2){
 			System.out.println("Both players are ready");
+			theTimer.start();
 		}
 	}
 
@@ -142,10 +148,7 @@ public class SBSRModelControl implements ActionListener{
 			view.ChatArea.append(intPlayersReady + " joined\n");
 			view.ChatArea.append(strUsername + " has connected\n");
 			
-			
-
 			checkPlay();
-
 		}else if(evt.getSource() == view.Character2Button){
 			if(blnHost){
 				intHostCharacter = 2;
@@ -163,10 +166,8 @@ public class SBSRModelControl implements ActionListener{
 			view.ChatArea.append(intPlayersReady + " joined\n");
 			view.ChatArea.append(strUsername + " has connected\n");
 			
-
 			checkPlay();
-			
-		//Text input 
+		//Text input Chat
 		}else if(evt.getSource() == view.ChatTextInput){
 			if(blnHost == true){
 				ssm.sendText("chat,"+strHostUsername+","+view.ChatTextInput.getText());
@@ -177,6 +178,10 @@ public class SBSRModelControl implements ActionListener{
 				view.ChatArea.append(strClientUsername+": "+view.ChatTextInput.getText()+ "\n");
 				view.ChatTextInput.setText("");
 			}
+		}else if(evt.getSource() == theTimer){
+			
+			System.out.println("Timer is running");
+			AniPanel.repaint();
 		//Detecting SSM 
 		}else if(evt.getSource() == ssm){
 			ssmMessage = ssm.readText().split(",");
@@ -188,11 +193,12 @@ public class SBSRModelControl implements ActionListener{
 			//Getting chat responses
 			}else if(ssmMessage[0].equals("chat")){
 				view.ChatArea.append(ssmMessage[1] + ": " + ssmMessage[2] + "\n");
+			//Getting connection responses
 			}else if(ssmMessage[0].equals("connection")){
 				intPlayersReady += 1;
 				view.ChatArea.append(ssmMessage[1] + " has connected\n");
 				System.out.println("Players Ready: "+intPlayersReady);
-				
+
 				checkPlay();
 
 			}else{
@@ -204,6 +210,10 @@ public class SBSRModelControl implements ActionListener{
 	//Constructor
 	public SBSRModelControl(SBSRViewTest view){
 		this.view = view;
+
+		view.PlayPanel.add(AniPanel);
+		view.PlayPanel.repaint();
+		view.PlayPanel.revalidate();
 
 		// adding Action listeners
 
