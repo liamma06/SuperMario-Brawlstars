@@ -1,6 +1,4 @@
-import java.awt.*;
 import java.io.*;
-<<<<<<< HEAD
 
 import javax.swing.JPanel;
 
@@ -19,11 +17,6 @@ import java.awt.*;
 import javax.swing.*;
 import javax.imageio.*;
 import java.awt.image.*;
-=======
-import javax.swing.*;
-import java.awt.event.*;
-import javax.swing.event.*;
->>>>>>> cf78f6a267133e9d7c482fd6015db26e8551ea42
 
 public class SBSRModelControl implements ActionListener{
 	//Properties
@@ -64,10 +57,6 @@ public class SBSRModelControl implements ActionListener{
 	String[] ssmMessage;
 	SBSRViewTest view;
 	SuperSocketMaster ssm;
-
-	//AnimationPanel
-	AnimationPanelTest AniPanel = new AnimationPanelTest();
-	public Timer theTimer = new Timer(1000/60,this);
 	
 	//Methods
 
@@ -133,90 +122,8 @@ public class SBSRModelControl implements ActionListener{
 		}		
 		if (intPlayersReady == 2){
 			System.out.println("Both players are ready");
-<<<<<<< HEAD
-			try{
-				BufferedReader mapFile = new BufferedReader(new FileReader("Map1.csv")); 
-				imgGrass = ImageIO.read(new File("Colt.jpg"));
-            	imgAir = ImageIO.read(new File("Shelly.jpg"));
-            	imgBrick = ImageIO.read(new File("Brick.png"));
-				//Methods
-
-			}catch(IOException e){
-		
-			}catch(ArrayIndexOutOfBoundsException e){
-
-			}
-			for(intRowNum = 0; intRowNum < 20; intRowNum++){
 			
-				// reads the line of text from the map file, returns a string, and puts it into the variable strLine
-				try{
-					BufferedReader mapFile = new BufferedReader(new FileReader("Map1.csv")); 
-					imgGrass = ImageIO.read(new File("Colt.jpg"));
-					imgAir = ImageIO.read(new File("Shelly.jpg"));
-					imgBrick = ImageIO.read(new File("Brick.png"));
-					strLine = mapFile.readLine();
-					//Methods
-	
-				}catch(IOException e){
-			
-				}catch(ArrayIndexOutOfBoundsException e){
-	
-				}catch(NullPointerException e){
 
-				}
-				
-						   
-			   for(intColumnNum = 0; intColumnNum < 100; intColumnNum++){
-				   // Need a 1d array to split that line based on commas
-				   try{
-				   strSplit = strLine.split(",");
-				   }catch(NullPointerException e){
-
-				   }
-				   // copy to the 2d array
-				   try{
-				   strMap[intRowNum][intColumnNum] = strSplit[intColumnNum]; 
-					}catch(NullPointerException e){
-
-				}
-			   }
-		
-		   }
-			
-		for(intRowNum2 = 0; intRowNum2 < 20; intRowNum2++){
-			
-			for(intColumnNum2 = 0; intColumnNum2 < 20; intColumnNum2++){
-				
-				if(strMap[intRowNum2][intColumnNum2].equals("g")){
-					g.drawImage(imgGrass, (20 * intColumnNum2), ((20 * intRowNum2) + 100),null);
-					
-				}
-				
-				if(strMap[intRowNum2][intColumnNum2].equals("a")){
-					g.drawImage(imgAir, (20 * intColumnNum2), ((20 * intRowNum2) + 100),null);
-					
-				}
-				
-				if(strMap[intRowNum2][intColumnNum2].equals("b")){
-					g.drawImage(imgBrick, (20 * intColumnNum2), ((20 * intRowNum2) + 100),null);
-					
-				}
-				
-				/*if(strMap[intRowNum2][intColumnNum2].equals("h")){
-					con.drawImage(imgHealth, (20 * intColumnNum2), ((20 * intRowNum2) + 100));
-					
-				}
-				
-				if(strMap[intRowNum2][intColumnNum2].equals("f")){
-					con.drawImage(imgForce, (20 * intColumnNum2), ((20 * intRowNum2) + 100));
-					
-				}*/
-			}
-		}
-
-=======
-			theTimer.start();
->>>>>>> cf78f6a267133e9d7c482fd6015db26e8551ea42
 		}
 	}
 
@@ -278,14 +185,10 @@ public class SBSRModelControl implements ActionListener{
 			view.ChatArea.append(intPlayersReady + " joined\n");
 			view.ChatArea.append(strUsername + " has connected\n");
 			
-<<<<<<< HEAD
 			
 
 			checkPlay(null);
 
-=======
-			checkPlay();
->>>>>>> cf78f6a267133e9d7c482fd6015db26e8551ea42
 		}else if(evt.getSource() == view.Character2Button){
 			if(blnHost){
 				intHostCharacter = 2;
@@ -303,15 +206,10 @@ public class SBSRModelControl implements ActionListener{
 			view.ChatArea.append(intPlayersReady + " joined\n");
 			view.ChatArea.append(strUsername + " has connected\n");
 			
-<<<<<<< HEAD
 
 			checkPlay(null);
 			
 		//Text input 
-=======
-			checkPlay();
-		//Text input Chat
->>>>>>> cf78f6a267133e9d7c482fd6015db26e8551ea42
 		}else if(evt.getSource() == view.ChatTextInput){
 			if(blnHost == true){
 				ssm.sendText("chat,"+strHostUsername+","+view.ChatTextInput.getText());
@@ -322,10 +220,6 @@ public class SBSRModelControl implements ActionListener{
 				view.ChatArea.append(strClientUsername+": "+view.ChatTextInput.getText()+ "\n");
 				view.ChatTextInput.setText("");
 			}
-		}else if(evt.getSource() == theTimer){
-			
-			System.out.println("Timer is running");
-			AniPanel.repaint();
 		//Detecting SSM 
 		}else if(evt.getSource() == ssm){
 			ssmMessage = ssm.readText().split(",");
@@ -337,21 +231,15 @@ public class SBSRModelControl implements ActionListener{
 			//Getting chat responses
 			}else if(ssmMessage[0].equals("chat")){
 				view.ChatArea.append(ssmMessage[1] + ": " + ssmMessage[2] + "\n");
-			//Getting connection responses
 			}else if(ssmMessage[0].equals("connection")){
 				intPlayersReady += 1;
 				view.ChatArea.append(ssmMessage[1] + " has connected\n");
 				System.out.println("Players Ready: "+intPlayersReady);
-<<<<<<< HEAD
 				try{
 				checkPlay(null);
 				}catch(NullPointerException e){
 
 			}
-=======
-
-				checkPlay();
->>>>>>> cf78f6a267133e9d7c482fd6015db26e8551ea42
 
 			}else{
 				System.out.println("Invalid SSM message");
@@ -362,10 +250,6 @@ public class SBSRModelControl implements ActionListener{
 	//Constructor
 	public SBSRModelControl(SBSRViewTest view){
 		this.view = view;
-
-		view.PlayPanel.add(AniPanel);
-		view.PlayPanel.repaint();
-		view.PlayPanel.revalidate();
 
 		// adding Action listeners
 
