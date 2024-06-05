@@ -25,8 +25,8 @@ public class AnimationPanelTest extends JPanel {
     public int ViewportHeight = 20;
 
     //Character
-    public int CharacterX=15;
-    public int CharacterY=10; 
+    public int CharacterX = 10;
+    public int CharacterY = 10; 
 
     Timer timer;
     
@@ -41,12 +41,15 @@ public class AnimationPanelTest extends JPanel {
                 if(mapX >= 0 && mapX < MapWidth && mapY >= 0 && mapY < MapHeight){
                     g.drawImage(ImgAir, x * TilePixels, y * TilePixels, TilePixels, TilePixels, null);
                     switch(Map[mapX][mapY]){
+                        //grass
                         case 'g':
                             g.drawImage(ImgGrass, x * TilePixels, y * TilePixels, TilePixels, TilePixels, null);
                             break;
+                        //brick
                         case 'b':
                             g.drawImage(ImgBrick, x * TilePixels, y * TilePixels, TilePixels, TilePixels, null);
                             break;
+                        //air
                         case'a':
                             g.drawImage(ImgAir, x * TilePixels, y * TilePixels, TilePixels, TilePixels, null);
                             break;
@@ -64,8 +67,8 @@ public class AnimationPanelTest extends JPanel {
         //load images
         try{
             ImgCharacter = ImageIO.read(new File("Shelly.jpg"));
-            ImgGrass = ImageIO.read(new File("Colt.jpg"));
-            //ImgBrick = ImageIO.read(new File("Brick.png"));
+            ImgGrass = ImageIO.read(new File("Grass.png"));
+            ImgBrick = ImageIO.read(new File("Brick.png"));
             ImgAir = ImageIO.read(new File("Air.png"));
         }catch(IOException e){
             System.out.println("Error loading images");

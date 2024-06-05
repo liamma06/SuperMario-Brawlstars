@@ -50,8 +50,6 @@ public class SBSRView implements ActionListener{
 
 
     SuperSocketMaster ssm;
-
-    
     
 
     //Methods
