@@ -27,12 +27,15 @@ public class AnimationPanelTest extends JPanel {
     //Character
     public int CharacterX = 10;
     public int CharacterY = 10; 
-
+    BufferedImage imgShelly = null;
+    int intShellyX = 10;
+    int intShellyY= 10;
     Timer timer;
     
     //Methods
     public void paintComponent(Graphics g){
         super.paintComponent(g);
+        g.drawImage(imgShelly, intShellyX, intShellyY, null);
         //draw visible map
         for(int x = 0; x < ViewportWidth; x++){
             for(int y = 0; y < ViewportHeight; y++){
@@ -58,13 +61,21 @@ public class AnimationPanelTest extends JPanel {
             }
         }
         //draw character
-        g.drawImage(ImgCharacter, 10 * TilePixels, 10 * TilePixels, TilePixels, TilePixels, null);
+        g.drawImage(ImgCharacter,10* TilePixels, 10*TilePixels, TilePixels, TilePixels, null);
         repaint();
     }
 
     //Constructor
     public AnimationPanelTest(){
         //load images
+        try{
+            imgShelly  = ImageIO.read(new File("Shelly.jpg"));
+        }catch(IOException e){
+            System.out.println("Unable to load image");
+            System.out.println(e.toString());
+        }
+
+    
         try{
             ImgCharacter = ImageIO.read(new File("Shelly.jpg"));
             ImgGrass = ImageIO.read(new File("Grass.png"));

@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import javax.swing.event.*;
 
-public class SBSRModelControl implements ActionListener{
+public class SBSRModelControl extends JPanel implements ActionListener{
 	//Properties
 
 	//Connection
@@ -36,7 +36,7 @@ public class SBSRModelControl implements ActionListener{
 
 	//AnimationPanel
 	public Timer theTimer = new Timer(1000/60,this);
-	
+	AnimationPanelTest AniPanel2 = new AnimationPanelTest();
 	//Methods
 
 	//setting up connection
@@ -180,6 +180,9 @@ public class SBSRModelControl implements ActionListener{
 		//Timer
 		}else if(evt.getSource() == theTimer){
 			System.out.println("Timer is running");
+			AniPanel2.intShellyX = AniPanel2.intShellyX + 300;
+			AniPanel2.intShellyY = AniPanel2.intShellyY + 100;
+			AniPanel2.repaint();
 		//Detecting SSM 
 		}else if(evt.getSource() == ssm){
 			ssmMessage = ssm.readText().split(",");
