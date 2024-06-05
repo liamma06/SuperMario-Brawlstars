@@ -108,54 +108,56 @@ public class SBSRView implements ActionListener{
         	}
     	}
 
-    //Constructor
-    public SBSRView(){
-        MenuPanel.setPreferredSize(new Dimension(1280,720));
-        MenuPanel.setLayout(null);
+	//Constructor
+	public SBSRView(){
+        	MenuPanel.setPreferredSize(new Dimension(1280,720));
+        	MenuPanel.setLayout(null);
 
-        //Menu options 
-        PlayMenuButton = new JButton("Play");
-        PlayMenuButton.setSize(300,60);
-        PlayMenuButton.setLocation(490,400);
-        PlayMenuButton.addActionListener(this);
-        MenuPanel.add(PlayMenuButton);
 
-        ConnectMenuButton = new JButton("Connect");
-        ConnectMenuButton.setSize(300,60);
-        ConnectMenuButton.setLocation(490,500);
-        ConnectMenuButton.addActionListener(this);
-        MenuPanel.add(ConnectMenuButton);
+        	//Menu options 
+       		PlayMenuButton = new JButton("Play");
+        	PlayMenuButton.setSize(300,60);
+        	PlayMenuButton.setLocation(490,400);
+        	PlayMenuButton.addActionListener(this);
+        	MenuPanel.add(PlayMenuButton);
 
-        HelpMenuButton = new JButton("Help");
-        HelpMenuButton.setSize(300,60);
-        HelpMenuButton.setLocation(490,600);
-        MenuPanel.add(HelpMenuButton);
+        	ConnectMenuButton = new JButton("Connect");
+        	ConnectMenuButton.setSize(300,60);
+        	ConnectMenuButton.setLocation(490,500);
+        	ConnectMenuButton.addActionListener(this);
+        	MenuPanel.add(ConnectMenuButton);
 
-        //Map Panel
-        MapPanel.setLayout(null);
+        	HelpMenuButton = new JButton("Help");
+        	HelpMenuButton.setSize(300,60);
+        	HelpMenuButton.setLocation(490,600);
+        	MenuPanel.add(HelpMenuButton);
+	
 
-        Map1Label = new JLabel("Map 1");
-        Map1Label.setSize(200,50);
-        Map1Label.setLocation(300,75);
-        Map1Label.setFont(new Font("Arial",Font.BOLD,30));
-        MapPanel.add(Map1Label);
+        	//Map Level Selection Panel
+        	MapPanel.setLayout(null);
 
-        Map2Label = new JLabel("Map 2");
-        Map2Label.setSize(200,50);
-        Map2Label.setLocation(880,75);
-        Map2Label.setFont(new Font("Arial",Font.BOLD,30));
-        MapPanel.add(Map2Label);
+        	Map1Label = new JLabel("Map 1");
+        	Map1Label.setSize(200,50);
+        	Map1Label.setLocation(300,75);
+        	Map1Label.setFont(new Font("Arial",Font.BOLD,30));
+        	MapPanel.add(Map1Label);
 
-        Map1Button = new JButton("Select");
-        Map1Button.setSize(200,50);
-        Map1Button.setLocation(250,550);
-        Map1Button.setFont(new Font("Arial",Font.PLAIN,20));
-        Map1Button.addActionListener(this);
-        MapPanel.add(Map1Button);
+        	Map2Label = new JLabel("Map 2");
+        	Map2Label.setSize(200,50);
+        	Map2Label.setLocation(880,75);
+        	Map2Label.setFont(new Font("Arial",Font.BOLD,30));
+        	MapPanel.add(Map2Label);
 
-        Map2Button = new JButton("Select");
-        Map2Button.setSize(200,50);
-        Map2Button.setLocation(830,550);
+	        Map1Button = new JButton("Select");
+        	Map1Button.setSize(200,50);
+        	Map1Button.setLocation(250,550);
+        	Map1Button.setFont(new Font("Arial",Font.PLAIN,20));
+        	Map1Button.addActionListener(this);
+	        MapPanel.add(Map1Button);
+
+        	Map2Button = new JButton("Select");
+        	Map2Button.setSize(200,50);
+        	Map2Button.setLocation(830,550);
         Map2Button.setFont(new Font("Arial",Font.PLAIN,20));
         Map2Button.addActionListener(this);
         MapPanel.add(Map2Button);
