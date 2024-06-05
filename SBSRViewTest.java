@@ -11,7 +11,6 @@ import java.awt.event.*;
 import javax.swing.event.*;
 import java.awt.image.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 //Defining
 public class SBSRViewTest{
@@ -63,7 +62,8 @@ public class SBSRViewTest{
     //Help screen
     public JPanel HelpPanel = new JPanel();
 
-    
+    AnimationPanelTest AniPanel = new AnimationPanelTest();
+
     //Methods
 
     //Constructor
