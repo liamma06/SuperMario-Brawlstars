@@ -4,93 +4,101 @@ import javax.imageio.*;
 import java.io.*;
 import java.awt.image.*;
 
-public class AnimationPanel extends JPanel{ 
+public class AnimationPanel extends JPanel{
     //Properties
-    //Images
-    public Image ImgCharacter;
-    public Image ImgGrass;
-    public Image ImgBrick;
-    public Image ImgAir;
-
-    //Map
-    public char[][] Map;//2D array to hold map layout
-    public int MapWidth = 1000;
-    public int MapHeight = 20;
-    public int TilePixels = 36;
-
-    //area that is being viewed
-    public int ViewportX;
-    public int ViewportY;
-    public int ViewportWidth = 20;
-    public int ViewportHeight = 20;
-
-    //Character
-    public int CharacterX;
-    public int CharacterY; 
-
-    Timer timer;
-    
+    public String strLine;		
+	public String strSplit[];
+	public int intRowNum;
+	public int intColumnNum;	
+	public int intColumnNum2;
+	public int intRowNum2;
+	public String strMap[][] = new String[20][20];
+	BufferedImage imgGrass = null;
+    BufferedImage imgAir = null;
+    BufferedImage imgBrick = null;
     //Methods
-    public void paintComponent(Graphics g){
-        super.paintComponent(g);
-        g.setColor(Color.BLACK);
-        g.fillRect(0,0,400,540);
-        //draw visible map
-        for(int x = 0; x < ViewportWidth; x++){
-            for(int y = 0; y < ViewportHeight; y++){
-                int mapX = x + CharacterX - ViewportWidth / 2;
-                int mapY = y + CharacterY - ViewportHeight / 2;
-                if(mapX >= 0 && mapX < MapWidth && mapY >= 0 && mapY < MapHeight){
-                    g.drawImage(ImgAir, x * TilePixels, y * TilePixels, TilePixels, TilePixels, null);
-                    switch(Map[mapX][mapY]){
-                        case 'g':
-                            g.drawImage(ImgGrass, x * TilePixels, y * TilePixels, TilePixels, TilePixels, null);
-                            break;
-                        case 'b':
-                            g.drawImage(ImgBrick, x * TilePixels, y * TilePixels, TilePixels, TilePixels, null);
-                            break;
-                        case'a':
-                            g.drawImage(ImgAir, x * TilePixels, y * TilePixels, TilePixels, TilePixels, null);
-                            break;
-                    }
-                }
-            }
-        }
-        //draw character
-        g.drawImage(ImgCharacter, CharacterX * TilePixels, CharacterY * TilePixels, TilePixels, TilePixels, null);
-        repaint();
-    }
 
     //Constructor
-    public AnimationPanel(){
-        //load images
+    public AnimationPanel(Graphics g){
         try{
-            //ImgCharacter = ImageIO.read(new File("Character.png"));
-            //ImgGrass = ImageIO.read(new File("Grass.png"));
-            //ImgBrick = ImageIO.read(new File("Brick.png"));
-            ImgAir = ImageIO.read(new File("Air.png"));
-        }catch(IOException e){
-            System.out.println("Error loading images");
-        }
+            BufferedReader mapFile = new BufferedReader(new FileReader("Map1.csv")); 
+            imgGrass = ImageIO.read(new File("Colt.jpg"));
+            imgAir = ImageIO.read(new File("Shelly.jpg"));
+            imgBrick = ImageIO.read(new File("Brick.png"));
+            //Methods
 
-        //load Map layout from csv file
-        Map = new char[MapWidth][MapHeight];
-        try{
-            BufferedReader br = new BufferedReader(new FileReader("Map1.csv"));
-            String line;
-            int row = 0;
-            while((line = br.readLine()) != null){
-                String[] parts = line.split(",");
-                for(int col = 0; col < parts.length; col++){
-                    Map[col][row] = parts[col].charAt(0);
-                }
-                row++;
-            }
-            br.close(); 
         }catch(IOException e){
-            System.out.println("Error reading map file");
+    
+        }catch(ArrayIndexOutOfBoundsException e){
+
         }
-        repaint();
+        for(intRowNum = 0; intRowNum < 20; intRowNum++){
         
+            // reads the line of text from the map file, returns a string, and puts it into the variable strLine
+            try{
+                BufferedReader mapFile = new BufferedReader(new FileReader("Map1.csv")); 
+                imgGrass = ImageIO.read(new File("Colt.jpg"));
+                imgAir = ImageIO.read(new File("Shelly.jpg"));
+                imgBrick = ImageIO.read(new File("Brick.png"));
+                strLine = mapFile.readLine();
+                //Methods
+
+            }catch(IOException e){
+        
+            }catch(ArrayIndexOutOfBoundsException e){
+
+            }catch(NullPointerException e){
+
+            }
+            
+                       
+           for(intColumnNum = 0; intColumnNum < 100; intColumnNum++){
+               // Need a 1d array to split that line based on commas
+               try{
+               strSplit = strLine.split(",");
+               }catch(NullPointerException e){
+
+               }
+               // copy to the 2d array
+               try{
+               strMap[intRowNum][intColumnNum] = strSplit[intColumnNum]; 
+                }catch(NullPointerException e){
+
+            }
+           }
+    
+       }
+        
+    for(intRowNum2 = 0; intRowNum2 < 20; intRowNum2++){
+        
+        for(intColumnNum2 = 0; intColumnNum2 < 20; intColumnNum2++){
+            
+            if(strMap[intRowNum2][intColumnNum2].equals("g")){
+                g.drawImage(imgGrass, (20 * intColumnNum2), ((20 * intRowNum2) + 100),null);
+                
+            }
+            
+            if(strMap[intRowNum2][intColumnNum2].equals("a")){
+                g.drawImage(imgAir, (20 * intColumnNum2), ((20 * intRowNum2) + 100),null);
+                
+            }
+            
+            if(strMap[intRowNum2][intColumnNum2].equals("b")){
+                g.drawImage(imgBrick, (20 * intColumnNum2), ((20 * intRowNum2) + 100),null);
+                
+            }
+            
+            /*if(strMap[intRowNum2][intColumnNum2].equals("h")){
+                con.drawImage(imgHealth, (20 * intColumnNum2), ((20 * intRowNum2) + 100));
+                
+            }
+            
+            if(strMap[intRowNum2][intColumnNum2].equals("f")){
+                con.drawImage(imgForce, (20 * intColumnNum2), ((20 * intRowNum2) + 100));
+                
+            }*/
+        }
     }
+    }
+    
 }
