@@ -1,22 +1,8 @@
+import java.awt.*;
 import java.io.*;
-
-import javax.swing.JPanel;
-
+import javax.swing.*;
 import java.awt.event.*;
-
-import java.awt.image.BufferedImage;
-
-import javax.imageio.ImageIO;
-import javax.swing.*;
-
-import java.awt.*;
-
-import java.awt.geom.AffineTransform;
-import java.io.*;
-import java.awt.*;
-import javax.swing.*;
-import javax.imageio.*;
-import java.awt.image.*;
+import javax.swing.event.*;
 
 public class SBSRModelControl implements ActionListener{
 	//Properties
@@ -42,21 +28,14 @@ public class SBSRModelControl implements ActionListener{
 	//Play
 	public int intPlayersReady = 0;
 
-	public String strLine;		
-	public String strSplit[];
-	public int intRowNum;
-	public int intColumnNum;	
-	public int intColumnNum2;
-	public int intRowNum2;
-	public String strMap[][] = new String[20][20];
-	BufferedImage imgGrass = null;
-    BufferedImage imgAir = null;
-    BufferedImage imgBrick = null;
-	
 	//splitting ssm messages -> mode(chat/charcter/play/game/connection),user(host/client),action(message/game input),xcord,ycord
 	String[] ssmMessage;
+
 	SBSRViewTest view;
 	SuperSocketMaster ssm;
+
+	//AnimationPanel
+	public Timer theTimer = new Timer(1000/60,this);
 	
 	//Methods
 
@@ -103,27 +82,10 @@ public class SBSRModelControl implements ActionListener{
 	}
 
 	//check play method
-	public void checkPlay(Graphics g){
-		//Graphics2D g2d = (Graphics2D) g;
-		try{
-			BufferedReader mapFile = new BufferedReader(new FileReader("Map1.csv")); 
-			imgGrass = ImageIO.read(new File("Colt.jpg"));
-			imgAir = ImageIO.read(new File("Shelly.jpg"));
-			imgBrick = ImageIO.read(new File("Brick.png"));
-			strLine = mapFile.readLine();
-			//Methods
-
-		}catch(IOException e){
-	
-		}catch(ArrayIndexOutOfBoundsException e){
-
-		}catch(NullPointerException e){
-
-		}		
-		if (intPlayersReady == 2){
+	public void checkPlay(){
+		if(intPlayersReady == 2){
 			System.out.println("Both players are ready");
-			
-
+			theTimer.start();
 		}
 	}
 
@@ -185,10 +147,7 @@ public class SBSRModelControl implements ActionListener{
 			view.ChatArea.append(intPlayersReady + " joined\n");
 			view.ChatArea.append(strUsername + " has connected\n");
 			
-			
-
-			checkPlay(null);
-
+			checkPlay();
 		}else if(evt.getSource() == view.Character2Button){
 			if(blnHost){
 				intHostCharacter = 2;
@@ -206,10 +165,8 @@ public class SBSRModelControl implements ActionListener{
 			view.ChatArea.append(intPlayersReady + " joined\n");
 			view.ChatArea.append(strUsername + " has connected\n");
 			
-
-			checkPlay(null);
-			
-		//Text input 
+			checkPlay();
+		//Text input Chat
 		}else if(evt.getSource() == view.ChatTextInput){
 			if(blnHost == true){
 				ssm.sendText("chat,"+strHostUsername+","+view.ChatTextInput.getText());
@@ -220,6 +177,9 @@ public class SBSRModelControl implements ActionListener{
 				view.ChatArea.append(strClientUsername+": "+view.ChatTextInput.getText()+ "\n");
 				view.ChatTextInput.setText("");
 			}
+		//Timer
+		}else if(evt.getSource() == theTimer){
+			System.out.println("Timer is running");
 		//Detecting SSM 
 		}else if(evt.getSource() == ssm){
 			ssmMessage = ssm.readText().split(",");
@@ -231,15 +191,13 @@ public class SBSRModelControl implements ActionListener{
 			//Getting chat responses
 			}else if(ssmMessage[0].equals("chat")){
 				view.ChatArea.append(ssmMessage[1] + ": " + ssmMessage[2] + "\n");
+			//Getting connection responses
 			}else if(ssmMessage[0].equals("connection")){
 				intPlayersReady += 1;
 				view.ChatArea.append(ssmMessage[1] + " has connected\n");
 				System.out.println("Players Ready: "+intPlayersReady);
-				try{
-				checkPlay(null);
-				}catch(NullPointerException e){
 
-			}
+				checkPlay();
 
 			}else{
 				System.out.println("Invalid SSM message");
