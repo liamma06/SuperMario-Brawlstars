@@ -55,7 +55,7 @@ public class AnimationPanelTest extends JPanel {
             }
         }
         //draw character
-        g.drawImage(ImgCharacter, CharacterX * TilePixels, CharacterY * TilePixels, TilePixels, TilePixels, null);
+        g.drawImage(ImgCharacter, 10 * TilePixels, 10 * TilePixels, TilePixels, TilePixels, null);
         repaint();
     }
 
@@ -63,7 +63,7 @@ public class AnimationPanelTest extends JPanel {
     public AnimationPanelTest(){
         //load images
         try{
-            //ImgCharacter = ImageIO.read(new File("Character.png"));
+            ImgCharacter = ImageIO.read(new File("Shelly.jpg"));
             ImgGrass = ImageIO.read(new File("Colt.jpg"));
             //ImgBrick = ImageIO.read(new File("Brick.png"));
             ImgAir = ImageIO.read(new File("Air.png"));

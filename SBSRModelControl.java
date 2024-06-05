@@ -138,7 +138,7 @@ public class SBSRModelControl implements ActionListener{
 				intClientCharacter = 1;
 				System.out.println("Client Character: Colt");
 			}
-			view.theframe.setContentPane(view.PlayPanel);
+			view.theframe.setContentPane(view.AniPanel);
 			view.theframe.revalidate();
 			ssm.sendText("connection,"+strUsername);
 
@@ -156,7 +156,7 @@ public class SBSRModelControl implements ActionListener{
 				intClientCharacter = 2;
 				System.out.println("Client Character: El Primo");
 			}
-			view.theframe.setContentPane(view.PlayPanel);
+			view.theframe.setContentPane(view.AniPanel);
 			view.theframe.revalidate();
 			ssm.sendText("connection,"+strUsername);
 

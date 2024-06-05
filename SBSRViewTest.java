@@ -204,10 +204,8 @@ public class SBSRViewTest{
         HelpPanel.setLayout(null);
 
         //Play screen 
-        PlayPanel.setLayout(null);
+        AniPanel.setLayout(null);
 
-        
-        
 
         //Play(Chat screen)
         ChatArea = new JTextArea();
@@ -216,16 +214,16 @@ public class SBSRViewTest{
         ChatScroll = new JScrollPane(ChatArea);
         ChatScroll.setSize(350,400);
 		ChatScroll.setLocation(850,50);
-		PlayPanel.add(ChatScroll);
+		AniPanel.add(ChatScroll);
         
         ChatTextInput = new JTextField();
         ChatTextInput.setSize(350,50);
         ChatTextInput.setLocation(850,450);
-        PlayPanel.add(ChatTextInput);
+        AniPanel.add(ChatTextInput);
 
         //putting the panel inside the frame
         AniPanel.setPreferredSize(new Dimension(1280,720));
-        theframe.setContentPane(AniPanel);
+        theframe.setContentPane(MenuPanel);
         theframe.pack();
         theframe.setResizable(false);
         theframe.setVisible(true);
