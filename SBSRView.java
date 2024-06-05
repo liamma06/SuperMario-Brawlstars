@@ -1,7 +1,7 @@
-//SuperBrawlStarsRun SBSR View (Graphical User Interfaces)
-//Authors: Bosco Zhang, Liam Ma, Nihal Sidhu
-//Last Modified: Friday, May 24, 2024
-//Version Number: 2.0 Beta
+// SuperBrawlStarsRun SBSR View (Graphical User Interfaces)
+// Authors: Bosco Zhang, Liam Ma, Nihal Sidhu
+// Last Modified: Friday, May 24, 2024
+// Version Number: 2.0 Beta
 
 //Importing Java Swing and GUI toolkits for graphical setup
 import java.io.*;
@@ -10,103 +10,103 @@ import javax.swing.*;
 import java.awt.event.*;
 import javax.swing.event.*;
 
-//Defining
+//Defining Graphical J Components
 public class SBSRView implements ActionListener{
-    //Properties
+   
+	//Properties
+	
+	//Main Frame
+	public JFrame theframe = new JFrame("Super Mario Brawlstars");
 
-    public JFrame theframe = new JFrame("Super Mario Brawlstars");
+    	//Main Menu
+    	public JPanel MenuPanel = new JPanel();
+    	public JButton PlayMenuButton;
+    	public JButton ConnectMenuButton;
+    	public JButton HelpMenuButton;
 
-    //main menu
-    public JPanel MenuPanel = new JPanel();
-    public JButton PlayMenuButton;
-    public JButton ConnectMenuButton;
-    public JButton HelpMenuButton;
-
-    //Connect screen
-    public JPanel ConnectPanel = new JPanel();
-    public JTextField ipField;
-    public JTextField portField;
+    	//Connect screen
+    	public JPanel ConnectPanel = new JPanel();
+    	public JTextField ipField;
+    	public JTextField portField;
 	public JButton ConnectButton;
-    public JButton BackButton;
-    public JLabel ConnectionStatusLabel;
-    public JLabel UsernameLabel;
-    public JLabel IPLabel;
-    public JLabel PortLabel;
-    public JTextField UsernameField;
-    public String strHostUsername;
-    public String strClientUsername; 
-    public Boolean blnHost = true;
-    public int intNumPlayers = 0;
+   	public JButton BackButton;
+    	public JLabel ConnectionStatusLabel;
+    	public JLabel UsernameLabel;
+    	public JLabel IPLabel;
+    	public JLabel PortLabel;
+    	public JTextField UsernameField;
+    	public String strHostUsername;
+    	public String strClientUsername; 
+    	public boolean blnHost = true;
+    	public int intNumPlayers = 0;
 
-    //map screen
-    public JPanel MapPanel = new JPanel();
-    public JLabel Map1Label;
-    public JLabel Map2Label;
-    public JButton Map1Button;
-    public JButton Map2Button;
+    	//Map Screen
+    	public JPanel MapPanel = new JPanel();
+    	public JLabel Map1Label;
+    	public JLabel Map2Label;
+    	public JButton Map1Button;
+    	public JButton Map2Button;
 
-    //Play screen 
-    public JPanel PlayPanel = new JPanel();
+    	//Play Screen 
+    	public JPanel PlayPanel = new JPanel();
 
-
-    SuperSocketMaster ssm;
+	SuperSocketMaster ssm;
     
 
-    //Methods
-    public void actionPerformed(ActionEvent evt){
-        if(evt.getSource() == ConnectMenuButton){
-            theframe.setContentPane(ConnectPanel);
-            theframe.revalidate();
-        }else if(evt.getSource() == BackButton){
-            theframe.setContentPane(MenuPanel);
-            theframe.revalidate();
-        }else if(evt.getSource() == ConnectButton){
-			    //System.out.println("Connect Button Pressed");
+	//Methods
+    	public void actionPerformed(ActionEvent evt){
+        	if(evt.getSource() == ConnectMenuButton){
+	        	theframe.setContentPane(ConnectPanel);
+        	   	theframe.revalidate();
+        	} else if(evt.getSource() == BackButton){
+        		theframe.setContentPane(MenuPanel);
+           		theframe.revalidate();
+        	} else if(evt.getSource() == ConnectButton){
 			if(ipField.getText().equals("") && portField.getText().equals("")){
 				ConnectionStatusLabel.setText("Enter a port number and/or IP Address\n");
-			}else if(ipField.getText().equals("") && !portField.getText().equals("") && UsernameField.getText().equals("")){
-                ConnectionStatusLabel.setText("Enter Username");
-            }else if(ipField.getText().equals("") && !portField.getText().equals("") && !UsernameField.getText().equals("")){
+			} else if(ipField.getText().equals("") && !portField.getText().equals("") && UsernameField.getText().equals("")){
+             			ConnectionStatusLabel.setText("Enter Username");
+            		} else if(ipField.getText().equals("") && !portField.getText().equals("") && !UsernameField.getText().equals("")){
 				//ConnectionStatusLabel.setText("Starting chat in server mode\n");
 				ssm = new SuperSocketMaster(Integer.parseInt(portField.getText()),this);
 				ssm.connect();
-                strHostUsername = UsernameField.getText();
-                UsernameField.setEnabled(false);
-                System.out.println(strHostUsername);
-                ConnectionStatusLabel.setText("(HOST) Your IP:" + ssm.getMyAddress());
-                blnHost = true;
-                intNumPlayers =1;
-			}else if(!ipField.getText().equals("") && !portField.getText().equals("") && UsernameField.getText().equals("")){
-                ConnectionStatusLabel.setText("Enter Username");
-            }else if(!ipField.getText().equals("") && !portField.getText().equals("")&& !UsernameField.getText().equals("")){
-                //ConnectionStatusLabel.setText("Starting chat in client  mode\n");
+                		strHostUsername = UsernameField.getText();
+                		UsernameField.setEnabled(false);
+                		System.out.println(strHostUsername);
+                		ConnectionStatusLabel.setText("(HOST) Your IP:" + ssm.getMyAddress());
+                		blnHost = true;
+                		intNumPlayers =1;
+			} else if(!ipField.getText().equals("") && !portField.getText().equals("") && UsernameField.getText().equals("")){
+            			ConnectionStatusLabel.setText("Enter Username");
+            		} else if(!ipField.getText().equals("") && !portField.getText().equals("")&& !UsernameField.getText().equals("")){
+                		//ConnectionStatusLabel.setText("Starting chat in client  mode\n");
 				ssm = new SuperSocketMaster(ipField.getText(),Integer.parseInt(portField.getText()),this);
 				ssm.connect();
-                strClientUsername = UsernameField.getText();
-                UsernameField.setEnabled(false);
-                System.out.println(strClientUsername);
-                ConnectionStatusLabel.setText("(Client) Connected to: " + ipField.getText());
-                blnHost = false;
-                intNumPlayers +=1;
-            }else if(!ipField.getText().equals("") && portField.getText().equals("")){
-                ConnectionStatusLabel.setText("Need a portnumber or port/ip \n");
-            }
-		}else if(evt.getSource()== PlayMenuButton){
-            if(blnHost == true){
-                System.out.println("Host pressed play");
-                theframe.setContentPane(MapPanel);
-                theframe.revalidate();
-            }else if(blnHost == false){
-                System.out.println("you are not host");
-            }
-        }else if(evt.getSource() == Map1Button){
-            theframe.setContentPane(PlayPanel);
-            theframe.revalidate();
-        }else if(evt.getSource() == Map2Button){
-            theframe.setContentPane(PlayPanel);
-            theframe.revalidate();
-        }
-    }
+                		strClientUsername = UsernameField.getText();
+                		UsernameField.setEnabled(false);
+                		System.out.println(strClientUsername);
+                		ConnectionStatusLabel.setText("(Client) Connected to: " + ipField.getText());
+                		blnHost = false;
+                		intNumPlayers +=1;
+            		} else if(!ipField.getText().equals("") && portField.getText().equals("")){
+                		ConnectionStatusLabel.setText("Need a portnumber or port/ip \n");
+            		}
+		} else if(evt.getSource()== PlayMenuButton){
+            		if(blnHost == true){
+                		System.out.println("Host pressed play");
+                		theframe.setContentPane(MapPanel);
+                		theframe.revalidate();
+            		} else if(blnHost == false){
+                		System.out.println("you are not host");
+            		}
+        	} else if(evt.getSource() == Map1Button){
+            		theframe.setContentPane(PlayPanel);
+           		 theframe.revalidate();
+        	} else if(evt.getSource() == Map2Button){
+            		theframe.setContentPane(PlayPanel);
+            		theframe.revalidate();
+        	}
+    	}
 
     //Constructor
     public SBSRView(){
