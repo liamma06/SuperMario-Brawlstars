@@ -18,8 +18,46 @@ public class AnimationPanel extends JPanel{
     BufferedImage imgBrick = null;
     //Methods
 
+    public void paintComponent(Graphics g){
+        super.paintComponent(g);
+
+        for(intRowNum2 = 0; intRowNum2 < 20; intRowNum2++){
+        
+            for(intColumnNum2 = 0; intColumnNum2 < 20; intColumnNum2++){
+                
+                if(strMap[intRowNum2][intColumnNum2].equals("g")){
+                    g.drawImage(imgGrass, (20 * intColumnNum2), ((20 * intRowNum2) + 100),null);
+                    
+                }
+                
+                if(strMap[intRowNum2][intColumnNum2].equals("a")){
+                    g.drawImage(imgAir, (20 * intColumnNum2), ((20 * intRowNum2) + 100),null);
+                    
+                }
+                
+                if(strMap[intRowNum2][intColumnNum2].equals("b")){
+                    g.drawImage(imgBrick, (20 * intColumnNum2), ((20 * intRowNum2) + 100),null);
+                    
+                }
+                
+                /*if(strMap[intRowNum2][intColumnNum2].equals("h")){
+                    con.drawImage(imgHealth, (20 * intColumnNum2), ((20 * intRowNum2) + 100));
+                    
+                }
+                
+                if(strMap[intRowNum2][intColumnNum2].equals("f")){
+                    con.drawImage(imgForce, (20 * intColumnNum2), ((20 * intRowNum2) + 100));
+                    
+                }*/
+            }
+        }
+
+    }
+
     //Constructor
-    public AnimationPanel(Graphics g){
+    public AnimationPanel(){
+        super();
+
         try{
             BufferedReader mapFile = new BufferedReader(new FileReader("Map1.csv")); 
             imgGrass = ImageIO.read(new File("Colt.jpg"));
@@ -66,39 +104,7 @@ public class AnimationPanel extends JPanel{
 
             }
            }
-    
        }
-        
-    for(intRowNum2 = 0; intRowNum2 < 20; intRowNum2++){
-        
-        for(intColumnNum2 = 0; intColumnNum2 < 20; intColumnNum2++){
-            
-            if(strMap[intRowNum2][intColumnNum2].equals("g")){
-                g.drawImage(imgGrass, (20 * intColumnNum2), ((20 * intRowNum2) + 100),null);
-                
-            }
-            
-            if(strMap[intRowNum2][intColumnNum2].equals("a")){
-                g.drawImage(imgAir, (20 * intColumnNum2), ((20 * intRowNum2) + 100),null);
-                
-            }
-            
-            if(strMap[intRowNum2][intColumnNum2].equals("b")){
-                g.drawImage(imgBrick, (20 * intColumnNum2), ((20 * intRowNum2) + 100),null);
-                
-            }
-            
-            /*if(strMap[intRowNum2][intColumnNum2].equals("h")){
-                con.drawImage(imgHealth, (20 * intColumnNum2), ((20 * intRowNum2) + 100));
-                
-            }
-            
-            if(strMap[intRowNum2][intColumnNum2].equals("f")){
-                con.drawImage(imgForce, (20 * intColumnNum2), ((20 * intRowNum2) + 100));
-                
-            }*/
-        }
-    }
     }
     
 }

@@ -69,11 +69,11 @@ public class SBSRViewTest{
     //Constructor
     public SBSRViewTest(){
         
-        
-
+    
         //Menu options 
         MenuPanel.setPreferredSize(new Dimension(1280,720));
         MenuPanel.setLayout(null);
+        
 
         PlayMenuButton = new JButton("Play");
         PlayMenuButton.setSize(300,60);
@@ -206,6 +206,9 @@ public class SBSRViewTest{
         //Play screen 
         PlayPanel.setLayout(null);
 
+        
+        
+
         //Play(Chat screen)
         ChatArea = new JTextArea();
         ChatArea.setEditable(false);
@@ -221,7 +224,8 @@ public class SBSRViewTest{
         PlayPanel.add(ChatTextInput);
 
         //putting the panel inside the frame
-        theframe.setContentPane(MenuPanel);
+        AniPanel.setPreferredSize(new Dimension(1280,720));
+        theframe.setContentPane(AniPanel);
         theframe.pack();
         theframe.setResizable(false);
         theframe.setVisible(true);

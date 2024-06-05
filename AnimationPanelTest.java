@@ -4,7 +4,7 @@ import javax.imageio.*;
 import java.io.*;
 import java.awt.image.*;
 
-public class AnimationPanelTest {
+public class AnimationPanelTest extends JPanel {
      //Properties
     //Images
     public Image ImgCharacter;
@@ -25,8 +25,8 @@ public class AnimationPanelTest {
     public int ViewportHeight = 20;
 
     //Character
-    public int CharacterX;
-    public int CharacterY; 
+    public int CharacterX=15;
+    public int CharacterY=10; 
 
     Timer timer;
     
@@ -60,11 +60,11 @@ public class AnimationPanelTest {
     }
 
     //Constructor
-    public AnimationPanel(){
+    public AnimationPanelTest(){
         //load images
         try{
             //ImgCharacter = ImageIO.read(new File("Character.png"));
-            //ImgGrass = ImageIO.read(new File("Grass.png"));
+            ImgGrass = ImageIO.read(new File("Colt.jpg"));
             //ImgBrick = ImageIO.read(new File("Brick.png"));
             ImgAir = ImageIO.read(new File("Air.png"));
         }catch(IOException e){
