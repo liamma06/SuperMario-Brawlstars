@@ -21,7 +21,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 	public String strResult;
 
 	//Map selection
-	public int intMapSelection = 0;
+	public int intMapSelection;
 
 	//Chacter selection
 	public int intHostCharacter = 0;
@@ -151,6 +151,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			}
 		//Map selection
 		}else if (evt.getSource() == view.Map1Button){
+			System.out.println("button");
 			intMapSelection = 1;
 			view.theframe.setContentPane(view.CharacterPanel);
 			view.theframe.revalidate();
