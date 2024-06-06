@@ -92,16 +92,16 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 
 	//Player movement 
 	public void keyPressed(KeyEvent evt){
-		if(evt.getKeyCode() == KeyEvent.VK_UP){
+		if(evt.getKeyCode() == KeyEvent.VK_UP || evt.getKeyCode() == KeyEvent.VK_W){
 			System.out.println("Key pressed");
 			view.AniPanel.CharacterY--;
-		}else if(evt.getKeyCode() == KeyEvent.VK_DOWN){
+		}else if(evt.getKeyCode() == KeyEvent.VK_DOWN || evt.getKeyCode() == KeyEvent.VK_S){
 			System.out.println("Key pressed");
 			view.AniPanel.CharacterY++;
-		}else if(evt.getKeyCode() == KeyEvent.VK_LEFT){
+		}else if(evt.getKeyCode() == KeyEvent.VK_LEFT || evt.getKeyCode() == KeyEvent.VK_A){
 			System.out.println("Key pressed");
 			view.AniPanel.CharacterX--;
-		}else if(evt.getKeyCode() == KeyEvent.VK_RIGHT){
+		}else if(evt.getKeyCode() == KeyEvent.VK_RIGHT || evt.getKeyCode() == KeyEvent.VK_D){
 			System.out.println("Key pressed");
 			view.AniPanel.CharacterX++;
 		}else{
