@@ -1,5 +1,7 @@
 import java.awt.*;
 import java.io.*;
+import java.util.Map;
+
 import javax.swing.*;
 import java.awt.event.*;
 import javax.swing.event.*;
@@ -92,16 +94,16 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 
 	//Player movement 
 	public void keyPressed(KeyEvent evt){
-		if(evt.getKeyCode() == KeyEvent.VK_UP || evt.getKeyCode() == KeyEvent.VK_W){
+		if((evt.getKeyCode() == KeyEvent.VK_UP || evt.getKeyCode() == KeyEvent.VK_W)&& view.AniPanel.Map[view.AniPanel.CharacterX][view.AniPanel.CharacterY-1] == 'a'){
 			System.out.println("Key pressed");
 			view.AniPanel.CharacterY--;
-		}else if(evt.getKeyCode() == KeyEvent.VK_DOWN || evt.getKeyCode() == KeyEvent.VK_S){
+		}else if((evt.getKeyCode() == KeyEvent.VK_DOWN || evt.getKeyCode() == KeyEvent.VK_S)&& view.AniPanel.Map[view.AniPanel.CharacterX][view.AniPanel.CharacterY+1] == 'a'){
 			System.out.println("Key pressed");
 			view.AniPanel.CharacterY++;
-		}else if(evt.getKeyCode() == KeyEvent.VK_LEFT || evt.getKeyCode() == KeyEvent.VK_A){
+		}else if((evt.getKeyCode() == KeyEvent.VK_LEFT || evt.getKeyCode() == KeyEvent.VK_A)&& view.AniPanel.Map[view.AniPanel.CharacterX-1][view.AniPanel.CharacterY] == 'a'){
 			System.out.println("Key pressed");
 			view.AniPanel.CharacterX--;
-		}else if(evt.getKeyCode() == KeyEvent.VK_RIGHT || evt.getKeyCode() == KeyEvent.VK_D){
+		}else if((evt.getKeyCode() == KeyEvent.VK_RIGHT || evt.getKeyCode() == KeyEvent.VK_D) && view.AniPanel.Map[view.AniPanel.CharacterX+1][view.AniPanel.CharacterY] == 'a'){
 			System.out.println("Key pressed");
 			view.AniPanel.CharacterX++;
 		}else{
