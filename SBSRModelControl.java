@@ -177,8 +177,8 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 
 			intPlayersReady += 1;
 
-			view.ChatArea.append(intPlayersReady + " joined\n");
-			view.ChatArea.append(strUsername + " has connected\n");
+			view.ChatArea.append("[ Server ] "+strUsername + " has connected\n");
+			view.ChatArea.append("[ Server ] "+intPlayersReady + " players connected\n");
 			
 			checkPlay();
 		}else if(evt.getSource() == view.Character2Button){
