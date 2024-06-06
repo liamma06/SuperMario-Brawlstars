@@ -214,12 +214,12 @@ public class SBSRViewTest{
         ChatScroll = new JScrollPane(ChatArea);
         ChatScroll.setSize(350,400);
 		ChatScroll.setLocation(850,50);
-		//AniPanel.add(ChatScroll);
+		AniPanel.add(ChatScroll);
         
         ChatTextInput = new JTextField();
         ChatTextInput.setSize(350,50);
         ChatTextInput.setLocation(850,450);
-        //AniPanel.add(ChatTextInput);
+        AniPanel.add(ChatTextInput);
 
         //putting the panel inside the frame
         AniPanel.setPreferredSize(new Dimension(1280,720));

@@ -59,7 +59,7 @@ public class AnimationPanelTest extends JPanel{
             }
         }
         //draw character
-        g.drawImage(ImgCharacter,CharacterX* TilePixels, CharacterY*TilePixels, TilePixels, TilePixels, null);
+        g.drawImage(ImgCharacter,10* TilePixels, 10*TilePixels, TilePixels, TilePixels, null);
         repaint();
     }
 
