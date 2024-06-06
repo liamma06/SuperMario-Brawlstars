@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import javax.swing.event.*;
 
-public class SBSRModelControl extends JPanel implements ActionListener{
+public class SBSRModelControl extends JPanel implements ActionListener, KeyListener{
 	//Properties
 
 	//Connection
@@ -36,7 +36,8 @@ public class SBSRModelControl extends JPanel implements ActionListener{
 
 	//AnimationPanel
 	public Timer theTimer = new Timer(1000/60,this);
-	AnimationPanelTest AniPanel2 = new AnimationPanelTest();
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	//Methods
 
 	//setting up connection
@@ -89,6 +90,34 @@ public class SBSRModelControl extends JPanel implements ActionListener{
 		}
 	}
 
+	//Player movement 
+	public void keyPressed(KeyEvent evt){
+		if(evt.getKeyCode() == KeyEvent.VK_UP){
+			System.out.println("Key pressed");
+			view.AniPanel.CharacterY--;
+		}else if(evt.getKeyCode() == KeyEvent.VK_DOWN){
+			System.out.println("Key pressed");
+			view.AniPanel.CharacterY++;
+		}else if(evt.getKeyCode() == KeyEvent.VK_LEFT){
+			System.out.println("Key pressed");
+			view.AniPanel.CharacterX--;
+		}else if(evt.getKeyCode() == KeyEvent.VK_RIGHT){
+			System.out.println("Key pressed");
+			view.AniPanel.CharacterX++;
+		}else{
+			System.out.println("Invalid key");
+		}
+		repaint();
+	}
+
+	public void keyReleased(KeyEvent e) {
+        // Optional: Handle key release events
+    }
+
+    public void keyTyped(KeyEvent e) {
+        // Optional: Handle key typed events
+    }
+
 	//overridding action listener
 	public void actionPerformed(ActionEvent evt){
 		//Connect menu button
@@ -140,6 +169,10 @@ public class SBSRModelControl extends JPanel implements ActionListener{
 			}
 			view.theframe.setContentPane(view.AniPanel);
 			view.theframe.revalidate();
+			view.AniPanel.requestFocusInWindow();
+        	view.AniPanel.setFocusable(true);
+			view.AniPanel.addKeyListener(this);
+			
 			ssm.sendText("connection,"+strUsername);
 
 			intPlayersReady += 1;
@@ -158,6 +191,10 @@ public class SBSRModelControl extends JPanel implements ActionListener{
 			}
 			view.theframe.setContentPane(view.AniPanel);
 			view.theframe.revalidate();
+			view.AniPanel.requestFocusInWindow();
+        	view.AniPanel.setFocusable(true);
+			view.AniPanel.addKeyListener(this);
+
 			ssm.sendText("connection,"+strUsername);
 
 			intPlayersReady += 1;
@@ -179,10 +216,8 @@ public class SBSRModelControl extends JPanel implements ActionListener{
 			}
 		//Timer
 		}else if(evt.getSource() == theTimer){
-			System.out.println("Timer is running");
-			AniPanel2.intShellyX = AniPanel2.intShellyX + 300;
-			AniPanel2.intShellyY = AniPanel2.intShellyY + 100;
-			AniPanel2.repaint();
+			//System.out.println("Timer is running");
+			view.AniPanel.repaint();
 		//Detecting SSM 
 		}else if(evt.getSource() == ssm){
 			ssmMessage = ssm.readText().split(",");
@@ -208,9 +243,12 @@ public class SBSRModelControl extends JPanel implements ActionListener{
 		}
 	}
 
+	//////////////////////////////////////////////////////////////////////////////////////////////////////
 	//Constructor
 	public SBSRModelControl(SBSRViewTest view){
 		this.view = view;
+
+		
 
 		// adding Action listeners
 
