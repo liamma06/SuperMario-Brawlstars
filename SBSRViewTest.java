@@ -36,14 +36,15 @@ public class SBSRViewTest{
 		public JLabel PortLabel;
 		public JTextField UsernameField;
 
-    //Play screen
-    public JPanel PlayPanel = new JPanel();
+		//Play screen
+		public JPanel PlayPanel = new JPanel();
+		public JButton PlayBackButton;
 
-    //Play(Chat screen)
-    public JPanel ChatPanel = new JPanel();
-    public JTextArea ChatArea;
-    public JScrollPane ChatScroll;
-    public JTextField ChatTextInput;
+		//Play(Chat screen)
+		public JPanel ChatPanel = new JPanel();
+		public JTextArea ChatArea;
+		public JScrollPane ChatScroll;
+		public JTextField ChatTextInput;
 
 		//Play(game screen)
 
@@ -65,11 +66,11 @@ public class SBSRViewTest{
 		//Help screen
 		public JPanel HelpPanel = new JPanel();
 
-    //Animation Panel
-    AnimationPanelTest AniPanel = new AnimationPanelTest();
+		//Animation Panel
+		AnimationPanelTest AniPanel = new AnimationPanelTest();
 
-    //Split Pane for game and chat
-    public JSplitPane PlaySplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
+		//Split Pane for game and chat
+		public JSplitPane PlaySplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 
 		//Methods
 
@@ -161,7 +162,7 @@ public class SBSRViewTest{
 				BackConnectButton.setLocation(50,550);
 				ConnectPanel.add(BackConnectButton);
 
-				//Map Panel
+				//Map Selection Panel
 				MapPanel.setLayout(null);
 
 				Map1Label = new JLabel("Map 1");
@@ -219,9 +220,15 @@ public class SBSRViewTest{
 				HelpPanel.setLayout(null);
 
 
-        //Play(Chat screen)
+        //PlayScreen Components
+        PlayBackButton = new JButton ("Back");
+        PlayBackButton.setSize(170, 70);
+        PlayBackButton.setLocation(350, 600);
+        PlayBackButton.setFont(new Font("Arial", Font.PLAIN, 30));
+		ChatPanel.add(PlayBackButton);
+        
         ChatPanel.setLayout(null);
-        ChatPanel.setPreferredSize(new Dimension(400,720));
+        ChatPanel.setPreferredSize(new Dimension(450,720));
 
         ChatArea = new JTextArea();
         ChatArea.setEditable(false);
@@ -238,6 +245,7 @@ public class SBSRViewTest{
 
         //Animation Panel
         AniPanel.setPreferredSize(new Dimension(880,720));
+        
 
         //Split Pane for game and chat
         PlaySplitPane.setLeftComponent(AniPanel);
