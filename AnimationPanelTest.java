@@ -32,8 +32,8 @@ public class AnimationPanelTest extends JPanel{
     public int CharacterY = 0; 
 
     //Opponent 
-    public int OpponentX = 10;
-    public int OpponentY = 10;
+    //public int OpponentX = 10;
+    //public int OpponentY = 10;
 
     Timer timer;
     
@@ -85,7 +85,7 @@ public class AnimationPanelTest extends JPanel{
         //draw character
         g.drawImage(ImgCharacter,(CharacterX - ViewportX)* TilePixels, CharacterY*TilePixels, TilePixels, TilePixels, null);
         
-        g.drawImage(ImgOpponent, (OpponentX - ViewportX) * TilePixels, OpponentY*TilePixels, TilePixels, TilePixels, null);
+        //g.drawImage(ImgOpponent, (OpponentX - ViewportX) * TilePixels, OpponentY*TilePixels, TilePixels, TilePixels, null);
     
         repaint();
     }
@@ -94,8 +94,8 @@ public class AnimationPanelTest extends JPanel{
     public AnimationPanelTest(){
         //load images  
         try{
-            ImgOpponent = ImageIO.read(new File("Dynamike.png"));
-            ImgCharacter = ImageIO.read(new File("Shelly.png"));
+         //   ImgOpponent = ImageIO.read(new File("Dynamike.png"));
+            ImgCharacter = ImageIO.read(new File("Dynamike.png"));
             ImgGrass = ImageIO.read(new File("Grass.png"));
             ImgBrick = ImageIO.read(new File("Brick.png"));
             ImgAir = ImageIO.read(new File("Air.png"));
@@ -105,6 +105,7 @@ public class AnimationPanelTest extends JPanel{
 
         //load Map layout from csv file
         this.model = model;
+        
         try{
         String strMapNum = Integer.toString(model.intMapSelection);
         }catch(NullPointerException e){

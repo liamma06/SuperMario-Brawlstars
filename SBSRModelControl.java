@@ -254,18 +254,22 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				view.ChatArea.append(ssmMessage[1] + ": " + ssmMessage[2] + "\n");
 			//Getting connection responses
 			}else if(ssmMessage[0].equals("connection")){
+			
 				intPlayersReady += 1;
 				view.ChatArea.append(ssmMessage[1] + " has connected\n");
 				System.out.println("Players Ready: "+intPlayersReady);
 
 				checkPlay();
 			//Getting position updates
-			}else if(ssmMessage[0].equals("position")){
-				view.AniPanel.OpponentX = Integer.parseInt(ssmMessage[1]);
-				view.AniPanel.OpponentY = Integer.parseInt(ssmMessage[2]);
+			//}else if(ssmMessage[0].equals("position")){
+			//	view.AniPanel.OpponentX = Integer.parseInt(ssmMessage[1]);
+			//	view.AniPanel.OpponentY = Integer.parseInt(ssmMessage[2]);
 			}else{
 				System.out.println("Invalid SSM message");
 			}
+		} else if (evt.getSource() == view.PlayBackButton){
+			view.theframe.setContentPane(view.MenuPanel);
+			view.theframe.revalidate();
 		}
 	}
 
@@ -301,6 +305,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		//Chat
 		view.ChatTextInput.addActionListener(this);
 		view.ChatTextInput.addKeyListener(this);
+		view.PlayBackButton.addActionListener(this);
 	}
 
 	//Main program
