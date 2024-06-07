@@ -31,6 +31,7 @@ public class AnimationPanelTest extends JPanel{
     public int CharacterY = 10; 
     Timer timer;
     
+    SBSRModelControl model;
     //Methods
     public void paintComponent(Graphics g){
         super.paintComponent(g);
@@ -76,6 +77,12 @@ public class AnimationPanelTest extends JPanel{
         }
 
         //load Map layout from csv file
+        this.model = model;
+        try{
+        String strMapNum = Integer.toString(model.intMapSelection);
+        }catch(NullPointerException e){
+            
+        }
         Map = new char[MapWidth][MapHeight];
         try{
             BufferedReader br = new BufferedReader(new FileReader("Map1.csv"));
@@ -91,8 +98,11 @@ public class AnimationPanelTest extends JPanel{
             br.close(); 
         }catch(IOException e){
             System.out.println("Error reading map file");
+        }catch(NullPointerException e){
+
         }
         repaint();
         
     }
+    
 }
