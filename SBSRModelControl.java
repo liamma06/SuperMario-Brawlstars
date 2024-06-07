@@ -1,25 +1,26 @@
 import java.awt.*;
 import java.io.*;
+import java.util.Map;
 import javax.swing.*;
 import java.awt.event.*;
 import javax.swing.event.*;
 
 public class SBSRModelControl extends JPanel implements ActionListener, KeyListener{
-	//Properties
+	//Properties **************************************************************************************************************
 
 	//Connection
 	public String strConnectionResult;
 	public String strHostUsername;
 	public String strClientUsername;
-	public boolean blnHost = false;
-	public int intNumPlayers = 0;
 	public String strIp;
 	public String strPort;
 	public String strUsername;
 	public String strResult;
+	public boolean blnHost = false;
+	public int intNumPlayers = 0;
 
 	//Map selection
-	public int intMapSelection = 0;
+	public int intMapSelection;
 
 	//Chacter selection
 	public int intHostCharacter = 0;
@@ -37,8 +38,8 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 	//AnimationPanel
 	public Timer theTimer = new Timer(1000/60,this);
 
-	/////////////////////////////////////////////////////////////////////////////////////////////////////
-	//Methods
+
+	//Methods **************************************************************************************************************
 
 	//setting up connection
 	public String connect(String ipField, String portField, String UsernameField){
@@ -170,6 +171,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			}
 		//Map selection
 		}else if (evt.getSource() == view.Map1Button){
+			System.out.println("button");
 			intMapSelection = 1;
 			view.theframe.setContentPane(view.CharacterPanel);
 			view.theframe.revalidate();
@@ -198,8 +200,8 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 
 			intPlayersReady += 1;
 
-			view.ChatArea.append(intPlayersReady + " joined\n");
-			view.ChatArea.append(strUsername + " has connected\n");
+			view.ChatArea.append("[ Server ] "+strUsername + " has connected\n");
+			view.ChatArea.append("[ Server ] "+intPlayersReady + " players connected\n");
 			
 			checkPlay();
 		}else if(evt.getSource() == view.Character2Button){
