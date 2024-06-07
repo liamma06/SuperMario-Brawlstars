@@ -8,12 +8,13 @@ import java.awt.event.*;
 
 public class AnimationPanelTest extends JPanel{
      //Properties
-    //Images
+    //Images and Terrain Tiles
     public Image ImgOpponent;
     public Image ImgCharacter;
     public Image ImgGrass;
     public Image ImgBrick;
     public Image ImgAir;
+    public Image ImgDirt;
 
     //Map
     public char[][] Map;//2D array to hold map layout
@@ -75,15 +76,19 @@ public class AnimationPanelTest extends JPanel{
                             g.drawImage(ImgBrick, x * TilePixels, y * TilePixels, TilePixels, TilePixels, null);
                             break;
                         //air
-                        case'a':
+                        case 'a':
                             g.drawImage(ImgAir, x * TilePixels, y * TilePixels, TilePixels, TilePixels, null);
                             break;
+                        //dirt
+                        case 'd':
+							g.drawImage(ImgDirt, x * TilePixels, y * TilePixels, TilePixels, TilePixels, null);
+							break;
                     }
                 }
             }
         }
         //draw character
-        g.drawImage(ImgCharacter,(CharacterX - ViewportX)* TilePixels, CharacterY*TilePixels, TilePixels, TilePixels, null);
+        g.drawImage(ImgCharacter,(CharacterX - ViewportX*3), CharacterY*3, TilePixels, TilePixels, null);
         
         //g.drawImage(ImgOpponent, (OpponentX - ViewportX) * TilePixels, OpponentY*TilePixels, TilePixels, TilePixels, null);
     
@@ -96,6 +101,7 @@ public class AnimationPanelTest extends JPanel{
         try{
          //   ImgOpponent = ImageIO.read(new File("Dynamike.png"));
             ImgCharacter = ImageIO.read(new File("Dynamike.png"));
+            ImgDirt = ImageIO.read(new File("Dirt.png"));
             ImgGrass = ImageIO.read(new File("Grass.png"));
             ImgBrick = ImageIO.read(new File("Brick.png"));
             ImgAir = ImageIO.read(new File("Air.png"));
