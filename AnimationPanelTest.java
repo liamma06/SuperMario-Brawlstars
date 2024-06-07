@@ -95,7 +95,7 @@ public class AnimationPanelTest extends JPanel{
         //load images  
         try{
             ImgOpponent = ImageIO.read(new File("Dynamike.png"));
-            ImgCharacter = ImageIO.read(new File("Shelly.jpg"));
+            ImgCharacter = ImageIO.read(new File("Shelly.png"));
             ImgGrass = ImageIO.read(new File("Grass.png"));
             ImgBrick = ImageIO.read(new File("Brick.png"));
             ImgAir = ImageIO.read(new File("Air.png"));
