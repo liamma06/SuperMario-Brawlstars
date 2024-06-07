@@ -92,20 +92,41 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 
 	//Player movement 
 	public void keyPressed(KeyEvent evt){
+		//checking if key is pressed
+		boolean PositionChanged = false;
+
+		if(evt.getSource() == view.ChatTextInput && evt.getKeyCode() == KeyEvent.VK_ENTER){
+			view.AniPanel.requestFocusInWindow();
+			return;
+		}
+
+		//Character movement
 		if(evt.getKeyCode() == KeyEvent.VK_UP || evt.getKeyCode() == KeyEvent.VK_W){
-			System.out.println("Key pressed");
+			view.AniPanel.grabFocus();
+			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
 			view.AniPanel.CharacterY--;
+			PositionChanged = true;
 		}else if(evt.getKeyCode() == KeyEvent.VK_DOWN || evt.getKeyCode() == KeyEvent.VK_S){
-			System.out.println("Key pressed");
+			view.AniPanel.grabFocus();
+			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
 			view.AniPanel.CharacterY++;
+			PositionChanged = true;
 		}else if(evt.getKeyCode() == KeyEvent.VK_LEFT || evt.getKeyCode() == KeyEvent.VK_A){
-			System.out.println("Key pressed");
+			view.AniPanel.grabFocus();
+			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
 			view.AniPanel.CharacterX--;
+			PositionChanged = true;
 		}else if(evt.getKeyCode() == KeyEvent.VK_RIGHT || evt.getKeyCode() == KeyEvent.VK_D){
-			System.out.println("Key pressed");
+			view.AniPanel.grabFocus();
+			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
 			view.AniPanel.CharacterX++;
+			PositionChanged = true;
 		}else{
 			System.out.println("Invalid key");
+		}
+
+		if(PositionChanged){
+			ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY);
 		}
 		repaint();
 	}
@@ -167,7 +188,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				intClientCharacter = 1;
 				System.out.println("Client Character: Colt");
 			}
-			view.theframe.setContentPane(view.AniPanel);
+			view.theframe.setContentPane(view.PlaySplitPane);
 			view.theframe.revalidate();
 			view.AniPanel.requestFocusInWindow();
         	view.AniPanel.setFocusable(true);
@@ -189,7 +210,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				intClientCharacter = 2;
 				System.out.println("Client Character: El Primo");
 			}
-			view.theframe.setContentPane(view.AniPanel);
+			view.theframe.setContentPane(view.PlaySplitPane);
 			view.theframe.revalidate();
 			view.AniPanel.requestFocusInWindow();
         	view.AniPanel.setFocusable(true);
@@ -236,7 +257,10 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				System.out.println("Players Ready: "+intPlayersReady);
 
 				checkPlay();
-
+			//Getting position updates
+			}else if(ssmMessage[0].equals("position")){
+				view.AniPanel.OpponentX = Integer.parseInt(ssmMessage[1]);
+				view.AniPanel.OpponentY = Integer.parseInt(ssmMessage[2]);
 			}else{
 				System.out.println("Invalid SSM message");
 			}
@@ -274,6 +298,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 
 		//Chat
 		view.ChatTextInput.addActionListener(this);
+		view.ChatTextInput.addKeyListener(this);
 	}
 
 	//Main program

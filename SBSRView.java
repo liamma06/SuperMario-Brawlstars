@@ -18,37 +18,37 @@ public class SBSRView implements ActionListener{
 	//Main Frame
 	public JFrame theframe = new JFrame("Super Mario Brawlstars");
 
-    	//Main Menu
-    	public JPanel MenuPanel = new JPanel();
-    	public JButton PlayMenuButton;
-    	public JButton ConnectMenuButton;
-    	public JButton HelpMenuButton;
+    //Main Menu
+    public JPanel MenuPanel = new JPanel();
+    public JButton PlayMenuButton;
+    public JButton ConnectMenuButton;
+    public JButton HelpMenuButton;
 
-    	//Connect screen
-    	public JPanel ConnectPanel = new JPanel();
-    	public JTextField ipField;
-    	public JTextField portField;
+    //Connect screen
+    public JPanel ConnectPanel = new JPanel();
+    public JTextField ipField;
+    public JTextField portField;
 	public JButton ConnectButton;
    	public JButton BackButton;
-    	public JLabel ConnectionStatusLabel;
-    	public JLabel UsernameLabel;
-    	public JLabel IPLabel;
-    	public JLabel PortLabel;
-    	public JTextField UsernameField;
-    	public String strHostUsername;
-    	public String strClientUsername; 
-    	public boolean blnHost = true;
-    	public int intNumPlayers = 0;
+    public JLabel ConnectionStatusLabel;
+    public JLabel UsernameLabel;
+    public JLabel IPLabel;
+    public JLabel PortLabel;
+    public JTextField UsernameField;
+    public String strHostUsername;
+    public String strClientUsername; 
+    public boolean blnHost = true;
+    public int intNumPlayers = 0;
 
-    	//Map Screen
-    	public JPanel MapPanel = new JPanel();
-    	public JLabel Map1Label;
-    	public JLabel Map2Label;
-    	public JButton Map1Button;
-    	public JButton Map2Button;
+    //Map Screen
+    public JPanel MapPanel = new JPanel();
+    public JLabel Map1Label;
+    public JLabel Map2Label;
+    public JButton Map1Button;
+    public JButton Map2Button;
 
-    	//Play Screen 
-    	public JPanel PlayPanel = new JPanel();
+    //Play Screen 
+    public JPanel PlayPanel = new JPanel();
 
 	SuperSocketMaster ssm;
     

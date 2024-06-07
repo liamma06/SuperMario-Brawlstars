@@ -36,8 +36,10 @@ public class SBSRViewTest{
     public JTextField UsernameField;
 
     //Play screen
-    //Play(Chat screen)
     public JPanel PlayPanel = new JPanel();
+
+    //Play(Chat screen)
+    public JPanel ChatPanel = new JPanel();
     public JTextArea ChatArea;
     public JScrollPane ChatScroll;
     public JTextField ChatTextInput;
@@ -62,14 +64,18 @@ public class SBSRViewTest{
     //Help screen
     public JPanel HelpPanel = new JPanel();
 
+    //Animation Panel
     AnimationPanelTest AniPanel = new AnimationPanelTest();
+
+    //Split Pane for game and chat
+    public JSplitPane PlaySplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 
     //Methods
 
     //Constructor
     public SBSRViewTest(){
         
-    
+
         //Menu options 
         MenuPanel.setPreferredSize(new Dimension(1280,720));
         MenuPanel.setLayout(null);
@@ -203,26 +209,31 @@ public class SBSRViewTest{
         //Help Panel
         HelpPanel.setLayout(null);
 
-        //Play screen 
-        AniPanel.setLayout(null);
-
 
         //Play(Chat screen)
+        ChatPanel.setLayout(null);
+        ChatPanel.setPreferredSize(new Dimension(400,720));
+
         ChatArea = new JTextArea();
         ChatArea.setEditable(false);
 
         ChatScroll = new JScrollPane(ChatArea);
         ChatScroll.setSize(350,400);
-		ChatScroll.setLocation(850,50);
-		AniPanel.add(ChatScroll);
+		ChatScroll.setLocation(25,50);
+		ChatPanel.add(ChatScroll);
         
         ChatTextInput = new JTextField();
         ChatTextInput.setSize(350,50);
-        ChatTextInput.setLocation(850,450);
-        AniPanel.add(ChatTextInput);
+        ChatTextInput.setLocation(25,450);
+        ChatPanel.add(ChatTextInput);
 
-        //putting the panel inside the frame
-        AniPanel.setPreferredSize(new Dimension(1280,720));
+        //Animation Panel
+        AniPanel.setPreferredSize(new Dimension(880,720));
+
+        //Split Pane for game and chat
+        PlaySplitPane.setLeftComponent(AniPanel);
+        PlaySplitPane.setRightComponent(ChatPanel);
+        PlaySplitPane.setDividerLocation(720);
         
         theframe.setContentPane(MenuPanel);
         theframe.pack();

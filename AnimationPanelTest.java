@@ -9,6 +9,7 @@ import java.awt.event.*;
 public class AnimationPanelTest extends JPanel{
      //Properties
     //Images
+    public Image ImgOpponent;
     public Image ImgCharacter;
     public Image ImgGrass;
     public Image ImgBrick;
@@ -27,18 +28,40 @@ public class AnimationPanelTest extends JPanel{
     public int ViewportHeight = 20;
 
     //Character
-    public int CharacterX = 10;
-    public int CharacterY = 10; 
+    public int CharacterX = 0;
+    public int CharacterY = 0; 
+
+    //Opponent 
+    public int OpponentX = 10;
+    public int OpponentY = 10;
+
     Timer timer;
     
     //Methods
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        //draw visible map
+
+        //Adjust viewport based on character x position
+        ViewportX = CharacterX - ViewportWidth / 2;
+        if(ViewportX < 0){
+            ViewportX = 0;
+        } else if(ViewportX + ViewportWidth > MapWidth ){
+            ViewportX = MapWidth - ViewportWidth;
+        }
+
+        ViewportY = CharacterY - ViewportHeight / 2;
+        if(ViewportY < 0){
+            ViewportY = 0;
+        } else if(ViewportY + ViewportHeight > MapHeight){
+            ViewportY = MapHeight - ViewportHeight;
+        }
+
+        //Draw viewport(20x20 portion of map)
         for(int x = 0; x < ViewportWidth; x++){
             for(int y = 0; y < ViewportHeight; y++){
-                int mapX = x + CharacterX - ViewportWidth / 2;
-                int mapY = y + CharacterY - ViewportHeight / 2;
+                int mapX = x + ViewportX;
+                int mapY = y + ViewportY;
+
                 if(mapX >= 0 && mapX < MapWidth && mapY >= 0 && mapY < MapHeight){
                     g.drawImage(ImgAir, x * TilePixels, y * TilePixels, TilePixels, TilePixels, null);
                     switch(Map[mapX][mapY]){
@@ -59,7 +82,10 @@ public class AnimationPanelTest extends JPanel{
             }
         }
         //draw character
-        g.drawImage(ImgCharacter,(ViewportWidth/2)* TilePixels, (ViewportHeight/2)*TilePixels, TilePixels, TilePixels, null);
+        g.drawImage(ImgCharacter,(CharacterX - ViewportX)* TilePixels, CharacterY*TilePixels, TilePixels, TilePixels, null);
+        
+        g.drawImage(ImgOpponent, (OpponentX - ViewportX) * TilePixels, OpponentY*TilePixels, TilePixels, TilePixels, null);
+    
         repaint();
     }
 
@@ -67,6 +93,7 @@ public class AnimationPanelTest extends JPanel{
     public AnimationPanelTest(){
         //load images  
         try{
+            ImgOpponent = ImageIO.read(new File("Dynamike.png"));
             ImgCharacter = ImageIO.read(new File("Shelly.jpg"));
             ImgGrass = ImageIO.read(new File("Grass.png"));
             ImgBrick = ImageIO.read(new File("Brick.png"));
