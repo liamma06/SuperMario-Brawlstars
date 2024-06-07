@@ -183,7 +183,7 @@ public class SBSRViewTest{
 				Map2Button.setFont(new Font("Arial",Font.PLAIN,20));
 				MapPanel.add(Map2Button);
 
-				//Character Panel 
+				//Character Selection Panel 
 				CharacterPanel.setLayout(null);
 
 				Character1Label = new JLabel("Colt");

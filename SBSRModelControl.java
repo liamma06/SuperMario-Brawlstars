@@ -5,18 +5,18 @@ import java.awt.event.*;
 import javax.swing.event.*;
 
 public class SBSRModelControl extends JPanel implements ActionListener, KeyListener{
-	//Properties
+	//Properties **************************************************************************************************************
 
 	//Connection
 	public String strConnectionResult;
 	public String strHostUsername;
 	public String strClientUsername;
-	public boolean blnHost = false;
-	public int intNumPlayers = 0;
 	public String strIp;
 	public String strPort;
 	public String strUsername;
 	public String strResult;
+	public boolean blnHost = false;
+	public int intNumPlayers = 0;
 
 	//Map selection
 	public int intMapSelection = 0;
@@ -37,8 +37,8 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 	//AnimationPanel
 	public Timer theTimer = new Timer(1000/60,this);
 
-	/////////////////////////////////////////////////////////////////////////////////////////////////////
-	//Methods
+
+	//Methods **************************************************************************************************************
 
 	//setting up connection
 	public String connect(String ipField, String portField, String UsernameField){
