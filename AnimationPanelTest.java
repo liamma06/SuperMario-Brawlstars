@@ -24,18 +24,19 @@ public class AnimationPanelTest extends JPanel{
     public int TilePixels = 36;
 
     //area that is being viewed
-    public int ViewportX;
-    public int ViewportY;
-    public int ViewportWidth = 20;
-    public int ViewportHeight = 20;
+    public double dblViewportX = 0;
+    public double dblViewportY = 0;
 
     //Character
-    public double CharacterX = 0;
-    public double CharacterY = 0; 
+    public double CharacterX = 360;
+    public double CharacterY = 612; 
 
     //Opponent 
     public double OpponentX = 0;
     public double OpponentY = 0;
+  
+	public int intMapX = 0;
+	public int intMapY = 0;
 
     Timer timer;
     SBSRModelControl model;
@@ -44,7 +45,43 @@ public class AnimationPanelTest extends JPanel{
     public void paintComponent(Graphics g){
         super.paintComponent(g);
 
-        /* 
+
+		
+		
+		dblViewportX = dblViewportX + CharacterX;
+		dblViewportY = dblViewportY - CharacterY;
+		
+		
+		for (int intCount = 0; intCount <36; intCount++){
+			for (int intCount2 = 0; intCount2 < 36; intCount2++){
+				
+					intMapX = intMapX++;
+					intMapY = intMapY++;
+					
+					
+					switch(Map[intMapX][intMapY]){
+						//Grass
+						case 'g':
+							g.drawImage(ImgGrass, (int)(dblViewportX +((double)intCount2-1)*36), intCount*36, null);
+							break;
+						//Dirt
+						case 'd':
+							g.drawImage(ImgDirt, (int)(dblViewportX +((double)intCount2-1)*36), intCount*36, null);
+							break;
+						//Brick
+						case 'b':
+							g.drawImage(ImgBrick, (int)(dblViewportX +((double)intCount2-1)*36), intCount*36, null);
+							break;
+						//Air
+						case 'a':
+							g.drawImage(ImgAir, (int)(dblViewportX +((double)intCount2-1)*36), intCount*36, null);
+							break;
+						}	
+				
+			}
+		}
+		
+		        /* 
 
         //Adjust viewport based on character x position
         ViewportX = (int) CharacterX - ViewportWidth / 2;
