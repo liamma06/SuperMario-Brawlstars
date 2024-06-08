@@ -115,7 +115,7 @@ public class AnimationPanelTest extends JPanel{
         this.model = model;
         
         try{
-        String strMapNum = Integer.toString(model.intMapSelection);
+			String strMapNum = Integer.toString(model.intMapSelection);
         }catch(NullPointerException e){
             
         }

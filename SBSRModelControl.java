@@ -296,6 +296,8 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		} else if (evt.getSource() == view.PlayBackButton){
 			view.theframe.setContentPane(view.MenuPanel);
 			view.theframe.revalidate();
+			intPlayersReady--;
+			view.ChatArea.append(ssmMessage[1] +" left\n");
 		}
 	}
 
