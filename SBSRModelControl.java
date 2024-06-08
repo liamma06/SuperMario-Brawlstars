@@ -226,8 +226,8 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 
 			intPlayersReady += 1;
 
-			view.ChatArea.append("[ Server ] "+strUsername + " has connected\n");
-			view.ChatArea.append("[ Server ] "+intPlayersReady + " players connected\n");
+			view.ChatArea.append("[ Server ]: "+strUsername + " has connected\n");
+			view.ChatArea.append("[ Server ]: "+intPlayersReady + " players connected\n");
 			
 			checkPlay();
 		}else if(evt.getSource() == view.Character2Button){
@@ -297,7 +297,13 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			view.theframe.setContentPane(view.MenuPanel);
 			view.theframe.revalidate();
 			intPlayersReady--;
-			view.ChatArea.append(ssmMessage[1] +" left\n");
+			if (blnHost == true){
+				ssm.sendText("chat,[ Server ], "+strHostUsername+" left\n");
+				view.ChatArea.append("[ Server ]: "+strHostUsername+" left\n");
+			} else if (blnHost == false){
+				ssm.sendText("chat,[ Server ], "+strClientUsername+" left\n");
+				view.ChatArea.append("[ Server ]: "+strClientUsername+" left\n");
+			}
 		}
 	}
 
