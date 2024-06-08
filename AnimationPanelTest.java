@@ -43,6 +43,8 @@ public class AnimationPanelTest extends JPanel{
     public void paintComponent(Graphics g){
         super.paintComponent(g);
 
+        /* 
+
         //Adjust viewport based on character x position
         ViewportX = (int) CharacterX - ViewportWidth / 2;
         if(ViewportX < 0){
@@ -94,7 +96,11 @@ public class AnimationPanelTest extends JPanel{
         g.drawImage(ImgOpponent, (int)((OpponentX - ViewportX) * TilePixels), (int)((OpponentY - ViewportY)*TilePixels), TilePixels, TilePixels, null);
     
         repaint();
+
+        */
     }
+    
+    
 
 
     //Constructor

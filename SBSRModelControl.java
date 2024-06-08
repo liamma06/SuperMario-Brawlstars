@@ -103,7 +103,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		}
 
 		//setting step size for character movement
-		double step = 0.1;
+		double step = 6;
 
 		//Character movement with collision detection 
 		if(evt.getKeyCode() == KeyEvent.VK_UP ){
