@@ -91,6 +91,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		}
 	}
 
+	
 	//Player movement 
 	public void keyPressed(KeyEvent evt){
 		//checking if key is pressed
@@ -104,6 +105,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 
 		//setting step size for character movement
 		double step = 6;
+		double step = 1/6;
 
 		//Character movement with collision detection 
 		if(evt.getKeyCode() == KeyEvent.VK_UP ){
@@ -112,6 +114,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			double newY = view.AniPanel.CharacterY - step;
 			//checking for up collision
 			if(view.AniPanel.CharacterY > 0 && view.AniPanel.Map[(int) (view.AniPanel.CharacterX + 1)][(int) (view.AniPanel.CharacterY - step)] == 'a' && view.AniPanel.Map[(int) (view.AniPanel.CharacterX)][(int) (view.AniPanel.CharacterY - step)] == 'a'){
+				double newY = view.AniPanel.CharacterY - step;
 				view.AniPanel.CharacterY = newY;
 				PositionChanged = true;
 			}
@@ -122,6 +125,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			double newY = view.AniPanel.CharacterY + step;
 			//Checking for down collision
 			if(view.AniPanel.CharacterY < view.AniPanel.MapHeight && view.AniPanel.Map[(int) (view.AniPanel.CharacterX + 1)][(int) (view.AniPanel.CharacterY + 1 + step)] == 'a' && view.AniPanel.Map[(int) (view.AniPanel.CharacterX)][(int) (view.AniPanel.CharacterY + 1 + step)] == 'a'){
+				double newY = view.AniPanel.CharacterY + step;
 				view.AniPanel.CharacterY = newY;
 				PositionChanged = true;
 			}
@@ -132,6 +136,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			double newX = view.AniPanel.CharacterX - step;
 			//Checking for left collision
 			if(view.AniPanel.CharacterX > 0 && view.AniPanel.Map[(int) (view.AniPanel.CharacterX - step)][(int) (view.AniPanel.CharacterY + 1)] == 'a' && view.AniPanel.Map[(int) (view.AniPanel.CharacterX - step)][(int) (view.AniPanel.CharacterY)] == 'a'){
+				double newX = view.AniPanel.CharacterX - step;
 				view.AniPanel.CharacterX = newX;
 				PositionChanged = true;
 			}
