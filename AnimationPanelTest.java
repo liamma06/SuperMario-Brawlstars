@@ -44,12 +44,6 @@ public class AnimationPanelTest extends JPanel{
     //Methods
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-
-
-		
-		
-		dblViewportX = dblViewportX + CharacterX;
-		dblViewportY = dblViewportY - CharacterY;
 		
 		
 		for (int intCount = 0; intCount <36; intCount++){

@@ -131,6 +131,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			if(view.AniPanel.CharacterX > 0 && view.AniPanel.Map[(int) (view.AniPanel.CharacterX - step)][(int) (view.AniPanel.CharacterY + 1)] == 'a' && view.AniPanel.Map[(int) (view.AniPanel.CharacterX - step)][(int) (view.AniPanel.CharacterY)] == 'a'){
 				double newX = view.AniPanel.CharacterX - step;
 				view.AniPanel.CharacterX = newX;
+				view.AniPanel.dblViewportX = view.AniPanel.dblViewportX - 6;
 				PositionChanged = true;
 			}
 
@@ -141,6 +142,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			if(view.AniPanel.CharacterX < view.AniPanel.MapWidth && view.AniPanel.Map[(int) (view.AniPanel.CharacterX + 1 + step)][(int) (view.AniPanel.CharacterY + 1)] == 'a' && view.AniPanel.Map[(int) (view.AniPanel.CharacterX + 1 + step)][(int) (view.AniPanel.CharacterY)] == 'a'){
 				double newX = view.AniPanel.CharacterX + step;
 				view.AniPanel.CharacterX = newX;
+				view.AniPanel.dblViewportX = view.AniPanel.dblViewportX + 6;
 				PositionChanged = true;
 			}
 
