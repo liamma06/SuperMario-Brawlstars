@@ -111,30 +111,40 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
 			double newY = view.AniPanel.CharacterY - step;
 			//checking for up collision
-			if(view.AniPanel.CharacterY > 0 && view.AniPanel.Map[(int) (view.AniPanel.CharacterX + 1)][(int) (view.AniPanel.CharacterY - step)] == 'a' && view.AniPanel.Map[(int) (view.AniPanel.CharacterX)][(int) (view.AniPanel.CharacterY - step)] == 'a')
-			view.AniPanel.CharacterY = newY;
-			PositionChanged = true;
+			if(view.AniPanel.CharacterY > 0 && view.AniPanel.Map[(int) (view.AniPanel.CharacterX + 1)][(int) (view.AniPanel.CharacterY - step)] == 'a' && view.AniPanel.Map[(int) (view.AniPanel.CharacterX)][(int) (view.AniPanel.CharacterY - step)] == 'a'){
+				view.AniPanel.CharacterY = newY;
+				PositionChanged = true;
+			}
 
-		}else if(evt.getKeyCode() == KeyEvent.VK_DOWN && view.AniPanel.CharacterY < view.AniPanel.MapHeight && view.AniPanel.Map[(int) (view.AniPanel.CharacterX + 1)][(int) (view.AniPanel.CharacterY + 1 +step)] == 'a'){
+		}else if(evt.getKeyCode() == KeyEvent.VK_DOWN ){
 			view.AniPanel.grabFocus();
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
 			double newY = view.AniPanel.CharacterY + step;
-			view.AniPanel.CharacterY = newY;
-			PositionChanged = true;
+			//Checking for down collision
+			if(view.AniPanel.CharacterY < view.AniPanel.MapHeight && view.AniPanel.Map[(int) (view.AniPanel.CharacterX + 1)][(int) (view.AniPanel.CharacterY + 1 + step)] == 'a' && view.AniPanel.Map[(int) (view.AniPanel.CharacterX)][(int) (view.AniPanel.CharacterY + 1 + step)] == 'a'){
+				view.AniPanel.CharacterY = newY;
+				PositionChanged = true;
+			}
 
-		}else if(evt.getKeyCode() == KeyEvent.VK_LEFT && view.AniPanel.CharacterX > 0 && view.AniPanel.Map[(int) (view.AniPanel.CharacterX - step)][(int) (view.AniPanel.CharacterY + 1)] == 'a'){
+		}else if(evt.getKeyCode() == KeyEvent.VK_LEFT){
 			view.AniPanel.grabFocus();
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
 			double newX = view.AniPanel.CharacterX - step;
-			view.AniPanel.CharacterX = newX;
-			PositionChanged = true;
+			//Checking for left collision
+			if(view.AniPanel.CharacterX > 0 && view.AniPanel.Map[(int) (view.AniPanel.CharacterX - step)][(int) (view.AniPanel.CharacterY + 1)] == 'a' && view.AniPanel.Map[(int) (view.AniPanel.CharacterX - step)][(int) (view.AniPanel.CharacterY)] == 'a'){
+				view.AniPanel.CharacterX = newX;
+				PositionChanged = true;
+			}
 
-		}else if(evt.getKeyCode() == KeyEvent.VK_RIGHT && view.AniPanel.CharacterX < view.AniPanel.MapWidth && view.AniPanel.Map[(int) (view.AniPanel.CharacterX + 1 + step)][(int) (view.AniPanel.CharacterY + 1)] == 'a'){
+		}else if(evt.getKeyCode() == KeyEvent.VK_RIGHT ){
 			view.AniPanel.grabFocus();
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
 			double newX = view.AniPanel.CharacterX + step;
-			view.AniPanel.CharacterX = newX;
-			PositionChanged = true;
+			//Checking for right collision
+			if(view.AniPanel.CharacterX < view.AniPanel.MapWidth && view.AniPanel.Map[(int) (view.AniPanel.CharacterX + 1 + step)][(int) (view.AniPanel.CharacterY + 1)] == 'a' && view.AniPanel.Map[(int) (view.AniPanel.CharacterX + 1 + step)][(int) (view.AniPanel.CharacterY)] == 'a'){
+				view.AniPanel.CharacterX = newX;
+				PositionChanged = true;
+			}
 
 		}else{
 			System.out.println("Invalid key");
