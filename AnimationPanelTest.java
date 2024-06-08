@@ -56,24 +56,27 @@ public class AnimationPanelTest extends JPanel{
 					switch(Map[intMapX][intMapY]){
 						//Grass
 						case 'g':
-							g.drawImage(ImgGrass, (int)(dblViewportX +((double)intCount2-1)*36), intCount*36, null);
+							g.drawImage(ImgGrass, (int)(dblViewportX +((double)intCount2-1)*36), intCount*36, 36, 36, null);
+							System.out.println("**");
 							break;
 						//Dirt
 						case 'd':
-							g.drawImage(ImgDirt, (int)(dblViewportX +((double)intCount2-1)*36), intCount*36, null);
+							g.drawImage(ImgDirt, (int)(dblViewportX +((double)intCount2-1)*36), intCount*36, 36, 36, null);
 							break;
 						//Brick
 						case 'b':
-							g.drawImage(ImgBrick, (int)(dblViewportX +((double)intCount2-1)*36), intCount*36, null);
+							g.drawImage(ImgBrick, (int)(dblViewportX +((double)intCount2-1)*36), intCount*36, 36, 36, null);
 							break;
 						//Air
 						case 'a':
-							g.drawImage(ImgAir, (int)(dblViewportX +((double)intCount2-1)*36), intCount*36, null);
+							g.drawImage(ImgAir, (int)(dblViewportX +((double)intCount2-1)*36), intCount*36, 36, 36, null);
 							break;
 						}	
 				
 			}
 		}
+		
+		repaint();
 		
 		        /* 
 
