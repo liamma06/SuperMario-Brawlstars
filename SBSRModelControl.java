@@ -106,10 +106,12 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		double step = 0.1;
 
 		//Character movement with collision detection 
-		if(evt.getKeyCode() == KeyEvent.VK_UP && view.AniPanel.CharacterY > 0 && view.AniPanel.Map[(int) (view.AniPanel.CharacterX + 1)][(int) (view.AniPanel.CharacterY - step)] == 'a'){
+		if(evt.getKeyCode() == KeyEvent.VK_UP ){
 			view.AniPanel.grabFocus();
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
 			double newY = view.AniPanel.CharacterY - step;
+			//checking for up collision
+			if(view.AniPanel.CharacterY > 0 && view.AniPanel.Map[(int) (view.AniPanel.CharacterX + 1)][(int) (view.AniPanel.CharacterY - step)] == 'a' && view.AniPanel.Map[(int) (view.AniPanel.CharacterX + 1)][(int) (view.AniPanel.CharacterY - step)] == 'a')
 			view.AniPanel.CharacterY = newY;
 			PositionChanged = true;
 
@@ -143,6 +145,8 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		}
 		repaint();
 	}
+
+	
 
 	public void keyReleased(KeyEvent e) {
         // Optional: Handle key release events
