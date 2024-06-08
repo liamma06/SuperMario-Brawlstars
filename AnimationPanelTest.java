@@ -29,29 +29,30 @@ public class AnimationPanelTest extends JPanel{
     public int ViewportHeight = 20;
 
     //Character
-    public int CharacterX = 0;
-    public int CharacterY = 0; 
+    public double CharacterX = 0;
+    public double CharacterY = 0; 
 
     //Opponent 
-    //public int OpponentX = 10;
-    //public int OpponentY = 10;
+    public double OpponentX = 10;
+    public double OpponentY = 10;
 
     Timer timer;
-    
     SBSRModelControl model;
+
     //Methods
     public void paintComponent(Graphics g){
         super.paintComponent(g);
 
         //Adjust viewport based on character x position
-        ViewportX = CharacterX - ViewportWidth / 2;
+        ViewportX = (int) CharacterX - ViewportWidth / 2;
         if(ViewportX < 0){
             ViewportX = 0;
         } else if(ViewportX + ViewportWidth > MapWidth ){
             ViewportX = MapWidth - ViewportWidth;
         }
 
-        ViewportY = CharacterY - ViewportHeight / 2;
+        //Adjust viewport based on character y position
+        ViewportY = (int) CharacterY - ViewportHeight / 2;
         if(ViewportY < 0){
             ViewportY = 0;
         } else if(ViewportY + ViewportHeight > MapHeight){
@@ -88,18 +89,19 @@ public class AnimationPanelTest extends JPanel{
             }
         }
         //draw character
-        g.drawImage(ImgCharacter,(CharacterX - ViewportX*3), CharacterY*3, TilePixels, TilePixels, null);
+        g.drawImage(ImgCharacter,(int)((CharacterX - ViewportX)*TilePixels), (int)((CharacterY - ViewportY)*TilePixels), TilePixels, TilePixels, null);
         
-        //g.drawImage(ImgOpponent, (OpponentX - ViewportX) * TilePixels, OpponentY*TilePixels, TilePixels, TilePixels, null);
+        g.drawImage(ImgOpponent, (int)((OpponentX - ViewportX) * TilePixels), (int)((OpponentY - ViewportY)*TilePixels), TilePixels, TilePixels, null);
     
         repaint();
     }
+
 
     //Constructor
     public AnimationPanelTest(){
         //load images  
         try{
-         //   ImgOpponent = ImageIO.read(new File("Dynamike.png"));
+            ImgOpponent = ImageIO.read(new File("Shelly.png"));
             ImgCharacter = ImageIO.read(new File("Dynamike.png"));
             ImgDirt = ImageIO.read(new File("Dirt.png"));
             ImgGrass = ImageIO.read(new File("Grass.png"));

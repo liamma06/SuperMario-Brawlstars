@@ -96,32 +96,44 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		//checking if key is pressed
 		boolean PositionChanged = false;
 
+		//return focus to animation panel when enter is pressed 
 		if(evt.getSource() == view.ChatTextInput && evt.getKeyCode() == KeyEvent.VK_ENTER){
 			view.AniPanel.requestFocusInWindow();
 			return;
 		}
 
-		//Character movement
-		if((evt.getKeyCode() == KeyEvent.VK_UP || evt.getKeyCode() == KeyEvent.VK_W)&& view.AniPanel.Map[view.AniPanel.CharacterX][view.AniPanel.CharacterY-1] == 'a'){
+		//setting step size for character movement
+		double step = 0.1;
+
+		//Character movement with collision detection 
+		if(evt.getKeyCode() == KeyEvent.VK_UP && view.AniPanel.CharacterY > 0 && view.AniPanel.Map[(int) (view.AniPanel.CharacterX + 1)][(int) (view.AniPanel.CharacterY - step)] == 'a'){
 			view.AniPanel.grabFocus();
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
-			view.AniPanel.CharacterY--;
+			double newY = view.AniPanel.CharacterY - step;
+			view.AniPanel.CharacterY = newY;
 			PositionChanged = true;
-		}else if((evt.getKeyCode() == KeyEvent.VK_DOWN || evt.getKeyCode() == KeyEvent.VK_S)&& view.AniPanel.Map[view.AniPanel.CharacterX][view.AniPanel.CharacterY+1] == 'a'){
+
+		}else if(evt.getKeyCode() == KeyEvent.VK_DOWN && view.AniPanel.CharacterY < view.AniPanel.MapHeight && view.AniPanel.Map[(int) (view.AniPanel.CharacterX + 1)][(int) (view.AniPanel.CharacterY + 1 +step)] == 'a'){
 			view.AniPanel.grabFocus();
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
-			view.AniPanel.CharacterY++;
+			double newY = view.AniPanel.CharacterY + step;
+			view.AniPanel.CharacterY = newY;
 			PositionChanged = true;
-		}else if((evt.getKeyCode() == KeyEvent.VK_LEFT || evt.getKeyCode() == KeyEvent.VK_A)&& view.AniPanel.Map[view.AniPanel.CharacterX-1][view.AniPanel.CharacterY] == 'a'){
+
+		}else if(evt.getKeyCode() == KeyEvent.VK_LEFT && view.AniPanel.CharacterX > 0 && view.AniPanel.Map[(int) (view.AniPanel.CharacterX - step)][(int) (view.AniPanel.CharacterY + 1)] == 'a'){
 			view.AniPanel.grabFocus();
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
-			view.AniPanel.CharacterX--;
+			double newX = view.AniPanel.CharacterX - step;
+			view.AniPanel.CharacterX = newX;
 			PositionChanged = true;
-		}else if((evt.getKeyCode() == KeyEvent.VK_RIGHT || evt.getKeyCode() == KeyEvent.VK_D)&& view.AniPanel.Map[view.AniPanel.CharacterX+1][view.AniPanel.CharacterY] == 'a'){
+
+		}else if(evt.getKeyCode() == KeyEvent.VK_RIGHT && view.AniPanel.CharacterX < view.AniPanel.MapWidth && view.AniPanel.Map[(int) (view.AniPanel.CharacterX + 1 + step)][(int) (view.AniPanel.CharacterY + 1)] == 'a'){
 			view.AniPanel.grabFocus();
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
-			view.AniPanel.CharacterX++;
+			double newX = view.AniPanel.CharacterX + step;
+			view.AniPanel.CharacterX = newX;
 			PositionChanged = true;
+
 		}else{
 			System.out.println("Invalid key");
 		}
@@ -260,10 +272,10 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				System.out.println("Players Ready: "+intPlayersReady);
 
 				checkPlay();
-			//Getting position updates
-			//}else if(ssmMessage[0].equals("position")){
-			//	view.AniPanel.OpponentX = Integer.parseInt(ssmMessage[1]);
-			//	view.AniPanel.OpponentY = Integer.parseInt(ssmMessage[2]);
+			//Getting position updates of the opponent
+			}else if(ssmMessage[0].equals("position")){
+				view.AniPanel.OpponentX = Double.parseDouble(ssmMessage[1]);
+				view.AniPanel.OpponentY = Double.parseDouble(ssmMessage[2]);
 			}else{
 				System.out.println("Invalid SSM message");
 			}
