@@ -33,8 +33,8 @@ public class AnimationPanelTest extends JPanel{
     public double CharacterY = 0; 
 
     //Opponent 
-    public double OpponentX = 10;
-    public double OpponentY = 10;
+    public double OpponentX = 0;
+    public double OpponentY = 0;
 
     Timer timer;
     SBSRModelControl model;
