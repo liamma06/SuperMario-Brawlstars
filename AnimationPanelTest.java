@@ -17,6 +17,7 @@ public class AnimationPanelTest extends JPanel{
     public Image ImgDirt;
 
     //Map
+    BufferedReader br;
     public char[][] Map;//2D array to hold map layout
     public int MapWidth = 1000;
     public int MapHeight = 20;
@@ -100,6 +101,35 @@ public class AnimationPanelTest extends JPanel{
         */
     }
     
+    public void loadMap(int intMapSelection){
+        //load Map layout from csv file
+
+        Map = new char[MapWidth][MapHeight];
+        try{
+            if(intMapSelection == 1){
+                br = new BufferedReader(new FileReader("Map1.csv"));
+                System.out.println("map 1 shown");
+            }else if(intMapSelection == 2){
+                br = new BufferedReader(new FileReader("Map2.csv"));
+                System.out.println("map 2 shown");
+            }
+            String line;
+            int row = 0;
+            while((line = br.readLine()) != null){
+                String[] parts = line.split(",");
+                for(int col = 0; col < parts.length; col++){
+                    Map[col][row] = parts[col].charAt(0);
+                }
+                row++;
+            }
+            br.close(); 
+        }catch(IOException e){
+            System.out.println("Error reading map file");
+        }catch(NullPointerException e){
+
+        }
+        repaint();
+    }
     
 
 
@@ -117,33 +147,6 @@ public class AnimationPanelTest extends JPanel{
             System.out.println("Error loading images");
         }
 
-        //load Map layout from csv file
-        this.model = model;
-        
-        try{
-			String strMapNum = Integer.toString(model.intMapSelection);
-        }catch(NullPointerException e){
-            
-        }
-        Map = new char[MapWidth][MapHeight];
-        try{
-            BufferedReader br = new BufferedReader(new FileReader("Map1.csv"));
-            String line;
-            int row = 0;
-            while((line = br.readLine()) != null){
-                String[] parts = line.split(",");
-                for(int col = 0; col < parts.length; col++){
-                    Map[col][row] = parts[col].charAt(0);
-                }
-                row++;
-            }
-            br.close(); 
-        }catch(IOException e){
-            System.out.println("Error reading map file");
-        }catch(NullPointerException e){
-
-        }
-        repaint();
         
     }
     

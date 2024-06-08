@@ -19,9 +19,6 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 	public boolean blnHost = false;
 	public int intNumPlayers = 0;
 
-	//Map selection
-	public int intMapSelection;
-
 	//Chacter selection
 	public int intHostCharacter = 0;
 	public int intClientCharacter = 0;
@@ -151,9 +148,11 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			System.out.println("Invalid key");
 		}
 
+		//sending position to opponent
 		if(PositionChanged){
 			ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY);
 		}
+
 		repaint();
 	}
 
@@ -198,13 +197,16 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			}
 		//Map selection
 		}else if (evt.getSource() == view.Map1Button){
-			System.out.println("button");
-			intMapSelection = 1;
+			view.AniPanel.loadMap(1);
+			ssm.sendText("Map,1");
+
 			view.theframe.setContentPane(view.CharacterPanel);
 			view.theframe.revalidate();
 			ssm.sendText("character");
 		}else if(evt.getSource() == view.Map2Button){
-			intMapSelection = 2;
+			view.AniPanel.loadMap(2);
+			ssm.sendText("Map,2");
+
 			view.theframe.setContentPane(view.CharacterPanel);
 			view.theframe.revalidate();
 			ssm.sendText("character");
@@ -268,6 +270,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		}else if(evt.getSource() == theTimer){
 			//System.out.println("Timer is running");
 			view.AniPanel.repaint();
+			
 		//Detecting SSM 
 		}else if(evt.getSource() == ssm){
 			ssmMessage = ssm.readText().split(",");
@@ -291,6 +294,8 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			}else if(ssmMessage[0].equals("position")){
 				view.AniPanel.OpponentX = Double.parseDouble(ssmMessage[1]);
 				view.AniPanel.OpponentY = Double.parseDouble(ssmMessage[2]);
+			}else if(ssmMessage[0].equals("Map")){
+				view.AniPanel.loadMap(Integer.parseInt(ssmMessage[1]));
 			}else{
 				System.out.println("Invalid SSM message");
 			}
