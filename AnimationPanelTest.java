@@ -134,9 +134,8 @@ public class AnimationPanelTest extends JPanel{
         */
     }
     
+    //load Map layout from csv file
     public void loadMap(int intMapSelection){
-        //load Map layout from csv file
-
         Map = new char[MapWidth][MapHeight];
         try{
             if(intMapSelection == 1){
@@ -164,6 +163,37 @@ public class AnimationPanelTest extends JPanel{
         repaint();
     }
     
+    //loading the proper character image
+    public void loadCharacter(int intCharacterSelection){
+        try{
+            if(intCharacterSelection == 1){
+                ImgCharacter = ImageIO.read(new File("Dynamike.png"));
+                System.out.println("loaded dynamike");
+            }else if(intCharacterSelection == 2){
+                ImgCharacter = ImageIO.read(new File("Colt.jpg"));
+                System.out.println("loaded colt");
+            }
+        }catch(IOException e){
+            System.out.println("Error loading character image");
+        }
+        repaint();
+    }
+
+    //loading the proper opponent image
+    public void loadOpponent(int intOpponentSelection){
+        try{
+            if(intOpponentSelection == 1){
+                ImgOpponent = ImageIO.read(new File("Dynamike.png"));
+                System.out.println("loaded dinamike");
+            }else if(intOpponentSelection == 2){
+                ImgOpponent = ImageIO.read(new File("Colt.jpg"));
+                System.out.println("loaded colt");
+            }
+        }catch(IOException e){
+            System.out.println("Error loading opponent image");
+        }
+        repaint();
+    }
 
 
     //Constructor
@@ -179,8 +209,11 @@ public class AnimationPanelTest extends JPanel{
         }catch(IOException e){
             System.out.println("Error loading images");
         }
+    }
+
+
 
         
-    }
+    
     
 }

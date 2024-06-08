@@ -221,6 +221,10 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				intClientCharacter = 1;
 				System.out.println("Client Character: Colt");
 			}
+			view.AniPanel.loadCharacter(1);
+			ssm.sendText("characterChosen,1");
+
+
 			view.theframe.setContentPane(view.PlaySplitPane);
 			view.theframe.revalidate();
 			view.AniPanel.requestFocusInWindow();
@@ -243,6 +247,9 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				intClientCharacter = 2;
 				System.out.println("Client Character: El Primo");
 			}
+			view.AniPanel.loadCharacter(2);
+			ssm.sendText("characterChosen,2");
+
 			view.theframe.setContentPane(view.PlaySplitPane);
 			view.theframe.revalidate();
 			view.AniPanel.requestFocusInWindow();
@@ -296,8 +303,12 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			}else if(ssmMessage[0].equals("position")){
 				view.AniPanel.OpponentX = Double.parseDouble(ssmMessage[1]);
 				view.AniPanel.OpponentY = Double.parseDouble(ssmMessage[2]);
+			//loading the proper map for both players 
 			}else if(ssmMessage[0].equals("Map")){
 				view.AniPanel.loadMap(Integer.parseInt(ssmMessage[1]));
+			//loading the proper character for both players
+			}else if(ssmMessage[0].equals("characterChosen")){
+				view.AniPanel.loadOpponent(Integer.parseInt(ssmMessage[1]));
 			}else{
 				System.out.println("Invalid SSM message");
 			}
