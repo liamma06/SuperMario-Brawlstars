@@ -111,7 +111,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
 			double newY = view.AniPanel.CharacterY - step;
 			//checking for up collision
-			if(view.AniPanel.CharacterY > 0 && view.AniPanel.Map[(int) (view.AniPanel.CharacterX + 1)][(int) (view.AniPanel.CharacterY - step)] == 'a' && view.AniPanel.Map[(int) (view.AniPanel.CharacterX + 1)][(int) (view.AniPanel.CharacterY - step)] == 'a')
+			if(view.AniPanel.CharacterY > 0 && view.AniPanel.Map[(int) (view.AniPanel.CharacterX + 1)][(int) (view.AniPanel.CharacterY - step)] == 'a' && view.AniPanel.Map[(int) (view.AniPanel.CharacterX)][(int) (view.AniPanel.CharacterY - step)] == 'a')
 			view.AniPanel.CharacterY = newY;
 			PositionChanged = true;
 
