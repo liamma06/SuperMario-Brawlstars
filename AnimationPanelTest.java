@@ -46,18 +46,16 @@ public class AnimationPanelTest extends JPanel{
         super.paintComponent(g);
 		
 		
-		for (int intCount = 0; intCount <36; intCount++){
-			for (int intCount2 = 0; intCount2 < 36; intCount2++){
-				
-					intMapX = intMapX++;
-					intMapY = intMapY++;
+		for (int intCount = 0; intCount < 20; intCount++){
+			for (int intCount2 = 0; intCount2 < 20; intCount2++){
 					
 					
-					switch(Map[intMapX][intMapY]){
+					g.drawImage(ImgAir, (int)(dblViewportX +((double)intCount2-1)*36), intCount*36, 36, 36, null);
+					
+					switch(Map[intCount2][intCount]){
 						//Grass
 						case 'g':
 							g.drawImage(ImgGrass, (int)(dblViewportX +((double)intCount2-1)*36), intCount*36, 36, 36, null);
-							System.out.println("**");
 							break;
 						//Dirt
 						case 'd':
@@ -71,8 +69,9 @@ public class AnimationPanelTest extends JPanel{
 						case 'a':
 							g.drawImage(ImgAir, (int)(dblViewportX +((double)intCount2-1)*36), intCount*36, 36, 36, null);
 							break;
-						}	
-				
+					}	
+					
+					
 			}
 		}
 		
