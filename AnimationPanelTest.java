@@ -124,14 +124,15 @@ public class AnimationPanelTest extends JPanel{
                 }
             }
         }
+            */
         //draw character
-        g.drawImage(ImgCharacter,(int)((CharacterX - ViewportX)*TilePixels), (int)((CharacterY - ViewportY)*TilePixels), TilePixels, TilePixels, null);
+        g.drawImage(ImgCharacter,(int)((CharacterX - dblViewportX)*TilePixels), (int)((CharacterY - dblViewportY)*TilePixels), TilePixels, TilePixels, null);
         
-        g.drawImage(ImgOpponent, (int)((OpponentX - ViewportX) * TilePixels), (int)((OpponentY - ViewportY)*TilePixels), TilePixels, TilePixels, null);
+        g.drawImage(ImgOpponent, (int)((OpponentX - dblViewportX) * TilePixels), (int)((OpponentY - dblViewportY)*TilePixels), TilePixels, TilePixels, null);
     
         repaint();
 
-        */
+        
     }
     
     //load Map layout from csv file
