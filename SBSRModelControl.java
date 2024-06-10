@@ -100,9 +100,6 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			return;
 		}
 
-		//setting step size for character movement
-		double step = 1/6;
-
 		//Character movement with collision detection 
 		if(evt.getKeyCode() == KeyEvent.VK_UP ){
 			view.AniPanel.grabFocus();
@@ -122,7 +119,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			//Checking for down collision
 	
 			if(view.AniPanel.CharacterY < view.AniPanel.MapHeight && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX)/36))][(int) (Math.ceil((view.AniPanel.CharacterY + 6)/36))] == 'a' && view.AniPanel.Map[(int) (Math.ceil((view.AniPanel.CharacterX)/36))][(int) (Math.ceil((view.AniPanel.CharacterY + 6)/36))] == 'a'){
-				double newY = view.AniPanel.CharacterY + step;
+				double newY = view.AniPanel.CharacterY + 6;
 				view.AniPanel.CharacterY = newY;
 				PositionChanged = true;
 			}
@@ -132,8 +129,8 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
 			//Checking for left collision
 	
-			if(view.AniPanel.CharacterX > 0 && view.AniPanel.Map[(int) (Math.floor((view.AniPanel.CharacterX - 6)/36))][(int) (Math.floor((view.AniPanel.CharacterY)/36))] == 'a' && view.AniPanel.Map[(int) (Math.floor((view.AniPanel.CharacterX - 6)/36))][(int) (Math.ceil((view.AniPanel.CharacterY)/36))] == 'a'){
-				double newX = view.AniPanel.CharacterX - step;
+			if(view.AniPanel.CharacterX > 324 && view.AniPanel.Map[(int) (Math.floor((view.AniPanel.CharacterX - 6)/36))][(int) (Math.floor((view.AniPanel.CharacterY)/36))] == 'a' && view.AniPanel.Map[(int) (Math.floor((view.AniPanel.CharacterX - 6)/36))][(int) (Math.ceil((view.AniPanel.CharacterY)/36))] == 'a'){
+				double newX = view.AniPanel.CharacterX - 6;
 				view.AniPanel.CharacterX = newX;
 				view.AniPanel.dblViewportX = view.AniPanel.dblViewportX - 6;
 				PositionChanged = true;
@@ -144,8 +141,8 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
 			//Checking for right collision
 
-			if(view.AniPanel.CharacterX < view.AniPanel.MapWidth && view.AniPanel.Map[(int) (Math.ceil((view.AniPanel.CharacterX + 6)/36))][(int) (Math.floor((view.AniPanel.CharacterY)/36))] == 'a' && view.AniPanel.Map[(int) (Math.ceil((view.AniPanel.CharacterX + 6)/36))][(int) (Math.ceil((view.AniPanel.CharacterY)/36))] == 'a'){
-				double newX = view.AniPanel.CharacterX + step;
+			if(view.AniPanel.CharacterX < view.AniPanel.MapWidth && view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX + 6)/36))][(int) (Math.floor((view.AniPanel.CharacterY)/36))] == 'a' && view.AniPanel.Map[(int) (Math.ceil((view.AniPanel.CharacterX + 6)/36))][(int) (Math.ceil((view.AniPanel.CharacterY)/36))] == 'a'){
+				double newX = view.AniPanel.CharacterX + 6;
 				view.AniPanel.CharacterX = newX;
 				view.AniPanel.dblViewportX = view.AniPanel.dblViewportX + 6;
 				PositionChanged = true;

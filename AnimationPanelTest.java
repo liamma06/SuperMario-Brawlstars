@@ -28,7 +28,7 @@ public class AnimationPanelTest extends JPanel{
     public double dblViewportY = 0;
 
     //Character
-    public double CharacterX = 360;
+    public double CharacterX = 324;
     public double CharacterY = 612; 
 
     //Opponent 
@@ -50,24 +50,24 @@ public class AnimationPanelTest extends JPanel{
 			for (int intCount2 = 0; intCount2 < 100; intCount2++){
 					
 					
-					g.drawImage(ImgAir, (int)((double)(intCount2-1)*36-dblViewportX), intCount*36, 36, 36, null);
+					g.drawImage(ImgAir, (int)((double)(intCount2)*36-dblViewportX), intCount*36, 36, 36, null);
 					
 					switch(Map[intCount2][intCount]){
 						//Grass
 						case 'g':
-							g.drawImage(ImgGrass, (int)((double)(intCount2-1)*36-dblViewportX), intCount*36, 36, 36, null);
+							g.drawImage(ImgGrass, (int)((double)(intCount2)*36-dblViewportX), intCount*36, 36, 36, null);
 							break;
 						//Dirt
 						case 'd':
-							g.drawImage(ImgDirt, (int)((double)(intCount2-1)*36-dblViewportX), intCount*36, 36, 36, null);
+							g.drawImage(ImgDirt, (int)((double)(intCount2)*36-dblViewportX), intCount*36, 36, 36, null);
 							break;
 						//Brick
 						case 'b':
-							g.drawImage(ImgBrick, (int)((double)(intCount2-1)*36-dblViewportX), intCount*36, 36, 36, null);
+							g.drawImage(ImgBrick, (int)((double)(intCount2)*36-dblViewportX), intCount*36, 36, 36, null);
 							break;
 						//Air
 						case 'a':
-							g.drawImage(ImgAir, (int)((double)(intCount2-1)*36-dblViewportX), intCount*36, 36, 36, null);
+							g.drawImage(ImgAir, (int)((double)(intCount2)*36-dblViewportX), intCount*36, 36, 36, null);
 							break;
 					}	
 					
@@ -126,7 +126,7 @@ public class AnimationPanelTest extends JPanel{
         }
             */
         //draw character
-        g.drawImage(ImgCharacter,(int)((CharacterX - dblViewportX)*TilePixels), (int)((CharacterY - dblViewportY)*TilePixels), TilePixels, TilePixels, null);
+        g.drawImage(ImgCharacter,(int)((CharacterX - dblViewportX)), (int)((CharacterY)), 36, 36, null);
         
         //g.drawImage(ImgOpponent, (int)((OpponentX - dblViewportX) * TilePixels), (int)((OpponentY - dblViewportY)*TilePixels), TilePixels, TilePixels, null);
     
