@@ -126,6 +126,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 
 		}else if(evt.getKeyCode() == KeyEvent.VK_A){
 			view.AniPanel.grabFocus();
+			view.AniPanel.strCharacterDir = "left";
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
 			//Checking for left collision
 	
@@ -138,6 +139,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 
 		}else if(evt.getKeyCode() == KeyEvent.VK_D){
 			view.AniPanel.grabFocus();
+			view.AniPanel.strCharacterDir = "right";
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
 			//Checking for right collision
 
@@ -195,7 +197,10 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 
 		}else if(evt.getKeyCode() == KeyEvent.VK_A){
 			view.AniPanel.grabFocus();
+			view.AniPanel.strCharacterDir = "left";
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
+			view.AniPanel.repaint();
+			
 			//Checking for left collision
 	
 			if(view.AniPanel.CharacterX > 324 && view.AniPanel.Map[(int)((view.AniPanel.CharacterX - 6)/36)][(int) (Math.floor((view.AniPanel.CharacterY)/36))] == 'a' && view.AniPanel.Map[(int) ((view.AniPanel.CharacterX - 6)/36)][(int) (Math.ceil((view.AniPanel.CharacterY)/36))] == 'a'){
@@ -207,7 +212,10 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 
 		}else if(evt.getKeyCode() == KeyEvent.VK_D){
 			view.AniPanel.grabFocus();
+			view.AniPanel.strCharacterDir = "right";
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
+			view.AniPanel.repaint();
+			
 			//Checking for right collision
 
 			if(view.AniPanel.CharacterX < view.AniPanel.MapWidth && view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX + 6)/36))][(int) (Math.floor((view.AniPanel.CharacterY)/36))] == 'a' && view.AniPanel.Map[(int) (Math.ceil((view.AniPanel.CharacterX + 6)/36))][(int) (Math.ceil((view.AniPanel.CharacterY)/36))] == 'a'){
@@ -217,8 +225,6 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				PositionChanged = true;
 			}
 	
-		}else{
-			System.out.println("Invalid key");
 		}
 
 		//sending position to opponent

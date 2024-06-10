@@ -7,14 +7,14 @@ import java.awt.image.*;
 import java.awt.event.*;
 
 public class AnimationPanelTest extends JPanel{
-     //Properties
+    //Properties
     //Images and Terrain Tiles
-    public Image ImgOpponent;
-    public Image ImgCharacter;
-    public Image ImgGrass;
-    public Image ImgBrick;
-    public Image ImgAir;
-    public Image ImgDirt;
+    public Image imgOpponent;
+    public Image imgCharacter;
+    public Image imgGrass;
+    public Image imgBrick;
+    public Image imgAir;
+    public Image imgDirt;
 
     //Map
     BufferedReader br;
@@ -30,6 +30,7 @@ public class AnimationPanelTest extends JPanel{
     //Character
     public double CharacterX = 324;
     public double CharacterY = 612; 
+    public String strCharacterDir = "right";
 
     //Opponent 
     public double OpponentX = 0;
@@ -50,24 +51,24 @@ public class AnimationPanelTest extends JPanel{
 			for (int intCount2 = 0; intCount2 < 100; intCount2++){
 					
 					
-					g.drawImage(ImgAir, (int)((double)(intCount2)*36-dblViewportX), intCount*36, 36, 36, null);
+					g.drawImage(imgAir, (int)((double)(intCount2)*36-dblViewportX), intCount*36, 36, 36, null);
 					
 					switch(Map[intCount2][intCount]){
 						//Grass
 						case 'g':
-							g.drawImage(ImgGrass, (int)((double)(intCount2)*36-dblViewportX), intCount*36, 36, 36, null);
+							g.drawImage(imgGrass, (int)((double)(intCount2)*36-dblViewportX), intCount*36, 36, 36, null);
 							break;
 						//Dirt
 						case 'd':
-							g.drawImage(ImgDirt, (int)((double)(intCount2)*36-dblViewportX), intCount*36, 36, 36, null);
+							g.drawImage(imgDirt, (int)((double)(intCount2)*36-dblViewportX), intCount*36, 36, 36, null);
 							break;
 						//Brick
 						case 'b':
-							g.drawImage(ImgBrick, (int)((double)(intCount2)*36-dblViewportX), intCount*36, 36, 36, null);
+							g.drawImage(imgBrick, (int)((double)(intCount2)*36-dblViewportX), intCount*36, 36, 36, null);
 							break;
 						//Air
 						case 'a':
-							g.drawImage(ImgAir, (int)((double)(intCount2)*36-dblViewportX), intCount*36, 36, 36, null);
+							g.drawImage(imgAir, (int)((double)(intCount2)*36-dblViewportX), intCount*36, 36, 36, null);
 							break;
 					}	
 					
@@ -75,58 +76,25 @@ public class AnimationPanelTest extends JPanel{
 			}
 		}
 		
-		repaint();
-		
-		        /* 
-
-        //Adjust viewport based on character x position
-        ViewportX = (int) CharacterX - ViewportWidth / 2;
-        if(ViewportX < 0){
-            ViewportX = 0;
-        } else if(ViewportX + ViewportWidth > MapWidth ){
-            ViewportX = MapWidth - ViewportWidth;
-        }
-
-        //Adjust viewport based on character y position
-        ViewportY = (int) CharacterY - ViewportHeight / 2;
-        if(ViewportY < 0){
-            ViewportY = 0;
-        } else if(ViewportY + ViewportHeight > MapHeight){
-            ViewportY = MapHeight - ViewportHeight;
-        }
-
-        //Draw viewport(20x20 portion of map)
-        for(int x = 0; x < ViewportWidth; x++){
-            for(int y = 0; y < ViewportHeight; y++){
-                int mapX = x + ViewportX;
-                int mapY = y + ViewportY;
-
-                if(mapX >= 0 && mapX < MapWidth && mapY >= 0 && mapY < MapHeight){
-                    g.drawImage(ImgAir, x * TilePixels, y * TilePixels, TilePixels, TilePixels, null);
-                    switch(Map[mapX][mapY]){
-                        //grass
-                        case 'g':
-                            g.drawImage(ImgGrass, x * TilePixels, y * TilePixels, TilePixels, TilePixels, null);
-                            break;
-                        //brick
-                        case 'b':
-                            g.drawImage(ImgBrick, x * TilePixels, y * TilePixels, TilePixels, TilePixels, null);
-                            break;
-                        //air
-                        case 'a':
-                            g.drawImage(ImgAir, x * TilePixels, y * TilePixels, TilePixels, TilePixels, null);
-                            break;
-                        //dirt
-                        case 'd':
-							g.drawImage(ImgDirt, x * TilePixels, y * TilePixels, TilePixels, TilePixels, null);
-							break;
-                    }
-                }
-            }
-        }
-            */
-        //draw character
-        g.drawImage(ImgCharacter,(int)((CharacterX - dblViewportX)), (int)((CharacterY)), 36, 36, null);
+       
+        //Load and draw character image according to which way he/she is facing.
+        
+        if (strCharacterDir.equals("right")){
+				try{
+					imgCharacter = ImageIO.read(new File("Dynamike.png"));
+				} catch (IOException e){
+						System.out.println("Error loading image.");
+				}
+		} else if (strCharacterDir.equals("left")){
+				try{
+					imgCharacter = ImageIO.read(new File("Dynamike(Left).png"));
+				} catch (IOException e){
+						System.out.println("Error loading iamge.");
+				}
+		}
+					
+					
+        g.drawImage(imgCharacter,(int)((CharacterX - dblViewportX)), (int)((CharacterY)), 36, 36, null);
         
         //g.drawImage(ImgOpponent, (int)((OpponentX - dblViewportX) * TilePixels), (int)((OpponentY - dblViewportY)*TilePixels), TilePixels, TilePixels, null);
     
@@ -168,10 +136,10 @@ public class AnimationPanelTest extends JPanel{
     public void loadCharacter(int intCharacterSelection){
         try{
             if(intCharacterSelection == 1){
-                ImgCharacter = ImageIO.read(new File("Dynamike.png"));
+                imgCharacter = ImageIO.read(new File("Dynamike.png"));
                 System.out.println("loaded dynamike");
             }else if(intCharacterSelection == 2){
-                ImgCharacter = ImageIO.read(new File("Colt.jpg"));
+                imgCharacter = ImageIO.read(new File("Colt.jpg"));
                 System.out.println("loaded colt");
             }
         }catch(IOException e){
@@ -184,10 +152,10 @@ public class AnimationPanelTest extends JPanel{
     public void loadOpponent(int intOpponentSelection){
         try{
             if(intOpponentSelection == 1){
-                ImgOpponent = ImageIO.read(new File("Dynamike.png"));
+                imgOpponent = ImageIO.read(new File("Dynamike.png"));
                 System.out.println("loaded dinamike");
             }else if(intOpponentSelection == 2){
-                ImgOpponent = ImageIO.read(new File("Colt.jpg"));
+                imgOpponent = ImageIO.read(new File("Colt.jpg"));
                 System.out.println("loaded colt");
             }
         }catch(IOException e){
@@ -201,12 +169,12 @@ public class AnimationPanelTest extends JPanel{
     public AnimationPanelTest(){
         //load images  
         try{
-            ImgOpponent = ImageIO.read(new File("Shelly.png"));
-            ImgCharacter = ImageIO.read(new File("Dynamike.png"));
-            ImgDirt = ImageIO.read(new File("Dirt.png"));
-            ImgGrass = ImageIO.read(new File("Grass.png"));
-            ImgBrick = ImageIO.read(new File("Brick.png"));
-            ImgAir = ImageIO.read(new File("Air.png"));
+            imgOpponent = ImageIO.read(new File("Shelly.png"));
+            imgCharacter = ImageIO.read(new File("Dynamike.png"));
+            imgDirt = ImageIO.read(new File("Dirt.png"));
+            imgGrass = ImageIO.read(new File("Grass.png"));
+            imgBrick = ImageIO.read(new File("Brick.png"));
+            imgAir = ImageIO.read(new File("Air.png"));
         }catch(IOException e){
             System.out.println("Error loading images");
         }
