@@ -19,8 +19,8 @@ public class AnimationPanelTest extends JPanel{
     //Map
     BufferedReader br;
     public char[][] Map;//2D array to hold map layout
-    public int MapWidth = 1000;
-    public int MapHeight = 20;
+    public int MapWidth = 3600;
+    public int MapHeight =720;
     public int TilePixels = 36;
 
     //area that is being viewed

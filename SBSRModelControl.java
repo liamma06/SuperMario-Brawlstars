@@ -109,7 +109,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
 			//checking for up collision
 
-			if(view.AniPanel.CharacterY > 0 && view.AniPanel.Map[(int) (Math.floor((view.AniPanel.CharacterX + 1)/36))][(int) (Math.floor((view.AniPanel.CharacterY - 6)/36))] == 'a' && view.AniPanel.Map[(int) (Math.floor((view.AniPanel.CharacterX)/36))][(int) (view.AniPanel.CharacterY - step)] == 'a'){
+			if(view.AniPanel.CharacterY > 0 && view.AniPanel.Map[(int) (Math.floor((view.AniPanel.CharacterX)/36))][(int) (Math.floor((view.AniPanel.CharacterY - 6)/36))] == 'a' && view.AniPanel.Map[(int) (Math.ceil((view.AniPanel.CharacterX)/36))][(int) (Math.floor((view.AniPanel.CharacterY - 6)/36))] == 'a'){
 				double newY = view.AniPanel.CharacterY - 6;
 				view.AniPanel.CharacterY = newY;
 				PositionChanged = true;
@@ -132,7 +132,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
 			//Checking for left collision
 	
-			if(view.AniPanel.CharacterX > 0 && view.AniPanel.Map[(int) (view.AniPanel.CharacterX - step)][(int) (view.AniPanel.CharacterY + 1)] == 'a' && view.AniPanel.Map[(int) (view.AniPanel.CharacterX - step)][(int) (view.AniPanel.CharacterY)] == 'a'){
+			if(view.AniPanel.CharacterX > 0 && view.AniPanel.Map[(int) (Math.floor((view.AniPanel.CharacterX - 6)/36))][(int) (Math.floor((view.AniPanel.CharacterY)/36))] == 'a' && view.AniPanel.Map[(int) (Math.floor((view.AniPanel.CharacterX - 6)/36))][(int) (Math.ceil((view.AniPanel.CharacterY)/36))] == 'a'){
 				double newX = view.AniPanel.CharacterX - step;
 				view.AniPanel.CharacterX = newX;
 				view.AniPanel.dblViewportX = view.AniPanel.dblViewportX - 6;
@@ -144,7 +144,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
 			//Checking for right collision
 
-			if(view.AniPanel.CharacterX < view.AniPanel.MapWidth && view.AniPanel.Map[(int) (view.AniPanel.CharacterX + 1 + step)][(int) (view.AniPanel.CharacterY + 1)] == 'a' && view.AniPanel.Map[(int) (view.AniPanel.CharacterX + 1 + step)][(int) (view.AniPanel.CharacterY)] == 'a'){
+			if(view.AniPanel.CharacterX < view.AniPanel.MapWidth && view.AniPanel.Map[(int) (Math.ceil((view.AniPanel.CharacterX + 6)/36))][(int) (Math.floor((view.AniPanel.CharacterY)/36))] == 'a' && view.AniPanel.Map[(int) (Math.ceil((view.AniPanel.CharacterX + 6)/36))][(int) (Math.ceil((view.AniPanel.CharacterY)/36))] == 'a'){
 				double newX = view.AniPanel.CharacterX + step;
 				view.AniPanel.CharacterX = newX;
 				view.AniPanel.dblViewportX = view.AniPanel.dblViewportX + 6;
