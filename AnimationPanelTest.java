@@ -47,27 +47,27 @@ public class AnimationPanelTest extends JPanel{
 		
 		
 		for (int intCount = 0; intCount < 20; intCount++){
-			for (int intCount2 = 0; intCount2 < 20; intCount2++){
+			for (int intCount2 = 0; intCount2 < 100; intCount2++){
 					
 					
-					g.drawImage(ImgAir, (int)(dblViewportX +((double)intCount2-1)*36), intCount*36, 36, 36, null);
+					g.drawImage(ImgAir, (int)((double)(intCount2-1)*36-dblViewportX), intCount*36, 36, 36, null);
 					
 					switch(Map[intCount2][intCount]){
 						//Grass
 						case 'g':
-							g.drawImage(ImgGrass, (int)(dblViewportX +((double)intCount2-1)*36), intCount*36, 36, 36, null);
+							g.drawImage(ImgGrass, (int)((double)(intCount2-1)*36-dblViewportX), intCount*36, 36, 36, null);
 							break;
 						//Dirt
 						case 'd':
-							g.drawImage(ImgDirt, (int)(dblViewportX +((double)intCount2-1)*36), intCount*36, 36, 36, null);
+							g.drawImage(ImgDirt, (int)((double)(intCount2-1)*36-dblViewportX), intCount*36, 36, 36, null);
 							break;
 						//Brick
 						case 'b':
-							g.drawImage(ImgBrick, (int)(dblViewportX +((double)intCount2-1)*36), intCount*36, 36, 36, null);
+							g.drawImage(ImgBrick, (int)((double)(intCount2-1)*36-dblViewportX), intCount*36, 36, 36, null);
 							break;
 						//Air
 						case 'a':
-							g.drawImage(ImgAir, (int)(dblViewportX +((double)intCount2-1)*36), intCount*36, 36, 36, null);
+							g.drawImage(ImgAir, (int)((double)(intCount2-1)*36-dblViewportX), intCount*36, 36, 36, null);
 							break;
 					}	
 					
