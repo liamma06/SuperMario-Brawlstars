@@ -101,7 +101,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		}
 
 		//Character movement with collision detection 
-		if(evt.getKeyCode() == KeyEvent.VK_UP ){
+		if(evt.getKeyCode() == KeyEvent.VK_SPACE ){
 			view.AniPanel.grabFocus();
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
 			//checking for up collision
@@ -124,19 +124,88 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				PositionChanged = true;
 			}
 
-		}else if(evt.getKeyCode() == KeyEvent.VK_LEFT){
+		}else if(evt.getKeyCode() == KeyEvent.VK_A){
 			view.AniPanel.grabFocus();
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
 			//Checking for left collision
 	
-			if(view.AniPanel.CharacterX > 324 && view.AniPanel.Map[(int) (Math.floor((view.AniPanel.CharacterX - 6)/36))][(int) (Math.floor((view.AniPanel.CharacterY)/36))] == 'a' && view.AniPanel.Map[(int) (Math.floor((view.AniPanel.CharacterX - 6)/36))][(int) (Math.ceil((view.AniPanel.CharacterY)/36))] == 'a'){
+			if(view.AniPanel.CharacterX > 324 && view.AniPanel.Map[(int)((view.AniPanel.CharacterX - 6)/36)][(int) (Math.floor((view.AniPanel.CharacterY)/36))] == 'a' && view.AniPanel.Map[(int) ((view.AniPanel.CharacterX - 6)/36)][(int) (Math.ceil((view.AniPanel.CharacterY)/36))] == 'a'){
 				double newX = view.AniPanel.CharacterX - 6;
 				view.AniPanel.CharacterX = newX;
 				view.AniPanel.dblViewportX = view.AniPanel.dblViewportX - 6;
 				PositionChanged = true;
 			}
 
-		}else if(evt.getKeyCode() == KeyEvent.VK_RIGHT ){
+		}else if(evt.getKeyCode() == KeyEvent.VK_D){
+			view.AniPanel.grabFocus();
+			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
+			//Checking for right collision
+
+			if(view.AniPanel.CharacterX < view.AniPanel.MapWidth && view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX + 6)/36))][(int) (Math.floor((view.AniPanel.CharacterY)/36))] == 'a' && view.AniPanel.Map[(int) (Math.ceil((view.AniPanel.CharacterX + 6)/36))][(int) (Math.ceil((view.AniPanel.CharacterY)/36))] == 'a'){
+				double newX = view.AniPanel.CharacterX + 6;
+				view.AniPanel.CharacterX = newX;
+				view.AniPanel.dblViewportX = view.AniPanel.dblViewportX + 6;
+				PositionChanged = true;
+			}
+	
+		}else{
+			System.out.println("Invalid key");
+		}
+
+		//sending position to opponent
+		if(PositionChanged){
+			ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY);
+		}
+
+		repaint();
+	}
+	public void keyTyped(KeyEvent evt){
+		//checking if key is typed
+		boolean PositionChanged = false;
+
+		//return focus to animation panel when enter is pressed 
+		if(evt.getSource() == view.ChatTextInput && evt.getKeyCode() == KeyEvent.VK_ENTER){
+			view.AniPanel.requestFocusInWindow();
+			return;
+		}
+
+		//Character movement with collision detection 
+		if(evt.getKeyCode() == KeyEvent.VK_SPACE ){
+			view.AniPanel.grabFocus();
+			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
+			//checking for up collision
+
+			if(view.AniPanel.CharacterY > 0 && view.AniPanel.Map[(int) (Math.floor((view.AniPanel.CharacterX)/36))][(int) (Math.floor((view.AniPanel.CharacterY - 6)/36))] == 'a' && view.AniPanel.Map[(int) (Math.ceil((view.AniPanel.CharacterX)/36))][(int) (Math.floor((view.AniPanel.CharacterY - 6)/36))] == 'a'){
+				double newY = view.AniPanel.CharacterY - 6;
+				view.AniPanel.CharacterY = newY;
+				PositionChanged = true;
+			}
+
+		//If the character is between two blocks, then both blocks underneath must be air in order for the character to move vertically. 
+		}else if(evt.getKeyCode() == KeyEvent.VK_DOWN ){
+			view.AniPanel.grabFocus();
+			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
+			//Checking for down collision
+	
+			if(view.AniPanel.CharacterY < view.AniPanel.MapHeight && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX)/36))][(int) (Math.ceil((view.AniPanel.CharacterY + 6)/36))] == 'a' && view.AniPanel.Map[(int) (Math.ceil((view.AniPanel.CharacterX)/36))][(int) (Math.ceil((view.AniPanel.CharacterY + 6)/36))] == 'a'){
+				double newY = view.AniPanel.CharacterY + 6;
+				view.AniPanel.CharacterY = newY;
+				PositionChanged = true;
+			}
+
+		}else if(evt.getKeyCode() == KeyEvent.VK_A){
+			view.AniPanel.grabFocus();
+			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
+			//Checking for left collision
+	
+			if(view.AniPanel.CharacterX > 324 && view.AniPanel.Map[(int)((view.AniPanel.CharacterX - 6)/36)][(int) (Math.floor((view.AniPanel.CharacterY)/36))] == 'a' && view.AniPanel.Map[(int) ((view.AniPanel.CharacterX - 6)/36)][(int) (Math.ceil((view.AniPanel.CharacterY)/36))] == 'a'){
+				double newX = view.AniPanel.CharacterX - 6;
+				view.AniPanel.CharacterX = newX;
+				view.AniPanel.dblViewportX = view.AniPanel.dblViewportX - 6;
+				PositionChanged = true;
+			}
+
+		}else if(evt.getKeyCode() == KeyEvent.VK_D){
 			view.AniPanel.grabFocus();
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
 			//Checking for right collision
@@ -166,9 +235,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
         // Optional: Handle key release events
     }
 
-    public void keyTyped(KeyEvent e) {
-        // Optional: Handle key typed events
-    }
+  
 
 	//overridding action listener
 	public void actionPerformed(ActionEvent evt){
