@@ -108,59 +108,49 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			view.AniPanel.grabFocus();
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
 			//checking for up collision
-			try{
-			if(view.AniPanel.CharacterY > 0 && view.AniPanel.Map[(int) (view.AniPanel.CharacterX + 1)][(int) (view.AniPanel.CharacterY - step)] == 'a' && view.AniPanel.Map[(int) (view.AniPanel.CharacterX)][(int) (view.AniPanel.CharacterY - step)] == 'a'){
-				double newY = view.AniPanel.CharacterY - step;
+
+			if(view.AniPanel.CharacterY > 0 && view.AniPanel.Map[(int) (Math.floor((view.AniPanel.CharacterX + 1)/36))][(int) (Math.floor((view.AniPanel.CharacterY - 6)/36))] == 'a' && view.AniPanel.Map[(int) (Math.floor((view.AniPanel.CharacterX)/36))][(int) (view.AniPanel.CharacterY - step)] == 'a'){
+				double newY = view.AniPanel.CharacterY - 6;
 				view.AniPanel.CharacterY = newY;
 				PositionChanged = true;
 			}
-		}catch(ArrayIndexOutOfBoundsException e){
 
-		}
-
+		//If the character is between two blocks, then both blocks underneath must be air in order for the character to move vertically. 
 		}else if(evt.getKeyCode() == KeyEvent.VK_DOWN ){
 			view.AniPanel.grabFocus();
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
 			//Checking for down collision
-			try{
-			if(view.AniPanel.CharacterY < view.AniPanel.MapHeight && view.AniPanel.Map[(int) (view.AniPanel.CharacterX + 1)][(int) (view.AniPanel.CharacterY + 1 + step)] == 'a' && view.AniPanel.Map[(int) (view.AniPanel.CharacterX)][(int) (view.AniPanel.CharacterY + 1 + step)] == 'a'){
+	
+			if(view.AniPanel.CharacterY < view.AniPanel.MapHeight && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX)/36))][(int) (Math.ceil((view.AniPanel.CharacterY + 6)/36))] == 'a' && view.AniPanel.Map[(int) (Math.ceil((view.AniPanel.CharacterX)/36))][(int) (Math.ceil((view.AniPanel.CharacterY + 6)/36))] == 'a'){
 				double newY = view.AniPanel.CharacterY + step;
 				view.AniPanel.CharacterY = newY;
 				PositionChanged = true;
 			}
-		}catch(ArrayIndexOutOfBoundsException e){
-			
-		}
 
 		}else if(evt.getKeyCode() == KeyEvent.VK_LEFT){
 			view.AniPanel.grabFocus();
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
 			//Checking for left collision
-			try{
+	
 			if(view.AniPanel.CharacterX > 0 && view.AniPanel.Map[(int) (view.AniPanel.CharacterX - step)][(int) (view.AniPanel.CharacterY + 1)] == 'a' && view.AniPanel.Map[(int) (view.AniPanel.CharacterX - step)][(int) (view.AniPanel.CharacterY)] == 'a'){
 				double newX = view.AniPanel.CharacterX - step;
 				view.AniPanel.CharacterX = newX;
 				view.AniPanel.dblViewportX = view.AniPanel.dblViewportX - 6;
 				PositionChanged = true;
 			}
-		}catch(ArrayIndexOutOfBoundsException e){
-
-		}
 
 		}else if(evt.getKeyCode() == KeyEvent.VK_RIGHT ){
 			view.AniPanel.grabFocus();
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
 			//Checking for right collision
-			try{
+
 			if(view.AniPanel.CharacterX < view.AniPanel.MapWidth && view.AniPanel.Map[(int) (view.AniPanel.CharacterX + 1 + step)][(int) (view.AniPanel.CharacterY + 1)] == 'a' && view.AniPanel.Map[(int) (view.AniPanel.CharacterX + 1 + step)][(int) (view.AniPanel.CharacterY)] == 'a'){
 				double newX = view.AniPanel.CharacterX + step;
 				view.AniPanel.CharacterX = newX;
 				view.AniPanel.dblViewportX = view.AniPanel.dblViewportX + 6;
 				PositionChanged = true;
 			}
-		}catch(ArrayIndexOutOfBoundsException e){
-
-		}
+	
 		}else{
 			System.out.println("Invalid key");
 		}
