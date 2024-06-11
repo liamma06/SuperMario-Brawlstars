@@ -124,7 +124,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				double newX = view.AniPanel.CharacterX - 6;
 				view.AniPanel.CharacterX = newX;
 				view.AniPanel.dblViewportX = view.AniPanel.dblViewportX - 6;
-				PositionChanged = true;
+				ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+",left");
 			}
 
 		}else if(evt.getKeyCode() == KeyEvent.VK_D){
@@ -137,7 +137,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				double newX = view.AniPanel.CharacterX + 6;
 				view.AniPanel.CharacterX = newX;
 				view.AniPanel.dblViewportX = view.AniPanel.dblViewportX + 6;
-				PositionChanged = true;
+				ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+",right");
 			}
 	
 		}else{
@@ -219,7 +219,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 
 		//sending position to opponent
 		if(PositionChanged){
-			ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY);
+			ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+",");
 		}
 
 		repaint();
@@ -342,7 +342,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			}
 		//Timer
 		}else if(evt.getSource() == theTimer){
-			
+			/* 
 			intGravTime++;
 			System.out.println("**");
 			
@@ -352,6 +352,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			}
 			
 			repaint();
+			*/
 			
 		//Detecting SSM 
 		}else if(evt.getSource() == ssm){
@@ -374,6 +375,12 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			}else if(ssmMessage[0].equals("position")){
 				view.AniPanel.OpponentX = Double.parseDouble(ssmMessage[1]);
 				view.AniPanel.OpponentY = Double.parseDouble(ssmMessage[2]);
+				if(ssmMessage.length == 4){
+					view.AniPanel.strOpponentDir = ssmMessage[3];
+				}else{
+					view.AniPanel.strOpponentDir = view.AniPanel.strOpponentDir;
+				}
+				
 			//loading the proper map for both players 
 			}else if(ssmMessage[0].equals("Map")){
 				view.AniPanel.loadMap(Integer.parseInt(ssmMessage[1]));

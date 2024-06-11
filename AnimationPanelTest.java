@@ -10,6 +10,8 @@ public class AnimationPanelTest extends JPanel{
     //Properties
     //Images and Terrain Tiles
     public Image imgOpponent;
+    public Image imgOpponentRight;
+    public Image imgOpponentLeft;
     public Image imgCharacter;
     public Image imgCharacterRight;
     public Image imgCharacterLeft;
@@ -35,8 +37,9 @@ public class AnimationPanelTest extends JPanel{
     public String strCharacterDir = "right";
 
     //Opponent 
-    public double OpponentX = 0;
-    public double OpponentY = 0;
+    public double OpponentX = 324;
+    public double OpponentY = 612;
+    public String strOpponentDir = "right";
   
 	public int intMapX = 0;
 	public int intMapY = 0;
@@ -80,17 +83,23 @@ public class AnimationPanelTest extends JPanel{
 		
        
         //Load and draw character image according to which way he/she is facing.
-        
-        
         if (strCharacterDir.equals("right")){
 				imgCharacter = imgCharacterRight;
 		} else if (strCharacterDir.equals("left")){
 				imgCharacter = imgCharacterLeft;
 		}
+
+        //load and draw opponent image according to which way he/she is facing.
+        if (strOpponentDir.equals("right")){
+            imgOpponent = imgOpponentRight;
+        } else if (strOpponentDir.equals("left")){
+            imgOpponent = imgOpponentLeft;
+        }
+
 					
         g.drawImage(imgCharacter,(int)((CharacterX - dblViewportX)), (int)((CharacterY)), 36, 36, null);
         
-        //g.drawImage(ImgOpponent, (int)((OpponentX - dblViewportX) * TilePixels), (int)((OpponentY - dblViewportY)*TilePixels), TilePixels, TilePixels, null);
+        g.drawImage(imgOpponent, (int)((OpponentX - dblViewportX)), (int)((OpponentY - dblViewportY)), 36, 36, null);
     
         repaint();
 
@@ -147,11 +156,13 @@ public class AnimationPanelTest extends JPanel{
     //loading the proper opponent image
     public void loadOpponent(int intOpponentSelection){
         try{
-            if(intOpponentSelection == 1){
-                imgOpponent = ImageIO.read(new File("Dynamike.png"));
+            if(intOpponentSelection == 2){
+                imgOpponentRight = ImageIO.read(new File("Dynamike.png"));
+                imgOpponentLeft = ImageIO.read(new File("Dynamike(Left).png"));
                 System.out.println("loaded dinamike");
-            }else if(intOpponentSelection == 2){
-                imgOpponent = ImageIO.read(new File("Colt.png"));
+            }else if(intOpponentSelection == 1){
+                imgOpponentRight = ImageIO.read(new File("Colt.png"));
+                imgOpponentLeft = ImageIO.read(new File("Colt(Left).png"));
                 System.out.println("loaded colt");
             }
         }catch(IOException e){
