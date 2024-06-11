@@ -99,7 +99,7 @@ public class AnimationPanelTest extends JPanel{
 					
         g.drawImage(imgCharacter,(int)((CharacterX - dblViewportX)), (int)((CharacterY)), 36, 36, null);
         
-        g.drawImage(imgOpponent, (int)((OpponentX - dblViewportX)), (int)((OpponentY - dblViewportY)), 36, 36, null);
+        //g.drawImage(imgOpponent, (int)((OpponentX - dblViewportX)), (int)((OpponentY - dblViewportY)), 36, 36, null);
     
         repaint();
 

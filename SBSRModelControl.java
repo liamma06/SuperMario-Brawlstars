@@ -342,7 +342,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			}
 		//Timer
 		}else if(evt.getSource() == theTimer){
-			/* 
+			 
 			intGravTime++;
 			System.out.println("**");
 			
@@ -352,7 +352,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			}
 			
 			repaint();
-			*/
+			
 			
 		//Detecting SSM 
 		}else if(evt.getSource() == ssm){
