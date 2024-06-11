@@ -137,7 +137,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				double newX = view.AniPanel.CharacterX - 6;
 				view.AniPanel.CharacterX = newX;
 				view.AniPanel.dblViewportX = view.AniPanel.dblViewportX - 6;
-				PositionChanged = true;
+				ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+",left");
 			}
 
 		}else if(evt.getKeyCode() == KeyEvent.VK_D){
@@ -150,7 +150,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				double newX = view.AniPanel.CharacterX + 6;
 				view.AniPanel.CharacterX = newX;
 				view.AniPanel.dblViewportX = view.AniPanel.dblViewportX + 6;
-				PositionChanged = true;
+				ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+",right");
 			}
 	
 		}else{
@@ -224,7 +224,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 
 		//sending position to opponent
 		if(PositionChanged){
-			ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY);
+			ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+",");
 		}
 		repaint();
 	}
@@ -350,7 +350,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			}
 		//Timer
 		}else if(evt.getSource() == theTimer){
-			
+			 
 			intGravTime++;
 			
 				if(view.AniPanel.Map != null && blnjump == false && (view.AniPanel.CharacterY) < view.AniPanel.MapHeight && view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX)/36))][(int) (Math.ceil((view.AniPanel.CharacterY + 6)/36))] == 'a' && view.AniPanel.Map[(int) (Math.floor((view.AniPanel.CharacterX)/36))][(int) (Math.ceil((view.AniPanel.CharacterY + 6)/36))] == 'a'){
@@ -359,6 +359,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 					ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY);
 				}
 			repaint();
+			
 			
 		//Detecting SSM 
 		}else if(evt.getSource() == ssm){
@@ -381,6 +382,12 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			}else if(ssmMessage[0].equals("position")){
 				view.AniPanel.OpponentX = Double.parseDouble(ssmMessage[1]);
 				view.AniPanel.OpponentY = Double.parseDouble(ssmMessage[2]);
+				if(ssmMessage.length == 4){
+					view.AniPanel.strOpponentDir = ssmMessage[3];
+				}else{
+					view.AniPanel.strOpponentDir = view.AniPanel.strOpponentDir;
+				}
+				
 			//loading the proper map for both players 
 			}else if(ssmMessage[0].equals("Map")){
 				view.AniPanel.loadMap(Integer.parseInt(ssmMessage[1]));
