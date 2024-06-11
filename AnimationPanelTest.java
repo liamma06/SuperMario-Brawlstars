@@ -79,6 +79,7 @@ public class AnimationPanelTest extends JPanel{
        
         //Load and draw character image according to which way he/she is facing.
         
+        /* 
         if (strCharacterDir.equals("right")){
 				try{
 					imgCharacter = ImageIO.read(new File("Dynamike.png"));
@@ -92,6 +93,7 @@ public class AnimationPanelTest extends JPanel{
 						System.out.println("Error loading iamge.");
 				}
 		}
+        */
 					
 					
         g.drawImage(imgCharacter,(int)((CharacterX - dblViewportX)), (int)((CharacterY)), 36, 36, null);
@@ -135,10 +137,10 @@ public class AnimationPanelTest extends JPanel{
     //loading the proper character image
     public void loadCharacter(int intCharacterSelection){
         try{
-            if(intCharacterSelection == 1){
+            if(intCharacterSelection == 2){
                 imgCharacter = ImageIO.read(new File("Dynamike.png"));
                 System.out.println("loaded dynamike");
-            }else if(intCharacterSelection == 2){
+            }else if(intCharacterSelection == 1){
                 imgCharacter = ImageIO.read(new File("Colt.jpg"));
                 System.out.println("loaded colt");
             }
@@ -169,8 +171,8 @@ public class AnimationPanelTest extends JPanel{
     public AnimationPanelTest(){
         //load images  
         try{
-            imgOpponent = ImageIO.read(new File("Shelly.png"));
-            imgCharacter = ImageIO.read(new File("Dynamike.png"));
+            //imgOpponent = ImageIO.read(new File("Shelly.png"));
+            //imgCharacter = ImageIO.read(new File("Dynamike.png"));
             imgDirt = ImageIO.read(new File("Dirt.png"));
             imgGrass = ImageIO.read(new File("Grass.png"));
             imgBrick = ImageIO.read(new File("Brick.png"));

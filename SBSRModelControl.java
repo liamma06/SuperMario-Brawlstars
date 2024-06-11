@@ -317,10 +317,10 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		}else if(evt.getSource() == view.Character2Button){
 			if(blnHost){
 				intHostCharacter = 2;
-				System.out.println("Host Character: El Primo");
+				System.out.println("Host Character: Dynamike");
 			}else{
 				intClientCharacter = 2;
-				System.out.println("Client Character: El Primo");
+				System.out.println("Client Character: Dynamike");
 			}
 			view.AniPanel.loadCharacter(2);
 			ssm.sendText("characterChosen,2");
