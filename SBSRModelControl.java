@@ -34,6 +34,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 
 	//AnimationPanel
 	public Timer theTimer = new Timer(1000/60,this);
+	public int intGravTime = 0;
 
 
 	//Methods **************************************************************************************************************
@@ -84,7 +85,6 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 	public void checkPlay(){
 		if(intPlayersReady == 2){
 			System.out.println("Both players are ready");
-			theTimer.start();
 		}
 	}
 
@@ -112,17 +112,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				PositionChanged = true;
 			}
 
-		//If the character is between two blocks, then both blocks underneath must be air in order for the character to move vertically. 
-		}else if(evt.getKeyCode() == KeyEvent.VK_DOWN ){
-			view.AniPanel.grabFocus();
-			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
-			//Checking for down collision
-	
-			if(view.AniPanel.CharacterY < view.AniPanel.MapHeight && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX)/36))][(int) (Math.ceil((view.AniPanel.CharacterY + 6)/36))] == 'a' && view.AniPanel.Map[(int) (Math.ceil((view.AniPanel.CharacterX)/36))][(int) (Math.ceil((view.AniPanel.CharacterY + 6)/36))] == 'a'){
-				double newY = view.AniPanel.CharacterY + 6;
-				view.AniPanel.CharacterY = newY;
-				PositionChanged = true;
-			}
+		//If the character is between two blocks, then both blocks underneath/above must be air in order for the character to move vertically.
 
 		}else if(evt.getKeyCode() == KeyEvent.VK_A){
 			view.AniPanel.grabFocus();
@@ -238,12 +228,12 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 	
 
 	public void keyReleased(KeyEvent e) {
-        // Optional: Handle key release events
+       //No keyReleased method required but maintained to override the abstract method "keyReleased(KeyEvent) in KeyListener.
     }
 
   
 
-	//overridding action listener
+	//Overridding action listener
 	public void actionPerformed(ActionEvent evt){
 		//Connect menu button
 		if(evt.getSource() == view.ConnectMenuButton){
@@ -352,8 +342,16 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			}
 		//Timer
 		}else if(evt.getSource() == theTimer){
-			//System.out.println("Timer is running");
-			view.AniPanel.repaint();
+			
+			intGravTime++;
+			System.out.println("**");
+			
+			if(intGravTime%10==0 && (view.AniPanel.CharacterY+6) < view.AniPanel.MapHeight && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX)/36))][(int) (Math.ceil((view.AniPanel.CharacterY + 6)/36))] == 'a' && view.AniPanel.Map[(int) (Math.ceil((view.AniPanel.CharacterX)/36))][(int) (Math.ceil((view.AniPanel.CharacterY + 6)/36))] == 'a'){
+				view.AniPanel.CharacterY = view.AniPanel.CharacterY + 6;
+				ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY);
+			}
+			
+			repaint();
 			
 		//Detecting SSM 
 		}else if(evt.getSource() == ssm){
@@ -368,11 +366,9 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				view.ChatArea.append(ssmMessage[1] + ": " + ssmMessage[2] + "\n");
 			//Getting connection responses
 			}else if(ssmMessage[0].equals("connection")){
-			
 				intPlayersReady += 1;
 				view.ChatArea.append(ssmMessage[1] + " has connected\n");
 				System.out.println("Players Ready: "+intPlayersReady);
-
 				checkPlay();
 			//Getting position updates of the opponent
 			}else if(ssmMessage[0].equals("position")){
@@ -387,6 +383,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			}else{
 				System.out.println("Invalid SSM message");
 			}
+			
 		} else if (evt.getSource() == view.PlayBackButton){
 			view.theframe.setContentPane(view.MenuPanel);
 			view.theframe.revalidate();
@@ -401,14 +398,12 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		}
 	}
 
-	//////////////////////////////////////////////////////////////////////////////////////////////////////
-	//Constructor
+
+	//Constructor  **************************************************************************************************************
 	public SBSRModelControl(SBSRViewTest view){
 		this.view = view;
 
-		
-
-		// adding Action listeners
+		// Adding Event listeners
 
 		//Main Menu
 		view.PlayMenuButton.addActionListener(this);
@@ -434,6 +429,9 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		view.ChatTextInput.addActionListener(this);
 		view.ChatTextInput.addKeyListener(this);
 		view.PlayBackButton.addActionListener(this);
+		
+		//Timer
+		theTimer.start();
 	}
 
 	//Main program
