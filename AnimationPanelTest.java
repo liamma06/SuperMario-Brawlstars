@@ -11,6 +11,8 @@ public class AnimationPanelTest extends JPanel{
     //Images and Terrain Tiles
     public Image imgOpponent;
     public Image imgCharacter;
+    public Image imgCharacterRight;
+    public Image imgCharacterLeft;
     public Image imgGrass;
     public Image imgBrick;
     public Image imgAir;
@@ -79,20 +81,12 @@ public class AnimationPanelTest extends JPanel{
        
         //Load and draw character image according to which way he/she is facing.
         
+        
         if (strCharacterDir.equals("right")){
-				try{
-					imgCharacter = ImageIO.read(new File("Dynamike.png"));
-				} catch (IOException e){
-						System.out.println("Error loading image.");
-				}
+				imgCharacter = imgCharacterRight;
 		} else if (strCharacterDir.equals("left")){
-				try{
-					imgCharacter = ImageIO.read(new File("Dynamike(Left).png"));
-				} catch (IOException e){
-						System.out.println("Error loading iamge.");
-				}
+				imgCharacter = imgCharacterLeft;
 		}
-					
 					
         g.drawImage(imgCharacter,(int)((CharacterX - dblViewportX)), (int)((CharacterY)), 36, 36, null);
         
@@ -135,11 +129,13 @@ public class AnimationPanelTest extends JPanel{
     //loading the proper character image
     public void loadCharacter(int intCharacterSelection){
         try{
-            if(intCharacterSelection == 1){
-                imgCharacter = ImageIO.read(new File("Dynamike.png"));
+            if(intCharacterSelection == 2){
+                imgCharacterRight = ImageIO.read(new File("Dynamike.png"));
+                imgCharacterLeft = ImageIO.read(new File("Dynamike(Left).png"));
                 System.out.println("loaded dynamike");
-            }else if(intCharacterSelection == 2){
-                imgCharacter = ImageIO.read(new File("Colt.jpg"));
+            }else if(intCharacterSelection == 1){
+                imgCharacterRight = ImageIO.read(new File("Colt.png"));
+                imgCharacterLeft = ImageIO.read(new File("Colt(Left).png"));
                 System.out.println("loaded colt");
             }
         }catch(IOException e){
@@ -155,7 +151,7 @@ public class AnimationPanelTest extends JPanel{
                 imgOpponent = ImageIO.read(new File("Dynamike.png"));
                 System.out.println("loaded dinamike");
             }else if(intOpponentSelection == 2){
-                imgOpponent = ImageIO.read(new File("Colt.jpg"));
+                imgOpponent = ImageIO.read(new File("Colt.png"));
                 System.out.println("loaded colt");
             }
         }catch(IOException e){
@@ -169,8 +165,8 @@ public class AnimationPanelTest extends JPanel{
     public AnimationPanelTest(){
         //load images  
         try{
-            imgOpponent = ImageIO.read(new File("Shelly.png"));
-            imgCharacter = ImageIO.read(new File("Dynamike.png"));
+            //imgOpponent = ImageIO.read(new File("Shelly.png"));
+            //imgCharacter = ImageIO.read(new File("Dynamike.png"));
             imgDirt = ImageIO.read(new File("Dirt.png"));
             imgGrass = ImageIO.read(new File("Grass.png"));
             imgBrick = ImageIO.read(new File("Brick.png"));
@@ -179,10 +175,4 @@ public class AnimationPanelTest extends JPanel{
             System.out.println("Error loading images");
         }
     }
-
-
-
-        
-    
-    
 }

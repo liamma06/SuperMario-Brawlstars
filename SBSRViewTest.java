@@ -198,7 +198,7 @@ public class SBSRViewTest{
 				Character1Label.setFont(new Font("Arial",Font.BOLD,30));
 				CharacterPanel.add(Character1Label);
 
-				Character2Label = new JLabel("El Primo");
+				Character2Label = new JLabel("Dynamike");
 				Character2Label.setSize(200,50);
 				Character2Label.setLocation(880,75);
 				Character2Label.setFont(new Font("Arial",Font.BOLD,30));
