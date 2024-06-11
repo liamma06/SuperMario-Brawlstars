@@ -73,8 +73,6 @@ public class AnimationPanelTest extends JPanel{
 							g.drawImage(imgAir, (int)((double)(intCount2)*36-dblViewportX), intCount*36, 36, 36, null);
 							break;
 					}	
-					
-					
 			}
 		}
 		

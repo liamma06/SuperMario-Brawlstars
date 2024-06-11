@@ -1,5 +1,5 @@
 //SuperBrawlStarsRun SBSR View (Graphical User Interfaces)
-//Authors: Bosco Zhang, Liam Ma, Nihal Sidhu
+//Programmers: Bosco Zhang, Liam Ma, Nihal Sidhu
 //Last Modified: Thursday, June 6, 2024
 //Version Number: 2.0 Beta
 

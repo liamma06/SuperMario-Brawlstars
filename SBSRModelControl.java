@@ -1,3 +1,8 @@
+//SuperBrawlStarsRun SBSR ModelControl (Logic, Computation, Network, Algorithm, and Data File Processing)
+//Programmers: Bosco Zhang, Liam Ma, Nihal Sidhu
+//Last Modified: Monday, June 10, 2024
+//Version Number: 2.0 Beta
+
 import java.awt.*;
 import java.io.*;
 import java.util.Map;
@@ -17,7 +22,9 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 	public String strUsername;
 	public String strResult;
 	public boolean blnHost = false;
+	public boolean blnjump = false;
 	public int intNumPlayers = 0;
+	public int intJumpCooldown = 0;
 
 	//Chacter selection
 	public int intHostCharacter = 0;
@@ -88,6 +95,10 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		}
 	}
 
+	//********Make it so that can only jump if the block below is NOT air. 
+	
+	
+	
 	
 	//Player movement 
 	public void keyPressed(KeyEvent evt){
@@ -101,14 +112,16 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		}
 
 		//Character movement with collision detection 
-		if(evt.getKeyCode() == KeyEvent.VK_SPACE ){
+		if(evt.getKeyCode() == KeyEvent.VK_SPACE){
 			view.AniPanel.grabFocus();
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
 			//checking for up collision
 
-			if(view.AniPanel.CharacterY > 0 && view.AniPanel.Map[(int) (Math.floor((view.AniPanel.CharacterX)/36))][(int) (Math.floor((view.AniPanel.CharacterY - 6)/36))] == 'a' && view.AniPanel.Map[(int) (Math.ceil((view.AniPanel.CharacterX)/36))][(int) (Math.floor((view.AniPanel.CharacterY - 6)/36))] == 'a'){
-				double newY = view.AniPanel.CharacterY - 6;
-				view.AniPanel.CharacterY = newY;
+			if(view.AniPanel.CharacterY > 0 && intJumpCooldown < 3 && view.AniPanel.Map[(int) (Math.floor((view.AniPanel.CharacterX)/36))][(int) (Math.floor((view.AniPanel.CharacterY - 36)/36))] == 'a' && view.AniPanel.Map[(int) (Math.ceil((view.AniPanel.CharacterX)/36))][(int) (Math.floor((view.AniPanel.CharacterY - 36)/36))] == 'a' && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX)/36))][(int)(Math.ceil((view.AniPanel.CharacterY)/36))] != 'a' && view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX)/36))][(int)(Math.ceil((view.AniPanel.CharacterY)/36))] != 'a'){
+				double newY = view.AniPanel.CharacterY - 36;
+				view.AniPanel.CharacterY = view.AniPanel.CharacterY - 36;
+				blnjump = true;
+				intJumpCooldown++;
 				PositionChanged = true;
 			}
 
@@ -162,26 +175,18 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		}
 
 		//Character movement with collision detection 
+		
+		
 		if(evt.getKeyCode() == KeyEvent.VK_SPACE ){
 			view.AniPanel.grabFocus();
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
 			//checking for up collision
 
-			if(view.AniPanel.CharacterY > 0 && view.AniPanel.Map[(int) (Math.floor((view.AniPanel.CharacterX)/36))][(int) (Math.floor((view.AniPanel.CharacterY - 6)/36))] == 'a' && view.AniPanel.Map[(int) (Math.ceil((view.AniPanel.CharacterX)/36))][(int) (Math.floor((view.AniPanel.CharacterY - 6)/36))] == 'a'){
-				double newY = view.AniPanel.CharacterY - 6;
-				view.AniPanel.CharacterY = newY;
-				PositionChanged = true;
-			}
-
-		//If the character is between two blocks, then both blocks underneath must be air in order for the character to move vertically. 
-		}else if(evt.getKeyCode() == KeyEvent.VK_DOWN ){
-			view.AniPanel.grabFocus();
-			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
-			//Checking for down collision
-	
-			if(view.AniPanel.CharacterY < view.AniPanel.MapHeight && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX)/36))][(int) (Math.ceil((view.AniPanel.CharacterY + 6)/36))] == 'a' && view.AniPanel.Map[(int) (Math.ceil((view.AniPanel.CharacterX)/36))][(int) (Math.ceil((view.AniPanel.CharacterY + 6)/36))] == 'a'){
-				double newY = view.AniPanel.CharacterY + 6;
-				view.AniPanel.CharacterY = newY;
+			if(view.AniPanel.CharacterY > 0 && intJumpCooldown < 3 && view.AniPanel.Map[(int) (Math.floor((view.AniPanel.CharacterX)/36))][(int) (Math.floor((view.AniPanel.CharacterY - 36)/36))] == 'a' && view.AniPanel.Map[(int) (Math.ceil((view.AniPanel.CharacterX)/36))][(int) (Math.floor((view.AniPanel.CharacterY - 36)/36))] == 'a' && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX)/36))][(int)(Math.ceil((view.AniPanel.CharacterY)/36))] != 'a' && view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX)/36))][(int)(Math.ceil((view.AniPanel.CharacterY)/36))] != 'a'){
+				double newY = view.AniPanel.CharacterY - 36;
+				view.AniPanel.CharacterY = view.AniPanel.CharacterY - 36;
+				blnjump = true;
+				intJumpCooldown++;
 				PositionChanged = true;
 			}
 
@@ -221,14 +226,17 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		if(PositionChanged){
 			ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY);
 		}
-
 		repaint();
 	}
-
+	
 	
 
-	public void keyReleased(KeyEvent e) {
-       //No keyReleased method required but maintained to override the abstract method "keyReleased(KeyEvent) in KeyListener.
+	public void keyReleased(KeyEvent evt) {
+		if (evt.getKeyCode() == KeyEvent.VK_SPACE){
+			blnjump = false;
+			intJumpCooldown = 0;
+		}
+		repaint();
     }
 
   
@@ -344,13 +352,12 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		}else if(evt.getSource() == theTimer){
 			
 			intGravTime++;
-			System.out.println("**");
 			
-			if(intGravTime%10==0 && (view.AniPanel.CharacterY+6) < view.AniPanel.MapHeight && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX)/36))][(int) (Math.ceil((view.AniPanel.CharacterY + 6)/36))] == 'a' && view.AniPanel.Map[(int) (Math.ceil((view.AniPanel.CharacterX)/36))][(int) (Math.ceil((view.AniPanel.CharacterY + 6)/36))] == 'a'){
-				view.AniPanel.CharacterY = view.AniPanel.CharacterY + 6;
-				ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY);
-			}
-			
+				if(view.AniPanel.Map != null && blnjump == false && (view.AniPanel.CharacterY) < view.AniPanel.MapHeight && view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX)/36))][(int) (Math.ceil((view.AniPanel.CharacterY + 6)/36))] == 'a' && view.AniPanel.Map[(int) (Math.floor((view.AniPanel.CharacterX)/36))][(int) (Math.ceil((view.AniPanel.CharacterY + 6)/36))] == 'a'){
+					
+					view.AniPanel.CharacterY = view.AniPanel.CharacterY + 3;
+					ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY);
+				}
 			repaint();
 			
 		//Detecting SSM 
