@@ -42,6 +42,8 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 	//AnimationPanel
 	public Timer theTimer = new Timer(1000/60,this);
 	public int intGravTime = 0;
+	public double dblCharacterDefX = 0;
+	public double dblCharacterDefY = 0;
 
 
 	//Methods **************************************************************************************************************
@@ -114,13 +116,12 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		//Character movement with collision detection 
 		if(evt.getKeyCode() == KeyEvent.VK_SPACE){
 			view.AniPanel.grabFocus();
-			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
+			System.out.println("Key pressed JUMP: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
 			intJumpCooldown++;
 			//checking for up collision
 
-			if(view.AniPanel.CharacterY > 0 && intJumpCooldown < 3 && view.AniPanel.Map[(int) (Math.floor((view.AniPanel.CharacterX)/36))][(int) (Math.floor((view.AniPanel.CharacterY - 36)/36))] == 'a' && view.AniPanel.Map[(int) (Math.ceil((view.AniPanel.CharacterX)/36))][(int) (Math.floor((view.AniPanel.CharacterY - 36)/36))] == 'a' && (view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX)/36))][(int)(Math.floor((view.AniPanel.CharacterY+36)/36))] != 'a' || view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX)/36))][(int)(Math.floor((view.AniPanel.CharacterY+36)/36))] != 'a')){
-				System.out.println("jumped");
-				view.AniPanel.CharacterY = view.AniPanel.CharacterY - 36;
+			if(view.AniPanel.CharacterY >= 36 && intJumpCooldown < 3 && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX)/36))][(int) (Math.floor((view.AniPanel.CharacterY - 36)/36))] == 'a' && view.AniPanel.Map[(int) (Math.ceil((view.AniPanel.CharacterX)/36))][(int) (Math.floor((view.AniPanel.CharacterY - 36)/36))] == 'a' && (view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX)/36))][(int)(Math.floor((view.AniPanel.CharacterY+36)/36))] != 'a' || view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX)/36))][(int)(Math.floor((view.AniPanel.CharacterY+36)/36))] != 'a')){
+				dblCharacterDefY = -36;
 				blnjump = true;
 				PositionChanged = true;
 			} else if (intJumpCooldown >= 2){
@@ -138,23 +139,21 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			//Checking for left collision
 	
 			if(view.AniPanel.CharacterX > 324 && view.AniPanel.Map[(int)((view.AniPanel.CharacterX - 6)/36)][(int) (Math.floor((view.AniPanel.CharacterY)/36))] == 'a' && view.AniPanel.Map[(int) ((view.AniPanel.CharacterX - 6)/36)][(int) (Math.ceil((view.AniPanel.CharacterY)/36))] == 'a'){
-				double newX = view.AniPanel.CharacterX - 6;
-				view.AniPanel.CharacterX = newX;
-				view.AniPanel.dblViewportX = view.AniPanel.dblViewportX - 6;
-				ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+",left");
+				dblCharacterDefX = -6;
+				PositionChanged = true;
+				//ssm.sendText("position,"+(view.AniPanel.CharacterX-6)+","+view.AniPanel.CharacterY+",left");
 			}
 
 		}else if(evt.getKeyCode() == KeyEvent.VK_RIGHT){
 			view.AniPanel.grabFocus();
 			view.AniPanel.strCharacterDir = "right";
-			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
+			System.out.println("Key pressed RIGHT: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
 			//Checking for right collision
 
 			if(view.AniPanel.CharacterX < view.AniPanel.MapWidth && view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX + 6)/36))][(int) (Math.floor((view.AniPanel.CharacterY)/36))] == 'a' && view.AniPanel.Map[(int) (Math.ceil((view.AniPanel.CharacterX + 6)/36))][(int) (Math.ceil((view.AniPanel.CharacterY)/36))] == 'a'){
-				double newX = view.AniPanel.CharacterX + 6;
-				view.AniPanel.CharacterX = newX;
-				view.AniPanel.dblViewportX = view.AniPanel.dblViewportX + 6;
-				ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+",right");
+				dblCharacterDefX = 6;
+				PositionChanged = true;
+				//ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+",right");
 			}
 	
 		}else{
@@ -162,83 +161,72 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		}
 
 		//sending position to opponent
-		if(PositionChanged){
-			ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY);
+		if(PositionChanged == true){
+			view.AniPanel.CharacterX = view.AniPanel.CharacterX + dblCharacterDefX;
+			view.AniPanel.CharacterY = view.AniPanel.CharacterY + dblCharacterDefY;
+			view.AniPanel.dblViewportX = view.AniPanel.dblViewportX + dblCharacterDefX;
+			//ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY);
 		}
 
 		repaint();
 	}
 	public void keyTyped(KeyEvent evt){
-		//checking if key is typed
-		boolean PositionChanged = false;
-
+		
 		//return focus to animation panel when enter is pressed 
 		if(evt.getSource() == view.ChatTextInput && evt.getKeyCode() == KeyEvent.VK_ENTER){
 			view.AniPanel.requestFocusInWindow();
 			return;
 		}
+		repaint();
+	}
+	
+	
+	public void keyReleased(KeyEvent evt) {
+		
+		//checking if key is released
+		boolean PositionChanged = false;
+		
+		if (evt.getKeyCode() == KeyEvent.VK_SPACE){
+			blnjump = false;
+			intJumpCooldown = 0;
+			dblCharacterDefY = 0;
+			PositionChanged = true;
+			
+		}
 
 		//Character movement with collision detection 
 		
-		
-		if(evt.getKeyCode() == KeyEvent.VK_SPACE){
-			view.AniPanel.grabFocus();
-			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
-			//checking for up collision
-
-			if(view.AniPanel.CharacterY > 0 && intJumpCooldown < 3 && view.AniPanel.Map[(int) (Math.floor((view.AniPanel.CharacterX)/36))][(int) (Math.floor((view.AniPanel.CharacterY - 36)/36))] == 'a' && view.AniPanel.Map[(int) (Math.ceil((view.AniPanel.CharacterX)/36))][(int) (Math.floor((view.AniPanel.CharacterY - 36)/36))] == 'a' && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX)/36))][(int)(Math.ceil((view.AniPanel.CharacterY)/36))] != 'a' && view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX)/36))][(int)(Math.ceil((view.AniPanel.CharacterY)/36))] != 'a'){
-				view.AniPanel.CharacterY = view.AniPanel.CharacterY - 36;
-				blnjump = true;
-				intJumpCooldown++;
-				PositionChanged = true;
-			}
-
-		}else if(evt.getKeyCode() == KeyEvent.VK_LEFT){
+		else if(evt.getKeyCode() == KeyEvent.VK_LEFT){
 			view.AniPanel.grabFocus();
 			view.AniPanel.strCharacterDir = "left";
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
-			view.AniPanel.repaint();
-			
-			//Checking for left collision
+			PositionChanged = true;
 	
-			if(view.AniPanel.CharacterX > 324 && view.AniPanel.Map[(int)((view.AniPanel.CharacterX - 6)/36)][(int) (Math.floor((view.AniPanel.CharacterY)/36))] == 'a' && view.AniPanel.Map[(int) ((view.AniPanel.CharacterX - 6)/36)][(int) (Math.ceil((view.AniPanel.CharacterY)/36))] == 'a'){
-				double newX = view.AniPanel.CharacterX - 6;
-				view.AniPanel.CharacterX = newX;
-				view.AniPanel.dblViewportX = view.AniPanel.dblViewportX - 6;
-				PositionChanged = true;
-			}
+			dblCharacterDefX = 0;
+			ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+",left");
+			
 
 		}else if(evt.getKeyCode() == KeyEvent.VK_RIGHT){
 			view.AniPanel.grabFocus();
 			view.AniPanel.strCharacterDir = "right";
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
-			view.AniPanel.repaint();
-			
-			//Checking for right collision
+			PositionChanged = true;
 
-			if(view.AniPanel.CharacterX < view.AniPanel.MapWidth && view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX + 6)/36))][(int) (Math.floor((view.AniPanel.CharacterY)/36))] == 'a' && view.AniPanel.Map[(int) (Math.ceil((view.AniPanel.CharacterX + 6)/36))][(int) (Math.ceil((view.AniPanel.CharacterY)/36))] == 'a'){
-				double newX = view.AniPanel.CharacterX + 6;
-				view.AniPanel.CharacterX = newX;
-				view.AniPanel.dblViewportX = view.AniPanel.dblViewportX + 6;
-				PositionChanged = true;
-			}
+			dblCharacterDefX = 0;
+			ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+",right");
 	
+		}else{
+			System.out.println("Invalid key");
 		}
 
 		//sending position to opponent
 		if(PositionChanged){
-			ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+",");
+			view.AniPanel.CharacterX = view.AniPanel.CharacterX + dblCharacterDefX;
+			view.AniPanel.CharacterY = view.AniPanel.CharacterY + dblCharacterDefY;
+			view.AniPanel.dblViewportX = view.AniPanel.dblViewportX + dblCharacterDefX;
+			ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY);
 		}
-		repaint();
-	}
-	
-	
-
-	public void keyReleased(KeyEvent evt) {
-		if (evt.getKeyCode() == KeyEvent.VK_SPACE){
-			blnjump = false;
-			intJumpCooldown = 0;
-		}
+		
 		repaint();
     }
 
