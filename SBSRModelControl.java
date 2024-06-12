@@ -131,7 +131,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 
 		}
 		
-		else if(evt.getKeyCode() == KeyEvent.VK_A){
+		else if(evt.getKeyCode() == KeyEvent.VK_LEFT){
 			view.AniPanel.grabFocus();
 			view.AniPanel.strCharacterDir = "left";
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
@@ -144,7 +144,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+",left");
 			}
 
-		}else if(evt.getKeyCode() == KeyEvent.VK_D){
+		}else if(evt.getKeyCode() == KeyEvent.VK_RIGHT){
 			view.AniPanel.grabFocus();
 			view.AniPanel.strCharacterDir = "right";
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
@@ -193,7 +193,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				PositionChanged = true;
 			}
 
-		}else if(evt.getKeyCode() == KeyEvent.VK_A){
+		}else if(evt.getKeyCode() == KeyEvent.VK_LEFT){
 			view.AniPanel.grabFocus();
 			view.AniPanel.strCharacterDir = "left";
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
@@ -208,7 +208,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				PositionChanged = true;
 			}
 
-		}else if(evt.getKeyCode() == KeyEvent.VK_D){
+		}else if(evt.getKeyCode() == KeyEvent.VK_RIGHT){
 			view.AniPanel.grabFocus();
 			view.AniPanel.strCharacterDir = "right";
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
