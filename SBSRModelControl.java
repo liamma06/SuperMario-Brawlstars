@@ -41,7 +41,6 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 
 	//AnimationPanel
 	public Timer theTimer = new Timer(1000/60,this);
-	public int intGravTime = 0;
 	public double dblCharacterDefX = 0;
 	public double dblCharacterDefY = 0;
 
@@ -136,25 +135,15 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			view.AniPanel.grabFocus();
 			view.AniPanel.strCharacterDir = "left";
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
-			//Checking for left collision
-	
-			if(view.AniPanel.CharacterX > 324 && view.AniPanel.Map[(int)((view.AniPanel.CharacterX - 6)/36)][(int) (Math.floor((view.AniPanel.CharacterY)/36))] == 'a' && view.AniPanel.Map[(int) ((view.AniPanel.CharacterX - 6)/36)][(int) (Math.ceil((view.AniPanel.CharacterY)/36))] == 'a'){
-				dblCharacterDefX = -6;
-				PositionChanged = true;
-				//ssm.sendText("position,"+(view.AniPanel.CharacterX-6)+","+view.AniPanel.CharacterY+",left");
-			}
+			dblCharacterDefX = -6;
+			//ssm.sendText("position,"+(view.AniPanel.CharacterX-6)+","+view.AniPanel.CharacterY+",left");
 
 		}else if(evt.getKeyCode() == KeyEvent.VK_RIGHT){
 			view.AniPanel.grabFocus();
 			view.AniPanel.strCharacterDir = "right";
 			System.out.println("Key pressed RIGHT: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
-			//Checking for right collision
-
-			if(view.AniPanel.CharacterX < view.AniPanel.MapWidth && view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX + 6)/36))][(int) (Math.floor((view.AniPanel.CharacterY)/36))] == 'a' && view.AniPanel.Map[(int) (Math.ceil((view.AniPanel.CharacterX + 6)/36))][(int) (Math.ceil((view.AniPanel.CharacterY)/36))] == 'a'){
-				dblCharacterDefX = 6;
-				PositionChanged = true;
-				//ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+",right");
-			}
+			dblCharacterDefX = 6;
+			//ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+",right");
 	
 		}else{
 			System.out.println("Invalid key");
@@ -167,8 +156,6 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			view.AniPanel.dblViewportX = view.AniPanel.dblViewportX + dblCharacterDefX;
 			//ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY);
 		}
-
-		repaint();
 	}
 	public void keyTyped(KeyEvent evt){
 		
@@ -177,7 +164,6 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			view.AniPanel.requestFocusInWindow();
 			return;
 		}
-		repaint();
 	}
 	
 	
@@ -201,7 +187,6 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			view.AniPanel.strCharacterDir = "left";
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
 			PositionChanged = true;
-	
 			dblCharacterDefX = 0;
 			ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+",left");
 			
@@ -211,7 +196,6 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			view.AniPanel.strCharacterDir = "right";
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
 			PositionChanged = true;
-
 			dblCharacterDefX = 0;
 			ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+",right");
 	
@@ -219,15 +203,6 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			System.out.println("Invalid key");
 		}
 
-		//sending position to opponent
-		if(PositionChanged){
-			view.AniPanel.CharacterX = view.AniPanel.CharacterX + dblCharacterDefX;
-			view.AniPanel.CharacterY = view.AniPanel.CharacterY + dblCharacterDefY;
-			view.AniPanel.dblViewportX = view.AniPanel.dblViewportX + dblCharacterDefX;
-			ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY);
-		}
-		
-		repaint();
     }
 
   
@@ -302,6 +277,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			view.ChatArea.append("[ Server ]: "+strUsername + " has connected\n");
 			view.ChatArea.append("[ Server ]: "+intPlayersReady + " players connected\n");
 			checkPlay();
+			theTimer.start();
 		}else if(evt.getSource() == view.Character2Button){
 			if(blnHost){
 				intHostCharacter = 2;
@@ -341,24 +317,38 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		//Timer
 		}else if(evt.getSource() == theTimer){
 			 
-			intGravTime++;
+			if (view.AniPanel.strCharacterDir == "right"){
+				if (view.AniPanel.CharacterX < 3564 && view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX + 6)/36))][(int) (Math.floor((view.AniPanel.CharacterY)/36))] == 'a' && view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX + 6)/36))][(int)(Math.floor((view.AniPanel.CharacterY)/36))] == 'a'){
+					view.AniPanel.CharacterX = view.AniPanel.CharacterX + dblCharacterDefX;
+					view.AniPanel.dblViewportX = view.AniPanel.dblViewportX + dblCharacterDefX;
+				} else if (view.AniPanel.CharacterX >= 3564){
+					System.out.println("**");
+				}
+			} else if (view.AniPanel.strCharacterDir == "left"){
+				if (view.AniPanel.CharacterX > 324 && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX - 6)/36))][(int)(Math.floor((view.AniPanel.CharacterY)/36))] == 'a' && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX - 6)/36))][(int) (Math.floor((view.AniPanel.CharacterY)/36))] == 'a'){
+					view.AniPanel.CharacterX = view.AniPanel.CharacterX + dblCharacterDefX;
+					view.AniPanel.dblViewportX = view.AniPanel.dblViewportX + dblCharacterDefX;
+				}
+			}
 			
-				if(view.AniPanel.Map != null && blnjump == false && (view.AniPanel.CharacterY) < view.AniPanel.MapHeight-3 && view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX)/36))][(int)(Math.ceil((view.AniPanel.CharacterY + 3)/36))] == 'a' && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX)/36))][(int)(Math.ceil((view.AniPanel.CharacterY + 3)/36))] == 'a'){
-					
-					view.AniPanel.CharacterY = view.AniPanel.CharacterY + 3;
-					ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY);
-				}
+			if (this.ssm != null){
+				ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY);
+			}
+			
+			if(view.AniPanel.Map != null && blnjump == false && (view.AniPanel.CharacterY) < view.AniPanel.MapHeight-3 && view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX)/36))][(int)(Math.ceil((view.AniPanel.CharacterY + 3)/36))] == 'a' && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX)/36))][(int)(Math.ceil((view.AniPanel.CharacterY + 3)/36))] == 'a'){
+				view.AniPanel.CharacterY = view.AniPanel.CharacterY + 3;
+				ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY);
+			}
 				
-				//Bypass the border when the character falls out of the map to incite death 
+			//Bypass the border when the character falls out of the map to incite death 
 				
-				if (view.AniPanel.CharacterY >= 684 && view.AniPanel.CharacterY <= 720){
-					view.AniPanel.CharacterY = view.AniPanel.CharacterY + 3;
-					ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY);
-				} else if (view.AniPanel.CharacterY > 720){
-					view.AniPanel.intCharacterHP = 0;
-					
-					//Kill character
-				}
+			if (view.AniPanel.CharacterY >= 684 && view.AniPanel.CharacterY <= 720){
+				view.AniPanel.CharacterY = view.AniPanel.CharacterY + 3;
+				ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY);
+			} else if (view.AniPanel.CharacterY > 720){
+				view.AniPanel.intCharacterHP = 0;
+				//Kill character
+			}
 				
 			repaint();
 			
@@ -443,9 +433,6 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		view.ChatTextInput.addActionListener(this);
 		view.ChatTextInput.addKeyListener(this);
 		view.PlayBackButton.addActionListener(this);
-		
-		//Timer
-		theTimer.start();
 		
 	}
 
