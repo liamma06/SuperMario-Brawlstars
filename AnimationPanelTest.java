@@ -35,6 +35,7 @@ public class AnimationPanelTest extends JPanel{
     public double CharacterX = 324;
     public double CharacterY = 612; 
     public String strCharacterDir = "right";
+    public int intCharacterHP = 3;
 
     //Opponent 
     public double OpponentX = 324;
@@ -94,10 +95,12 @@ public class AnimationPanelTest extends JPanel{
             imgOpponent = imgOpponentLeft;
         }
 
-					
-        g.drawImage(imgCharacter,(int)((CharacterX - dblViewportX)), (int)((CharacterY)), 36, 36, null);
-        
-        g.drawImage(imgOpponent, (int)((OpponentX - dblViewportX)), (int)((OpponentY - dblViewportY)), 36, 36, null);
+		if (intCharacterHP > 0){
+			g.drawImage(imgCharacter,(int)((CharacterX - dblViewportX)), (int)((CharacterY)), 36, 36, null);
+		} else {
+				System.out.println("Character dead");
+		}
+        //g.drawImage(imgOpponent, (int)((OpponentX - dblViewportX)), (int)((OpponentY - dblViewportY)), 36, 36, null);
     
         repaint();
 

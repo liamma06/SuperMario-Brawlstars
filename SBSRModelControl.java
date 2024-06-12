@@ -115,19 +115,23 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		if(evt.getKeyCode() == KeyEvent.VK_SPACE){
 			view.AniPanel.grabFocus();
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
+			intJumpCooldown++;
 			//checking for up collision
 
 			if(view.AniPanel.CharacterY > 0 && intJumpCooldown < 3 && view.AniPanel.Map[(int) (Math.floor((view.AniPanel.CharacterX)/36))][(int) (Math.floor((view.AniPanel.CharacterY - 36)/36))] == 'a' && view.AniPanel.Map[(int) (Math.ceil((view.AniPanel.CharacterX)/36))][(int) (Math.floor((view.AniPanel.CharacterY - 36)/36))] == 'a' && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX)/36))][(int)(Math.floor((view.AniPanel.CharacterY+36)/36))] != 'a' && view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX)/36))][(int)(Math.floor((view.AniPanel.CharacterY+36)/36))] != 'a'){
 				System.out.println("jumped");
 				view.AniPanel.CharacterY = view.AniPanel.CharacterY - 36;
 				blnjump = true;
-				intJumpCooldown++;
 				PositionChanged = true;
+			} else if (intJumpCooldown >= 2){
+					blnjump = false;
 			}
 
 		//If the character is between two blocks, then both blocks underneath/above must be air in order for the character to move vertically.
 
-		}else if(evt.getKeyCode() == KeyEvent.VK_A){
+		}
+		
+		else if(evt.getKeyCode() == KeyEvent.VK_A){
 			view.AniPanel.grabFocus();
 			view.AniPanel.strCharacterDir = "left";
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
@@ -177,7 +181,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		//Character movement with collision detection 
 		
 		
-		if(evt.getKeyCode() == KeyEvent.VK_SPACE ){
+		if(evt.getKeyCode() == KeyEvent.VK_SPACE){
 			view.AniPanel.grabFocus();
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
 			//checking for up collision
@@ -364,6 +368,8 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 					view.AniPanel.CharacterY = view.AniPanel.CharacterY + 3;
 					ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY);
 				} else if (view.AniPanel.CharacterY > 720){
+					view.AniPanel.intCharacterHP = 0;
+					//Kill character
 				}
 				
 			repaint();
