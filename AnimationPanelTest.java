@@ -23,6 +23,7 @@ public class AnimationPanelTest extends JPanel{
     public Image imgStair;
     public Image imgUndergroundDirt;
     public Image imgHardBlock;
+    public Image imgFlag;
 
     //Map
     BufferedReader br;
@@ -91,6 +92,9 @@ public class AnimationPanelTest extends JPanel{
 							break;
                         case 'u':
 							g.drawImage(imgUndergroundDirt, (int)((double)(intCount2)*36-dblViewportX), intCount*36, 36, 36, null);
+							break;
+                        case 'f':
+							g.drawImage(imgFlag, (int)((double)(intCount2)*36-dblViewportX), intCount*36, 36, 36, null);
 							break;
                         }	
 			}
@@ -203,6 +207,7 @@ public class AnimationPanelTest extends JPanel{
             imgStair = ImageIO.read(new File("Stair.png"));
             imgUndergroundDirt = ImageIO.read(new File("UGDirt.png"));
             imgHardBlock = ImageIO.read(new File("HardBlock.png"));
+            imgFlag = ImageIO.read(new File("Flag.png"));
         }catch(IOException e){
             System.out.println("Error loading images");
         }
