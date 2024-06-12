@@ -356,6 +356,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 					ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY);
 				} else if (view.AniPanel.CharacterY > 720){
 					view.AniPanel.intCharacterHP = 0;
+					
 					//Kill character
 				}
 				
@@ -445,6 +446,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		
 		//Timer
 		theTimer.start();
+		
 	}
 
 	//Main program
