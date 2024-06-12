@@ -117,8 +117,8 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
 			//checking for up collision
 
-			if(view.AniPanel.CharacterY > 0 && intJumpCooldown < 3 && view.AniPanel.Map[(int) (Math.floor((view.AniPanel.CharacterX)/36))][(int) (Math.floor((view.AniPanel.CharacterY - 36)/36))] == 'a' && view.AniPanel.Map[(int) (Math.ceil((view.AniPanel.CharacterX)/36))][(int) (Math.floor((view.AniPanel.CharacterY - 36)/36))] == 'a' && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX)/36))][(int)(Math.ceil((view.AniPanel.CharacterY)/36))] != 'a' && view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX)/36))][(int)(Math.ceil((view.AniPanel.CharacterY)/36))] != 'a'){
-				double newY = view.AniPanel.CharacterY - 36;
+			if(view.AniPanel.CharacterY > 0 && intJumpCooldown < 3 && view.AniPanel.Map[(int) (Math.floor((view.AniPanel.CharacterX)/36))][(int) (Math.floor((view.AniPanel.CharacterY - 36)/36))] == 'a' && view.AniPanel.Map[(int) (Math.ceil((view.AniPanel.CharacterX)/36))][(int) (Math.floor((view.AniPanel.CharacterY - 36)/36))] == 'a' && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX)/36))][(int)(Math.floor((view.AniPanel.CharacterY+36)/36))] != 'a' && view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX)/36))][(int)(Math.floor((view.AniPanel.CharacterY+36)/36))] != 'a'){
+				System.out.println("jumped");
 				view.AniPanel.CharacterY = view.AniPanel.CharacterY - 36;
 				blnjump = true;
 				intJumpCooldown++;
@@ -183,7 +183,6 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			//checking for up collision
 
 			if(view.AniPanel.CharacterY > 0 && intJumpCooldown < 3 && view.AniPanel.Map[(int) (Math.floor((view.AniPanel.CharacterX)/36))][(int) (Math.floor((view.AniPanel.CharacterY - 36)/36))] == 'a' && view.AniPanel.Map[(int) (Math.ceil((view.AniPanel.CharacterX)/36))][(int) (Math.floor((view.AniPanel.CharacterY - 36)/36))] == 'a' && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX)/36))][(int)(Math.ceil((view.AniPanel.CharacterY)/36))] != 'a' && view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX)/36))][(int)(Math.ceil((view.AniPanel.CharacterY)/36))] != 'a'){
-				double newY = view.AniPanel.CharacterY - 36;
 				view.AniPanel.CharacterY = view.AniPanel.CharacterY - 36;
 				blnjump = true;
 				intJumpCooldown++;
@@ -353,13 +352,12 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			 
 			intGravTime++;
 			
-				if(view.AniPanel.Map != null && blnjump == false && (view.AniPanel.CharacterY) < view.AniPanel.MapHeight && view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX)/36))][(int) (Math.ceil((view.AniPanel.CharacterY + 6)/36))] == 'a' && view.AniPanel.Map[(int) (Math.floor((view.AniPanel.CharacterX)/36))][(int) (Math.ceil((view.AniPanel.CharacterY + 6)/36))] == 'a'){
+				if(view.AniPanel.Map != null && blnjump == false && (view.AniPanel.CharacterY) < view.AniPanel.MapHeight-3 && view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX)/36))][(int)(Math.ceil((view.AniPanel.CharacterY + 3)/36))] == 'a' && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX)/36))][(int)(Math.ceil((view.AniPanel.CharacterY + 3)/36))] == 'a'){
 					
 					view.AniPanel.CharacterY = view.AniPanel.CharacterY + 3;
 					ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY);
 				}
 			repaint();
-			
 			
 		//Detecting SSM 
 		}else if(evt.getSource() == ssm){
@@ -411,7 +409,6 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			}
 		}
 	}
-
 
 	//Constructor  **************************************************************************************************************
 	public SBSRModelControl(SBSRViewTest view){
