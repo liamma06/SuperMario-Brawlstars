@@ -100,7 +100,7 @@ public class AnimationPanelTest extends JPanel{
 		} else {
 				System.out.println("Character dead");
 		}
-        //g.drawImage(imgOpponent, (int)((OpponentX - dblViewportX)), (int)((OpponentY - dblViewportY)), 36, 36, null);
+        g.drawImage(imgOpponent, (int)((OpponentX - dblViewportX)), (int)((OpponentY - dblViewportY)), 36, 36, null);
     
         repaint();
 
