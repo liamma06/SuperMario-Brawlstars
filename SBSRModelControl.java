@@ -133,7 +133,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
 			//Checking for left collision
 	
-			if(view.AniPanel.CharacterX > 324 && view.AniPanel.Map[(int)((view.AniPanel.CharacterX - 6)/36)][(int) (Math.floor((view.AniPanel.CharacterY)/36))] == 'a' && view.AniPanel.Map[(int) ((view.AniPanel.CharacterX - 6)/36)][(int) (Math.ceil((view.AniPanel.CharacterY)/36))] == 'a'){
+			if(view.AniPanel.CharacterX > 0 && view.AniPanel.Map[(int)((view.AniPanel.CharacterX - 6)/36)][(int) (Math.floor((view.AniPanel.CharacterY)/36))] == 'a' && view.AniPanel.Map[(int) ((view.AniPanel.CharacterX - 6)/36)][(int) (Math.ceil((view.AniPanel.CharacterY)/36))] == 'a'){
 				double newX = view.AniPanel.CharacterX - 6;
 				view.AniPanel.CharacterX = newX;
 				view.AniPanel.dblViewportX = view.AniPanel.dblViewportX - 6;
