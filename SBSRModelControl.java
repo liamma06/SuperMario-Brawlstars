@@ -30,6 +30,10 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 	public int intHostCharacter = 0;
 	public int intClientCharacter = 0;
 
+	//Players entered
+	public boolean blnHostReady = false;
+	public boolean blnClientReady = false;
+
 	//Play
 	public int intPlayersReady = 0;
 
@@ -92,6 +96,8 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 	//check play method
 	public void checkPlay(){
 		if(intPlayersReady == 2){
+			blnHostReady = true;
+			blnClientReady = true;
 			System.out.println("Both players are ready");
 		}
 	}
@@ -103,6 +109,12 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 	
 	//Player movement 
 	public void keyPressed(KeyEvent evt){
+		//checking if both players have entered the game
+		if(!blnHostReady || !blnClientReady){
+			System.out.println("Both players have not entered the game yet");
+			return;
+		}
+
 		//checking if key is pressed
 		boolean PositionChanged = false;
 
@@ -168,6 +180,11 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 	
 	
 	public void keyReleased(KeyEvent evt) {
+		//Checking if both players have entered the game
+		if (!blnHostReady || !blnClientReady) {
+            System.out.println("Both players are not ready yet.");
+            return;
+        }
 		
 		//checking if key is released
 		boolean PositionChanged = false;
