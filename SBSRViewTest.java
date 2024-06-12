@@ -235,12 +235,12 @@ public class SBSRViewTest{
 
         ChatScroll = new JScrollPane(ChatArea);
         ChatScroll.setSize(350,400);
-		ChatScroll.setLocation(25,50);
+		ChatScroll.setLocation(85,50);
 		ChatPanel.add(ChatScroll);
         
         ChatTextInput = new JTextField();
         ChatTextInput.setSize(350,50);
-        ChatTextInput.setLocation(25,450);
+        ChatTextInput.setLocation(85,450);
         ChatPanel.add(ChatTextInput);
 
         //Animation Panel
@@ -251,6 +251,8 @@ public class SBSRViewTest{
         PlaySplitPane.setLeftComponent(AniPanel);
         PlaySplitPane.setRightComponent(ChatPanel);
         PlaySplitPane.setDividerLocation(720);
+		PlaySplitPane.setOneTouchExpandable(false);
+		PlaySplitPane.setDividerSize(0);
         
         theframe.setContentPane(MenuPanel);
         theframe.pack();
