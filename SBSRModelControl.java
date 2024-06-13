@@ -376,7 +376,9 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				}
 			} 
 			view.AniPanel.intEnemyX += 1;
-
+			if(((view.AniPanel.intEnemyX-view.AniPanel.dblViewportX-36)<(view.AniPanel.CharacterX-view.AniPanel.dblViewportX))&&((view.AniPanel.intEnemyX-view.AniPanel.dblViewportX+36)>(view.AniPanel.CharacterX-view.AniPanel.dblViewportX))){
+				view.AniPanel.CharacterY =0;
+			}
 			repaint();
 			
 		//Detecting SSM 
