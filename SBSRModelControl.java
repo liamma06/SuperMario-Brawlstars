@@ -101,8 +101,6 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			System.out.println("Both players are ready");
 		}
 	}
-
-	//********Make it so that can only jump if the block below is NOT air. 
 	
 	
 	
@@ -128,32 +126,30 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 
 		//Character movement with collision detection 
 		if(evt.getKeyCode() == KeyEvent.VK_SPACE){
-			view.AniPanel.grabFocus();
-			System.out.println("Key pressed JUMP: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
-			intJumpCooldown++;
-			//checking for up collision
-
-			dblCharacterDefY = -36;
-			
-			
+			if (view.AniPanel.CharacterX < 3168){
+				view.AniPanel.grabFocus();
+				System.out.println("Key pressed JUMP: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
+				intJumpCooldown++;
+				dblCharacterDefY = -36;
+			}
 		//If the character is between two blocks, then both blocks underneath/above must be air in order for the character to move vertically.
 
-		}
-		
-		else if(evt.getKeyCode() == KeyEvent.VK_LEFT){
-			view.AniPanel.grabFocus();
-			view.AniPanel.strCharacterDir = "left";
-			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
-			dblCharacterDefX = -6;
-			//ssm.sendText("position,"+(view.AniPanel.CharacterX-6)+","+view.AniPanel.CharacterY+",left");
-
+		}else if(evt.getKeyCode() == KeyEvent.VK_LEFT){
+			if (view.AniPanel.CharacterX < 3168){
+				view.AniPanel.grabFocus();
+				view.AniPanel.strCharacterDir = "left";
+				System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
+				dblCharacterDefX = -6;
+				//ssm.sendText("position,"+(view.AniPanel.CharacterX-6)+","+view.AniPanel.CharacterY+",left");
+			}
 		}else if(evt.getKeyCode() == KeyEvent.VK_RIGHT){
-			view.AniPanel.grabFocus();
-			view.AniPanel.strCharacterDir = "right";
-			System.out.println("Key pressed RIGHT: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
-			dblCharacterDefX = 6;
-			//ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+",right");
-	
+			if (view.AniPanel.CharacterX < 3168){
+				view.AniPanel.grabFocus();
+				view.AniPanel.strCharacterDir = "right";
+				System.out.println("Key pressed RIGHT: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
+				dblCharacterDefX = 6;
+				//ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+",right");
+			}
 		}else{
 			System.out.println("Invalid key");
 		}
@@ -192,18 +188,14 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		
 		else if(evt.getKeyCode() == KeyEvent.VK_LEFT){
 			view.AniPanel.grabFocus();
-			view.AniPanel.strCharacterDir = "left";
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
-			PositionChanged = true;
 			dblCharacterDefX = 0;
 			ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+",left");
 			
 
 		}else if(evt.getKeyCode() == KeyEvent.VK_RIGHT){
 			view.AniPanel.grabFocus();
-			view.AniPanel.strCharacterDir = "right";
 			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
-			PositionChanged = true;
 			dblCharacterDefX = 0;
 			ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+",right");
 	
