@@ -72,23 +72,15 @@ public class SBSRViewTest{
 		//Split Pane for game and chat
 		public JSplitPane PlaySplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 
-		//Methods
-
-
-
-
-
-
-
-
+		//Methods ~ See "SBSRModelControl.java"
 
 		//Constructor
 		public SBSRViewTest(){
         
 
-        //Menu options 
-        MenuPanel.setPreferredSize(new Dimension(1280,720));
-        MenuPanel.setLayout(null);
+			//Menu options 
+			MenuPanel.setPreferredSize(new Dimension(1280,720));
+			MenuPanel.setLayout(null);
         
 
 				PlayMenuButton = new JButton("Play");
