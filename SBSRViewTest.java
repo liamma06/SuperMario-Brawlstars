@@ -225,7 +225,7 @@ public class SBSRViewTest{
 		DeathPanel.setPreferredSize(new Dimension(880,720));
 		DeathPanel.setBackground(Color.BLACK);
 
-		DeathLabel = new JLabel("You have died.");
+		DeathLabel = new JLabel("You lost.");
 		DeathLabel.setSize(400,100);
 		DeathLabel.setLocation(50, 50);
 		DeathLabel.setForeground(Color.RED);
@@ -243,7 +243,7 @@ public class SBSRViewTest{
 		WinLabel.setForeground(Color.GREEN);
 		WinLabel.setFont(new Font("Arial", Font.BOLD, 50));
 		WinPanel.add(WinLabel);
-		
+
 
         //PlayScreen Components
         PlayBackButton = new JButton ("Back");
