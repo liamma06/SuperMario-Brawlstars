@@ -72,6 +72,14 @@ public class SBSRViewTest{
 		//Split Pane for game and chat
 		public JSplitPane PlaySplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 
+		//Death panel
+		public JPanel DeathPanel = new JPanel();
+		public JLabel DeathLabel;
+
+		//Win panel
+		public JPanel WinPanel = new JPanel();
+		public JLabel WinLabel;
+
 		//Methods ~ See "SBSRModelControl.java"
 
 		//Constructor
@@ -210,6 +218,31 @@ public class SBSRViewTest{
 
 				//Help Panel
 				HelpPanel.setLayout(null);
+
+
+		//Death screen
+		DeathPanel.setLayout(null);
+		DeathPanel.setPreferredSize(new Dimension(880,720));
+		DeathPanel.setBackground(Color.BLACK);
+
+		DeathLabel = new JLabel("You lost.");
+		DeathLabel.setSize(400,100);
+		DeathLabel.setLocation(50, 50);
+		DeathLabel.setForeground(Color.RED);
+		DeathLabel.setFont(new Font("Arial", Font.BOLD, 50));
+		DeathPanel.add(DeathLabel);
+
+		//Win screen
+		WinPanel.setLayout(null);
+		WinPanel.setPreferredSize(new Dimension(880,720));
+		WinPanel.setBackground(Color.BLACK);
+
+		WinLabel = new JLabel("You have won!");
+		WinLabel.setSize(400,100);
+		WinLabel.setLocation(50, 50);
+		WinLabel.setForeground(Color.GREEN);
+		WinLabel.setFont(new Font("Arial", Font.BOLD, 50));
+		WinPanel.add(WinLabel);
 
 
         //PlayScreen Components

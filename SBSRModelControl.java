@@ -48,6 +48,11 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 	public double dblCharacterDefX = 0;
 	public double dblCharacterDefY = 0;
 
+	//winning logic
+	public boolean hostReachedEnd = false;
+	public boolean clientReachedEnd = false;
+	public boolean gameEnded = false;
+
 
 	//Methods **************************************************************************************************************
 
@@ -93,6 +98,28 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		return strConnectionResult;
 	}
 
+	// method when someone died
+	public void playerDied(String playerUsername){
+		//send message to chat
+		ssm.sendText("server,death,"+playerUsername);
+		view.ChatArea.append("[ Server ]: "+playerUsername + " has died\n");
+		theTimer.stop();
+		view.PlaySplitPane.setLeftComponent(view.DeathPanel);
+		view.PlaySplitPane.setDividerLocation(720);
+		view.theframe.revalidate();	
+	}
+
+	// method when someone reached the end
+	public void playerReachedEnd(String playerUsername){
+		//send message to chat
+		ssm.sendText("server,win,"+playerUsername);
+		view.ChatArea.append("[ Server ]: "+playerUsername + " has reached the end\n");
+		theTimer.stop();
+		view.PlaySplitPane.setLeftComponent(view.WinPanel);
+		view.PlaySplitPane.setDividerLocation(720);
+		view.theframe.revalidate();	
+	}
+
 	//check play method
 	public void checkPlay(){
 		if(intPlayersReady == 2){
@@ -101,9 +128,6 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			System.out.println("Both players are ready");
 		}
 	}
-	
-	
-	
 	
 	//Player movement 
 	public void keyPressed(KeyEvent evt){
@@ -123,9 +147,9 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			return;
 		}
 
-		//Character movement with collision detection 
+		//Character movement 
 		if(evt.getKeyCode() == KeyEvent.VK_SPACE){
-			if (view.AniPanel.dblCharacterX < 3168){
+			if (view.AniPanel.dblCharacterX < 3168 && view.AniPanel.dblCharacterY <=684){
 				view.AniPanel.grabFocus();
 				System.out.println("Key pressed JUMP: ("+view.AniPanel.dblCharacterX+","+view.AniPanel.dblCharacterY+")");
 				intJumpCooldown++;
@@ -137,7 +161,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			if (view.AniPanel.dblCharacterX < 3168){
 				view.AniPanel.grabFocus();
 				view.AniPanel.strCharacterDir = "left";
-				System.out.println("Key pressed: ("+view.AniPanel.dblCharacterX+","+view.AniPanel.dblCharacterY+")");
+				System.out.println("Key pressed LEFT: ("+view.AniPanel.dblCharacterX+","+view.AniPanel.dblCharacterY+")");
 				dblCharacterDefX = -6;
 			}
 		}else if(evt.getKeyCode() == KeyEvent.VK_RIGHT){
@@ -177,11 +201,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			intJumpCooldown = 0;
 			dblCharacterDefY = 0;
 			
-		}
-
-		//Character movement with collision detection 
-		
-		else if(evt.getKeyCode() == KeyEvent.VK_LEFT){
+		}else if(evt.getKeyCode() == KeyEvent.VK_LEFT){
 			view.AniPanel.grabFocus();
 			System.out.println("Key pressed: ("+view.AniPanel.dblCharacterX+","+view.AniPanel.dblCharacterY+")");
 			dblCharacterDefX = 0;
@@ -201,7 +221,6 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
     }
 
   
-
 	//Overridding action listener
 	public void actionPerformed(ActionEvent evt){
 		//Connect menu button
@@ -247,7 +266,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			view.theframe.revalidate();
 			ssm.sendText("character");
 		//Character selection
-		}else if(evt.getSource() == view.Character1Button&&(intPlayersReady<=2)){
+		}else if(evt.getSource() == view.Character1Button){
 			if(blnHost){
 				intHostCharacter = 1;
 				System.out.println("Host Character: Colt");
@@ -272,8 +291,11 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			view.ChatArea.append("[ Server ]: "+strUsername + " has connected\n");
 			view.ChatArea.append("[ Server ]: "+intPlayersReady + " players connected\n");
 			checkPlay();
-			theTimer.start();
-		}else if((evt.getSource() == view.Character2Button)&& intPlayersReady <=2){
+			theTimer.restart();
+			intJumpCooldown = 0;
+			blnjump = false;
+			
+		}else if(evt.getSource() == view.Character2Button){
 			if(blnHost){
 				intHostCharacter = 2;
 				System.out.println("Host Character: Dynamike");
@@ -292,12 +314,14 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 
 			ssm.sendText("connection,"+strUsername);
 
-			intPlayersReady += 1;
+			intPlayersReady++;
 
 			view.ChatArea.append("[ Server ]: "+strUsername + " has connected\n");
 			view.ChatArea.append("[ Server ]: "+intPlayersReady + " players connected\n");
 			checkPlay();
-			theTimer.start();
+			theTimer.restart();
+			intJumpCooldown = 0;
+			blnjump = false;
 			
 		//Text input Chat
 		}else if(evt.getSource() == view.ChatTextInput){
@@ -319,7 +343,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				view.AniPanel.dblCharacterY = view.AniPanel.dblCharacterY + dblCharacterDefY;
 				blnjump = true;
 			} else if (intJumpCooldown > 3){
-					blnjump = false;
+				blnjump = false;
 			}
 			
 			if (this.ssm != null){
@@ -333,13 +357,21 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				
 			//Bypass the border when the character falls out of the map to incite death 
 				
-			if (view.AniPanel.dblCharacterY >= 684 && view.AniPanel.dblCharacterY <= 720){
+			if (view.AniPanel.dblCharacterY >= 684 && view.AniPanel.dblCharacterY < 720){
 				view.AniPanel.dblCharacterY = view.AniPanel.dblCharacterY + 6;
 				ssm.sendText("position,"+view.AniPanel.dblCharacterX+","+view.AniPanel.dblCharacterY);
-			} else if (view.AniPanel.dblCharacterY > 720){
+			} else if (view.AniPanel.dblCharacterY >= 720){
 				view.AniPanel.intCharacterHP = 0;
+				playerDied(strUsername);
 				//Kill character
 			}
+
+			//checking of bottom of pole is reached
+			if(view.AniPanel.dblCharacterX == 3168 && view.AniPanel.dblCharacterY == 612){
+				System.out.println("end is reached");
+				playerReachedEnd(strUsername);
+			}
+
 			if (view.AniPanel.strCharacterDir == "right"){
 				if (view.AniPanel.dblCharacterX < 3168 && view.AniPanel.chrMap[(int)(Math.ceil((view.AniPanel.dblCharacterX + 6)/36))][(int) (Math.floor((view.AniPanel.dblCharacterY)/36))] == 'a' && view.AniPanel.chrMap[(int)(Math.ceil((view.AniPanel.dblCharacterX + 6)/36))][(int)(Math.floor((view.AniPanel.dblCharacterY)/36))] == 'a'){
 					if (blnjump == true){
@@ -377,7 +409,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			} 
 			view.AniPanel.intEnemyX += 1;
 			if(((view.AniPanel.intEnemyX-view.AniPanel.dblViewportX-36)<(view.AniPanel.dblCharacterX-view.AniPanel.dblViewportX))&&((view.AniPanel.intEnemyX-view.AniPanel.dblViewportX+36)>(view.AniPanel.dblCharacterX-view.AniPanel.dblViewportX))){
-				view.AniPanel.dblCharacterY =0;
+				//view.AniPanel.dblCharacterY =0;
 			}
 			repaint();
 			
@@ -391,7 +423,22 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				System.out.println("Host has selected map, character selection");
 			//Getting chat responses
 			}else if(ssmMessage[0].equals("chat")){
-				view.ChatArea.append(ssmMessage[1] + ": " + ssmMessage[2] + "\n");
+				if(ssmMessage[1].equals("server")){
+					view.ChatArea.append("[ Server ]: "+ssmMessage[3] + " has died\n");
+				}else{
+					view.ChatArea.append(ssmMessage[1] + ": " + ssmMessage[2] + "\n");
+				}
+			//getting server responses for player death and win
+			}else if(ssmMessage[0].equals("server")){
+				if(ssmMessage[1].equals("death")){
+					view.ChatArea.append("[ Server ]: "+ssmMessage[2] + " has died\n");
+				}else if(ssmMessage[1].equals("win")){
+					view.ChatArea.append("[ Server ]: "+ssmMessage[2] + " has reached the end\n");
+					theTimer.stop();
+					view.PlaySplitPane.setLeftComponent(view.DeathPanel);
+					view.PlaySplitPane.setDividerLocation(720);
+					view.theframe.revalidate();	
+				}
 			//Getting connection responses
 			}else if(ssmMessage[0].equals("connection")){
 				intPlayersReady += 1;
