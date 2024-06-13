@@ -123,9 +123,9 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			return;
 		}
 
-		//Character movement with collision detection 
+		//Character movement 
 		if(evt.getKeyCode() == KeyEvent.VK_SPACE){
-			if (view.AniPanel.dblCharacterX < 3168){
+			if (view.AniPanel.dblCharacterX < 3168 && view.AniPanel.dblCharacterY <=684){
 				view.AniPanel.grabFocus();
 				System.out.println("Key pressed JUMP: ("+view.AniPanel.dblCharacterX+","+view.AniPanel.dblCharacterY+")");
 				intJumpCooldown++;
@@ -177,11 +177,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			intJumpCooldown = 0;
 			dblCharacterDefY = 0;
 			
-		}
-
-		//Character movement with collision detection 
-		
-		else if(evt.getKeyCode() == KeyEvent.VK_LEFT){
+		}else if(evt.getKeyCode() == KeyEvent.VK_LEFT){
 			view.AniPanel.grabFocus();
 			System.out.println("Key pressed: ("+view.AniPanel.dblCharacterX+","+view.AniPanel.dblCharacterY+")");
 			dblCharacterDefX = 0;
@@ -201,7 +197,6 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
     }
 
   
-
 	//Overridding action listener
 	public void actionPerformed(ActionEvent evt){
 		//Connect menu button
@@ -272,7 +267,10 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			view.ChatArea.append("[ Server ]: "+strUsername + " has connected\n");
 			view.ChatArea.append("[ Server ]: "+intPlayersReady + " players connected\n");
 			checkPlay();
-			theTimer.start();
+			theTimer.restart();
+			intJumpCooldown = 0;
+			blnjump = false;
+			
 		}else if(evt.getSource() == view.Character2Button){
 			if(blnHost){
 				intHostCharacter = 2;
@@ -292,12 +290,14 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 
 			ssm.sendText("connection,"+strUsername);
 
-			intPlayersReady += 1;
+			intPlayersReady++;
 
 			view.ChatArea.append("[ Server ]: "+strUsername + " has connected\n");
 			view.ChatArea.append("[ Server ]: "+intPlayersReady + " players connected\n");
 			checkPlay();
-			theTimer.start();
+			theTimer.restart();
+			intJumpCooldown = 0;
+			blnjump = false;
 			
 		//Text input Chat
 		}else if(evt.getSource() == view.ChatTextInput){
@@ -319,7 +319,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				view.AniPanel.dblCharacterY = view.AniPanel.dblCharacterY + dblCharacterDefY;
 				blnjump = true;
 			} else if (intJumpCooldown > 3){
-					blnjump = false;
+				blnjump = false;
 			}
 			
 			if (this.ssm != null){
@@ -333,10 +333,10 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				
 			//Bypass the border when the character falls out of the map to incite death 
 				
-			if (view.AniPanel.dblCharacterY >= 684 && view.AniPanel.dblCharacterY <= 720){
+			if (view.AniPanel.dblCharacterY >= 684 && view.AniPanel.dblCharacterY < 720){
 				view.AniPanel.dblCharacterY = view.AniPanel.dblCharacterY + 6;
 				ssm.sendText("position,"+view.AniPanel.dblCharacterX+","+view.AniPanel.dblCharacterY);
-			} else if (view.AniPanel.dblCharacterY > 720){
+			} else if (view.AniPanel.dblCharacterY >= 720){
 				view.AniPanel.intCharacterHP = 0;
 				//Kill character
 			}
@@ -377,7 +377,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			} 
 			view.AniPanel.intEnemyX += 1;
 			if(((view.AniPanel.intEnemyX-view.AniPanel.dblViewportX-36)<(view.AniPanel.dblCharacterX-view.AniPanel.dblViewportX))&&((view.AniPanel.intEnemyX-view.AniPanel.dblViewportX+36)>(view.AniPanel.dblCharacterX-view.AniPanel.dblViewportX))){
-				view.AniPanel.dblCharacterY =0;
+				//view.AniPanel.dblCharacterY =0;
 			}
 			repaint();
 			
