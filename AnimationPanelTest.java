@@ -110,6 +110,8 @@ public class AnimationPanelTest extends JPanel{
 				imgCharacter = imgCharacterRight;
 		} else if (strCharacterDir.equals("left")){
 				imgCharacter = imgCharacterLeft;
+		} else {
+				imgCharacter = imgCharacterRight;
 		}
 
         //load and draw opponent image according to which way he/she is facing.
@@ -122,13 +124,12 @@ public class AnimationPanelTest extends JPanel{
 		if (intCharacterHP > 0){
 			g.drawImage(imgCharacter,(int)((CharacterX - dblViewportX)), (int)((CharacterY)), 36, 36, null);
 		} else {
-				System.out.println("Character dead");
+			System.out.println("Character dead");
 		}
         g.drawImage(imgOpponent, (int)((OpponentX - dblViewportX)), (int)((OpponentY - dblViewportY)), 36, 36, null);
         g.drawImage(imgEnemy, (int)(intEnemyX-dblViewportX), (int)(intEnemyY), null);
         repaint();
 
-        
     }
     
     //load Map layout from csv file
@@ -201,8 +202,6 @@ public class AnimationPanelTest extends JPanel{
     public AnimationPanelTest(){
         //load images  
         try{
-            //imgOpponent = ImageIO.read(new File("Shelly.png"));
-            //imgCharacter = ImageIO.read(new File("Dynamike.png"));
             imgDirt = ImageIO.read(new File("Dirt.png"));
             imgGrass = ImageIO.read(new File("Grass.png"));
             imgBrick = ImageIO.read(new File("Brick.png"));

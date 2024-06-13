@@ -116,7 +116,6 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		*/
 
 		//checking if key is pressed
-		boolean PositionChanged = false;
 
 		//return focus to animation panel when enter is pressed 
 		if(evt.getSource() == view.ChatTextInput && evt.getKeyCode() == KeyEvent.VK_ENTER){
@@ -140,7 +139,6 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				view.AniPanel.strCharacterDir = "left";
 				System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
 				dblCharacterDefX = -6;
-				//ssm.sendText("position,"+(view.AniPanel.CharacterX-6)+","+view.AniPanel.CharacterY+",left");
 			}
 		}else if(evt.getKeyCode() == KeyEvent.VK_RIGHT){
 			if (view.AniPanel.CharacterX < 3168){
@@ -148,7 +146,6 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				view.AniPanel.strCharacterDir = "right";
 				System.out.println("Key pressed RIGHT: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
 				dblCharacterDefX = 6;
-				//ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+",right");
 			}
 		}else{
 			System.out.println("Invalid key");
@@ -174,13 +171,11 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
         */
 		
 		//checking if key is released
-		boolean PositionChanged = false;
 		
 		if (evt.getKeyCode() == KeyEvent.VK_SPACE){
 			blnjump = false;
 			intJumpCooldown = 0;
 			dblCharacterDefY = 0;
-			PositionChanged = true;
 			
 		}
 
@@ -301,8 +296,9 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 
 			view.ChatArea.append("[ Server ]: "+strUsername + " has connected\n");
 			view.ChatArea.append("[ Server ]: "+intPlayersReady + " players connected\n");
-			
 			checkPlay();
+			theTimer.start();
+			
 		//Text input Chat
 		}else if(evt.getSource() == view.ChatTextInput){
 			if(blnHost == true){
@@ -360,7 +356,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 						view.AniPanel.CharacterX = view.AniPanel.CharacterX + dblCharacterDefX;
 						view.AniPanel.dblViewportX = view.AniPanel.dblViewportX + dblCharacterDefX;
 					}
-				}
+				} 
 			} else if (view.AniPanel.strCharacterDir == "left"){
 				if (view.AniPanel.CharacterX > 324 && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX - 6)/36))][(int)(Math.floor((view.AniPanel.CharacterY)/36))] == 'a' && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX - 6)/36))][(int) (Math.floor((view.AniPanel.CharacterY)/36))] == 'a'){
 					if (blnjump == true){
@@ -379,7 +375,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 					}
 				}
 			} 
-			view.AniPanel.intEnemyX +=1;
+			view.AniPanel.intEnemyX += 1;
 
 			repaint();
 			
