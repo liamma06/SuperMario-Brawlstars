@@ -212,7 +212,7 @@ public class AnimationPanelTest extends JPanel{
             imgUndergroundDirt = ImageIO.read(new File("UGDirt.png"));
             imgHardBlock = ImageIO.read(new File("HardBlock.png"));
             imgFlag = ImageIO.read(new File("Flag.png"));
-            imgEnemy = ImageIO.read(new File("testenemy.png"));
+            imgEnemy = ImageIO.read(new File("Enemy.png"));
         }catch(IOException e){
             System.out.println("Error loading images");
         }
