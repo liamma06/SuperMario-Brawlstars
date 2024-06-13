@@ -109,11 +109,13 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 	
 	//Player movement 
 	public void keyPressed(KeyEvent evt){
+		/*
 		//checking if both players have entered the game
 		if(!blnHostReady || !blnClientReady){
 			System.out.println("Both players have not entered the game yet");
 			return;
 		}
+		*/
 
 		//checking if key is pressed
 		boolean PositionChanged = false;
@@ -131,14 +133,9 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			intJumpCooldown++;
 			//checking for up collision
 
-			if(view.AniPanel.CharacterY >= 36 && intJumpCooldown < 3 && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX)/36))][(int) (Math.floor((view.AniPanel.CharacterY - 36)/36))] == 'a' && view.AniPanel.Map[(int) (Math.ceil((view.AniPanel.CharacterX)/36))][(int) (Math.floor((view.AniPanel.CharacterY - 36)/36))] == 'a' && (view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX)/36))][(int)(Math.floor((view.AniPanel.CharacterY+36)/36))] != 'a' || view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX)/36))][(int)(Math.floor((view.AniPanel.CharacterY+36)/36))] != 'a')){
-				dblCharacterDefY = -36;
-				blnjump = true;
-				PositionChanged = true;
-			} else if (intJumpCooldown >= 2){
-					blnjump = false;
-			}
-
+			dblCharacterDefY = -36;
+			
+			
 		//If the character is between two blocks, then both blocks underneath/above must be air in order for the character to move vertically.
 
 		}
@@ -160,14 +157,6 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		}else{
 			System.out.println("Invalid key");
 		}
-
-		//sending position to opponent
-		if(PositionChanged == true){
-			view.AniPanel.CharacterX = view.AniPanel.CharacterX + dblCharacterDefX;
-			view.AniPanel.CharacterY = view.AniPanel.CharacterY + dblCharacterDefY;
-			view.AniPanel.dblViewportX = view.AniPanel.dblViewportX + dblCharacterDefX;
-			//ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY);
-		}
 	}
 	public void keyTyped(KeyEvent evt){
 		
@@ -180,11 +169,13 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 	
 	
 	public void keyReleased(KeyEvent evt) {
+		/*
 		//Checking if both players have entered the game
 		if (!blnHostReady || !blnClientReady) {
             System.out.println("Both players are not ready yet.");
             return;
         }
+        */
 		
 		//checking if key is released
 		boolean PositionChanged = false;
@@ -333,40 +324,70 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			}
 		//Timer
 		}else if(evt.getSource() == theTimer){
-			 
-			if (view.AniPanel.strCharacterDir == "right"){
-				if (view.AniPanel.CharacterX < 3564 && view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX + 6)/36))][(int) (Math.floor((view.AniPanel.CharacterY)/36))] == 'a' && view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX + 6)/36))][(int)(Math.floor((view.AniPanel.CharacterY)/36))] == 'a'){
-					view.AniPanel.CharacterX = view.AniPanel.CharacterX + dblCharacterDefX;
-					view.AniPanel.dblViewportX = view.AniPanel.dblViewportX + dblCharacterDefX;
-				} else if (view.AniPanel.CharacterX >= 3564){
-					System.out.println("**");
-				}
-			} else if (view.AniPanel.strCharacterDir == "left"){
-				if (view.AniPanel.CharacterX > 324 && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX - 6)/36))][(int)(Math.floor((view.AniPanel.CharacterY)/36))] == 'a' && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX - 6)/36))][(int) (Math.floor((view.AniPanel.CharacterY)/36))] == 'a'){
-					view.AniPanel.CharacterX = view.AniPanel.CharacterX + dblCharacterDefX;
-					view.AniPanel.dblViewportX = view.AniPanel.dblViewportX + dblCharacterDefX;
-				}
+			
+			blnjump = false;
+			
+			if(view.AniPanel.CharacterY >= 36 && intJumpCooldown < 3 && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX)/36))][(int) (Math.floor((view.AniPanel.CharacterY - 36)/36))] == 'a' && view.AniPanel.Map[(int) (Math.ceil((view.AniPanel.CharacterX)/36))][(int) (Math.floor((view.AniPanel.CharacterY - 36)/36))] == 'a' && (view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX)/36))][(int)(Math.floor((view.AniPanel.CharacterY+36)/36))] != 'a' || view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX)/36))][(int)(Math.floor((view.AniPanel.CharacterY+36)/36))] != 'a')){
+				view.AniPanel.CharacterY = view.AniPanel.CharacterY + dblCharacterDefY;
+				blnjump = true;
+			} else if (intJumpCooldown >= 2){
+					blnjump = false;
 			}
 			
 			if (this.ssm != null){
 				ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY);
 			}
 			
-			if(view.AniPanel.Map != null && blnjump == false && (view.AniPanel.CharacterY) < view.AniPanel.MapHeight-3 && view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX)/36))][(int)(Math.ceil((view.AniPanel.CharacterY + 3)/36))] == 'a' && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX)/36))][(int)(Math.ceil((view.AniPanel.CharacterY + 3)/36))] == 'a'){
-				view.AniPanel.CharacterY = view.AniPanel.CharacterY + 3;
+			if(view.AniPanel.Map != null && blnjump == false && (view.AniPanel.CharacterY) < view.AniPanel.MapHeight-6 && view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX)/36))][(int)(Math.ceil((view.AniPanel.CharacterY + 6)/36))] == 'a' && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX)/36))][(int)(Math.ceil((view.AniPanel.CharacterY + 6)/36))] == 'a'){
+				view.AniPanel.CharacterY = view.AniPanel.CharacterY + 6;
 				ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY);
 			}
 				
 			//Bypass the border when the character falls out of the map to incite death 
 				
 			if (view.AniPanel.CharacterY >= 684 && view.AniPanel.CharacterY <= 720){
-				view.AniPanel.CharacterY = view.AniPanel.CharacterY + 3;
+				view.AniPanel.CharacterY = view.AniPanel.CharacterY + 6;
 				ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY);
 			} else if (view.AniPanel.CharacterY > 720){
 				view.AniPanel.intCharacterHP = 0;
 				//Kill character
 			}
-				
+			if (view.AniPanel.strCharacterDir == "right"){
+				if (view.AniPanel.CharacterX < 3564 && view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX + 6)/36))][(int) (Math.floor((view.AniPanel.CharacterY)/36))] == 'a' && view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX + 6)/36))][(int)(Math.floor((view.AniPanel.CharacterY)/36))] == 'a'){
+					if (blnjump == true){
+						if (view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX + 6)/36))][(int)(Math.floor((view.AniPanel.CharacterY-6)/36))] == 'a'){
+							view.AniPanel.CharacterX = view.AniPanel.CharacterX + dblCharacterDefX;
+							view.AniPanel.dblViewportX = view.AniPanel.dblViewportX + dblCharacterDefX;
+						}
+					} else if (blnjump != true && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX)/36))][(int)(Math.ceil((view.AniPanel.CharacterY+6)/36))]=='a'){
+						if (view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX + 6)/36))][(int)(Math.ceil((view.AniPanel.CharacterY+6)/36))] == 'a'){
+							view.AniPanel.CharacterX = view.AniPanel.CharacterX + dblCharacterDefX;
+							view.AniPanel.dblViewportX = view.AniPanel.dblViewportX + dblCharacterDefX;
+						}
+					} else {
+						view.AniPanel.CharacterX = view.AniPanel.CharacterX + dblCharacterDefX;
+						view.AniPanel.dblViewportX = view.AniPanel.dblViewportX + dblCharacterDefX;
+					}
+				}
+			} else if (view.AniPanel.strCharacterDir == "left"){
+				if (view.AniPanel.CharacterX > 324 && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX - 6)/36))][(int)(Math.floor((view.AniPanel.CharacterY)/36))] == 'a' && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX - 6)/36))][(int) (Math.floor((view.AniPanel.CharacterY)/36))] == 'a'){
+					if (blnjump == true){
+						if (view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX - 6)/36))][(int)(Math.floor((view.AniPanel.CharacterY-6)/36))] == 'a'){
+							view.AniPanel.CharacterX = view.AniPanel.CharacterX + dblCharacterDefX;
+							view.AniPanel.dblViewportX = view.AniPanel.dblViewportX + dblCharacterDefX;
+						} 
+					} else if (blnjump != true && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX)/36))][(int)(Math.ceil((view.AniPanel.CharacterY+6)/36))]=='a'){
+						if (view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX - 6)/36))][(int)(Math.ceil((view.AniPanel.CharacterY+6)/36))] == 'a'){
+							view.AniPanel.CharacterX = view.AniPanel.CharacterX + dblCharacterDefX;
+							view.AniPanel.dblViewportX = view.AniPanel.dblViewportX + dblCharacterDefX;
+						}
+					} else {
+						view.AniPanel.CharacterX = view.AniPanel.CharacterX + dblCharacterDefX;
+						view.AniPanel.dblViewportX = view.AniPanel.dblViewportX + dblCharacterDefX;
+					}
+				}
+			} 
+			
 			repaint();
 			
 		//Detecting SSM 
