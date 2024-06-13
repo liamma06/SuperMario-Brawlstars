@@ -48,6 +48,11 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 	public double dblCharacterDefX = 0;
 	public double dblCharacterDefY = 0;
 
+	//winning logic
+	public boolean hostReachedEnd = false;
+	public boolean clientReachedEnd = false;
+	public boolean gameEnded = false;
+
 
 	//Methods **************************************************************************************************************
 
@@ -93,6 +98,24 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		return strConnectionResult;
 	}
 
+	// method when someone died
+	public void playerDied(String playerUsername){
+		//send message to chat
+		ssm.sendText("server,death,"+playerUsername);
+		view.ChatArea.append("[ Server ]: "+playerUsername + " has died\n");
+		theTimer.stop();
+		view.PlaySplitPane.setLeftComponent(view.DeathPanel);
+		view.PlaySplitPane.setDividerLocation(720);
+		view.theframe.revalidate();	
+	}
+
+	// method when someone reached the end
+	public void playerReachedEnd(String playerUsername){
+		//send message to chat
+		ssm.sendText("server,win,"+playerUsername);
+		view.ChatArea.append("[ Server ]: "+playerUsername + " has reached the end\n");
+	}
+
 	//check play method
 	public void checkPlay(){
 		if(intPlayersReady == 2){
@@ -101,9 +124,6 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			System.out.println("Both players are ready");
 		}
 	}
-	
-	
-	
 	
 	//Player movement 
 	public void keyPressed(KeyEvent evt){
@@ -338,6 +358,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				ssm.sendText("position,"+view.AniPanel.dblCharacterX+","+view.AniPanel.dblCharacterY);
 			} else if (view.AniPanel.dblCharacterY >= 720){
 				view.AniPanel.intCharacterHP = 0;
+				playerDied(strUsername);
 				//Kill character
 			}
 			if (view.AniPanel.strCharacterDir == "right"){
@@ -391,7 +412,18 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				System.out.println("Host has selected map, character selection");
 			//Getting chat responses
 			}else if(ssmMessage[0].equals("chat")){
-				view.ChatArea.append(ssmMessage[1] + ": " + ssmMessage[2] + "\n");
+				if(ssmMessage[1].equals("server")){
+					view.ChatArea.append("[ Server ]: "+ssmMessage[3] + " has died\n");
+				}else{
+					view.ChatArea.append(ssmMessage[1] + ": " + ssmMessage[2] + "\n");
+				}
+			//getting server responses for player death and win
+			}else if(ssmMessage[0].equals("server")){
+				if(ssmMessage[1].equals("death")){
+					view.ChatArea.append("[ Server ]: "+ssmMessage[2] + " has died\n");
+				}else if(ssmMessage[1].equals("win")){
+					view.ChatArea.append("[ Server ]: "+ssmMessage[2] + " has reached the end\n");
+				}
 			//Getting connection responses
 			}else if(ssmMessage[0].equals("connection")){
 				intPlayersReady += 1;
