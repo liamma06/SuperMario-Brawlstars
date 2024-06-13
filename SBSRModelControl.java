@@ -379,6 +379,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 					}
 				}
 			} 
+			view.AniPanel.intEnemyX +=3;
 			
 			repaint();
 			
