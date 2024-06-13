@@ -35,11 +35,10 @@ public class AnimationPanelTest extends JPanel{
 
     //area that is being viewed
     public double dblViewportX = 0;
-    public double dblViewportY = 0;
 
     //Character
-    public double CharacterX = 324;
-    public double CharacterY = 612; 
+    public double CharacterX;
+    public double CharacterY; 
     public String strCharacterDir = "right";
     public int intCharacterHP = 3;
 
@@ -126,7 +125,7 @@ public class AnimationPanelTest extends JPanel{
 		} else {
 			System.out.println("Character dead");
 		}
-        g.drawImage(imgOpponent, (int)((OpponentX - dblViewportX)), (int)((OpponentY - dblViewportY)), 36, 36, null);
+        g.drawImage(imgOpponent, (int)((OpponentX - dblViewportX)), (int)((OpponentY)), 36, 36, null);
         g.drawImage(imgEnemy, (int)(intEnemyX-dblViewportX), (int)(intEnemyY), null);
         repaint();
 
@@ -139,9 +138,17 @@ public class AnimationPanelTest extends JPanel{
             if(intMapSelection == 1){
                 br = new BufferedReader(new FileReader("Map1.csv"));
                 System.out.println("map 1 shown");
+                CharacterX = 324;
+				CharacterY = 612; 
+				dblViewportX = 0;
+				intCharacterHP = 3;
             }else if(intMapSelection == 2){
                 br = new BufferedReader(new FileReader("Map2.csv"));
                 System.out.println("map 2 shown");
+                CharacterX = 324;
+                CharacterY = 0;
+                dblViewportX = 0;
+                intCharacterHP = 3;
             }
             String line;
             int row = 0;
