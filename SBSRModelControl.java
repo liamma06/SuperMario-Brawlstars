@@ -123,9 +123,9 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			return;
 		}
 
-		//Character movement 
+		//Character movement with collision detection 
 		if(evt.getKeyCode() == KeyEvent.VK_SPACE){
-			if (view.AniPanel.dblCharacterX < 3168 && view.AniPanel.dblCharacterY <=684){
+			if (view.AniPanel.dblCharacterX < 3168){
 				view.AniPanel.grabFocus();
 				System.out.println("Key pressed JUMP: ("+view.AniPanel.dblCharacterX+","+view.AniPanel.dblCharacterY+")");
 				intJumpCooldown++;
@@ -177,7 +177,11 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			intJumpCooldown = 0;
 			dblCharacterDefY = 0;
 			
-		}else if(evt.getKeyCode() == KeyEvent.VK_LEFT){
+		}
+
+		//Character movement with collision detection 
+		
+		else if(evt.getKeyCode() == KeyEvent.VK_LEFT){
 			view.AniPanel.grabFocus();
 			System.out.println("Key pressed: ("+view.AniPanel.dblCharacterX+","+view.AniPanel.dblCharacterY+")");
 			dblCharacterDefX = 0;
@@ -197,6 +201,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
     }
 
   
+
 	//Overridding action listener
 	public void actionPerformed(ActionEvent evt){
 		//Connect menu button
@@ -242,7 +247,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			view.theframe.revalidate();
 			ssm.sendText("character");
 		//Character selection
-		}else if(evt.getSource() == view.Character1Button){
+		}else if(evt.getSource() == view.Character1Button&&(intPlayersReady<=2)){
 			if(blnHost){
 				intHostCharacter = 1;
 				System.out.println("Host Character: Colt");
@@ -267,11 +272,8 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			view.ChatArea.append("[ Server ]: "+strUsername + " has connected\n");
 			view.ChatArea.append("[ Server ]: "+intPlayersReady + " players connected\n");
 			checkPlay();
-			theTimer.restart();
-			intJumpCooldown = 0;
-			blnjump = false;
-			
-		}else if(evt.getSource() == view.Character2Button){
+			theTimer.start();
+		}else if((evt.getSource() == view.Character2Button)&& intPlayersReady <=2){
 			if(blnHost){
 				intHostCharacter = 2;
 				System.out.println("Host Character: Dynamike");
@@ -290,14 +292,12 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 
 			ssm.sendText("connection,"+strUsername);
 
-			intPlayersReady++;
+			intPlayersReady += 1;
 
 			view.ChatArea.append("[ Server ]: "+strUsername + " has connected\n");
 			view.ChatArea.append("[ Server ]: "+intPlayersReady + " players connected\n");
 			checkPlay();
-			theTimer.restart();
-			intJumpCooldown = 0;
-			blnjump = false;
+			theTimer.start();
 			
 		//Text input Chat
 		}else if(evt.getSource() == view.ChatTextInput){
@@ -319,7 +319,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				view.AniPanel.dblCharacterY = view.AniPanel.dblCharacterY + dblCharacterDefY;
 				blnjump = true;
 			} else if (intJumpCooldown > 3){
-				blnjump = false;
+					blnjump = false;
 			}
 			
 			if (this.ssm != null){
@@ -333,10 +333,10 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				
 			//Bypass the border when the character falls out of the map to incite death 
 				
-			if (view.AniPanel.dblCharacterY >= 684 && view.AniPanel.dblCharacterY < 720){
+			if (view.AniPanel.dblCharacterY >= 684 && view.AniPanel.dblCharacterY <= 720){
 				view.AniPanel.dblCharacterY = view.AniPanel.dblCharacterY + 6;
 				ssm.sendText("position,"+view.AniPanel.dblCharacterX+","+view.AniPanel.dblCharacterY);
-			} else if (view.AniPanel.dblCharacterY >= 720){
+			} else if (view.AniPanel.dblCharacterY > 720){
 				view.AniPanel.intCharacterHP = 0;
 				//Kill character
 			}
@@ -377,7 +377,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			} 
 			view.AniPanel.intEnemyX += 1;
 			if(((view.AniPanel.intEnemyX-view.AniPanel.dblViewportX-36)<(view.AniPanel.dblCharacterX-view.AniPanel.dblViewportX))&&((view.AniPanel.intEnemyX-view.AniPanel.dblViewportX+36)>(view.AniPanel.dblCharacterX-view.AniPanel.dblViewportX))){
-				//view.AniPanel.dblCharacterY =0;
+				view.AniPanel.dblCharacterY =0;
 			}
 			repaint();
 			
