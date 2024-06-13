@@ -161,7 +161,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			if (view.AniPanel.dblCharacterX < 3168){
 				view.AniPanel.grabFocus();
 				view.AniPanel.strCharacterDir = "left";
-				System.out.println("Key pressed: ("+view.AniPanel.dblCharacterX+","+view.AniPanel.dblCharacterY+")");
+				System.out.println("Key pressed LEFT: ("+view.AniPanel.dblCharacterX+","+view.AniPanel.dblCharacterY+")");
 				dblCharacterDefX = -6;
 			}
 		}else if(evt.getKeyCode() == KeyEvent.VK_RIGHT){
