@@ -280,7 +280,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			
 			ssm.sendText("connection,"+strUsername);
 
-			intPlayersReady += 1;
+			intPlayersReady++;
 
 			view.ChatArea.append("[ Server ]: "+strUsername + " has connected\n");
 			view.ChatArea.append("[ Server ]: "+intPlayersReady + " players connected\n");
@@ -327,10 +327,10 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			
 			blnjump = false;
 			
-			if(view.AniPanel.CharacterY >= 36 && intJumpCooldown < 3 && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX)/36))][(int) (Math.floor((view.AniPanel.CharacterY - 36)/36))] == 'a' && view.AniPanel.Map[(int) (Math.ceil((view.AniPanel.CharacterX)/36))][(int) (Math.floor((view.AniPanel.CharacterY - 36)/36))] == 'a' && (view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX)/36))][(int)(Math.floor((view.AniPanel.CharacterY+36)/36))] != 'a' || view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX)/36))][(int)(Math.floor((view.AniPanel.CharacterY+36)/36))] != 'a')){
+			if(view.AniPanel.CharacterY >= 36 && intJumpCooldown < 4 && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX)/36))][(int) (Math.floor((view.AniPanel.CharacterY - 36)/36))] == 'a' && view.AniPanel.Map[(int) (Math.ceil((view.AniPanel.CharacterX)/36))][(int) (Math.floor((view.AniPanel.CharacterY - 36)/36))] == 'a' && (view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX)/36))][(int)(Math.floor((view.AniPanel.CharacterY+36)/36))] != 'a' || view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX)/36))][(int)(Math.floor((view.AniPanel.CharacterY+36)/36))] != 'a')){
 				view.AniPanel.CharacterY = view.AniPanel.CharacterY + dblCharacterDefY;
 				blnjump = true;
-			} else if (intJumpCooldown >= 2){
+			} else if (intJumpCooldown > 3){
 					blnjump = false;
 			}
 			
@@ -353,7 +353,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				//Kill character
 			}
 			if (view.AniPanel.strCharacterDir == "right"){
-				if (view.AniPanel.CharacterX < 3564 && view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX + 6)/36))][(int) (Math.floor((view.AniPanel.CharacterY)/36))] == 'a' && view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX + 6)/36))][(int)(Math.floor((view.AniPanel.CharacterY)/36))] == 'a'){
+				if (view.AniPanel.CharacterX < 3168 && view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX + 6)/36))][(int) (Math.floor((view.AniPanel.CharacterY)/36))] == 'a' && view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX + 6)/36))][(int)(Math.floor((view.AniPanel.CharacterY)/36))] == 'a'){
 					if (blnjump == true){
 						if (view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX + 6)/36))][(int)(Math.floor((view.AniPanel.CharacterY-6)/36))] == 'a'){
 							view.AniPanel.CharacterX = view.AniPanel.CharacterX + dblCharacterDefX;
