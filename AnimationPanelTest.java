@@ -29,22 +29,22 @@ public class AnimationPanelTest extends JPanel{
     //Map
     BufferedReader br;
     public char[][] Map;//2D array to hold map layout
-    public int MapWidth = 3600;
-    public int MapHeight =720;
-    public int TilePixels = 36;
+    public int intMapWidth = 3600;
+    public int intMapHeight =720;
+    public int intTilePixels = 36;
 
     //area that is being viewed
     public double dblViewportX = 0;
 
     //Character
-    public double CharacterX;
-    public double CharacterY; 
+    public double dblCharacterX;
+    public double dblCharacterY; 
     public String strCharacterDir = "right";
     public int intCharacterHP = 3;
 
     //Opponent 
-    public double OpponentX = 324;
-    public double OpponentY = 612;
+    public double dblOpponentX = 324;
+    public double dblOpponentY = 612;
     public String strOpponentDir = "right";
   
     public int intEnemyX=100;
@@ -121,11 +121,11 @@ public class AnimationPanelTest extends JPanel{
         }
 
 		if (intCharacterHP > 0){
-			g.drawImage(imgCharacter,(int)((CharacterX - dblViewportX)), (int)((CharacterY)), 36, 36, null);
+			g.drawImage(imgCharacter,(int)((dblCharacterX - dblViewportX)), (int)((dblCharacterY)), 36, 36, null);
 		} else {
 			System.out.println("Character dead");
 		}
-        g.drawImage(imgOpponent, (int)((OpponentX - dblViewportX)), (int)((OpponentY)), 36, 36, null);
+        g.drawImage(imgOpponent, (int)((dblOpponentX - dblViewportX)), (int)((dblOpponentY)), 36, 36, null);
         g.drawImage(imgEnemy, (int)(intEnemyX-dblViewportX), (int)(intEnemyY), null);
         repaint();
 
@@ -133,20 +133,20 @@ public class AnimationPanelTest extends JPanel{
     
     //load Map layout from csv file
     public void loadMap(int intMapSelection){
-        Map = new char[MapWidth][MapHeight];
+        Map = new char[intMapWidth][intMapHeight];
         try{
             if(intMapSelection == 1){
                 br = new BufferedReader(new FileReader("Map1.csv"));
                 System.out.println("map 1 shown");
-                CharacterX = 324;
-				CharacterY = 612; 
+                dblCharacterX = 324;
+				dblCharacterY = 612; 
 				dblViewportX = 0;
 				intCharacterHP = 3;
             }else if(intMapSelection == 2){
                 br = new BufferedReader(new FileReader("Map2.csv"));
                 System.out.println("map 2 shown");
-                CharacterX = 324;
-                CharacterY = 0;
+                dblCharacterX = 324;
+                dblCharacterY = 0;
                 dblViewportX = 0;
                 intCharacterHP = 3;
             }

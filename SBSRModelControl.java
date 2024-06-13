@@ -125,26 +125,26 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 
 		//Character movement with collision detection 
 		if(evt.getKeyCode() == KeyEvent.VK_SPACE){
-			if (view.AniPanel.CharacterX < 3168){
+			if (view.AniPanel.dblCharacterX < 3168){
 				view.AniPanel.grabFocus();
-				System.out.println("Key pressed JUMP: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
+				System.out.println("Key pressed JUMP: ("+view.AniPanel.dblCharacterX+","+view.AniPanel.dblCharacterY+")");
 				intJumpCooldown++;
 				dblCharacterDefY = -36;
 			}
 		//If the character is between two blocks, then both blocks underneath/above must be air in order for the character to move vertically.
 
 		}else if(evt.getKeyCode() == KeyEvent.VK_LEFT){
-			if (view.AniPanel.CharacterX < 3168){
+			if (view.AniPanel.dblCharacterX < 3168){
 				view.AniPanel.grabFocus();
 				view.AniPanel.strCharacterDir = "left";
-				System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
+				System.out.println("Key pressed: ("+view.AniPanel.dblCharacterX+","+view.AniPanel.dblCharacterY+")");
 				dblCharacterDefX = -6;
 			}
 		}else if(evt.getKeyCode() == KeyEvent.VK_RIGHT){
-			if (view.AniPanel.CharacterX < 3168){
+			if (view.AniPanel.dblCharacterX < 3168){
 				view.AniPanel.grabFocus();
 				view.AniPanel.strCharacterDir = "right";
-				System.out.println("Key pressed RIGHT: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
+				System.out.println("Key pressed RIGHT: ("+view.AniPanel.dblCharacterX+","+view.AniPanel.dblCharacterY+")");
 				dblCharacterDefX = 6;
 			}
 		}else{
@@ -183,16 +183,16 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		
 		else if(evt.getKeyCode() == KeyEvent.VK_LEFT){
 			view.AniPanel.grabFocus();
-			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
+			System.out.println("Key pressed: ("+view.AniPanel.dblCharacterX+","+view.AniPanel.dblCharacterY+")");
 			dblCharacterDefX = 0;
-			ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+",left");
+			ssm.sendText("position,"+view.AniPanel.dblCharacterX+","+view.AniPanel.dblCharacterY+",left");
 			
 
 		}else if(evt.getKeyCode() == KeyEvent.VK_RIGHT){
 			view.AniPanel.grabFocus();
-			System.out.println("Key pressed: ("+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+")");
+			System.out.println("Key pressed: ("+view.AniPanel.dblCharacterX+","+view.AniPanel.dblCharacterY+")");
 			dblCharacterDefX = 0;
-			ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY+",right");
+			ssm.sendText("position,"+view.AniPanel.dblCharacterX+","+view.AniPanel.dblCharacterY+",right");
 	
 		}else{
 			System.out.println("Invalid key");
@@ -315,69 +315,69 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			
 			blnjump = false;
 			
-			if(view.AniPanel.CharacterY >= 36 && intJumpCooldown < 4 && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX)/36))][(int) (Math.floor((view.AniPanel.CharacterY - 36)/36))] == 'a' && view.AniPanel.Map[(int) (Math.ceil((view.AniPanel.CharacterX)/36))][(int) (Math.floor((view.AniPanel.CharacterY - 36)/36))] == 'a' && (view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX)/36))][(int)(Math.floor((view.AniPanel.CharacterY+36)/36))] != 'a' || view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX)/36))][(int)(Math.floor((view.AniPanel.CharacterY+36)/36))] != 'a')){
-				view.AniPanel.CharacterY = view.AniPanel.CharacterY + dblCharacterDefY;
+			if(view.AniPanel.dblCharacterY >= 36 && intJumpCooldown < 4 && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.dblCharacterX)/36))][(int) (Math.floor((view.AniPanel.dblCharacterY - 36)/36))] == 'a' && view.AniPanel.Map[(int) (Math.ceil((view.AniPanel.dblCharacterX)/36))][(int) (Math.floor((view.AniPanel.dblCharacterY - 36)/36))] == 'a' && (view.AniPanel.Map[(int)(Math.floor((view.AniPanel.dblCharacterX)/36))][(int)(Math.floor((view.AniPanel.dblCharacterY+36)/36))] != 'a' || view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.dblCharacterX)/36))][(int)(Math.floor((view.AniPanel.dblCharacterY+36)/36))] != 'a')){
+				view.AniPanel.dblCharacterY = view.AniPanel.dblCharacterY + dblCharacterDefY;
 				blnjump = true;
 			} else if (intJumpCooldown > 3){
 					blnjump = false;
 			}
 			
 			if (this.ssm != null){
-				ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY);
+				ssm.sendText("position,"+view.AniPanel.dblCharacterX+","+view.AniPanel.dblCharacterY);
 			}
 			
-			if(view.AniPanel.Map != null && blnjump == false && (view.AniPanel.CharacterY) < view.AniPanel.MapHeight-6 && view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX)/36))][(int)(Math.ceil((view.AniPanel.CharacterY + 6)/36))] == 'a' && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX)/36))][(int)(Math.ceil((view.AniPanel.CharacterY + 6)/36))] == 'a'){
-				view.AniPanel.CharacterY = view.AniPanel.CharacterY + 6;
-				ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY);
+			if(view.AniPanel.Map != null && blnjump == false && (view.AniPanel.dblCharacterY) < view.AniPanel.intMapHeight-6 && view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.dblCharacterX)/36))][(int)(Math.ceil((view.AniPanel.dblCharacterY + 6)/36))] == 'a' && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.dblCharacterX)/36))][(int)(Math.ceil((view.AniPanel.dblCharacterY + 6)/36))] == 'a'){
+				view.AniPanel.dblCharacterY = view.AniPanel.dblCharacterY + 6;
+				ssm.sendText("position,"+view.AniPanel.dblCharacterX+","+view.AniPanel.dblCharacterY);
 			}
 				
 			//Bypass the border when the character falls out of the map to incite death 
 				
-			if (view.AniPanel.CharacterY >= 684 && view.AniPanel.CharacterY <= 720){
-				view.AniPanel.CharacterY = view.AniPanel.CharacterY + 6;
-				ssm.sendText("position,"+view.AniPanel.CharacterX+","+view.AniPanel.CharacterY);
-			} else if (view.AniPanel.CharacterY > 720){
+			if (view.AniPanel.dblCharacterY >= 684 && view.AniPanel.dblCharacterY <= 720){
+				view.AniPanel.dblCharacterY = view.AniPanel.dblCharacterY + 6;
+				ssm.sendText("position,"+view.AniPanel.dblCharacterX+","+view.AniPanel.dblCharacterY);
+			} else if (view.AniPanel.dblCharacterY > 720){
 				view.AniPanel.intCharacterHP = 0;
 				//Kill character
 			}
 			if (view.AniPanel.strCharacterDir == "right"){
-				if (view.AniPanel.CharacterX < 3168 && view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX + 6)/36))][(int) (Math.floor((view.AniPanel.CharacterY)/36))] == 'a' && view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX + 6)/36))][(int)(Math.floor((view.AniPanel.CharacterY)/36))] == 'a'){
+				if (view.AniPanel.dblCharacterX < 3168 && view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.dblCharacterX + 6)/36))][(int) (Math.floor((view.AniPanel.dblCharacterY)/36))] == 'a' && view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.dblCharacterX + 6)/36))][(int)(Math.floor((view.AniPanel.dblCharacterY)/36))] == 'a'){
 					if (blnjump == true){
-						if (view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX + 6)/36))][(int)(Math.floor((view.AniPanel.CharacterY-6)/36))] == 'a'){
-							view.AniPanel.CharacterX = view.AniPanel.CharacterX + dblCharacterDefX;
+						if (view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.dblCharacterX + 6)/36))][(int)(Math.floor((view.AniPanel.dblCharacterY-6)/36))] == 'a'){
+							view.AniPanel.dblCharacterX = view.AniPanel.dblCharacterX + dblCharacterDefX;
 							view.AniPanel.dblViewportX = view.AniPanel.dblViewportX + dblCharacterDefX;
 						}
-					} else if (blnjump != true && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX)/36))][(int)(Math.ceil((view.AniPanel.CharacterY+6)/36))]=='a'){
-						if (view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.CharacterX + 6)/36))][(int)(Math.ceil((view.AniPanel.CharacterY+6)/36))] == 'a'){
-							view.AniPanel.CharacterX = view.AniPanel.CharacterX + dblCharacterDefX;
+					} else if (blnjump != true && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.dblCharacterX)/36))][(int)(Math.ceil((view.AniPanel.dblCharacterY+6)/36))]=='a'){
+						if (view.AniPanel.Map[(int)(Math.ceil((view.AniPanel.dblCharacterX + 6)/36))][(int)(Math.ceil((view.AniPanel.dblCharacterY+6)/36))] == 'a'){
+							view.AniPanel.dblCharacterX = view.AniPanel.dblCharacterX + dblCharacterDefX;
 							view.AniPanel.dblViewportX = view.AniPanel.dblViewportX + dblCharacterDefX;
 						}
 					} else {
-						view.AniPanel.CharacterX = view.AniPanel.CharacterX + dblCharacterDefX;
+						view.AniPanel.dblCharacterX = view.AniPanel.dblCharacterX + dblCharacterDefX;
 						view.AniPanel.dblViewportX = view.AniPanel.dblViewportX + dblCharacterDefX;
 					}
 				} 
 			} else if (view.AniPanel.strCharacterDir == "left"){
-				if (view.AniPanel.CharacterX > 324 && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX - 6)/36))][(int)(Math.floor((view.AniPanel.CharacterY)/36))] == 'a' && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX - 6)/36))][(int) (Math.floor((view.AniPanel.CharacterY)/36))] == 'a'){
+				if (view.AniPanel.dblCharacterX > 324 && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.dblCharacterX - 6)/36))][(int)(Math.floor((view.AniPanel.dblCharacterY)/36))] == 'a' && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.dblCharacterX - 6)/36))][(int) (Math.floor((view.AniPanel.dblCharacterY)/36))] == 'a'){
 					if (blnjump == true){
-						if (view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX - 6)/36))][(int)(Math.floor((view.AniPanel.CharacterY-6)/36))] == 'a'){
-							view.AniPanel.CharacterX = view.AniPanel.CharacterX + dblCharacterDefX;
+						if (view.AniPanel.Map[(int)(Math.floor((view.AniPanel.dblCharacterX - 6)/36))][(int)(Math.floor((view.AniPanel.dblCharacterY-6)/36))] == 'a'){
+							view.AniPanel.dblCharacterX = view.AniPanel.dblCharacterX + dblCharacterDefX;
 							view.AniPanel.dblViewportX = view.AniPanel.dblViewportX + dblCharacterDefX;
 						} 
-					} else if (blnjump != true && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX)/36))][(int)(Math.ceil((view.AniPanel.CharacterY+6)/36))]=='a'){
-						if (view.AniPanel.Map[(int)(Math.floor((view.AniPanel.CharacterX - 6)/36))][(int)(Math.ceil((view.AniPanel.CharacterY+6)/36))] == 'a'){
-							view.AniPanel.CharacterX = view.AniPanel.CharacterX + dblCharacterDefX;
+					} else if (blnjump != true && view.AniPanel.Map[(int)(Math.floor((view.AniPanel.dblCharacterX)/36))][(int)(Math.ceil((view.AniPanel.dblCharacterY+6)/36))]=='a'){
+						if (view.AniPanel.Map[(int)(Math.floor((view.AniPanel.dblCharacterX - 6)/36))][(int)(Math.ceil((view.AniPanel.dblCharacterY+6)/36))] == 'a'){
+							view.AniPanel.dblCharacterX = view.AniPanel.dblCharacterX + dblCharacterDefX;
 							view.AniPanel.dblViewportX = view.AniPanel.dblViewportX + dblCharacterDefX;
 						}
 					} else {
-						view.AniPanel.CharacterX = view.AniPanel.CharacterX + dblCharacterDefX;
+						view.AniPanel.dblCharacterX = view.AniPanel.dblCharacterX + dblCharacterDefX;
 						view.AniPanel.dblViewportX = view.AniPanel.dblViewportX + dblCharacterDefX;
 					}
 				}
 			} 
 			view.AniPanel.intEnemyX += 1;
-			if(((view.AniPanel.intEnemyX-view.AniPanel.dblViewportX-36)<(view.AniPanel.CharacterX-view.AniPanel.dblViewportX))&&((view.AniPanel.intEnemyX-view.AniPanel.dblViewportX+36)>(view.AniPanel.CharacterX-view.AniPanel.dblViewportX))){
-				view.AniPanel.CharacterY =0;
+			if(((view.AniPanel.intEnemyX-view.AniPanel.dblViewportX-36)<(view.AniPanel.dblCharacterX-view.AniPanel.dblViewportX))&&((view.AniPanel.intEnemyX-view.AniPanel.dblViewportX+36)>(view.AniPanel.dblCharacterX-view.AniPanel.dblViewportX))){
+				view.AniPanel.dblCharacterY =0;
 			}
 			repaint();
 			
@@ -400,8 +400,8 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				checkPlay();
 			//Getting position updates of the opponent
 			}else if(ssmMessage[0].equals("position")){
-				view.AniPanel.OpponentX = Double.parseDouble(ssmMessage[1]);
-				view.AniPanel.OpponentY = Double.parseDouble(ssmMessage[2]);
+				view.AniPanel.dblOpponentX = Double.parseDouble(ssmMessage[1]);
+				view.AniPanel.dblOpponentY = Double.parseDouble(ssmMessage[2]);
 				if(ssmMessage.length == 4){
 					view.AniPanel.strOpponentDir = ssmMessage[3];
 				}else{
