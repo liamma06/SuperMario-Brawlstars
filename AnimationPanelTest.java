@@ -48,8 +48,8 @@ public class AnimationPanelTest extends JPanel{
     public double OpponentY = 612;
     public String strOpponentDir = "right";
   
-    public int intEnemyX=10;
-    public int intEnemyY=10;
+    public int intEnemyX=100;
+    public int intEnemyY=600;
 
 	public int intMapX = 0;
 	public int intMapY = 0;
@@ -125,7 +125,7 @@ public class AnimationPanelTest extends JPanel{
 				System.out.println("Character dead");
 		}
         g.drawImage(imgOpponent, (int)((OpponentX - dblViewportX)), (int)((OpponentY - dblViewportY)), 36, 36, null);
-        g.drawImage(imgEnemy, intEnemyX, intEnemyY, null);
+        g.drawImage(imgEnemy, (int)(intEnemyX-dblViewportX), (int)(intEnemyY), null);
         repaint();
 
         
