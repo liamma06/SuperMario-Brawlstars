@@ -153,7 +153,7 @@ public class AnimationPanelTest extends JPanel{
                 br = new BufferedReader(new FileReader("Map2.csv"));
                 System.out.println("map 2 shown");
                 dblCharacterX = 324;
-                dblCharacterY = 200;
+                dblCharacterY = 252;
                 dblViewportX = 0;
                 intCharacterHP = 3;
                 try{
@@ -204,7 +204,7 @@ public class AnimationPanelTest extends JPanel{
             if(intOpponentSelection == 2){
                 imgOpponentRight = ImageIO.read(new File("Dynamike.png"));
                 imgOpponentLeft = ImageIO.read(new File("Dynamike(Left).png"));
-                System.out.println("loaded dinamike");
+                System.out.println("loaded dynamike");
             }else if(intOpponentSelection == 1){
                 imgOpponentRight = ImageIO.read(new File("Colt.png"));
                 imgOpponentLeft = ImageIO.read(new File("Colt(Left).png"));
