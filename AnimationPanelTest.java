@@ -25,6 +25,7 @@ public class AnimationPanelTest extends JPanel{
     public Image imgHardBlock;
     public Image imgFlag;
     public Image imgEnemy;
+    public Image imgTerrain;
 
     //Map
     BufferedReader br;
@@ -60,6 +61,7 @@ public class AnimationPanelTest extends JPanel{
     public void paintComponent(Graphics g){
         super.paintComponent(g);
 		
+		g.drawImage(imgTerrain,(int)(0-dblViewportX), 0, 3600, 720, null);
 		
 		for (int intCount = 0; intCount < 20; intCount++){
 			for (int intCount2 = 0; intCount2 < 100; intCount2++){
@@ -142,13 +144,23 @@ public class AnimationPanelTest extends JPanel{
 				dblCharacterY = 612; 
 				dblViewportX = 0;
 				intCharacterHP = 3;
+				try{
+					imgTerrain = ImageIO.read(new File("Map1Terrain.png"));
+				} catch (IOException e){
+					System.out.println("Error loading map terrain.");
+				}
             }else if(intMapSelection == 2){
                 br = new BufferedReader(new FileReader("Map2.csv"));
                 System.out.println("map 2 shown");
                 dblCharacterX = 324;
-                dblCharacterY = 0;
+                dblCharacterY = 200;
                 dblViewportX = 0;
                 intCharacterHP = 3;
+                try{
+					imgTerrain = ImageIO.read(new File("Map2Terrain.png"));
+                } catch (IOException e){
+					System.out.println("Error loading map terrain.");
+				}
             }
             String line;
             int row = 0;
