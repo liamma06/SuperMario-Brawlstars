@@ -28,7 +28,7 @@ public class AnimationPanelTest extends JPanel{
 
     //Map
     BufferedReader br;
-    public char[][] Map;//2D array to hold map layout
+    public char[][] chrMap;//2D array to hold map layout
     public int intMapWidth = 3600;
     public int intMapHeight =720;
     public int intTilePixels = 36;
@@ -67,7 +67,7 @@ public class AnimationPanelTest extends JPanel{
 					
 					g.drawImage(imgAir, (int)((double)(intCount2)*36-dblViewportX), intCount*36, 36, 36, null);
 					
-					switch(Map[intCount2][intCount]){
+					switch(chrMap[intCount2][intCount]){
 						//Grass
 						case 'g':
 							g.drawImage(imgGrass, (int)((double)(intCount2)*36-dblViewportX), intCount*36, 36, 36, null);
@@ -133,7 +133,7 @@ public class AnimationPanelTest extends JPanel{
     
     //load Map layout from csv file
     public void loadMap(int intMapSelection){
-        Map = new char[intMapWidth][intMapHeight];
+        chrMap = new char[intMapWidth][intMapHeight];
         try{
             if(intMapSelection == 1){
                 br = new BufferedReader(new FileReader("Map1.csv"));
@@ -155,7 +155,7 @@ public class AnimationPanelTest extends JPanel{
             while((line = br.readLine()) != null){
                 String[] parts = line.split(",");
                 for(int col = 0; col < parts.length; col++){
-                    Map[col][row] = parts[col].charAt(0);
+                    chrMap[col][row] = parts[col].charAt(0);
                 }
                 row++;
             }
