@@ -24,7 +24,6 @@ public class AnimationPanelTest extends JPanel{
     public Image imgUndergroundDirt;
     public Image imgHardBlock;
     public Image imgFlag;
-    public Image imgEnemy;
     public Image imgTerrain;
 
     //Map
@@ -48,8 +47,6 @@ public class AnimationPanelTest extends JPanel{
     public double dblOpponentY = 612;
     public String strOpponentDir = "right";
   
-    public int intEnemyX=100;
-    public int intEnemyY=600;
 
 	public int intMapX = 0;
 	public int intMapY = 0;
@@ -128,7 +125,7 @@ public class AnimationPanelTest extends JPanel{
 			System.out.println("Character dead");
 		}
         g.drawImage(imgOpponent, (int)((dblOpponentX - dblViewportX)), (int)((dblOpponentY)), 36, 36, null);
-        g.drawImage(imgEnemy, (int)(intEnemyX-dblViewportX), (int)(intEnemyY), null);
+       
         repaint();
 
     }
@@ -230,7 +227,7 @@ public class AnimationPanelTest extends JPanel{
             imgUndergroundDirt = ImageIO.read(new File("UGDirt.png"));
             imgHardBlock = ImageIO.read(new File("HardBlock.png"));
             imgFlag = ImageIO.read(new File("Flag.png"));
-            imgEnemy = ImageIO.read(new File("Enemy.png"));
+            
         }catch(IOException e){
             System.out.println("Error loading images");
         }
