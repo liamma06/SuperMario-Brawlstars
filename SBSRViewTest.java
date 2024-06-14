@@ -146,79 +146,79 @@ public class SBSRViewTest{
 		portField.setFont(new Font("Arial", Font.PLAIN, 40));
 		ConnectPanel.add(portField);
 
-				ConnectButton = new JButton("Connect");
-				ConnectButton.setSize(300,100);
-				ConnectButton.setLocation(490, 500);
-				ConnectButton.setFont(new Font("Arial", Font.BOLD, 30));
-				ConnectPanel.add(ConnectButton);
+		ConnectButton = new JButton("Connect");
+		ConnectButton.setSize(300,100);
+		ConnectButton.setLocation(490, 500);
+		ConnectButton.setFont(new Font("Arial", Font.BOLD, 30));
+		ConnectPanel.add(ConnectButton);
 
-				ConnectionStatusLabel = new JLabel("");
-				ConnectionStatusLabel.setSize(400,100);
-				ConnectionStatusLabel.setLocation(850,20);
-				ConnectionStatusLabel.setFont(new Font("Arial", Font.PLAIN, 20));
-				ConnectPanel.add(ConnectionStatusLabel);
+		ConnectionStatusLabel = new JLabel("");
+		ConnectionStatusLabel.setSize(400,100);
+		ConnectionStatusLabel.setLocation(850,20);
+		ConnectionStatusLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+		ConnectPanel.add(ConnectionStatusLabel);
 
-				BackConnectButton = new JButton("Back");
-				BackConnectButton.setSize(200,75);
-				BackConnectButton.setLocation(50,550);
-				ConnectPanel.add(BackConnectButton);
+		BackConnectButton = new JButton("Back");
+		BackConnectButton.setSize(200,75);
+		BackConnectButton.setLocation(50,550);
+		ConnectPanel.add(BackConnectButton);
 
-				//Map Selection Panel
-				MapPanel.setLayout(null);
+		//Map Selection Panel
+		MapPanel.setLayout(null);
 
-				Map1Label = new JLabel("Map 1");
-				Map1Label.setSize(200,50);
-				Map1Label.setLocation(300,75);
-				Map1Label.setFont(new Font("Arial",Font.BOLD,30));
-				MapPanel.add(Map1Label);
+		Map1Label = new JLabel("Map 1");
+		Map1Label.setSize(200,50);
+		Map1Label.setLocation(300,75);
+		Map1Label.setFont(new Font("Arial",Font.BOLD,30));
+		MapPanel.add(Map1Label);
 
-				Map2Label = new JLabel("Map 2");
-				Map2Label.setSize(200,50);
-				Map2Label.setLocation(880,75);
-				Map2Label.setFont(new Font("Arial",Font.BOLD,30));
-				MapPanel.add(Map2Label);
+		Map2Label = new JLabel("Map 2");
+		Map2Label.setSize(200,50);
+		Map2Label.setLocation(880,75);
+		Map2Label.setFont(new Font("Arial",Font.BOLD,30));
+		MapPanel.add(Map2Label);
 
-				Map1Button = new JButton("Select");
-				Map1Button.setSize(200,50);
-				Map1Button.setLocation(250,550);
-				Map1Button.setFont(new Font("Arial",Font.PLAIN,20));
-				MapPanel.add(Map1Button);
+		Map1Button = new JButton("Select");
+		Map1Button.setSize(200,50);
+		Map1Button.setLocation(250,550);
+		Map1Button.setFont(new Font("Arial",Font.PLAIN,20));
+		MapPanel.add(Map1Button);
 
-				Map2Button = new JButton("Select");
-				Map2Button.setSize(200,50);
-				Map2Button.setLocation(830,550);
-				Map2Button.setFont(new Font("Arial",Font.PLAIN,20));
-				MapPanel.add(Map2Button);
+		Map2Button = new JButton("Select");
+		Map2Button.setSize(200,50);
+		Map2Button.setLocation(830,550);
+		Map2Button.setFont(new Font("Arial",Font.PLAIN,20));
+		MapPanel.add(Map2Button);
 
-				//Character Selection Panel 
-				CharacterPanel.setLayout(null);
+		//Character Selection Panel 
+		CharacterPanel.setLayout(null);
 
-				Character1Label = new JLabel("Colt");
-				Character1Label.setSize(200,50);
-				Character1Label.setLocation(300,75);
-				Character1Label.setFont(new Font("Arial",Font.BOLD,30));
-				CharacterPanel.add(Character1Label);
+		Character1Label = new JLabel("Colt");
+		Character1Label.setSize(200,50);
+		Character1Label.setLocation(300,75);
+		Character1Label.setFont(new Font("Arial",Font.BOLD,30));
+		CharacterPanel.add(Character1Label);
 
-				Character2Label = new JLabel("Dynamike");
-				Character2Label.setSize(200,50);
-				Character2Label.setLocation(880,75);
-				Character2Label.setFont(new Font("Arial",Font.BOLD,30));
-				CharacterPanel.add(Character2Label);
+		Character2Label = new JLabel("Dynamike");
+		Character2Label.setSize(200,50);
+		Character2Label.setLocation(880,75);
+		Character2Label.setFont(new Font("Arial",Font.BOLD,30));
+		CharacterPanel.add(Character2Label);
 
-				Character1Button = new JButton("Select");
-				Character1Button.setSize(200,50);
-				Character1Button.setLocation(250,550);
-				Character1Button.setFont(new Font("Arial",Font.PLAIN,20));
-				CharacterPanel.add(Character1Button);
+		Character1Button = new JButton("Select");
+		Character1Button.setSize(200,50);
+		Character1Button.setLocation(250,550);
+		Character1Button.setFont(new Font("Arial",Font.PLAIN,20));
+		CharacterPanel.add(Character1Button);
 
-				Character2Button = new JButton("Select");
-				Character2Button.setSize(200,50);
-				Character2Button.setLocation(830,550);
-				Character2Button.setFont(new Font("Arial",Font.PLAIN,20));
-				CharacterPanel.add(Character2Button);
+		Character2Button = new JButton("Select");
+		Character2Button.setSize(200,50);
+		Character2Button.setLocation(830,550);
+		Character2Button.setFont(new Font("Arial",Font.PLAIN,20));
+		CharacterPanel.add(Character2Button);
 
-				//Help Panel
-				HelpPanel.setLayout(null);
+		//Help Panel
+		HelpPanel.setLayout(null);
 
 
 		//Death screen
@@ -270,6 +270,11 @@ public class SBSRViewTest{
         ChatPanel.add(ChatTextInput);
         
         RaceTimerLabel = new JLabel();
+        RaceTimerLabel.setSize(170, 70);
+        RaceTimerLabel.setLocation(680, 0);
+        RaceTimerLabel.setForeground(Color.WHITE);
+        RaceTimerLabel.setFont(new Font("Arial", Font.PLAIN, 30));
+        ChatPanel.add(RaceTimerLabel);
         
 
         //Animation Panel
