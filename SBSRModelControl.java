@@ -14,16 +14,27 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 	//Properties **************************************************************************************************************
 
 	//Connection
+	/**Tells user things like host/client status and errors in the connection process when connect buton is pressed */
 	public String strConnectionResult;
+	/**The name the host enters in connection process*/
 	public String strHostUsername;
+	/**The name the client enters in connection process */
 	public String strClientUsername;
+	/**The IP of the computer */
 	public String strIp;
+	/**Port of the computer */
 	public String strPort;
+	/**The entered username */
 	public String strUsername;
+	/**The result of the connection method */
 	public String strResult;
+	/**Used to see who is host for extra privileges */
 	public boolean blnHost = false;
+	/**Used to see if jumping or not */
 	public boolean blnjump = false;
+	/**Used to count the number of players */
 	public int intNumPlayers = 0;
+	/**Cooldown for jump */
 	public int intJumpCooldown = 0;
 	public int intEndY = 0;
 
@@ -152,7 +163,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		}
 
 		//Character movement 
-		if(evt.getKeyCode() == KeyEvent.VK_SPACE){
+		if(evt.getKeyCode() == KeyEvent.VK_UP){
 			if (view.AniPanel.dblCharacterX < 3168 && view.AniPanel.dblCharacterY <=684){
 				view.AniPanel.grabFocus();
 				System.out.println("Key pressed JUMP: ("+view.AniPanel.dblCharacterX+","+view.AniPanel.dblCharacterY+")");
@@ -200,7 +211,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		
 		//checking if key is released
 		
-		if (evt.getKeyCode() == KeyEvent.VK_SPACE){
+		if (evt.getKeyCode() == KeyEvent.VK_UP){
 			blnjump = false;
 			intJumpCooldown = 0;
 			dblCharacterDefY = 0;
@@ -371,7 +382,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			}
 
 			//checking of bottom of pole is reached
-			if((int) view.AniPanel.dblCharacterX == 3168 && (int) view.AniPanel.dblCharacterY == intEndY){
+			if(((int) view.AniPanel.dblCharacterX == 3168 && (int) view.AniPanel.dblCharacterY == 612)||((int) view.AniPanel.dblCharacterX == 3168 && (int) view.AniPanel.dblCharacterY == 348) ){
 				System.out.println("end is reached");
 				playerReachedEnd(strUsername);
 			}
@@ -411,10 +422,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 					}
 				}
 			} 
-			view.AniPanel.intEnemyX += 1;
-			if(((view.AniPanel.intEnemyX-view.AniPanel.dblViewportX-36)<(view.AniPanel.dblCharacterX-view.AniPanel.dblViewportX))&&((view.AniPanel.intEnemyX-view.AniPanel.dblViewportX+36)>(view.AniPanel.dblCharacterX-view.AniPanel.dblViewportX))){
-				//view.AniPanel.dblCharacterY =0;
-			}
+			
 			repaint();
 			
 			
@@ -438,6 +446,15 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				}else{
 					view.ChatArea.append(ssmMessage[1] + ": " + ssmMessage[2] + "\n");
 				}
+			//reseting game for both players
+			}else if(ssmMessage[0].equals("reset")){
+				view.PlaySplitPane.setLeftComponent(view.AniPanel);
+				view.PlaySplitPane.setDividerLocation(720);
+				view.theframe.setContentPane(view.MenuPanel);
+				view.theframe.revalidate();
+
+				view.theframe.setContentPane(view.MenuPanel);
+				view.theframe.revalidate();
 			//getting server responses for player death and win
 			}else if(ssmMessage[0].equals("server")){
 				if(ssmMessage[1].equals("death")){
@@ -476,19 +493,22 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			}
 			
 		} else if (evt.getSource() == view.PlayBackButton){
-			view.PlaySplitPane.setLeftComponent(view.AniPanel);
-			view.PlaySplitPane.setDividerLocation(720);
-
-			view.theframe.setContentPane(view.MenuPanel);
-			view.theframe.revalidate();
-			intPlayersReady--;
 			if (blnHost == true){
+				view.PlaySplitPane.setLeftComponent(view.AniPanel);
+				view.PlaySplitPane.setDividerLocation(720);
+				view.theframe.setContentPane(view.MenuPanel);
+				view.theframe.revalidate();
+
+				ssm.sendText("reset");
+
+				intPlayersReady--;
+
 				ssm.sendText("chat,[ Server ], "+strHostUsername+" left\n");
 				view.ChatArea.append("[ Server ]: "+strHostUsername+" left\n");
-			} else if (blnHost == false){
-				ssm.sendText("chat,[ Server ], "+strClientUsername+" left\n");
-				view.ChatArea.append("[ Server ]: "+strClientUsername+" left\n");
+				
 			}
+
+			
 		}
 	}
 
