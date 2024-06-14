@@ -102,6 +102,8 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 
 	/**Method used to host and connect client to host*/
 	public String connect(String ipField, String portField, String UsernameField){
+
+		//If IP and Port Fields are left blank print connection result
 		if(ipField.equals("") && portField.equals("")){
 			strConnectionResult = "Enter a port number and/or IP Address\n";
 		}else if(ipField.equals("") && !portField.equals("") && UsernameField.equals("")){
@@ -286,10 +288,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		}else if(evt.getSource() == view.BackConnectButton){
 			view.theframe.setContentPane(view.MenuPanel);
 			view.theframe.revalidate();
-		//Help Menu button
-		}else if(evt.getSource() == view.HelpMenuButton){
-			view.theframe.setContentPane(view.HelpPanel);
-		//Connect button
+		
 		}else if(evt.getSource() == view.ConnectButton){
 			strIp = view.ipField.getText();
 			strPort = view.portField.getText();
@@ -323,6 +322,14 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			view.theframe.revalidate();
 			ssm.sendText("character");
 		//Character selection
+		}else if(evt.getSource()==view.HelpMenuButton){
+			view.AniPanel.loadMap(3);
+			ssm.sendText("Map,3");
+			
+
+			view.theframe.setContentPane(view.CharacterPanel);
+			view.theframe.revalidate();
+			ssm.sendText("character");
 		}else if((evt.getSource() == view.Character1Button)){
 			if(blnHost){
 				intHostCharacter = 1;
@@ -572,7 +579,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		view.Map2Button.addActionListener(this);
 
 		//Help page
-		view.HelpMenuButton.addActionListener(this);
+		//view.HelpMenuButton.addActionListener(this);
 
 		//Character page
 		view.Character1Button.addActionListener(this);

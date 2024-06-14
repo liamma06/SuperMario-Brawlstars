@@ -158,6 +158,18 @@ public class AnimationPanelTest extends JPanel{
                 } catch (IOException e){
 					System.out.println("Error loading map terrain.");
 				}
+            }else if(intMapSelection == 3){
+                br = new BufferedReader(new FileReader("Map3.csv"));
+                System.out.println("map 3 shown");
+                dblCharacterX = 324;
+                dblCharacterY = 612;
+                dblViewportX = 0;
+                intCharacterHP = 3;
+                try{
+					imgTerrain = ImageIO.read(new File("Map1Terrain.png"));
+                } catch (IOException e){
+					System.out.println("Error loading map terrain.");
+				}
             }
             String line;
             int row = 0;
