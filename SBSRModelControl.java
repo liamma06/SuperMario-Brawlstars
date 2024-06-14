@@ -36,7 +36,6 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 	public int intNumPlayers = 0;
 	/**Cooldown for jump */
 	public int intJumpCooldown = 0;
-	public int intEndY = 0;
 
 	//Chacter selection
 	public int intHostCharacter = 0;
@@ -271,7 +270,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		}else if (evt.getSource() == view.Map1Button){
 			view.AniPanel.loadMap(1);
 			ssm.sendText("Map,1");
-			intEndY = 612;
+			
 
 			view.theframe.setContentPane(view.CharacterPanel);
 			view.theframe.revalidate();
@@ -279,13 +278,13 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		}else if(evt.getSource() == view.Map2Button){
 			view.AniPanel.loadMap(2);
 			ssm.sendText("Map,2");
-			intEndY = 348;
+			
 
 			view.theframe.setContentPane(view.CharacterPanel);
 			view.theframe.revalidate();
 			ssm.sendText("character");
 		//Character selection
-		}else if((evt.getSource() == view.Character1Button)&&intPlayersReady<2){
+		}else if((evt.getSource() == view.Character1Button)){
 			if(blnHost){
 				intHostCharacter = 1;
 				System.out.println("Host Character: Colt");
@@ -314,7 +313,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			intJumpCooldown = 0;
 			blnjump = false;
 			
-		}else if((evt.getSource() == view.Character2Button)&&intPlayersReady<2){
+		}else if((evt.getSource() == view.Character2Button)){
 			if(blnHost){
 				intHostCharacter = 2;
 				System.out.println("Host Character: Dynamike");
@@ -502,7 +501,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 
 				ssm.sendText("reset");
 
-				intPlayersReady-=2;
+				intPlayersReady--;
 
 				ssm.sendText("chat,[ Server ], "+strHostUsername+" left\n");
 				view.ChatArea.append("[ Server ]: "+strHostUsername+" left\n");
