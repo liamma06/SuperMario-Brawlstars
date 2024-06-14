@@ -86,6 +86,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				System.out.println("Host: "+strHostUsername);
 				strConnectionResult = "(HOST) Your IP:" + ssm.getMyAddress();
 				blnHost = true;
+				view.PlayBackButton.setEnabled(true);
 				intNumPlayers = 1;
 				view.UsernameField.setEnabled(false);
 			}catch(NumberFormatException e){
@@ -102,6 +103,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				System.out.println("Client: " +strClientUsername);
 				strConnectionResult = "(Client) Connected to: " + ipField;
 				blnHost = false;
+				view.PlayBackButton.setEnabled(false);
 				intNumPlayers +=1;
 				view.UsernameField.setEnabled(false);
 			}catch(NumberFormatException e){
@@ -496,7 +498,6 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			}
 			
 		} else if (evt.getSource() == view.PlayBackButton){
-			if (blnHost == true){
 				view.PlaySplitPane.setLeftComponent(view.AniPanel);
 				view.PlaySplitPane.setDividerLocation(720);
 				view.theframe.setContentPane(view.MenuPanel);
@@ -508,8 +509,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 
 				ssm.sendText("chat,[ Server ], "+strHostUsername+" left\n");
 				view.ChatArea.append("[ Server ]: "+strHostUsername+" left\n");
-				
-			}
+			
 
 			
 		}
