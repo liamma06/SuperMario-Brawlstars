@@ -476,7 +476,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		//Detecting Second-Based Signals from Race Timer and Counting them
 		} else if (evt.getSource() == RaceTimer){
 			intRaceTimer++;
-			view.RaceTimerLabel.setText(String.valueOf(intRaceTimer));
+			//view.RaceTimerLabel.setText(String.valueOf(intRaceTimer));
 		
 		//Detecting SSM 
 		}else if(evt.getSource() == ssm){
