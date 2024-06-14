@@ -32,7 +32,9 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 	public boolean blnHost = false;
 	/**Used to see if jumping or not */
 	public boolean blnjump = false;
+	/**Used to count the number of players */
 	public int intNumPlayers = 0;
+	/**Cooldown for jump */
 	public int intJumpCooldown = 0;
 	public int intEndY = 0;
 
@@ -379,7 +381,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			}
 
 			//checking of bottom of pole is reached
-			if(((int) view.AniPanel.dblCharacterX == 3168 && (int) view.AniPanel.dblCharacterY == 612)||((int) view.AniPanel.dblCharacterX == 3168 && (int) view.AniPanel.dblCharacterY == 348)){
+			if((int) view.AniPanel.dblCharacterX == 3168 && (int) view.AniPanel.dblCharacterY == intEndY){
 				System.out.println("end is reached");
 				playerReachedEnd(strUsername);
 			}
@@ -419,10 +421,12 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 					}
 				}
 			} 
-			view.AniPanel.intEnemyX += 1;
+			view.AniPanel.intEnemyX += 6;
 			if(((view.AniPanel.intEnemyX-view.AniPanel.dblViewportX-36)<(view.AniPanel.dblCharacterX-view.AniPanel.dblViewportX))&&((view.AniPanel.intEnemyX-view.AniPanel.dblViewportX+36)>(view.AniPanel.dblCharacterX-view.AniPanel.dblViewportX))){
 				//view.AniPanel.dblCharacterY =0;
+				if(((view.AniPanel.intEnemyY-36)<(view.AniPanel.dblCharacterY))&&((view.AniPanel.intEnemyY+36)>(view.AniPanel.dblCharacterY))){
 				playerDied(strUsername);
+				}
 			}
 			repaint();
 			
@@ -486,13 +490,13 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		} else if (evt.getSource() == view.PlayBackButton){
 			view.PlaySplitPane.setLeftComponent(view.AniPanel);
 			view.PlaySplitPane.setDividerLocation(720);
+			ssm.sendText("reset");
 			view.theframe.setContentPane(view.MenuPanel);
 			view.theframe.revalidate();
 			intPlayersReady--;
 			if (blnHost == true){
 				ssm.sendText("chat,[ Server ], "+strHostUsername+" left\n");
 				view.ChatArea.append("[ Server ]: "+strHostUsername+" left\n");
-				ssm.sendText("reset");
 			} else if (blnHost == false){
 				ssm.sendText("chat,[ Server ], "+strClientUsername+" left\n");
 				view.ChatArea.append("[ Server ]: "+strClientUsername+" left\n");
