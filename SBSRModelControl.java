@@ -25,6 +25,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 	public boolean blnjump = false;
 	public int intNumPlayers = 0;
 	public int intJumpCooldown = 0;
+	public int intEndY = 0;
 
 	//Chacter selection
 	public int intHostCharacter = 0;
@@ -254,6 +255,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		}else if (evt.getSource() == view.Map1Button){
 			view.AniPanel.loadMap(1);
 			ssm.sendText("Map,1");
+			intEndY = 612;
 
 			view.theframe.setContentPane(view.CharacterPanel);
 			view.theframe.revalidate();
@@ -261,6 +263,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		}else if(evt.getSource() == view.Map2Button){
 			view.AniPanel.loadMap(2);
 			ssm.sendText("Map,2");
+			intEndY = 348;
 
 			view.theframe.setContentPane(view.CharacterPanel);
 			view.theframe.revalidate();
@@ -367,7 +370,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			}
 
 			//checking of bottom of pole is reached
-			if((view.AniPanel.dblCharacterX == 3168 && view.AniPanel.dblCharacterY == 612) ||( view.AniPanel.dblCharacterX == 3168 && view.AniPanel.dblCharacterY == 504)){
+			if((int) view.AniPanel.dblCharacterX == 3168 && (int) view.AniPanel.dblCharacterY == intEndY){
 				System.out.println("end is reached");
 				playerReachedEnd(strUsername);
 			}
