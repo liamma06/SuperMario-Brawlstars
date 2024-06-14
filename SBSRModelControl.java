@@ -37,6 +37,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 
 	//Play
 	public int intPlayersReady = 0;
+	public int intRaceTimer = 0;
 
 	//splitting ssm messages -> mode(chat/charcter/play/game/connection),user(host/client),action(message/game input),xcord,ycord
 	String[] ssmMessage;
@@ -46,8 +47,10 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 
 	//AnimationPanel
 	public Timer theTimer = new Timer(1000/60,this);
+	public Timer RaceTimer = new Timer (1000, this);
 	public double dblCharacterDefX = 0;
 	public double dblCharacterDefY = 0;
+	//Timers are assigned ActionListeners with (this). 
 
 	//winning logic
 	public boolean hostReachedEnd = false;
@@ -337,11 +340,9 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				view.ChatArea.append(strClientUsername+": "+view.ChatTextInput.getText()+ "\n");
 				view.ChatTextInput.setText("");
 			}
-		//Timer
+		//Animation Timer
 		}else if(evt.getSource() == theTimer){
-			
 			blnjump = false;
-			
 			if(view.AniPanel.dblCharacterY >= 36 && intJumpCooldown < 4 && view.AniPanel.chrMap[(int)(Math.floor((view.AniPanel.dblCharacterX)/36))][(int) (Math.floor((view.AniPanel.dblCharacterY - 36)/36))] == 'a' && view.AniPanel.chrMap[(int) (Math.ceil((view.AniPanel.dblCharacterX)/36))][(int) (Math.floor((view.AniPanel.dblCharacterY - 36)/36))] == 'a' && (view.AniPanel.chrMap[(int)(Math.floor((view.AniPanel.dblCharacterX)/36))][(int)(Math.floor((view.AniPanel.dblCharacterY+36)/36))] != 'a' || view.AniPanel.chrMap[(int)(Math.ceil((view.AniPanel.dblCharacterX)/36))][(int)(Math.floor((view.AniPanel.dblCharacterY+36)/36))] != 'a')){
 				view.AniPanel.dblCharacterY = view.AniPanel.dblCharacterY + dblCharacterDefY;
 				blnjump = true;
@@ -416,6 +417,12 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			}
 			repaint();
 			
+			
+		//Detecting Second-Based Signals from Race Timer and Counting them
+		} else if (evt.getSource() == RaceTimer){
+			intRaceTimer++;
+			view.RaceTimerLabel.setText(String.valueOf(intRaceTimer));
+		
 		//Detecting SSM 
 		}else if(evt.getSource() == ssm){
 			ssmMessage = ssm.readText().split(",");

@@ -45,6 +45,7 @@ public class SBSRViewTest{
 		public JTextArea ChatArea;
 		public JScrollPane ChatScroll;
 		public JTextField ChatTextInput;
+		public JLabel RaceTimerLabel;
 
 		//Play(game screen)
 
@@ -86,64 +87,64 @@ public class SBSRViewTest{
 		public SBSRViewTest(){
         
 
-			//Menu options 
-			MenuPanel.setPreferredSize(new Dimension(1280,720));
-			MenuPanel.setLayout(null);
+		//Menu options 
+		MenuPanel.setPreferredSize(new Dimension(1280,720));
+		MenuPanel.setLayout(null);
         
 
-				PlayMenuButton = new JButton("Play");
-				PlayMenuButton.setSize(300,60);
-				PlayMenuButton.setLocation(490,400);
-				MenuPanel.add(PlayMenuButton);
+		PlayMenuButton = new JButton("Play");
+		PlayMenuButton.setSize(300,60);
+		PlayMenuButton.setLocation(490,400);
+		MenuPanel.add(PlayMenuButton);
 
-				ConnectMenuButton = new JButton("Connect");
-				ConnectMenuButton.setSize(300,60);
-				ConnectMenuButton.setLocation(490,500);
-				MenuPanel.add(ConnectMenuButton);
+		ConnectMenuButton = new JButton("Connect");
+		ConnectMenuButton.setSize(300,60);
+		ConnectMenuButton.setLocation(490,500);
+		MenuPanel.add(ConnectMenuButton);
 
-				HelpMenuButton = new JButton("Help");
-				HelpMenuButton.setSize(300,60);
-				HelpMenuButton.setLocation(490,600);
-				MenuPanel.add(HelpMenuButton);
+		HelpMenuButton = new JButton("Help");
+		HelpMenuButton.setSize(300,60);
+		HelpMenuButton.setLocation(490,600);
+		MenuPanel.add(HelpMenuButton);
 
-				//ConnectPanel
-				ConnectPanel.setLayout(null);
+		//ConnectPanel
+		ConnectPanel.setLayout(null);
 
-				UsernameLabel = new JLabel("Username:");
-				UsernameLabel.setSize(200,50);
-				UsernameLabel.setLocation(50,50);
-				UsernameLabel.setFont(new Font("Arial", Font.BOLD,30));
-				ConnectPanel.add(UsernameLabel);
+		UsernameLabel = new JLabel("Username:");
+		UsernameLabel.setSize(200,50);
+		UsernameLabel.setLocation(50,50);
+		UsernameLabel.setFont(new Font("Arial", Font.BOLD,30));
+		ConnectPanel.add(UsernameLabel);
 
-				UsernameField = new JTextField();
-				UsernameField.setSize(250,50);
-				UsernameField.setLocation(210,50);
-				UsernameField.setFont(new Font("Arial", Font.PLAIN, 30));
-				ConnectPanel.add(UsernameField);
+		UsernameField = new JTextField();
+		UsernameField.setSize(250,50);
+		UsernameField.setLocation(210,50);
+		UsernameField.setFont(new Font("Arial", Font.PLAIN, 30));
+		ConnectPanel.add(UsernameField);
 
-				IPLabel = new JLabel("IP:");
-				IPLabel.setSize(200,50);
-				IPLabel.setLocation(340,150);
-				IPLabel.setFont(new Font("Arial", Font.BOLD,30));
-				ConnectPanel.add(IPLabel);
+		IPLabel = new JLabel("IP:");
+		IPLabel.setSize(200,50);
+		IPLabel.setLocation(340,150);
+		IPLabel.setFont(new Font("Arial", Font.BOLD,30));
+		ConnectPanel.add(IPLabel);
 
-				ipField = new JTextField();
-				ipField.setSize(500,200);
-				ipField.setLocation(100,200);
-				ipField.setFont(new Font("Arial", Font.PLAIN, 40));
-				ConnectPanel.add(ipField);
+		ipField = new JTextField();
+		ipField.setSize(500,200);
+		ipField.setLocation(100,200);
+		ipField.setFont(new Font("Arial", Font.PLAIN, 40));
+		ConnectPanel.add(ipField);
 
-				PortLabel = new JLabel("Port:");
-				PortLabel.setSize(200,50);
-				PortLabel.setLocation(900,150);
-				PortLabel.setFont(new Font("Arial", Font.BOLD,30));
-				ConnectPanel.add(PortLabel);
+		PortLabel = new JLabel("Port:");
+		PortLabel.setSize(200,50);
+		PortLabel.setLocation(900,150);
+		PortLabel.setFont(new Font("Arial", Font.BOLD,30));
+		ConnectPanel.add(PortLabel);
 
-				portField = new JTextField();
-				portField.setSize(500,200);
-				portField.setLocation(680,200);
-				portField.setFont(new Font("Arial", Font.PLAIN, 40));
-				ConnectPanel.add(portField);
+		portField = new JTextField();
+		portField.setSize(500,200);
+		portField.setLocation(680,200);
+		portField.setFont(new Font("Arial", Font.PLAIN, 40));
+		ConnectPanel.add(portField);
 
 				ConnectButton = new JButton("Connect");
 				ConnectButton.setSize(300,100);
@@ -267,6 +268,9 @@ public class SBSRViewTest{
         ChatTextInput.setSize(350,50);
         ChatTextInput.setLocation(85,450);
         ChatPanel.add(ChatTextInput);
+        
+        RaceTimerLabel = new JLabel();
+        
 
         //Animation Panel
         AniPanel.setPreferredSize(new Dimension(880,720));
