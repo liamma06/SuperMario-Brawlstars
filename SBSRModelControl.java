@@ -379,7 +379,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			}
 
 			//checking of bottom of pole is reached
-			if((int) view.AniPanel.dblCharacterX == 3168 && (int) view.AniPanel.dblCharacterY == intEndY){
+			if(((int) view.AniPanel.dblCharacterX == 3168 && (int) view.AniPanel.dblCharacterY == 612)||((int) view.AniPanel.dblCharacterX == 3168 && (int) view.AniPanel.dblCharacterY == 348)){
 				System.out.println("end is reached");
 				playerReachedEnd(strUsername);
 			}
@@ -486,13 +486,13 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		} else if (evt.getSource() == view.PlayBackButton){
 			view.PlaySplitPane.setLeftComponent(view.AniPanel);
 			view.PlaySplitPane.setDividerLocation(720);
-			ssm.sendText("reset");
 			view.theframe.setContentPane(view.MenuPanel);
 			view.theframe.revalidate();
 			intPlayersReady--;
 			if (blnHost == true){
 				ssm.sendText("chat,[ Server ], "+strHostUsername+" left\n");
 				view.ChatArea.append("[ Server ]: "+strHostUsername+" left\n");
+				ssm.sendText("reset");
 			} else if (blnHost == false){
 				ssm.sendText("chat,[ Server ], "+strClientUsername+" left\n");
 				view.ChatArea.append("[ Server ]: "+strClientUsername+" left\n");
