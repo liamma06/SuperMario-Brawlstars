@@ -422,6 +422,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			view.AniPanel.intEnemyX += 1;
 			if(((view.AniPanel.intEnemyX-view.AniPanel.dblViewportX-36)<(view.AniPanel.dblCharacterX-view.AniPanel.dblViewportX))&&((view.AniPanel.intEnemyX-view.AniPanel.dblViewportX+36)>(view.AniPanel.dblCharacterX-view.AniPanel.dblViewportX))){
 				//view.AniPanel.dblCharacterY =0;
+				playerDied(strUsername);
 			}
 			repaint();
 			
