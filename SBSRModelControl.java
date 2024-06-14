@@ -466,6 +466,9 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			}
 			
 		} else if (evt.getSource() == view.PlayBackButton){
+			view.PlaySplitPane.setLeftComponent(view.AniPanel);
+			view.PlaySplitPane.setDividerLocation(720);
+
 			view.theframe.setContentPane(view.MenuPanel);
 			view.theframe.revalidate();
 			intPlayersReady--;
