@@ -502,7 +502,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 
 				ssm.sendText("reset");
 
-				intPlayersReady--;
+				intPlayersReady-=2;
 
 				ssm.sendText("chat,[ Server ], "+strHostUsername+" left\n");
 				view.ChatArea.append("[ Server ]: "+strHostUsername+" left\n");
