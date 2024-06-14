@@ -141,6 +141,9 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			blnHostReady = true;
 			blnClientReady = true;
 			System.out.println("Both players are ready");
+		}else{
+			blnHostReady = false;
+			blnClientReady = false;
 		}
 	}
 	
