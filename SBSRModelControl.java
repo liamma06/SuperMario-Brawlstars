@@ -449,6 +449,8 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			}else if(ssmMessage[0].equals("reset")){
 				view.PlaySplitPane.setLeftComponent(view.AniPanel);
 				view.PlaySplitPane.setDividerLocation(720);
+				view.theframe.setContentPane(view.MenuPanel);
+				view.theframe.revalidate();
 
 				view.theframe.setContentPane(view.MenuPanel);
 				view.theframe.revalidate();
@@ -490,19 +492,22 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			}
 			
 		} else if (evt.getSource() == view.PlayBackButton){
-			view.PlaySplitPane.setLeftComponent(view.AniPanel);
-			view.PlaySplitPane.setDividerLocation(720);
-			view.theframe.setContentPane(view.MenuPanel);
-			view.theframe.revalidate();
-			intPlayersReady--;
 			if (blnHost == true){
+				view.PlaySplitPane.setLeftComponent(view.AniPanel);
+				view.PlaySplitPane.setDividerLocation(720);
+				view.theframe.setContentPane(view.MenuPanel);
+				view.theframe.revalidate();
+
+				ssm.sendText("reset");
+
+				intPlayersReady--;
+
 				ssm.sendText("chat,[ Server ], "+strHostUsername+" left\n");
 				view.ChatArea.append("[ Server ]: "+strHostUsername+" left\n");
-				ssm.sendText("reset");
-			} else if (blnHost == false){
-				ssm.sendText("chat,[ Server ], "+strClientUsername+" left\n");
-				view.ChatArea.append("[ Server ]: "+strClientUsername+" left\n");
+				
 			}
+
+			
 		}
 	}
 
