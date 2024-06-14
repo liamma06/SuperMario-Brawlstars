@@ -14,14 +14,23 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 	//Properties **************************************************************************************************************
 
 	//Connection
+	/**Tells user things like host/client status and errors in the connection process when connect buton is pressed */
 	public String strConnectionResult;
+	/**The name the host enters in connection process*/
 	public String strHostUsername;
+	/**The name the client enters in connection process */
 	public String strClientUsername;
+	/**The IP of the computer */
 	public String strIp;
+	/**Port of the computer */
 	public String strPort;
+	/**The entered username */
 	public String strUsername;
+	/**The result of the connection method */
 	public String strResult;
+	/**Used to see who is host for extra privileges */
 	public boolean blnHost = false;
+	/**Used to see if jumping or not */
 	public boolean blnjump = false;
 	public int intNumPlayers = 0;
 	public int intJumpCooldown = 0;
