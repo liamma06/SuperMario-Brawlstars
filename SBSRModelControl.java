@@ -370,7 +370,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			}
 
 			//checking of bottom of pole is reached
-			if(((int) view.AniPanel.dblCharacterX == 3168 && (int) view.AniPanel.dblCharacterY == 612)||((int) view.AniPanel.dblCharacterX == 3168 && (int) view.AniPanel.dblCharacterY == 348)){
+			if((int) view.AniPanel.dblCharacterX == 3168 && (int) view.AniPanel.dblCharacterY == intEndY){
 				System.out.println("end is reached");
 				playerReachedEnd(strUsername);
 			}
@@ -471,8 +471,6 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		} else if (evt.getSource() == view.PlayBackButton){
 			view.PlaySplitPane.setLeftComponent(view.AniPanel);
 			view.PlaySplitPane.setDividerLocation(720);
-			theTimer.start();
-			view.ChatArea.setText("");
 
 			view.theframe.setContentPane(view.MenuPanel);
 			view.theframe.revalidate();
