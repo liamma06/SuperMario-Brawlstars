@@ -283,7 +283,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			view.theframe.revalidate();
 			ssm.sendText("character");
 		//Character selection
-		}else if(evt.getSource() == view.Character1Button){
+		}else if((evt.getSource() == view.Character1Button)&&intPlayersReady<=2){
 			if(blnHost){
 				intHostCharacter = 1;
 				System.out.println("Host Character: Colt");
@@ -312,7 +312,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			intJumpCooldown = 0;
 			blnjump = false;
 			
-		}else if(evt.getSource() == view.Character2Button){
+		}else if((evt.getSource() == view.Character2Button)&&intPlayersReady<=2){
 			if(blnHost){
 				intHostCharacter = 2;
 				System.out.println("Host Character: Dynamike");
