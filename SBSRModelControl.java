@@ -431,6 +431,11 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				}else{
 					view.ChatArea.append(ssmMessage[1] + ": " + ssmMessage[2] + "\n");
 				}
+			//reseting game for both players
+			}else if(ssmMessage[0].equals("reset")){
+				view.PlaySplitPane.setLeftComponent(view.AniPanel);
+				view.PlaySplitPane.setDividerLocation(720);
+				view.theframe.revalidate();
 			//getting server responses for player death and win
 			}else if(ssmMessage[0].equals("server")){
 				if(ssmMessage[1].equals("death")){
@@ -471,7 +476,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		} else if (evt.getSource() == view.PlayBackButton){
 			view.PlaySplitPane.setLeftComponent(view.AniPanel);
 			view.PlaySplitPane.setDividerLocation(720);
-
+			ssm.sendText("reset");
 			view.theframe.setContentPane(view.MenuPanel);
 			view.theframe.revalidate();
 			intPlayersReady--;
