@@ -102,7 +102,6 @@ public class AnimationPanelTest extends JPanel{
 			}
 		}
 		
-       
         //Load and draw character image according to which way he/she is facing.
         if (strCharacterDir.equals("right")){
 				imgCharacter = imgCharacterRight;
@@ -127,7 +126,6 @@ public class AnimationPanelTest extends JPanel{
         g.drawImage(imgOpponent, (int)((dblOpponentX - dblViewportX)), (int)((dblOpponentY)), 36, 36, null);
        
         repaint();
-
     }
     
     //load Map layout from csv file
@@ -224,7 +222,6 @@ public class AnimationPanelTest extends JPanel{
         }
         repaint();
     }
-
 
     //Constructor
     public AnimationPanelTest(){

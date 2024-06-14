@@ -429,7 +429,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			}
 
 			//checking of bottom of pole is reached
-			if(((int) view.AniPanel.dblCharacterX == 3168 && (int) view.AniPanel.dblCharacterY == 612)||((int) view.AniPanel.dblCharacterX == 3168 && (int) view.AniPanel.dblCharacterY == 348) ){
+			if(((int) view.AniPanel.dblCharacterX == 3168 && (int) view.AniPanel.dblCharacterY == 612)||((int) view.AniPanel.dblCharacterX == 3168 && (int) view.AniPanel.dblCharacterY == 504) ){
 				System.out.println("end is reached");
 				playerReachedEnd(strUsername);
 			}
@@ -476,7 +476,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		//Detecting Second-Based Signals from Race Timer and Counting them
 		} else if (evt.getSource() == RaceTimer){
 			intRaceTimer++;
-			view.RaceTimerLabel.setText(String.valueOf(intRaceTimer));
+			//view.RaceTimerLabel.setText(String.valueOf(intRaceTimer));
 		
 		//Detecting SSM 
 		}else if(evt.getSource() == ssm){
