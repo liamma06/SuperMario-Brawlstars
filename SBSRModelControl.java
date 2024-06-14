@@ -422,7 +422,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			}
 
 			//checking of bottom of pole is reached
-			if(((int) view.AniPanel.dblCharacterX == 3168 && (int) view.AniPanel.dblCharacterY == 612)||((int) view.AniPanel.dblCharacterX == 3168 && (int) view.AniPanel.dblCharacterY == 348) ){
+			if(((int) view.AniPanel.dblCharacterX == 3168 && (int) view.AniPanel.dblCharacterY == 612)||((int) view.AniPanel.dblCharacterX == 3168 && (int) view.AniPanel.dblCharacterY == 504) ){
 				System.out.println("end is reached");
 				playerReachedEnd(strUsername);
 			}
