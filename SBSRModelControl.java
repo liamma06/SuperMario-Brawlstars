@@ -160,7 +160,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		}
 
 		//Character movement 
-		if(evt.getKeyCode() == KeyEvent.VK_SPACE){
+		if(evt.getKeyCode() == KeyEvent.VK_UP){
 			if (view.AniPanel.dblCharacterX < 3168 && view.AniPanel.dblCharacterY <=684){
 				view.AniPanel.grabFocus();
 				System.out.println("Key pressed JUMP: ("+view.AniPanel.dblCharacterX+","+view.AniPanel.dblCharacterY+")");
@@ -208,7 +208,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		
 		//checking if key is released
 		
-		if (evt.getKeyCode() == KeyEvent.VK_SPACE){
+		if (evt.getKeyCode() == KeyEvent.VK_UP){
 			blnjump = false;
 			intJumpCooldown = 0;
 			dblCharacterDefY = 0;
