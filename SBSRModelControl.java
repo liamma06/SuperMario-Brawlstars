@@ -16,61 +16,91 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 	//Connection
 	/**Tells user things like host/client status and errors in the connection process when connect buton is pressed */
 	public String strConnectionResult;
+
 	/**The name the host enters in connection process*/
 	public String strHostUsername;
+
 	/**The name the client enters in connection process */
 	public String strClientUsername;
+
 	/**The IP of the computer */
 	public String strIp;
+
 	/**Port of the computer */
 	public String strPort;
+
 	/**The entered username */
 	public String strUsername;
+
 	/**The result of the connection method */
 	public String strResult;
+
 	/**Used to see who is host for extra privileges */
 	public boolean blnHost = false;
+
 	/**Used to see if jumping or not */
 	public boolean blnjump = false;
+
 	/**Used to count the number of players */
 	public int intNumPlayers = 0;
+
 	/**Cooldown for jump */
 	public int intJumpCooldown = 0;
 
 	//Chacter selection
+	/**Sets which character the host is */
 	public int intHostCharacter = 0;
+
+	/**Sets which character the client is */
 	public int intClientCharacter = 0;
 
+
 	//Players entered
+	/**Checks to see if the host is ready */
 	public boolean blnHostReady = false;
+
+	/**Checks to see if the client is ready */
 	public boolean blnClientReady = false;
 
 	//Play
+	/**The number of players ready */
 	public int intPlayersReady = 0;
+
+
 	public int intRaceTimer = 0;
 
 	//splitting ssm messages -> mode(chat/charcter/play/game/connection),user(host/client),action(message/game input),xcord,ycord
+	
+	/**Messages you send over SuperSocketMaster */
 	String[] ssmMessage;
 
+	/**Calls on SBSRViewTest */
 	SBSRViewTest view;
+
+	/**Calls on SuperSocketMaster */
 	SuperSocketMaster ssm;
 
 	//AnimationPanel
-	public Timer theTimer = new Timer(1000/60,this);
-	public Timer RaceTimer = new Timer (1000, this);
-	public double dblCharacterDefX = 0;
-	public double dblCharacterDefY = 0;
-	//Timers are assigned ActionListeners with (this). 
 
-	//winning logic
-	public boolean hostReachedEnd = false;
-	public boolean clientReachedEnd = false;
-	public boolean gameEnded = false;
+	/**Timer that runs 60fps */
+	public Timer theTimer = new Timer(1000/60,this);
+
+	public Timer RaceTimer = new Timer (1000, this);
+
+	/**Character deflection in X */
+	public double dblCharacterDefX = 0;
+
+	/**Character deflection in Y */
+	public double dblCharacterDefY = 0;
+
+	//Timers are assigned ActionListeners with (this). 
 
 
 	//Methods **************************************************************************************************************
 
 	//setting up connection
+
+	/**Method used to host and connect client to host*/
 	public String connect(String ipField, String portField, String UsernameField){
 		if(ipField.equals("") && portField.equals("")){
 			strConnectionResult = "Enter a port number and/or IP Address\n";
@@ -115,6 +145,8 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 	}
 
 	// method when someone died
+
+	/**Method to run when player dies */
 	public void playerDied(String playerUsername){
 		//send message to chat
 		ssm.sendText("server,death,"+playerUsername);
@@ -126,6 +158,8 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 	}
 
 	// method when someone reached the end
+
+	/**Method to run when player reaches the end */
 	public void playerReachedEnd(String playerUsername){
 		//send message to chat
 		ssm.sendText("server,win,"+playerUsername);
@@ -137,6 +171,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 	}
 
 	//check play method
+	/**Used to check if both players are ready so game can begin */
 	public void checkPlay(){
 		if(intPlayersReady == 2){
 			blnHostReady = true;
@@ -146,6 +181,8 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 	}
 	
 	//Player movement 
+
+	/**Checks which keys are pressed and excecutes code such as movement depending on which key is pressed */
 	public void keyPressed(KeyEvent evt){
 		/*
 		//checking if both players have entered the game
@@ -191,6 +228,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			System.out.println("Invalid key");
 		}
 	}
+	/**Checks which key is typed and focuses back to animation panel when enter is typed */
 	public void keyTyped(KeyEvent evt){
 		
 		//return focus to animation panel when enter is pressed 
@@ -200,7 +238,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		}
 	}
 	
-	
+	/**Checks keys released and stops player movement */
 	public void keyReleased(KeyEvent evt) {
 		/*
 		//Checking if both players have entered the game
@@ -237,7 +275,8 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
     }
 
   
-	//Overridding action listener
+	//Overriding action listener
+	/**Overrides  action listener and check things like button presses*/
 	public void actionPerformed(ActionEvent evt){
 		//Connect menu button
 		if(evt.getSource() == view.ConnectMenuButton){
@@ -507,11 +546,13 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				view.ChatArea.append("[ Server ]: "+strHostUsername+" left\n");
 			
 
-			
+			    
+
 		}
 	}
 
 	//Constructor  **************************************************************************************************************
+	/**Adding action listeners from the view */
 	public SBSRModelControl(SBSRViewTest view){
 		this.view = view;
 
