@@ -163,7 +163,7 @@ public class SBSRViewTest{
 			HelpMenuButton.setSize(300,60);
 			HelpMenuButton.setLocation(490,600);
 			MenuPanel.add(HelpMenuButton);
-			
+
 			try {
     			MenuImage = new ImageIcon(ImageIO.read(new File("MenuImage.png")));
 			} catch (IOException e) {
@@ -280,7 +280,7 @@ public class SBSRViewTest{
 
 			//Character Selection Panel 
 			CharacterPanel.setLayout(null);
-
+			
 			Character1Label = new JLabel("Colt");
 			Character1Label.setSize(200,50);
 			Character1Label.setLocation(300,75);
