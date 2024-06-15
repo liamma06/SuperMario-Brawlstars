@@ -340,12 +340,14 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			view.theframe.setContentPane(view.ConnectPanel);
 			view.theframe.revalidate();
 		//back button
+		
 		//If back button on the play panel is pressed
 		}else if(evt.getSource() == view.BackConnectButton){
-			//Go pack to menu panel
+			//Go back to menu panel
 			view.theframe.setContentPane(view.MenuPanel);
 			view.theframe.revalidate();
-		//Iff connect button is pressed in the connect panel
+			
+		//If connect button is pressed in the connect panel
 		}else if(evt.getSource() == view.ConnectButton){
 			//Get entered IP
 			strIp = view.ipField.getText();
@@ -357,8 +359,9 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			String strResult = connect(strIp, strPort, strUsername);
 			//Set the text of the ConnectionStatusLabel
 			view.ConnectionStatusLabel.setText(strResult);
-		//Play menu button
-		//If PlayMenuButton is pressed
+
+		
+		//If PlayMenuButton on menu panel is pressed
 		}else if(evt.getSource() == view.PlayMenuButton){
 			//If you are the host
 			if(blnHost){
@@ -369,6 +372,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			}else{
 				System.out.println("You are not Host or have not connected yet");
 			}
+		
 		//Map selection
 		//If map button 1 is pressed
 		}else if (evt.getSource() == view.Map1Button){
