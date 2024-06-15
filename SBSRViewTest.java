@@ -6,6 +6,8 @@
 //Importing Java Swing and GUI toolkits for graphical setup
 import java.io.*;
 import java.awt.*;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.event.*;
 import javax.swing.event.*;
@@ -59,6 +61,10 @@ public class SBSRViewTest{
 		public JLabel Map2Label;
 		public JButton Map1Button;
 		public JButton Map2Button;
+		public JLabel Map1ImageLabel;
+		public JLabel Map2ImageLabel;
+		public ImageIcon Map1Image;
+		public ImageIcon Map2Image;
 
 		//Character selection screen
 		public JPanel CharacterPanel = new JPanel();
@@ -66,6 +72,10 @@ public class SBSRViewTest{
 		public JLabel Character2Label;
 		public JButton Character1Button;
 		public JButton Character2Button;    
+		public JLabel Character1ImageLabel;
+		public JLabel Character2ImageLabel;
+		public ImageIcon Character1Image;
+		public ImageIcon Character2Image;
 
 		//Help screen
 		public JPanel HelpPanel = new JPanel();
@@ -194,6 +204,24 @@ public class SBSRViewTest{
 			Map2Button.setFont(new Font("Arial",Font.PLAIN,20));
 			MapPanel.add(Map2Button);
 
+			//adding the map icon images
+			try {
+            	Map1Image = new ImageIcon(ImageIO.read(new File("Map1Icon.png")));
+            	Map2Image = new ImageIcon(ImageIO.read(new File("Map2Icon.png")));
+			} catch (IOException e) {
+				System.out.println("Error loading map images.");
+			}
+
+			Map1ImageLabel = new JLabel(Map1Image);
+			Map1ImageLabel.setSize(375,375);
+			Map1ImageLabel.setLocation(145, 135);
+			MapPanel.add(Map1ImageLabel);
+
+			Map2ImageLabel = new JLabel(Map2Image);
+			Map2ImageLabel.setSize(375, 375);
+			Map2ImageLabel.setLocation(740, 135);
+			MapPanel.add(Map2ImageLabel);
+
 			//Character Selection Panel 
 			CharacterPanel.setLayout(null);
 
@@ -220,6 +248,24 @@ public class SBSRViewTest{
 			Character2Button.setLocation(830,550);
 			Character2Button.setFont(new Font("Arial",Font.PLAIN,20));
 			CharacterPanel.add(Character2Button);
+
+			//adding the map icon images
+			try {
+            	Character1Image = new ImageIcon(ImageIO.read(new File("Character1.png")));
+            	Character2Image = new ImageIcon(ImageIO.read(new File("Character2.png")));
+			} catch (IOException e) {
+				System.out.println("Error loading map images.");
+			}
+
+			Character1ImageLabel = new JLabel(Character1Image);
+			Character1ImageLabel.setSize(375,375);
+			Character1ImageLabel.setLocation(145, 135);
+			CharacterPanel.add(Character1ImageLabel);
+
+			Character2ImageLabel = new JLabel(Character2Image);
+			Character2ImageLabel.setSize(375, 375);
+			Character2ImageLabel.setLocation(740, 135);
+			CharacterPanel.add(Character2ImageLabel);
 
 			//Help Panel
 			HelpPanel.setLayout(null);
