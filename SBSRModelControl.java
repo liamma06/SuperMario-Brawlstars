@@ -362,6 +362,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			intEndY = 612;
 			ssm.sendText("EndY,"+intEndY);
 			blnDemo = false;
+			view.ChatArea.setText("");
 		//Level 2
 		}else if(evt.getSource() == view.Map2Button){
 			view.AniPanel.loadMap(2);
@@ -372,6 +373,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			intEndY = 504;
 			ssm.sendText("EndY,"+intEndY);
 			blnDemo = false;
+			view.ChatArea.setText("");
 		
 		//Tutorial (Demo) Map
 		}else if(evt.getSource()==view.HelpMenuButton && blnConnect != true){
@@ -379,6 +381,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			view.theframe.setContentPane(view.CharacterPanel);
 			view.theframe.revalidate();
 			theTimer.restart();
+			view.ChatArea.setText("");
 			
 			//Automatically assigning "Colt" as the character.
 			if (blnHost){
@@ -670,8 +673,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			if (blnHost != true){
 				view.PlayBackButton.setEnabled(false);
 			}
-			
-			view.ChatArea.setText("");
+	
 
 		} else if (evt.getSource() == view.DemoOkButton){
 			blnOK = true;
