@@ -1,4 +1,4 @@
-//SuperBrawlStarsRun SBSR Child Panel for Graphical Animations and Image Upload
+//SuperBrawlStarsRun SBSR Child Class for Graphical Animation Panel
 //Programmers: Bosco Zhang, Liam Ma, Nihal Sidhu
 //Last Modified: Saturday, June 15, 2024
 //Version Number: 2.0 Beta
@@ -13,7 +13,9 @@ import java.awt.event.*;
 
 public class AnimationPanelTest extends JPanel{
     //Properties
+    
     //Images and Terrain Tiles
+    
     //Opponent image
     public Image imgOpponent;
     //Opponent image facing right
