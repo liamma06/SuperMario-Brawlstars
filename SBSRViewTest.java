@@ -26,6 +26,8 @@ public class SBSRViewTest{
 
 		//Main menu panel
     	public JPanel MenuPanel = new JPanel();
+		public JLabel MenuImageLabel;
+		public ImageIcon MenuImage;
 
 		//Play button
     	public JButton PlayMenuButton;
@@ -145,6 +147,17 @@ public class SBSRViewTest{
 			//Menu options 
 			MenuPanel.setPreferredSize(new Dimension(1280,720));
 			MenuPanel.setLayout(null);
+
+			//adding the menu icon images
+			try {
+    			MenuImage = new ImageIcon(ImageIO.read(new File("MenuImage.png")));
+			} catch (IOException e) {
+				System.out.println("Error loading map images.");
+			}
+			MenuImageLabel = new JLabel(MenuImage);
+			MenuImageLabel.setSize(1280,720);
+			MenuImageLabel.setLocation(0, 0);
+			MenuPanel.add(MenuImageLabel);
         
 
 			PlayMenuButton = new JButton("Play");
