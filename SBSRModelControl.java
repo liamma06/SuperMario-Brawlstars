@@ -212,13 +212,6 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 
 	/**Checks which keys are pressed and excecutes code such as movement depending on which key is pressed */
 	public void keyPressed(KeyEvent evt){
-		/*
-		//checking if both players have entered the game
-		if(!blnHostReady || !blnClientReady){
-			System.out.println("Both players have not entered the game yet");
-			return;
-		}
-		*/
 
 		//checking if key is pressed
 
@@ -268,13 +261,6 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 	
 	/**Checks keys released and stops player movement */
 	public void keyReleased(KeyEvent evt) {
-		/*
-		//Checking if both players have entered the game
-		if (!blnHostReady || !blnClientReady) {
-            System.out.println("Both players are not ready yet.");
-            return;
-        }
-        */
 		
 		//checking if key is released
 		
