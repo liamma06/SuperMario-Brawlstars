@@ -358,12 +358,27 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			view.AniPanel.requestFocusInWindow();
 			view.AniPanel.setFocusable(true);
 			view.AniPanel.addKeyListener(this);
+			view.ChatTextInput.setVisible(false);
+			view.ChatTextInput.setEnabled(false);
+			view.DemoOkButton.setVisible(true);
+			view.DemoOkButton.setEnabled(true);
+			//******REMEMBER TO ENABLE THIS BACK LATER!!
 			intJumpCooldown = 0;
 			blnjump = false;
 			intEndY=612;
 			
 			//Clearing chat for Demo Server Instructions
 			view.ChatArea.setText("");
+			view.ChatArea.setFont(new Font("Arial", Font.BOLD, 12));
+			view.ChatArea.append("[ Server ]: Welcome "+strUsername+" to the orientation demo!\n");
+			view.ChatArea.append("[ Server ]: In this short tutorial, you will navigate through\n");
+			view.ChatArea.append("            the map before advancing to the competitive ranks of our multiplayer races!\n");
+			view.ChatArea.append("[ Server ]: Please complete the following tasks as instructed.\n\n");
+			
+			
+			view.ChatArea.append("[ Server ]: (Task 1) To move forwards, press the forwards key");
+			
+			//Have a series of bricks blocking the character until they finish the task that is assigned."
 			
 			
 			

@@ -39,6 +39,7 @@ public class SBSRViewTest{
 		//Play screen
 		public JPanel PlayPanel = new JPanel();
 		public JButton PlayBackButton;
+		public JButton DemoOkButton;
 
 		//Play(Chat screen)
 		public JPanel ChatPanel = new JPanel();
@@ -253,8 +254,16 @@ public class SBSRViewTest{
 			PlayBackButton = new JButton ("Back");
 			PlayBackButton.setSize(170, 70);
 			PlayBackButton.setLocation(350, 600);
-			PlayBackButton.setFont(new Font("Arial", Font.PLAIN, 30));
+			PlayBackButton.setFont(new Font("Arial", Font.BOLD, 30));
 			ChatPanel.add(PlayBackButton);
+			
+			DemoOkButton = new JButton("Ok");
+			DemoOkButton.setSize(170, 70);
+			DemoOkButton.setLocation(0, 600);
+			DemoOkButton.setFont(new Font("Arial", Font.BOLD, 30));
+			DemoOkButton.setEnabled(false);
+			DemoOkButton.setVisible(false);
+			ChatPanel.add(DemoOkButton);
 			
 			ChatPanel.setLayout(null);
 			ChatPanel.setPreferredSize(new Dimension(450,720));
@@ -278,7 +287,6 @@ public class SBSRViewTest{
 			RaceTimerLabel = new JLabel();
 			RaceTimerLabel.setSize(170, 70);
 			RaceTimerLabel.setLocation(0,0);
-			//RaceTimerLabel.setLocation(680, 0);
 			RaceTimerLabel.setForeground(Color.WHITE);
 			RaceTimerLabel.setFont(new Font("Monospaced", Font.PLAIN, 30));
 			AniPanel.add(RaceTimerLabel);
