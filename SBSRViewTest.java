@@ -148,17 +148,7 @@ public class SBSRViewTest{
 			MenuPanel.setLayout(null);
 
 			//adding the menu icon images
-			try {
-    			MenuImage = new ImageIcon(ImageIO.read(new File("MenuImage.png")));
-			} catch (IOException e) {
-				System.out.println("Error loading map images.");
-			}
-			MenuImageLabel = new JLabel(MenuImage);
-			MenuImageLabel.setSize(1280,720);
-			MenuImageLabel.setLocation(0, 0);
-			MenuPanel.add(MenuImageLabel);
-        
-
+			
 			PlayMenuButton = new JButton("Play");
 			PlayMenuButton.setSize(300,60);
 			PlayMenuButton.setLocation(490,400);
@@ -173,6 +163,19 @@ public class SBSRViewTest{
 			HelpMenuButton.setSize(300,60);
 			HelpMenuButton.setLocation(490,600);
 			MenuPanel.add(HelpMenuButton);
+			
+			try {
+    			MenuImage = new ImageIcon(ImageIO.read(new File("MenuImage.png")));
+			} catch (IOException e) {
+				System.out.println("Error loading map images.");
+			}
+
+			
+			MenuImageLabel = new JLabel(MenuImage);
+			MenuImageLabel.setSize(1280,720);
+			MenuImageLabel.setLocation(0, 0);
+			MenuPanel.add(MenuImageLabel);
+			
 
 			//ConnectPanel
 			ConnectPanel.setLayout(null);
