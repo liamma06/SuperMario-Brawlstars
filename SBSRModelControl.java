@@ -95,6 +95,10 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 	
 	/**Integer value for the y-coordinate component denoting the bottom point of the pole */
 	public int intEndY = 0;
+	
+	//Demo Tutorial
+	/**Acts as an on-off mutator to regulate server runtime flow as per DemoOkButton */
+	public boolean blnOK = false;
 
 
 	//Methods **************************************************************************************************************
@@ -287,7 +291,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		if(evt.getSource() == view.ConnectMenuButton){
 			view.theframe.setContentPane(view.ConnectPanel);
 			view.theframe.revalidate();
-		//back button
+		//Back button
 		
 		//If back button on the play panel is pressed
 		}else if(evt.getSource() == view.BackConnectButton){
@@ -377,6 +381,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			
 			
 			view.ChatArea.append("[ Server ]: (Task 1) To move forwards, press the forwards key");
+			
 			
 			//Have a series of bricks blocking the character until they finish the task that is assigned."
 			
@@ -614,6 +619,8 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			view.ChatArea.append("[ Server ]: "+strHostUsername+" left\n");
 			intRaceTime = 0;
 
+		} else if (evt.getSource() == view.DemoOkButton){
+			blnOK = true;
 		}
 	}
 
