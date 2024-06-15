@@ -6,7 +6,7 @@ For our CPT we created a game inspired by super mario while having playable braw
 In this game, you can choose from two maps and two characters. There are also plenty of different blocks.
 
 Here are some instructions on how to navigate our game:
-1. Before connecting, if you want to play the tutorial press the tutorial button on the menu screen and select your character
+1. Before connecting, if you want to play the tutorial press the tutorial button on the menu screen
   
 2. If you want to play single or muti player, press the connect button
    
