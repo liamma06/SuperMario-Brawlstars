@@ -344,7 +344,29 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			ssm.sendText("Map,3");
 			view.theframe.setContentPane(view.CharacterPanel);
 			view.theframe.revalidate();
-			ssm.sendText("character");
+			theTimer.restart();
+			
+			//Automatically assigning "Colt" as the character.
+			if (blnHost){
+				intHostCharacter = 1;
+			} else {
+				intClientCharacter = 1;
+			}
+			view.AniPanel.loadCharacter(1);
+			view.theframe.setContentPane(view.PlaySplitPane);
+			view.theframe.revalidate();
+			view.AniPanel.requestFocusInWindow();
+			view.AniPanel.setFocusable(true);
+			view.AniPanel.addKeyListener(this);
+			intJumpCooldown = 0;
+			blnjump = false;
+			intEndY=612;
+			
+			//Clearing chat for Demo Server Instructions
+			view.ChatArea.setText("");
+			
+			
+			
 		//Character selection
 		}else if((evt.getSource() == view.Character1Button)){
 			intRaceTime = 0;
@@ -352,13 +374,12 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			if(blnHost){
 				intHostCharacter = 1;
 				System.out.println("Host Character: Colt");
-			}else {
+			}else{
 				intClientCharacter = 1;
 				System.out.println("Client Character: Colt");
 			}
 			view.AniPanel.loadCharacter(1);
 			ssm.sendText("characterChosen,1");
-
 
 			view.theframe.setContentPane(view.PlaySplitPane);
 			view.theframe.revalidate();
@@ -425,7 +446,6 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			}
 		//Animation Timer
 		}else if(evt.getSource() == theTimer){
-			System.out.println(intEndY);
 			blnjump = false;
 			if(view.AniPanel.dblCharacterY >= 36 && intJumpCooldown < 4 && view.AniPanel.chrMap[(int)(Math.floor((view.AniPanel.dblCharacterX)/36))][(int) (Math.floor((view.AniPanel.dblCharacterY - 36)/36))] == 'a' && view.AniPanel.chrMap[(int) (Math.ceil((view.AniPanel.dblCharacterX)/36))][(int) (Math.floor((view.AniPanel.dblCharacterY - 36)/36))] == 'a' && (view.AniPanel.chrMap[(int)(Math.floor((view.AniPanel.dblCharacterX)/36))][(int)(Math.floor((view.AniPanel.dblCharacterY+36)/36))] != 'a' || view.AniPanel.chrMap[(int)(Math.ceil((view.AniPanel.dblCharacterX)/36))][(int)(Math.floor((view.AniPanel.dblCharacterY+36)/36))] != 'a')){
 				view.AniPanel.dblCharacterY = view.AniPanel.dblCharacterY + dblCharacterDefY;
