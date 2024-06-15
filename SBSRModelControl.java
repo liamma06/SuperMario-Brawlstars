@@ -360,6 +360,8 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			intEndY = 612;
 			ssm.sendText("EndY,"+intEndY);
 			blnDemo = false;
+			dblCharacterDefX = 0.0;
+			dblCharacterDefY = 0.0;
 			view.ChatArea.setText("");
 		//Level 2
 		}else if(evt.getSource() == view.Map2Button){
@@ -371,6 +373,8 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			intEndY = 504;
 			ssm.sendText("EndY,"+intEndY);
 			blnDemo = false;
+			dblCharacterDefX = 0.0;
+			dblCharacterDefY = 0.0;
 			view.ChatArea.setText("");
 		
 		//Tutorial (Demo) Map
@@ -399,6 +403,8 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			intJumpCooldown = 0;
 			blnjump = false;
 			intEndY=612;
+			dblCharacterDefX = 0.0;
+			dblCharacterDefY = 0.0;
 			blnDemo = true;
 			
 			//Clearing chat for Demo Server Instructions
@@ -669,6 +675,8 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			if (blnHost != true){
 				view.PlayBackButton.setEnabled(false);
 			}
+			dblCharacterDefX = 0.0;
+			dblCharacterDefY = 0.0;
 		}
 	}
 
