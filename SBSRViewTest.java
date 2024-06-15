@@ -45,9 +45,7 @@ public class SBSRViewTest{
 		public JTextArea ChatArea;
 		public JScrollPane ChatScroll;
 		public JTextField ChatTextInput;
-
-		//Play(game screen)
-
+		
 		
 		//Map Selection Screen
 		public JPanel MapPanel = new JPanel();
@@ -81,7 +79,7 @@ public class SBSRViewTest{
 		public JPanel WinPanel = new JPanel();
 		public JLabel WinLabel;
 
-		//Methods ~ See "SBSRModelControl.java"
+		//GUI Methods ~ See "SBSRModelControl.java"
 
 		//Constructor
 		public SBSRViewTest(){
@@ -102,7 +100,7 @@ public class SBSRViewTest{
 			ConnectMenuButton.setLocation(490,500);
 			MenuPanel.add(ConnectMenuButton);
 
-			HelpMenuButton = new JButton("Help");
+			HelpMenuButton = new JButton("Tutorial (Demo)");
 			HelpMenuButton.setSize(300,60);
 			HelpMenuButton.setLocation(490,600);
 			MenuPanel.add(HelpMenuButton);
@@ -268,16 +266,17 @@ public class SBSRViewTest{
 			ChatTextInput.setSize(350,50);
 			ChatTextInput.setLocation(85,450);
 			ChatPanel.add(ChatTextInput);
-			
-			RaceTimerLabel = new JLabel();
-			RaceTimerLabel.setSize(170, 70);
-			RaceTimerLabel.setLocation(680, 0);
-			RaceTimerLabel.setForeground(Color.WHITE);
-			RaceTimerLabel.setFont(new Font("Arial", Font.PLAIN, 30));
-			ChatPanel.add(RaceTimerLabel);
 
 			//Animation Panel
 			AniPanel.setPreferredSize(new Dimension(880,720));
+			
+			RaceTimerLabel = new JLabel();
+			RaceTimerLabel.setSize(170, 70);
+			RaceTimerLabel.setLocation(0,0);
+			//RaceTimerLabel.setLocation(680, 0);
+			RaceTimerLabel.setForeground(Color.WHITE);
+			RaceTimerLabel.setFont(new Font("Monospaced", Font.PLAIN, 30));
+			AniPanel.add(RaceTimerLabel);
 			
 
 			//Split Pane for game and chat

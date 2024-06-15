@@ -66,7 +66,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 	/**The number of players ready */
 	public int intPlayersReady = 0;
 
-
+	/**Timer to count the seconds it takes for players to reach end of map */
 	public int intRaceTimer = 0;
 
 	//splitting ssm messages -> mode(chat/charcter/play/game/connection),user(host/client),action(message/game input),xcord,ycord
@@ -151,9 +151,11 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 	/**Method to run when player dies */
 	public void playerDied(String playerUsername){
 		//send message to chat
+		intRaceTimer = 0;
 		ssm.sendText("server,death,"+playerUsername);
 		view.ChatArea.append("[ Server ]: "+playerUsername + " has died\n");
 		theTimer.stop();
+		RaceTimer.stop();
 		view.PlaySplitPane.setLeftComponent(view.DeathPanel);
 		view.PlaySplitPane.setDividerLocation(720);
 		view.theframe.revalidate();	
@@ -165,11 +167,13 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 	public void playerReachedEnd(String playerUsername){
 		//send message to chat
 		ssm.sendText("server,win,"+playerUsername);
-		view.ChatArea.append("[ Server ]: "+playerUsername + " has reached the end\n");
+		view.ChatArea.append("[ Server ]: "+playerUsername + " has reached the end in "+intRaceTimer+" s\n");
 		theTimer.stop();
+		RaceTimer.stop();
 		view.PlaySplitPane.setLeftComponent(view.WinPanel);
 		view.PlaySplitPane.setDividerLocation(720);
 		view.theframe.revalidate();	
+		intRaceTimer = 0;
 	}
 
 	//check play method
@@ -331,6 +335,8 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			view.theframe.revalidate();
 			ssm.sendText("character");
 		}else if((evt.getSource() == view.Character1Button)){
+			intRaceTimer = 0;
+			view.RaceTimerLabel.setText(String.valueOf(intRaceTimer)+" s elapsed");
 			if(blnHost){
 				intHostCharacter = 1;
 				System.out.println("Host Character: Colt");
@@ -356,10 +362,15 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			view.ChatArea.append("[ Server ]: "+intPlayersReady + " players connected\n");
 			checkPlay();
 			theTimer.restart();
+			RaceTimer.restart();
 			intJumpCooldown = 0;
 			blnjump = false;
 			
+			
 		}else if((evt.getSource() == view.Character2Button)){
+			intRaceTimer = 0;
+			view.RaceTimerLabel.setText(String.valueOf(intRaceTimer)+" s elapsed");
+			
 			if(blnHost){
 				intHostCharacter = 2;
 				System.out.println("Host Character: Dynamike");
@@ -384,8 +395,10 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			view.ChatArea.append("[ Server ]: "+intPlayersReady + " players connected\n");
 			checkPlay();
 			theTimer.restart();
+			RaceTimer.restart();
 			intJumpCooldown = 0;
 			blnjump = false;
+			
 			
 		//Text input Chat
 		}else if(evt.getSource() == view.ChatTextInput){
@@ -476,7 +489,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		//Detecting Second-Based Signals from Race Timer and Counting them
 		} else if (evt.getSource() == RaceTimer){
 			intRaceTimer++;
-			//view.RaceTimerLabel.setText(String.valueOf(intRaceTimer));
+			view.RaceTimerLabel.setText(String.valueOf(intRaceTimer)+" s elapsed");
 		
 		//Detecting SSM 
 		}else if(evt.getSource() == ssm){
@@ -540,20 +553,18 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			}
 			
 		} else if (evt.getSource() == view.PlayBackButton){
-				view.PlaySplitPane.setLeftComponent(view.AniPanel);
-				view.PlaySplitPane.setDividerLocation(720);
-				view.theframe.setContentPane(view.MenuPanel);
-				view.theframe.revalidate();
+			view.PlaySplitPane.setLeftComponent(view.AniPanel);
+			view.PlaySplitPane.setDividerLocation(720);
+			view.theframe.setContentPane(view.MenuPanel);
+			view.theframe.revalidate();
 
-				ssm.sendText("reset");
+			ssm.sendText("reset");
 
-				intPlayersReady--;
+			intPlayersReady--;
 
-				ssm.sendText("chat,[ Server ], "+strHostUsername+" left\n");
-				view.ChatArea.append("[ Server ]: "+strHostUsername+" left\n");
-			
-
-			    
+			ssm.sendText("chat,[ Server ], "+strHostUsername+" left\n");
+			view.ChatArea.append("[ Server ]: "+strHostUsername+" left\n");
+			intRaceTimer = 0;
 
 		}
 	}
