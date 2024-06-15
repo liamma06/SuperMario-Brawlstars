@@ -410,7 +410,8 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			view.ChatArea.append("                    best brawlers in town!\n\n");
 			view.ChatArea.append("   [ Shelly ]: Think you got what it takes? Follow my lead \n");
 			view.ChatArea.append("                    and you'll become a PRO brawler in no time!\n\n ");
-			view.ChatArea.append("   [ Server ]: Shelly wants you to follow her...");
+			view.ChatArea.append("   [ Server ]: Shelly wants you to meet her at the end of the map...\n");
+			view.ChatArea.append("                    Keep right.");
 			
 			
 			//Have a series of bricks blocking the character until they finish the task that is assigned."
@@ -669,6 +670,8 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			if (blnHost != true){
 				view.PlayBackButton.setEnabled(false);
 			}
+			
+			view.ChatArea.setText("");
 
 		} else if (evt.getSource() == view.DemoOkButton){
 			blnOK = true;
