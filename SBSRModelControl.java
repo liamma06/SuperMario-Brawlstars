@@ -185,7 +185,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		//send message to chat
 		
 		if (ssm != null){
-			ssm.sendText("server,win,"+playerUsername);
+			ssm.sendText("server,win,"+playerUsername+","+intRaceTime);
 		}
 		if (blnDemo != true){
 			view.ChatArea.append("[ Server ]: "+playerUsername + " has reached the end in "+intRaceTime+" s\n");
@@ -616,7 +616,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				if(ssmMessage[1].equals("death")){
 					view.ChatArea.append("[ Server ]: "+ssmMessage[2] + " has died\n");
 				}else if(ssmMessage[1].equals("win")){
-					view.ChatArea.append("[ Server ]: "+ssmMessage[2] + " has reached the end in "+intRaceTime+" s\n");
+					view.ChatArea.append("[ Server ]: "+ssmMessage[2] + " has reached the end in "+ssmMessage[3]+" s\n");
 					theTimer.stop();
 					view.PlaySplitPane.setLeftComponent(view.DeathPanel);
 					view.PlaySplitPane.setDividerLocation(720);

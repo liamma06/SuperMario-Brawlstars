@@ -9,21 +9,37 @@ import java.awt.event.*;
 public class AnimationPanelTest extends JPanel{
     //Properties
     //Images and Terrain Tiles
+    //Opponent image
     public Image imgOpponent;
+    //Opponent image facing right
     public Image imgOpponentRight;
+    //Opponent image facing left
     public Image imgOpponentLeft;
+    //Character image (your character)
     public Image imgCharacter;
+    //Character image facing right
     public Image imgCharacterRight;
+    //Character image facing left
     public Image imgCharacterLeft;
+    //Grass image
     public Image imgGrass;
+    //Brick image
     public Image imgBrick;
+    //Air image
     public Image imgAir;
+    //Dirt image
     public Image imgDirt;
+    //Pole image
     public Image imgPole;
+    //Stair image
     public Image imgStair;
+    //Underground dirt image
     public Image imgUndergroundDirt;
+    //Hard block image
     public Image imgHardBlock;
+    //Flag image
     public Image imgFlag;
+    //Terrain image
     public Image imgTerrain;
 
     //Map
