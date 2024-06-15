@@ -24,7 +24,7 @@ Here are some instructions on how to navigate our game:
 
 9. Jump mechanics incorporate a spontaneous gravitational restriction on character's Y vector.
 
-10. Jump mechanics limit the frequency of jump instances in a given interval (specifically, users cannot hold jump indefinitely to avoid gravity).
+10. Jump mechanics limit the frequency of jump instances in a given interval (specifically, users cannot hold jump infinitely to avoid gravity).
 
 11. You are now ready to play. Have fun!!
 
