@@ -243,14 +243,23 @@ public class AnimationPanelTest extends JPanel{
     public AnimationPanelTest(){
         //load images  
         try{
+            //try loading dirt image
             imgDirt = ImageIO.read(new File("Dirt.png"));
+            //try loading grass image
             imgGrass = ImageIO.read(new File("Grass.png"));
+            //try loading brick image
             imgBrick = ImageIO.read(new File("Brick.png"));
+            //try loading air image
             imgAir = ImageIO.read(new File("Air.png"));
+            //try loading pole image
             imgPole = ImageIO.read(new File("Pole.png"));
+            //try loading stair image
             imgStair = ImageIO.read(new File("Stair.png"));
+            //try loading underground dirt image
             imgUndergroundDirt = ImageIO.read(new File("UGDirt.png"));
+            //try loading hard block image
             imgHardBlock = ImageIO.read(new File("HardBlock.png"));
+            //try loading flag image
             imgFlag = ImageIO.read(new File("Flag.png"));
             
         }catch(IOException e){

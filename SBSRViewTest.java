@@ -18,24 +18,53 @@ import java.awt.*;
 public class SBSRViewTest{
 
 		//Properties
+    	
+		//Main frame with title
     	public JFrame theframe = new JFrame("Super Mario Brawlstars");
 
     	//Main Menu
+
+		//Main menu panel
     	public JPanel MenuPanel = new JPanel();
+
+		//Play button
     	public JButton PlayMenuButton;
+
+		//Connect menu button
 		public JButton ConnectMenuButton;
+
 		public JButton HelpMenuButton;
 
 		//Connect screen
+
+		//Connect panel where client tries to connect to host
 		public JPanel ConnectPanel = new JPanel();
+
+		//Where players enter IP address of host
 		public JTextField ipField;
+
+		//Where players enter the port to connect to
 		public JTextField portField;
+
+		//Connect button used to connect to a host or become one
 		public JButton ConnectButton;
+
+		//Back button to be used to go back from the connect panel to the menu panel
 		public JButton BackConnectButton;
+
+		//Tells you if you have successfully conected or not
 		public JLabel ConnectionStatusLabel;
+
+		//Used to label the username field
 		public JLabel UsernameLabel;
+
+		//Used to name the IP field
 		public JLabel IPLabel;
+
+		//Used to name the port field
 		public JLabel PortLabel;
+
+		//Space where player enters their username
 		public JTextField UsernameField;
 
 		//Play screen
@@ -56,22 +85,34 @@ public class SBSRViewTest{
 		public JTextField ChatTextInput;	
 		
 		//Map Selection Screen
+
+		//Map selection panel
 		public JPanel MapPanel = new JPanel();
+		//Used to name map 1
 		public JLabel Map1Label;
+		//Used to name map 2
 		public JLabel Map2Label;
+		//Button used to select map 1
 		public JButton Map1Button;
+		//Button used to select map 2
 		public JButton Map2Button;
+
+		//Character selection screen
+		//Character selection panel
+		public JPanel CharacterPanel = new JPanel();
+		//Used to name character 1
+		public JLabel Character1Label;
+		//Used to name character 2
+		public JLabel Character2Label;
+		//Button used to select character 1
+		public JButton Character1Button;
+		//Button used to select character 2
+		public JButton Character2Button;
 		public JLabel Map1ImageLabel;
 		public JLabel Map2ImageLabel;
 		public ImageIcon Map1Image;
 		public ImageIcon Map2Image;
 
-		//Character selection screen
-		public JPanel CharacterPanel = new JPanel();
-		public JLabel Character1Label;
-		public JLabel Character2Label;
-		public JButton Character1Button;
-		public JButton Character2Button;    
 		public JLabel Character1ImageLabel;
 		public JLabel Character2ImageLabel;
 		public ImageIcon Character1Image;
