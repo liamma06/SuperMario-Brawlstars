@@ -21,3 +21,5 @@ Here are some instructions on how to navigate our game:
 7. Host and client selects characters
 
 8. You are now ready to play. Have fun!!
+
+Here is the link to the javadocs: 
