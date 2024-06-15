@@ -20,6 +20,12 @@ Here are some instructions on how to navigate our game:
 
 7. Host and client selects characters
 
-8. You are now ready to play. Have fun!!
+8. Character movement is conducted entirely through the KeyListener of the direction arrow keys (forward/backward and up for jump).
+
+9. Jump mechanics incorporate a spontaneous gravitational restriction on character's Y vector.
+
+10. Jump mechanics limit the frequency of jump instances in a given interval (specifically, users cannot hold jump indefinitely to avoid gravity).
+
+11. You are now ready to play. Have fun!!
 
 Here is the link to the Javadocs API Documentation in HTML format: 
