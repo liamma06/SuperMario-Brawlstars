@@ -71,11 +71,6 @@ public class SBSRViewTest{
 		//Play(Chat screen)
 		//Panel containing chat while you play
 		public JPanel ChatPanel = new JPanel();
-		public JTextArea ChatArea;
-		public JScrollPane ChatScroll;
-		public JTextField ChatTextInput;
-		
-
 
 		//Area that displays chat messages
 		public JTextArea ChatArea;
