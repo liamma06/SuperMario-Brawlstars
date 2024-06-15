@@ -409,6 +409,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			//Clearing chat for Demo Server Instructions
 			view.ChatArea.setText("");
 			view.ChatArea.setFont(new Font("Arial", Font.PLAIN, 12));
+			view.ChatArea.append("\n");
 			view.ChatArea.append("   [ Shelly ]: Howdy there NOOB! I'm Shelly, one of the\n");
 			view.ChatArea.append("                    best brawlers in town!\n\n");
 			view.ChatArea.append("   [ Shelly ]: Think you got what it takes? Follow my lead \n");
