@@ -151,17 +151,17 @@ public class SBSRViewTest{
 			
 			PlayMenuButton = new JButton("Play");
 			PlayMenuButton.setSize(300,60);
-			PlayMenuButton.setLocation(490,400);
+			PlayMenuButton.setLocation(490,350);
 			MenuPanel.add(PlayMenuButton);
 
 			ConnectMenuButton = new JButton("Connect");
 			ConnectMenuButton.setSize(300,60);
-			ConnectMenuButton.setLocation(490,500);
+			ConnectMenuButton.setLocation(490,420);
 			MenuPanel.add(ConnectMenuButton);
 
 			HelpMenuButton = new JButton("Tutorial (Demo)");
 			HelpMenuButton.setSize(300,60);
-			HelpMenuButton.setLocation(490,600);
+			HelpMenuButton.setLocation(490,490);
 			MenuPanel.add(HelpMenuButton);
 			
 			try {
