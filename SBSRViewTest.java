@@ -163,7 +163,7 @@ public class SBSRViewTest{
 			HelpMenuButton.setSize(300,60);
 			HelpMenuButton.setLocation(490,490);
 			MenuPanel.add(HelpMenuButton);
-			
+
 			try {
     			MenuImage = new ImageIcon(ImageIO.read(new File("MenuImage.png")));
 			} catch (IOException e) {
@@ -280,7 +280,7 @@ public class SBSRViewTest{
 
 			//Character Selection Panel 
 			CharacterPanel.setLayout(null);
-
+			
 			Character1Label = new JLabel("Colt");
 			Character1Label.setSize(200,50);
 			Character1Label.setLocation(300,75);
@@ -307,8 +307,8 @@ public class SBSRViewTest{
 
 			//adding the map icon images
 			try {
-            	Character1Image = new ImageIcon(ImageIO.read(new File("Character1.png")));
-            	Character2Image = new ImageIcon(ImageIO.read(new File("Character2.png")));
+            	Character1Image = new ImageIcon(ImageIO.read(new File("ColtIcon.png")));
+            	Character2Image = new ImageIcon(ImageIO.read(new File("DynamikeIcon.png")));
 			} catch (IOException e) {
 				System.out.println("Error loading map images.");
 			}
