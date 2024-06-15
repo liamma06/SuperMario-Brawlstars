@@ -187,8 +187,11 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		if (ssm != null){
 			ssm.sendText("server,win,"+playerUsername);
 		}
-		
-		view.ChatArea.append("[ Server ]: "+playerUsername + " has reached the end in "+intRaceTime+" s\n");
+		if (blnDemo != true){
+			view.ChatArea.append("[ Server ]: "+playerUsername + " has reached the end in "+intRaceTime+" s\n");
+		} else if (blnDemo == true){
+			view.ChatArea.append("[ Server ]: You have reached the end in "+intRaceTime+" s\n");
+		}
 		theTimer.stop();
 		RaceTimer.stop();
 		view.PlaySplitPane.setLeftComponent(view.WinPanel);
@@ -402,22 +405,12 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			
 			//Clearing chat for Demo Server Instructions
 			view.ChatArea.setText("");
-			view.ChatArea.setFont(new Font("Arial", Font.BOLD, 12));
-			view.ChatArea.append("[ Server ]: Welcome "+strUsername+" to demo mode!\n");
-			view.ChatArea.append("[ Server ]: In this tutorial, you will learn to navigate\n");
-			view.ChatArea.append("            before advancing to compete in multiplayer races!\n");
-			view.ChatArea.append("[ Server ]: Please complete the following tasks as instructed.\n\n");
-			
-			while (blnConnect != true){
-				System.out.println("*");
-				if (blnOK = true){
-					blnOK = false;
-					break;
-				} 
-			}
-			
-			view.ChatArea.setText("");
-			view.ChatArea.append("[ Server ]: (Task 1) To move forwards, press the forwards key");
+			view.ChatArea.setFont(new Font("Arial", Font.PLAIN, 12));
+			view.ChatArea.append("   [ Shelly ]: Howdy there NOOB! I'm Shelly, one of the\n");
+			view.ChatArea.append("                    best brawlers in town!\n\n");
+			view.ChatArea.append("   [ Shelly ]: Think you got what it takes? Follow my lead \n");
+			view.ChatArea.append("                    and you'll become a PRO brawler in no time!\n\n ");
+			view.ChatArea.append("   [ Server ]: Shelly wants you to follow her...");
 			
 			
 			//Have a series of bricks blocking the character until they finish the task that is assigned."
@@ -539,7 +532,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				view.AniPanel.dblCharacterY = 612;
 			}
 
-			//checking of bottom of pole is reached
+			//checking if bottom of pole is reached
 			if(((int) view.AniPanel.dblCharacterX) == 3168 && ((int) view.AniPanel.dblCharacterY) == intEndY){
 				System.out.println("end is reached");
 				playerReachedEnd(strUsername);
@@ -618,7 +611,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				if(ssmMessage[1].equals("death")){
 					view.ChatArea.append("[ Server ]: "+ssmMessage[2] + " has died\n");
 				}else if(ssmMessage[1].equals("win")){
-					view.ChatArea.append("[ Server ]: "+ssmMessage[2] + " has reached the end\n");
+					view.ChatArea.append("[ Server ]: "+ssmMessage[2] + " has reached the end in "+intRaceTime+" s\n");
 					theTimer.stop();
 					view.PlaySplitPane.setLeftComponent(view.DeathPanel);
 					view.PlaySplitPane.setDividerLocation(720);
@@ -679,6 +672,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 
 		} else if (evt.getSource() == view.DemoOkButton){
 			blnOK = true;
+			view.AniPanel.requestFocusInWindow();
 		}
 	}
 
@@ -710,6 +704,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		view.ChatTextInput.addActionListener(this);
 		view.ChatTextInput.addKeyListener(this);
 		view.PlayBackButton.addActionListener(this);
+		view.DemoOkButton.addActionListener(this);
 		
 	}
 

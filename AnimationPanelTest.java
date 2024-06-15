@@ -164,7 +164,7 @@ public class AnimationPanelTest extends JPanel{
                 dblViewportX = 0;
                 intCharacterHP = 3;
                 try{
-					imgTerrain = ImageIO.read(new File("Map1Terrain.png"));
+					imgTerrain = ImageIO.read(new File("Map3Terrain.png"));
                 } catch (IOException e){
 					System.out.println("Error loading map terrain.");
 				}
