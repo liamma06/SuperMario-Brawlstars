@@ -1,3 +1,8 @@
+//SuperBrawlStarsRun SBSR Child Panel for Graphical Animations and Image Upload
+//Programmers: Bosco Zhang, Liam Ma, Nihal Sidhu
+//Last Modified: Saturday, June 15, 2024
+//Version Number: 2.0 Beta
+
 import java.awt.*;
 import javax.swing.*;
 import javax.imageio.*;
