@@ -185,7 +185,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		//send message to chat
 		
 		if (ssm != null){
-			ssm.sendText("server,win,"+playerUsername+""+intRaceTime);
+			ssm.sendText("server,win,"+playerUsername+","+intRaceTime);
 		}
 		if (blnDemo != true){
 			view.ChatArea.append("[ Server ]: "+playerUsername + " has reached the end in "+intRaceTime+" s\n");
