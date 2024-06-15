@@ -307,8 +307,8 @@ public class SBSRViewTest{
 
 			//adding the map icon images
 			try {
-            	Character1Image = new ImageIcon(ImageIO.read(new File("Character1.png")));
-            	Character2Image = new ImageIcon(ImageIO.read(new File("Character2.png")));
+            	Character1Image = new ImageIcon(ImageIO.read(new File("ColtIcon.png")));
+            	Character2Image = new ImageIcon(ImageIO.read(new File("DynamikeIcon.png")));
 			} catch (IOException e) {
 				System.out.println("Error loading map images.");
 			}
