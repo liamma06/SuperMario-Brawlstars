@@ -107,8 +107,10 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		//If IP and Port Fields are left blank print connection result
 		if(ipField.equals("") && portField.equals("")){
 			strConnectionResult = "Enter a port number and/or IP Address\n";
+		//If Username Field is left blank print connection result
 		}else if(ipField.equals("") && !portField.equals("") && UsernameField.equals("")){
 			strConnectionResult = "Enter Username";
+		//Connecting the host 
 		}else if(ipField.equals("") && !portField.equals("") && !UsernameField.equals("")){
 			//ConnectionStatusLabel.setText("Starting chat in server mode\n");
 			try{
@@ -124,6 +126,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			}catch(NumberFormatException e){
 				strConnectionResult = "Invalid Port Number";
 			}
+		//If username is left blank print connection result
 		}else if(!ipField.equals("") && !portField.equals("") && UsernameField.equals("")){
 			strConnectionResult = "Enter Username";
 		}else if(!ipField.equals("") && !portField.equals("")&& !UsernameField.equals("")){
@@ -329,6 +332,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			view.theframe.revalidate();
 			ssm.sendText("character");
 			intEndY = 612;
+			ssm.sendText("EndY,"+intEndY);
 		//Level 2
 		}else if(evt.getSource() == view.Map2Button){
 			view.AniPanel.loadMap(2);
@@ -337,6 +341,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			view.theframe.revalidate();
 			ssm.sendText("character");
 			intEndY = 504;
+			ssm.sendText("EndY,"+intEndY);
 		
 		//Tutorial (Demo) Map
 		}else if(evt.getSource()==view.HelpMenuButton){
@@ -589,14 +594,17 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				}else{
 					view.AniPanel.strOpponentDir = view.AniPanel.strOpponentDir;
 				}
-				
 			//loading the proper map for both players 
 			}else if(ssmMessage[0].equals("Map")){
 				view.AniPanel.loadMap(Integer.parseInt(ssmMessage[1]));
 			//loading the proper character for both players
 			}else if(ssmMessage[0].equals("characterChosen")){
 				view.AniPanel.loadOpponent(Integer.parseInt(ssmMessage[1]));
-			}else{
+			}//getting the y-coordinate of the end of the pole
+			else if(ssmMessage[0].equals("EndY")){
+				intEndY = Integer.parseInt(ssmMessage[1]);
+			}
+			else{
 				System.out.println("Invalid SSM message");
 			}
 			
