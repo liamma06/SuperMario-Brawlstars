@@ -70,12 +70,13 @@ public class AnimationPanelTest extends JPanel{
     public double dblOpponentY = 612;
     public String strOpponentDir = "right";
   
-
+    //Map
 	public int intMapX = 0;
 	public int intMapY = 0;
 
+    //Timer
     Timer timer;
-    SBSRModelControl model;
+
 
     //Methods
     public void paintComponent(Graphics g){
@@ -106,18 +107,23 @@ public class AnimationPanelTest extends JPanel{
 						case 'a':
 							g.drawImage(imgAir, (int)((double)(intCount2)*36-dblViewportX), intCount*36, 36, 36, null);
 							break;
+                        //Pole
                         case 'p':
 							g.drawImage(imgPole, (int)((double)(intCount2)*36-dblViewportX), intCount*36, 36, 36, null);
 							break;
+                        //Stair
                         case 's':
 							g.drawImage(imgStair, (int)((double)(intCount2)*36-dblViewportX), intCount*36, 36, 36, null);
 							break;
+                        //Hard Block
                         case 'h':
 							g.drawImage(imgHardBlock, (int)((double)(intCount2)*36-dblViewportX), intCount*36, 36, 36, null);
 							break;
+                        //Underground Dirt
                         case 'u':
 							g.drawImage(imgUndergroundDirt, (int)((double)(intCount2)*36-dblViewportX), intCount*36, 36, 36, null);
 							break;
+                        //Flag
                         case 'f':
 							g.drawImage(imgFlag, (int)((double)(intCount2)*36-dblViewportX), intCount*36, 36, 36, null);
 							break;
