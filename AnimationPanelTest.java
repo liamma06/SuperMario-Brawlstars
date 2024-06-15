@@ -51,23 +51,34 @@ public class AnimationPanelTest extends JPanel{
 
     //Map
     BufferedReader br;
-    public char[][] chrMap;//2D array to hold map layout
+    //2D array to hold map layout
+    public char[][] chrMap;
+    //Width of the map
     public int intMapWidth = 3600;
+    //Height of the map
     public int intMapHeight =720;
+    //Tile pixels
     public int intTilePixels = 36;
 
     //area that is being viewed
     public double dblViewportX = 0;
 
     //Character
+    //Character X
     public double dblCharacterX;
+    //Character Y
     public double dblCharacterY; 
+    //Character direction
     public String strCharacterDir = "right";
+    //Character health
     public int intCharacterHP = 3;
 
     //Opponent 
+    //Opponent X
     public double dblOpponentX = 324;
+    //Opponent Y
     public double dblOpponentY = 612;
+    //Opponent direction
     public String strOpponentDir = "right";
   
     //Map
