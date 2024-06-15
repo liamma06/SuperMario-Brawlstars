@@ -67,7 +67,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 	public int intPlayersReady = 0;
 
 	/**Timer to count the seconds it takes for players to reach end of map */
-	public int intRaceTimer = 0;
+	public int intRaceTime = 0;
 
 	//splitting ssm messages -> mode(chat/charcter/play/game/connection),user(host/client),action(message/game input),xcord,ycord
 	
@@ -87,13 +87,14 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 
 	public Timer RaceTimer = new Timer (1000, this);
 
-	/**Character deflection in X */
+	/**Character displacement in X */
 	public double dblCharacterDefX = 0;
 
-	/**Character deflection in Y */
+	/**Character displacement in Y */
 	public double dblCharacterDefY = 0;
-
-	//Timers are assigned ActionListeners with (this). 
+	
+	/**Integer value for the y-coordinate component denoting the bottom point of the pole */
+	public int intEndY = 0;
 
 
 	//Methods **************************************************************************************************************
@@ -147,11 +148,10 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 	}
 
 	// method when someone died
-
 	/**Method to run when player dies */
 	public void playerDied(String playerUsername){
 		//send message to chat
-		intRaceTimer = 0;
+		intRaceTime = 0;
 		ssm.sendText("server,death,"+playerUsername);
 		view.ChatArea.append("[ Server ]: "+playerUsername + " has died\n");
 		theTimer.stop();
@@ -162,18 +162,17 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 	}
 
 	// method when someone reached the end
-
 	/**Method to run when player reaches the end */
 	public void playerReachedEnd(String playerUsername){
 		//send message to chat
 		ssm.sendText("server,win,"+playerUsername);
-		view.ChatArea.append("[ Server ]: "+playerUsername + " has reached the end in "+intRaceTimer+" s\n");
+		view.ChatArea.append("[ Server ]: "+playerUsername + " has reached the end in "+intRaceTime+" s\n");
 		theTimer.stop();
 		RaceTimer.stop();
 		view.PlaySplitPane.setLeftComponent(view.WinPanel);
 		view.PlaySplitPane.setDividerLocation(720);
 		view.theframe.revalidate();	
-		intRaceTimer = 0;
+		intRaceTime = 0;
 	}
 
 	//check play method
@@ -322,34 +321,34 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			}
 		
 		//Map selection
+		//Level 1
 		}else if (evt.getSource() == view.Map1Button){
 			view.AniPanel.loadMap(1);
 			ssm.sendText("Map,1");
-			
-
 			view.theframe.setContentPane(view.CharacterPanel);
 			view.theframe.revalidate();
 			ssm.sendText("character");
+			intEndY = 612;
+		//Level 2
 		}else if(evt.getSource() == view.Map2Button){
 			view.AniPanel.loadMap(2);
 			ssm.sendText("Map,2");
-			
-
+			view.theframe.setContentPane(view.CharacterPanel);
+			view.theframe.revalidate();
+			ssm.sendText("character");
+			intEndY = 504;
+		
+		//Tutorial (Demo) Map
+		}else if(evt.getSource()==view.HelpMenuButton){
+			view.AniPanel.loadMap(3);
+			ssm.sendText("Map,3");
 			view.theframe.setContentPane(view.CharacterPanel);
 			view.theframe.revalidate();
 			ssm.sendText("character");
 		//Character selection
-		}else if(evt.getSource()==view.HelpMenuButton){
-			view.AniPanel.loadMap(3);
-			ssm.sendText("Map,3");
-			
-
-			view.theframe.setContentPane(view.CharacterPanel);
-			view.theframe.revalidate();
-			ssm.sendText("character");
 		}else if((evt.getSource() == view.Character1Button)){
-			intRaceTimer = 0;
-			view.RaceTimerLabel.setText(String.valueOf(intRaceTimer)+" s elapsed");
+			intRaceTime = 0;
+			view.RaceTimerLabel.setText(String.valueOf(intRaceTime)+" s elapsed");
 			if(blnHost){
 				intHostCharacter = 1;
 				System.out.println("Host Character: Colt");
@@ -381,8 +380,8 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			
 			
 		}else if((evt.getSource() == view.Character2Button)){
-			intRaceTimer = 0;
-			view.RaceTimerLabel.setText(String.valueOf(intRaceTimer)+" s elapsed");
+			intRaceTime = 0;
+			view.RaceTimerLabel.setText(String.valueOf(intRaceTime)+" s elapsed");
 			
 			if(blnHost){
 				intHostCharacter = 2;
@@ -426,6 +425,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			}
 		//Animation Timer
 		}else if(evt.getSource() == theTimer){
+			System.out.println(intEndY);
 			blnjump = false;
 			if(view.AniPanel.dblCharacterY >= 36 && intJumpCooldown < 4 && view.AniPanel.chrMap[(int)(Math.floor((view.AniPanel.dblCharacterX)/36))][(int) (Math.floor((view.AniPanel.dblCharacterY - 36)/36))] == 'a' && view.AniPanel.chrMap[(int) (Math.ceil((view.AniPanel.dblCharacterX)/36))][(int) (Math.floor((view.AniPanel.dblCharacterY - 36)/36))] == 'a' && (view.AniPanel.chrMap[(int)(Math.floor((view.AniPanel.dblCharacterX)/36))][(int)(Math.floor((view.AniPanel.dblCharacterY+36)/36))] != 'a' || view.AniPanel.chrMap[(int)(Math.ceil((view.AniPanel.dblCharacterX)/36))][(int)(Math.floor((view.AniPanel.dblCharacterY+36)/36))] != 'a')){
 				view.AniPanel.dblCharacterY = view.AniPanel.dblCharacterY + dblCharacterDefY;
@@ -455,7 +455,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			}
 
 			//checking of bottom of pole is reached
-			if(((int) view.AniPanel.dblCharacterX == 3168 && (int) view.AniPanel.dblCharacterY == 612)||((int) view.AniPanel.dblCharacterX == 3168 && (int) view.AniPanel.dblCharacterY == 504) ){
+			if(((int) view.AniPanel.dblCharacterX) == 3168 && ((int) view.AniPanel.dblCharacterY) == intEndY){
 				System.out.println("end is reached");
 				playerReachedEnd(strUsername);
 			}
@@ -501,8 +501,8 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			
 		//Detecting Second-Based Signals from Race Timer and Counting them
 		} else if (evt.getSource() == RaceTimer){
-			intRaceTimer++;
-			view.RaceTimerLabel.setText(String.valueOf(intRaceTimer)+" s elapsed");
+			intRaceTime++;
+			view.RaceTimerLabel.setText(String.valueOf(intRaceTime)+" s elapsed");
 		
 		//Detecting SSM 
 		}else if(evt.getSource() == ssm){
@@ -577,7 +577,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 
 			ssm.sendText("chat,[ Server ], "+strHostUsername+" left\n");
 			view.ChatArea.append("[ Server ]: "+strHostUsername+" left\n");
-			intRaceTimer = 0;
+			intRaceTime = 0;
 
 		}
 	}
