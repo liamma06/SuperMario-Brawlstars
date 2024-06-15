@@ -61,6 +61,9 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 
 	/**Checks to see if the client is ready */
 	public boolean blnClientReady = false;
+	
+	/**Checks to see if the user is connected to a server. */
+	public boolean blnConnect = false;
 
 	//Play
 	/**The number of players ready */
@@ -99,6 +102,9 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 	//Demo Tutorial
 	/**Acts as an on-off mutator to regulate server runtime flow as per DemoOkButton */
 	public boolean blnOK = false;
+	
+	/**Communicates to the code whether the player is in demo mode */
+	public boolean blnDemo = false;
 
 
 	//Methods **************************************************************************************************************
@@ -127,12 +133,15 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				view.PlayBackButton.setEnabled(true);
 				intNumPlayers = 1;
 				view.UsernameField.setEnabled(false);
+				blnConnect = true;
+				view.HelpMenuButton.setEnabled(false);
 			}catch(NumberFormatException e){
 				strConnectionResult = "Invalid Port Number";
 			}
 		//If username is left blank print connection result
 		}else if(!ipField.equals("") && !portField.equals("") && UsernameField.equals("")){
 			strConnectionResult = "Enter Username";
+		//Connecting the Client
 		}else if(!ipField.equals("") && !portField.equals("")&& !UsernameField.equals("")){
 			//ConnectionStatusLabel.setText("Starting chat in client  mode\n");
 			try{
@@ -145,6 +154,8 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				view.PlayBackButton.setEnabled(false);
 				intNumPlayers +=1;
 				view.UsernameField.setEnabled(false);
+				blnConnect = true;
+				view.HelpMenuButton.setEnabled(false);
 			}catch(NumberFormatException e){
 				strConnectionResult = "Invalid Port Number";
 			}
@@ -172,7 +183,11 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 	/**Method to run when player reaches the end */
 	public void playerReachedEnd(String playerUsername){
 		//send message to chat
-		ssm.sendText("server,win,"+playerUsername);
+		
+		if (ssm != null){
+			ssm.sendText("server,win,"+playerUsername);
+		}
+		
 		view.ChatArea.append("[ Server ]: "+playerUsername + " has reached the end in "+intRaceTime+" s\n");
 		theTimer.stop();
 		RaceTimer.stop();
@@ -271,15 +286,21 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			view.AniPanel.grabFocus();
 			System.out.println("Key pressed: ("+view.AniPanel.dblCharacterX+","+view.AniPanel.dblCharacterY+")");
 			dblCharacterDefX = 0;
-			ssm.sendText("position,"+view.AniPanel.dblCharacterX+","+view.AniPanel.dblCharacterY+",left");
 			
-
+			try{
+				ssm.sendText("position,"+view.AniPanel.dblCharacterX+","+view.AniPanel.dblCharacterY+",left");
+			} catch (NullPointerException e){
+				System.out.println("Single Player Mode does not support socket networking.");
+			}
+			
 		}else if(evt.getKeyCode() == KeyEvent.VK_RIGHT){
 			view.AniPanel.grabFocus();
 			System.out.println("Key pressed: ("+view.AniPanel.dblCharacterX+","+view.AniPanel.dblCharacterY+")");
 			dblCharacterDefX = 0;
-			ssm.sendText("position,"+view.AniPanel.dblCharacterX+","+view.AniPanel.dblCharacterY+",right");
-	
+			
+			if (ssm != null){
+				ssm.sendText("position,"+view.AniPanel.dblCharacterX+","+view.AniPanel.dblCharacterY+",right");
+			}
 		}else{
 			System.out.println("Invalid key");
 		}
@@ -337,6 +358,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			ssm.sendText("character");
 			intEndY = 612;
 			ssm.sendText("EndY,"+intEndY);
+			blnDemo = false;
 		//Level 2
 		}else if(evt.getSource() == view.Map2Button){
 			view.AniPanel.loadMap(2);
@@ -346,11 +368,11 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			ssm.sendText("character");
 			intEndY = 504;
 			ssm.sendText("EndY,"+intEndY);
+			blnDemo = false;
 		
 		//Tutorial (Demo) Map
-		}else if(evt.getSource()==view.HelpMenuButton){
+		}else if(evt.getSource()==view.HelpMenuButton && blnConnect != true){
 			view.AniPanel.loadMap(3);
-			ssm.sendText("Map,3");
 			view.theframe.setContentPane(view.CharacterPanel);
 			view.theframe.revalidate();
 			theTimer.restart();
@@ -371,20 +393,30 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			view.ChatTextInput.setEnabled(false);
 			view.DemoOkButton.setVisible(true);
 			view.DemoOkButton.setEnabled(true);
+			view.PlayBackButton.setEnabled(true);
 			//******REMEMBER TO ENABLE THIS BACK LATER!!
 			intJumpCooldown = 0;
 			blnjump = false;
 			intEndY=612;
+			blnDemo = true;
 			
 			//Clearing chat for Demo Server Instructions
 			view.ChatArea.setText("");
 			view.ChatArea.setFont(new Font("Arial", Font.BOLD, 12));
-			view.ChatArea.append("[ Server ]: Welcome "+strUsername+" to the orientation demo!\n");
-			view.ChatArea.append("[ Server ]: In this short tutorial, you will navigate through\n");
-			view.ChatArea.append("            the map before advancing to the competitive ranks of our multiplayer races!\n");
+			view.ChatArea.append("[ Server ]: Welcome "+strUsername+" to demo mode!\n");
+			view.ChatArea.append("[ Server ]: In this tutorial, you will learn to navigate\n");
+			view.ChatArea.append("            before advancing to compete in multiplayer races!\n");
 			view.ChatArea.append("[ Server ]: Please complete the following tasks as instructed.\n\n");
 			
+			while (blnConnect != true){
+				System.out.println("*");
+				if (blnOK = true){
+					blnOK = false;
+					break;
+				} 
+			}
 			
+			view.ChatArea.setText("");
 			view.ChatArea.append("[ Server ]: (Task 1) To move forwards, press the forwards key");
 			
 			
@@ -485,18 +517,26 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			
 			if(view.AniPanel.chrMap != null && blnjump == false && (view.AniPanel.dblCharacterY) < view.AniPanel.intMapHeight-6 && view.AniPanel.chrMap[(int)(Math.ceil((view.AniPanel.dblCharacterX)/36))][(int)(Math.ceil((view.AniPanel.dblCharacterY + 6)/36))] == 'a' && view.AniPanel.chrMap[(int)(Math.floor((view.AniPanel.dblCharacterX)/36))][(int)(Math.ceil((view.AniPanel.dblCharacterY + 6)/36))] == 'a'){
 				view.AniPanel.dblCharacterY = view.AniPanel.dblCharacterY + 6;
-				ssm.sendText("position,"+view.AniPanel.dblCharacterX+","+view.AniPanel.dblCharacterY);
+				if (ssm != null){
+					ssm.sendText("position,"+view.AniPanel.dblCharacterX+","+view.AniPanel.dblCharacterY);
+				}
 			}
 				
 			//Bypass the border when the character falls out of the map to incite death 
 				
 			if (view.AniPanel.dblCharacterY >= 684 && view.AniPanel.dblCharacterY < 720){
 				view.AniPanel.dblCharacterY = view.AniPanel.dblCharacterY + 6;
-				ssm.sendText("position,"+view.AniPanel.dblCharacterX+","+view.AniPanel.dblCharacterY);
-			} else if (view.AniPanel.dblCharacterY >= 720){
+				if (ssm != null){
+					ssm.sendText("position,"+view.AniPanel.dblCharacterX+","+view.AniPanel.dblCharacterY);
+				}
+			} else if (view.AniPanel.dblCharacterY >= 720 && blnDemo != true){
 				view.AniPanel.intCharacterHP = 0;
 				playerDied(strUsername);
 				//Kill character
+			} else if (view.AniPanel.dblCharacterY >= 720 && blnDemo == true){
+				view.AniPanel.dblViewportX = 0;
+				view.AniPanel.dblCharacterX = 324;
+				view.AniPanel.dblCharacterY = 612;
 			}
 
 			//checking of bottom of pole is reached
@@ -619,13 +659,23 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			view.theframe.setContentPane(view.MenuPanel);
 			view.theframe.revalidate();
 
-			ssm.sendText("reset");
-
+			if (ssm != null){
+				ssm.sendText("reset");
+			}
+			
 			intPlayersReady--;
-
-			ssm.sendText("chat,[ Server ], "+strHostUsername+" left\n");
+			try{
+				ssm.sendText("chat,[ Server ], "+strHostUsername+" left\n");
+			} catch (NullPointerException e){
+				System.out.println("Single Player Mode does not support socket networking.");
+			}
 			view.ChatArea.append("[ Server ]: "+strHostUsername+" left\n");
 			intRaceTime = 0;
+			
+			//Re-Checking to disable "back button" for clients since the back button is enabled in Tutorial Mode (Single Player)
+			if (blnHost != true){
+				view.PlayBackButton.setEnabled(false);
+			}
 
 		} else if (evt.getSource() == view.DemoOkButton){
 			blnOK = true;
@@ -651,9 +701,6 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		//Map page
 		view.Map1Button.addActionListener(this);
 		view.Map2Button.addActionListener(this);
-
-		//Help page
-		//view.HelpMenuButton.addActionListener(this);
 
 		//Character page
 		view.Character1Button.addActionListener(this);

@@ -128,7 +128,7 @@ public class AnimationPanelTest extends JPanel{
         repaint();
     }
     
-    //load Map layout from csv file
+    //load Map layout from csv file (Method is called upon in ModelControl)
     public void loadMap(int intMapSelection){
         chrMap = new char[intMapWidth][intMapHeight];
         try{

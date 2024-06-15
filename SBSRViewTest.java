@@ -259,7 +259,7 @@ public class SBSRViewTest{
 			
 			DemoOkButton = new JButton("Ok");
 			DemoOkButton.setSize(170, 70);
-			DemoOkButton.setLocation(0, 600);
+			DemoOkButton.setLocation(50, 600);
 			DemoOkButton.setFont(new Font("Arial", Font.BOLD, 30));
 			DemoOkButton.setEnabled(false);
 			DemoOkButton.setVisible(false);
@@ -272,13 +272,13 @@ public class SBSRViewTest{
 			ChatArea.setEditable(false);
 
 			ChatScroll = new JScrollPane(ChatArea);
-			ChatScroll.setSize(350,400);
+			ChatScroll.setSize(380,450);
 			ChatScroll.setLocation(85,50);
 			ChatPanel.add(ChatScroll);
 			
 			ChatTextInput = new JTextField();
-			ChatTextInput.setSize(350,50);
-			ChatTextInput.setLocation(85,450);
+			ChatTextInput.setSize(386,50);
+			ChatTextInput.setLocation(82,500);
 			ChatPanel.add(ChatTextInput);
 
 			//Animation Panel
