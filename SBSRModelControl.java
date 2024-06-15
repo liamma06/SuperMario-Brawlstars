@@ -100,8 +100,6 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 	public int intEndY = 0;
 	
 	//Demo Tutorial
-	/**Acts as an on-off mutator to regulate server runtime flow as per DemoOkButton */
-	public boolean blnOK = false;
 	
 	/**Communicates to the code whether the player is in demo mode */
 	public boolean blnDemo = false;
@@ -397,10 +395,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			view.AniPanel.addKeyListener(this);
 			view.ChatTextInput.setVisible(false);
 			view.ChatTextInput.setEnabled(false);
-			view.DemoOkButton.setVisible(true);
-			view.DemoOkButton.setEnabled(true);
 			view.PlayBackButton.setEnabled(true);
-			//******REMEMBER TO ENABLE THIS BACK LATER!!
 			intJumpCooldown = 0;
 			blnjump = false;
 			intEndY=612;
@@ -674,11 +669,6 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			if (blnHost != true){
 				view.PlayBackButton.setEnabled(false);
 			}
-	
-
-		} else if (evt.getSource() == view.DemoOkButton){
-			blnOK = true;
-			view.AniPanel.requestFocusInWindow();
 		}
 	}
 
@@ -710,7 +700,6 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		view.ChatTextInput.addActionListener(this);
 		view.ChatTextInput.addKeyListener(this);
 		view.PlayBackButton.addActionListener(this);
-		view.DemoOkButton.addActionListener(this);
 		
 	}
 
