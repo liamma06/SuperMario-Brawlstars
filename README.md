@@ -1,18 +1,18 @@
 # SuperMario-Brawlstars
 Programmers: Bosco Zhang, Liam Ma, Nihal Sidhu
 
-For our CPT we created a game inspired by super mario while having playable brawl stars characters.
+For our ICS 4U1 Computer Science culminating CPT, we present a crossover game of Super Mario Racing, featuring playable Brawl Stars characters. 
 
-In this game, you can choose from two maps and two characters. There are also plenty of different blocks.
+In this game, you can choose from two maps and two characters. 
 
 Here are some instructions on how to navigate our game:
-1. Before connecting, if you want to play the tutorial press the tutorial button on the menu screen
+1. Before connecting, if you want to play the tutorial press the tutorial button on the menu screen which is only available on single-player modes.
   
-2. If you want to play single or muti player, press the connect button
+2. Racing against friends is available for multi-player once the user connects to a network server (via socket programming) using the "connect" button.
    
 3. If you want to host, enter a username and port number in the designated fields then press connect
 
-4. If you want to connect to the host as a client enter a username and the host's IP address and port number then press connect
+4. If you want to connect to the host as a client, enter a username and the host's IP address and port number; then press connect.
 
 5. As the host, press the back button then the play button
 
@@ -22,4 +22,4 @@ Here are some instructions on how to navigate our game:
 
 8. You are now ready to play. Have fun!!
 
-Here is the link to the javadocs: 
+Here is the link to the Javadocs API Documentation in HTML format: 
