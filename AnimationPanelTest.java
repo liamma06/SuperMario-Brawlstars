@@ -12,42 +12,59 @@ import java.awt.image.*;
 import java.awt.event.*;
 
 public class AnimationPanelTest extends JPanel{
-    //Properties
+    //Properties   **********************************************************************
     
-    //Images and Terrain Tiles
+    //Images and Terrain Tiles   >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     
     //Opponent image
     public Image imgOpponent;
+    
     //Opponent image facing right
     public Image imgOpponentRight;
+    
     //Opponent image facing left
     public Image imgOpponentLeft;
+    
     //Character image (your character)
     public Image imgCharacter;
+    
     //Character image facing right
     public Image imgCharacterRight;
+    
     //Character image facing left
     public Image imgCharacterLeft;
+    
     //Grass image
     public Image imgGrass;
+    
     //Brick image
     public Image imgBrick;
+    
     //Air image
     public Image imgAir;
+    
     //Dirt image
     public Image imgDirt;
+    
     //Pole image
     public Image imgPole;
+    
     //Stair image
     public Image imgStair;
+    
     //Underground dirt image
     public Image imgUndergroundDirt;
+    
     //Hard block image
     public Image imgHardBlock;
+    
     //Flag image
     public Image imgFlag;
+    
     //Terrain image
     public Image imgTerrain;
+   
+    //Image Icons for Display
     public ImageIcon MenuImage;
     public ImageIcon Map1Image;
     public ImageIcon Map2Image;
@@ -76,16 +93,13 @@ public class AnimationPanelTest extends JPanel{
     //Character health
     public int intCharacterHP = 3;
 
-    //Opponent 
+    //Opponent >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     //Opponent X
     public double dblOpponentX = 324;
     //Opponent Y
     public double dblOpponentY = 612;
     //Opponent direction
     public String strOpponentDir = "right";
-  
-    
-
 
 
     //Methods
@@ -215,6 +229,7 @@ public class AnimationPanelTest extends JPanel{
 					System.out.println("Error loading map terrain.");
 				}
             }
+            
             String line;
             int row = 0;
             while((line = br.readLine()) != null){
@@ -279,34 +294,47 @@ public class AnimationPanelTest extends JPanel{
         try{
             //try loading dirt image
             imgDirt = ImageIO.read(new File("imagefolder/Dirt.png"));
+            
             //try loading grass image
             imgGrass = ImageIO.read(new File("imagefolder/Grass.png"));
+            
             //try loading brick image
             imgBrick = ImageIO.read(new File("imagefolder/Brick.png"));
+            
             //try loading air image
             imgAir = ImageIO.read(new File("imagefolder/Air.png"));
+            
             //try loading pole image
             imgPole = ImageIO.read(new File("imagefolder/Pole.png"));
+            
             //try loading stair image
             imgStair = ImageIO.read(new File("imagefolder/Stair.png"));
+            
             //try loading underground dirt image
             imgUndergroundDirt = ImageIO.read(new File("imagefolder/UGDirt.png"));
+            
             //try loading hard block image
             imgHardBlock = ImageIO.read(new File("imagefolder/HardBlock.png"));
+            
             //try loading flag image
             imgFlag = ImageIO.read(new File("imagefolder/Flag.png"));
+            
             //try loading menu image
             MenuImage = new ImageIcon(ImageIO.read(new File("imagefolder/MenuImage.png")));
+            
             //try loading map 1 image
             Map1Image = new ImageIcon(ImageIO.read(new File("imagefolder/Map1Icon.png")));
+            
             //try loading map 2 image
             Map2Image = new ImageIcon(ImageIO.read(new File("imagefolder/Map2Icon.png")));
-            //try loading character 1 image
+            
             Character1Image = new ImageIcon(ImageIO.read(new File("imagefolder/ColtIcon.png")));
+            
             //try loading character 2 image
             Character2Image = new ImageIcon(ImageIO.read(new File("imagefolder/DynamikeIcon.png")));
+            
         }catch(IOException e){
-            System.out.println("Error loading images");
+            System.out.println("Error loading image(s)");
         }
     }
 }
