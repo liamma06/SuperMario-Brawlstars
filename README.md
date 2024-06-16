@@ -28,4 +28,4 @@ Here are some instructions on how to navigate our game:
 
 11. You are now ready to play. Have fun!!
 
-Here is the link to the Javadocs API Documentation in HTML format: 
+Here is the link to the Javadocs API Documentation in HTML format: file:///Users/boscozhang/Desktop/SuperMario-Brawlstars/doc/SBSRModelControl.html
