@@ -85,9 +85,10 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 
 	//AnimationPanel
 
-	/**Timer that runs 60fps */
+	/**Timer that runs 60fps Animations */
 	public Timer theTimer = new Timer(1000/60,this);
 
+	/**Timer that runs every second to count how long character takes to reach the end */
 	public Timer RaceTimer = new Timer (1000, this);
 
 	/**Character displacement in X */
@@ -180,12 +181,11 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 
 	// method when someone died
 	/**Method to run when player dies */
-	public void playerDied(String playerUsername){
+	public void playerDied(String strplayerUsername){
 		//send message to chat
 		intRaceTime = 0;
-		ssm.sendText("server,death,"+playerUsername);
-		view.ChatArea.append("[ Server ]: "+playerUsername + " has died\n");
-		//Stop timers
+		ssm.sendText("server,death,"+strplayerUsername);
+		view.ChatArea.append("[ Server ]: "+strplayerUsername + " has died\n");
 		theTimer.stop();
 		RaceTimer.stop();
 		//Show death panel on left screen
@@ -196,14 +196,14 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 
 	// method when someone reached the end
 	/**Method to run when player reaches the end */
-	public void playerReachedEnd(String playerUsername){
+	public void playerReachedEnd(String strplayerUsername){
 		//send message to chat
 		
 		if (ssm != null){
-			ssm.sendText("server,win,"+playerUsername+","+intRaceTime);
+			ssm.sendText("server,win,"+strplayerUsername+","+intRaceTime);
 		}
 		if (blnDemo != true){
-			view.ChatArea.append("[ Server ]: "+playerUsername + " has reached the end in "+intRaceTime+" s\n");
+			view.ChatArea.append("[ Server ]: "+strplayerUsername + " has reached the end in "+intRaceTime+" s\n");
 		} else if (blnDemo == true){
 			view.ChatArea.append("[ Server ]: You have reached the end!\n");
 		}
@@ -737,6 +737,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 	}
 
 	//Main program
+	/** Executing main program */
 	public static void main(String[] args){
 		SBSRViewTest view = new SBSRViewTest();
 		new SBSRModelControl(view);
