@@ -161,22 +161,25 @@ public class SBSRViewTest{
 		MenuPanel.setLayout(null);
 
 		//Main Menu Component Location, Size, Font, and Adding Constructor Operations
-			
+		//Play menu button	
 		PlayMenuButton = new JButton("Play");
 		PlayMenuButton.setSize(300,60);
 		PlayMenuButton.setLocation(490,350);
 		MenuPanel.add(PlayMenuButton);
 
+		//Connect menu button
 		ConnectMenuButton = new JButton("Connect");
 		ConnectMenuButton.setSize(300,60);
 		ConnectMenuButton.setLocation(490,420);
 		MenuPanel.add(ConnectMenuButton);
 
+		//Help menu button
 		HelpMenuButton = new JButton("Tutorial (Demo)");
 		HelpMenuButton.setSize(300,60);
 		HelpMenuButton.setLocation(490,490);
 		MenuPanel.add(HelpMenuButton);
 
+		//Menu image label
 		MenuImageLabel = new JLabel(AniPanel.MenuImage);
 		MenuImageLabel.setSize(1280,720);
 		MenuImageLabel.setLocation(0, 0);
@@ -186,54 +189,63 @@ public class SBSRViewTest{
 		//ConnectPanel Component Location, Size, Font, and Adding Constructor Operations
 		ConnectPanel.setLayout(null);
 
+		//Username label
 		UsernameLabel = new JLabel("Username:");
 		UsernameLabel.setSize(200,50);
 		UsernameLabel.setLocation(50,50);
 		UsernameLabel.setFont(new Font("Arial", Font.BOLD,30));
 		ConnectPanel.add(UsernameLabel);
 
+		//Username field
 		UsernameField = new JTextField();
 		UsernameField.setSize(250,50);
 		UsernameField.setLocation(210,50);
 		UsernameField.setFont(new Font("Arial", Font.PLAIN, 30));
 		ConnectPanel.add(UsernameField);
 
+		//IP label
 		IPLabel = new JLabel("IP:");
 		IPLabel.setSize(200,50);
 		IPLabel.setLocation(340,150);
 		IPLabel.setFont(new Font("Arial", Font.BOLD,30));
 		ConnectPanel.add(IPLabel);
 
+		//IP field
 		ipField = new JTextField();
 		ipField.setSize(500,200);
 		ipField.setLocation(100,200);
 		ipField.setFont(new Font("Arial", Font.PLAIN, 40));
 		ConnectPanel.add(ipField);
 
+		//Port label
 		PortLabel = new JLabel("Port:");
 		PortLabel.setSize(200,50);
 		PortLabel.setLocation(900,150);
 		PortLabel.setFont(new Font("Arial", Font.BOLD,30));
 		ConnectPanel.add(PortLabel);
 
+		//Port field
 		portField = new JTextField();
 		portField.setSize(500,200);
 		portField.setLocation(680,200);
 		portField.setFont(new Font("Arial", Font.PLAIN, 40));
 		ConnectPanel.add(portField);
 
+		//Conncect button
 		ConnectButton = new JButton("Connect");
 		ConnectButton.setSize(300,100);
 		ConnectButton.setLocation(490, 500);
 		ConnectButton.setFont(new Font("Arial", Font.BOLD, 30));
 		ConnectPanel.add(ConnectButton);
 
+		//Connection status label
 		ConnectionStatusLabel = new JLabel("");
 		ConnectionStatusLabel.setSize(400,100);
 		ConnectionStatusLabel.setLocation(850,20);
 		ConnectionStatusLabel.setFont(new Font("Arial", Font.PLAIN, 20));
 		ConnectPanel.add(ConnectionStatusLabel);
 
+		//Back connect button
 		BackConnectButton = new JButton("Back");
 		BackConnectButton.setSize(200,75);
 		BackConnectButton.setLocation(50,550);
@@ -242,24 +254,28 @@ public class SBSRViewTest{
 		//Map Selection Panel Component Location, Size, Font, and Adding Constructor Operations
 		MapPanel.setLayout(null);
 
+		//Map 1 Label
 		Map1Label = new JLabel("Level 1-1: Brawl Springs");
 		Map1Label.setSize(350,50);
 		Map1Label.setLocation(160,75);
 		Map1Label.setFont(new Font("Arial",Font.BOLD,30));
 		MapPanel.add(Map1Label);
 
+		//Map 2 Label
 		Map2Label = new JLabel("Level 1-2: Spooky Caverns");
 		Map2Label.setSize(400,50);
 		Map2Label.setLocation(735,75);
 		Map2Label.setFont(new Font("Arial",Font.BOLD,30));
 		MapPanel.add(Map2Label);
 
+		//Map 1 button
 		Map1Button = new JButton("Select");
 		Map1Button.setSize(200,50);
 		Map1Button.setLocation(230,550);
 		Map1Button.setFont(new Font("Arial",Font.PLAIN,20));
 		MapPanel.add(Map1Button);
 
+		//Map 2 button
 		Map2Button = new JButton("Select");
 		Map2Button.setSize(200,50);
 		Map2Button.setLocation(830,550);
@@ -268,11 +284,13 @@ public class SBSRViewTest{
 
 		//Adding the map icon images
 
+		//Map 1 Image label
 		Map1ImageLabel = new JLabel(AniPanel.Map1Image);
 		Map1ImageLabel.setSize(375,375);
 		Map1ImageLabel.setLocation(145, 135);
 		MapPanel.add(Map1ImageLabel);
 
+		//Map 2 Image label
 		Map2ImageLabel = new JLabel(AniPanel.Map2Image);
 		Map2ImageLabel.setSize(375, 375);
 		Map2ImageLabel.setLocation(740, 135);
@@ -281,24 +299,28 @@ public class SBSRViewTest{
 		//Character Selection Panel Component Location, Size, Font, and Adding Constructor Operations
 		CharacterPanel.setLayout(null);
 			
+		//Character 1 label
 		Character1Label = new JLabel("Colt");
 		Character1Label.setSize(200,50);
 		Character1Label.setLocation(300,75);
 		Character1Label.setFont(new Font("Arial",Font.BOLD,30));
 		CharacterPanel.add(Character1Label);
 
+		//Character 2 label
 		Character2Label = new JLabel("Dynamike");
 		Character2Label.setSize(200,50);
 		Character2Label.setLocation(880,75);
 		Character2Label.setFont(new Font("Arial",Font.BOLD,30));
 		CharacterPanel.add(Character2Label);
 
+		//Character 1 button
 		Character1Button = new JButton("Select");
 		Character1Button.setSize(200,50);
 		Character1Button.setLocation(250,550);
 		Character1Button.setFont(new Font("Arial",Font.PLAIN,20));
 		CharacterPanel.add(Character1Button);
 
+		//Character 2 button
 		Character2Button = new JButton("Select");
 		Character2Button.setSize(200,50);
 		Character2Button.setLocation(830,550);
@@ -306,11 +328,13 @@ public class SBSRViewTest{
 		CharacterPanel.add(Character2Button);
 
 		//Adding the map icon images
+		//Character 1 image
 		Character1ImageLabel = new JLabel(AniPanel.Character1Image);
 		Character1ImageLabel.setSize(375,375);
 		Character1ImageLabel.setLocation(145, 135);
 		CharacterPanel.add(Character1ImageLabel);
 
+		//Character 2 image
 		Character2ImageLabel = new JLabel(AniPanel.Character2Image);
 		Character2ImageLabel.setSize(375, 375);
 		Character2ImageLabel.setLocation(740, 135);
@@ -321,10 +345,12 @@ public class SBSRViewTest{
 
 
 		//Death screen Component Location, Size, Font, and Adding Constructor Operations
+		//Death panel
 		DeathPanel.setLayout(null);
 		DeathPanel.setPreferredSize(new Dimension(880,720));
 		DeathPanel.setBackground(Color.BLACK);
 
+		//Death label
 		DeathLabel = new JLabel("You lost.");
 		DeathLabel.setSize(400,100);
 		DeathLabel.setLocation(50, 50);
@@ -333,10 +359,12 @@ public class SBSRViewTest{
 		DeathPanel.add(DeathLabel);
 
 		//Win screen Component Location, Size, Font, and Adding Constructor Operations
+		//Win panel
 		WinPanel.setLayout(null);
 		WinPanel.setPreferredSize(new Dimension(880,720));
 		WinPanel.setBackground(Color.BLACK);
 
+		//Win label
 		WinLabel = new JLabel("You have won!");
 		WinLabel.setSize(400,100);
 		WinLabel.setLocation(50, 50);
@@ -346,6 +374,7 @@ public class SBSRViewTest{
 
 
 		//PlayScreen Component Location, Size, Font, and Adding Constructor Operations
+		//Play back button
 		PlayBackButton = new JButton ("Back");
 		PlayBackButton.setSize(170, 70);
 		PlayBackButton.setLocation(350, 600);
@@ -358,11 +387,13 @@ public class SBSRViewTest{
 		ChatArea = new JTextArea();
 		ChatArea.setEditable(false);
 
+		//chat scroll
 		ChatScroll = new JScrollPane(ChatArea);
 		ChatScroll.setSize(380,450);
 		ChatScroll.setLocation(85,50);
 		ChatPanel.add(ChatScroll);
 			
+		//chat text input
 		ChatTextInput = new JTextField();
 		ChatTextInput.setSize(386,50);
 		ChatTextInput.setLocation(82,500);
@@ -370,7 +401,8 @@ public class SBSRViewTest{
 
 		//Animation Panel Component Location, Size, Font, and Adding Constructor Operations
 		AniPanel.setPreferredSize(new Dimension(880,720));
-			
+		
+		//race timer label
 		RaceTimerLabel = new JLabel();
 		RaceTimerLabel.setSize(170, 70);
 		RaceTimerLabel.setLocation(0,0);
@@ -380,6 +412,7 @@ public class SBSRViewTest{
 			
 
 		//Split Pane for game (AniPanel) and chat (ChatPanel)
+		//Play split pane
 		PlaySplitPane.setLeftComponent(AniPanel);
 		PlaySplitPane.setRightComponent(ChatPanel);
 		PlaySplitPane.setDividerLocation(720);
