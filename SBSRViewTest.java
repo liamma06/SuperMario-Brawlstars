@@ -236,21 +236,21 @@ public class SBSRViewTest{
 			//Map Selection Panel
 			MapPanel.setLayout(null);
 
-			Map1Label = new JLabel("Map 1");
-			Map1Label.setSize(200,50);
-			Map1Label.setLocation(300,75);
+			Map1Label = new JLabel("Level 1-1: Brawl Springs");
+			Map1Label.setSize(350,50);
+			Map1Label.setLocation(160,75);
 			Map1Label.setFont(new Font("Arial",Font.BOLD,30));
 			MapPanel.add(Map1Label);
 
-			Map2Label = new JLabel("Map 2");
-			Map2Label.setSize(200,50);
-			Map2Label.setLocation(880,75);
+			Map2Label = new JLabel("Level 1-2: Spooky Caverns");
+			Map2Label.setSize(400,50);
+			Map2Label.setLocation(735,75);
 			Map2Label.setFont(new Font("Arial",Font.BOLD,30));
 			MapPanel.add(Map2Label);
 
 			Map1Button = new JButton("Select");
 			Map1Button.setSize(200,50);
-			Map1Button.setLocation(250,550);
+			Map1Button.setLocation(230,550);
 			Map1Button.setFont(new Font("Arial",Font.PLAIN,20));
 			MapPanel.add(Map1Button);
 
