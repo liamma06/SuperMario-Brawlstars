@@ -188,7 +188,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		if (blnDemo != true){
 			view.ChatArea.append("[ Server ]: "+playerUsername + " has reached the end in "+intRaceTime+" s\n");
 		} else if (blnDemo == true){
-			view.ChatArea.append("[ Server ]: You have reached the end in "+intRaceTime+" s\n");
+			view.ChatArea.append("[ Server ]: You have reached the end!\n");
 		}
 		theTimer.stop();
 		RaceTimer.stop();
