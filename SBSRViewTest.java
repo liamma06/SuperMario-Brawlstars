@@ -164,14 +164,10 @@ public class SBSRViewTest{
 			HelpMenuButton.setLocation(490,490);
 			MenuPanel.add(HelpMenuButton);
 
-			try {
-    			MenuImage = new ImageIcon(ImageIO.read(new File("MenuImage.png")));
-			} catch (IOException e) {
-				System.out.println("Error loading map images.");
-			}
+			
 
 			
-			MenuImageLabel = new JLabel(MenuImage);
+			MenuImageLabel = new JLabel(AniPanel.MenuImage);
 			MenuImageLabel.setSize(1280,720);
 			MenuImageLabel.setLocation(0, 0);
 			MenuPanel.add(MenuImageLabel);
@@ -261,19 +257,13 @@ public class SBSRViewTest{
 			MapPanel.add(Map2Button);
 
 			//adding the map icon images
-			try {
-            	Map1Image = new ImageIcon(ImageIO.read(new File("Map1Icon.png")));
-            	Map2Image = new ImageIcon(ImageIO.read(new File("Map2Icon.png")));
-			} catch (IOException e) {
-				System.out.println("Error loading map images.");
-			}
 
-			Map1ImageLabel = new JLabel(Map1Image);
+			Map1ImageLabel = new JLabel(AniPanel.Map1Image);
 			Map1ImageLabel.setSize(375,375);
 			Map1ImageLabel.setLocation(145, 135);
 			MapPanel.add(Map1ImageLabel);
 
-			Map2ImageLabel = new JLabel(Map2Image);
+			Map2ImageLabel = new JLabel(AniPanel.Map2Image);
 			Map2ImageLabel.setSize(375, 375);
 			Map2ImageLabel.setLocation(740, 135);
 			MapPanel.add(Map2ImageLabel);
@@ -306,19 +296,12 @@ public class SBSRViewTest{
 			CharacterPanel.add(Character2Button);
 
 			//adding the map icon images
-			try {
-            	Character1Image = new ImageIcon(ImageIO.read(new File("ColtIcon.png")));
-            	Character2Image = new ImageIcon(ImageIO.read(new File("DynamikeIcon.png")));
-			} catch (IOException e) {
-				System.out.println("Error loading map images.");
-			}
-
-			Character1ImageLabel = new JLabel(Character1Image);
+			Character1ImageLabel = new JLabel(AniPanel.Character1Image);
 			Character1ImageLabel.setSize(375,375);
 			Character1ImageLabel.setLocation(145, 135);
 			CharacterPanel.add(Character1ImageLabel);
 
-			Character2ImageLabel = new JLabel(Character2Image);
+			Character2ImageLabel = new JLabel(AniPanel.Character2Image);
 			Character2ImageLabel.setSize(375, 375);
 			Character2ImageLabel.setLocation(740, 135);
 			CharacterPanel.add(Character2ImageLabel);

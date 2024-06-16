@@ -48,6 +48,11 @@ public class AnimationPanelTest extends JPanel{
     public Image imgFlag;
     //Terrain image
     public Image imgTerrain;
+    public ImageIcon MenuImage;
+    public ImageIcon Map1Image;
+    public ImageIcon Map2Image;
+    public ImageIcon Character1Image;
+    public ImageIcon Character2Image;
 
     //Map
     BufferedReader br;
@@ -179,7 +184,7 @@ public class AnimationPanelTest extends JPanel{
 				dblViewportX = 0;
 				intCharacterHP = 3;
 				try{
-					imgTerrain = ImageIO.read(new File("Map1Terrain.png"));
+					imgTerrain = ImageIO.read(new File("imagefolder/Map1Terrain.png"));
 				} catch (IOException e){
 					System.out.println("Error loading map terrain.");
 				}
@@ -192,7 +197,7 @@ public class AnimationPanelTest extends JPanel{
                 dblViewportX = 0;
                 intCharacterHP = 3;
                 try{
-					imgTerrain = ImageIO.read(new File("Map2Terrain.png"));
+					imgTerrain = ImageIO.read(new File("imagefolder/Map2Terrain.png"));
                 } catch (IOException e){
 					System.out.println("Error loading map terrain.");
 				}
@@ -205,7 +210,7 @@ public class AnimationPanelTest extends JPanel{
                 dblViewportX = 0;
                 intCharacterHP = 3;
                 try{
-					imgTerrain = ImageIO.read(new File("Map3Terrain.png"));
+					imgTerrain = ImageIO.read(new File("imagefolder/Map3Terrain.png"));
                 } catch (IOException e){
 					System.out.println("Error loading map terrain.");
 				}
@@ -233,13 +238,13 @@ public class AnimationPanelTest extends JPanel{
         try{
             //If selected character 2
             if(intCharacterSelection == 2){
-                imgCharacterRight = ImageIO.read(new File("Dynamike.png"));
-                imgCharacterLeft = ImageIO.read(new File("Dynamike(Left).png"));
+                imgCharacterRight = ImageIO.read(new File("imagefolder/Dynamike.png"));
+                imgCharacterLeft = ImageIO.read(new File("imagefolder/Dynamike(Left).png"));
                 System.out.println("loaded dynamike");
             //If selected character 1
             }else if(intCharacterSelection == 1){
-                imgCharacterRight = ImageIO.read(new File("Colt.png"));
-                imgCharacterLeft = ImageIO.read(new File("Colt(Left).png"));
+                imgCharacterRight = ImageIO.read(new File("imagefolder/Colt.png"));
+                imgCharacterLeft = ImageIO.read(new File("imagefolder/Colt(Left).png"));
                 System.out.println("loaded colt");
             }
         }catch(IOException e){
@@ -253,13 +258,13 @@ public class AnimationPanelTest extends JPanel{
         try{
             //Iff opponent selected character 2
             if(intOpponentSelection == 2){
-                imgOpponentRight = ImageIO.read(new File("Dynamike.png"));
-                imgOpponentLeft = ImageIO.read(new File("Dynamike(Left).png"));
+                imgOpponentRight = ImageIO.read(new File("imagefolder/Dynamike.png"));
+                imgOpponentLeft = ImageIO.read(new File("imagefolder/Dynamike(Left).png"));
                 System.out.println("loaded dynamike");
             //If opponent selected character 1
             }else if(intOpponentSelection == 1){
-                imgOpponentRight = ImageIO.read(new File("Colt.png"));
-                imgOpponentLeft = ImageIO.read(new File("Colt(Left).png"));
+                imgOpponentRight = ImageIO.read(new File("imagefolder/Colt.png"));
+                imgOpponentLeft = ImageIO.read(new File("imagefolder/Colt(Left).png"));
                 System.out.println("loaded colt");
             }
         }catch(IOException e){
@@ -273,24 +278,28 @@ public class AnimationPanelTest extends JPanel{
         //load images  
         try{
             //try loading dirt image
-            imgDirt = ImageIO.read(new File("Dirt.png"));
+            imgDirt = ImageIO.read(new File("imagefolder/Dirt.png"));
             //try loading grass image
-            imgGrass = ImageIO.read(new File("Grass.png"));
+            imgGrass = ImageIO.read(new File("imagefolder/Grass.png"));
             //try loading brick image
             imgBrick = ImageIO.read(new File("imagefolder/Brick.png"));
             //try loading air image
-            imgAir = ImageIO.read(new File("Air.png"));
+            imgAir = ImageIO.read(new File("imagefolder/Air.png"));
             //try loading pole image
-            imgPole = ImageIO.read(new File("Pole.png"));
+            imgPole = ImageIO.read(new File("imagefolder/Pole.png"));
             //try loading stair image
-            imgStair = ImageIO.read(new File("Stair.png"));
+            imgStair = ImageIO.read(new File("imagefolder/Stair.png"));
             //try loading underground dirt image
-            imgUndergroundDirt = ImageIO.read(new File("UGDirt.png"));
+            imgUndergroundDirt = ImageIO.read(new File("imagefolder/UGDirt.png"));
             //try loading hard block image
-            imgHardBlock = ImageIO.read(new File("HardBlock.png"));
+            imgHardBlock = ImageIO.read(new File("imagefolder/HardBlock.png"));
             //try loading flag image
-            imgFlag = ImageIO.read(new File("Flag.png"));
-            
+            imgFlag = ImageIO.read(new File("imagefolder/Flag.png"));
+            MenuImage = new ImageIcon(ImageIO.read(new File("imagefolder/MenuImage.png")));
+            Map1Image = new ImageIcon(ImageIO.read(new File("imagefolder/Map1Icon.png")));
+            Map2Image = new ImageIcon(ImageIO.read(new File("imagefolder/Map2Icon.png")));
+            Character1Image = new ImageIcon(ImageIO.read(new File("imagefolder/ColtIcon.png")));
+            Character2Image = new ImageIcon(ImageIO.read(new File("imagefolder/DynamikeIcon.png")));
         }catch(IOException e){
             System.out.println("Error loading images");
         }
