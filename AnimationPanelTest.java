@@ -231,10 +231,12 @@ public class AnimationPanelTest extends JPanel{
     //loading the proper character image
     public void loadCharacter(int intCharacterSelection){
         try{
+            //If selected character 2
             if(intCharacterSelection == 2){
                 imgCharacterRight = ImageIO.read(new File("Dynamike.png"));
                 imgCharacterLeft = ImageIO.read(new File("Dynamike(Left).png"));
                 System.out.println("loaded dynamike");
+            //If selected character 1
             }else if(intCharacterSelection == 1){
                 imgCharacterRight = ImageIO.read(new File("Colt.png"));
                 imgCharacterLeft = ImageIO.read(new File("Colt(Left).png"));
@@ -249,10 +251,12 @@ public class AnimationPanelTest extends JPanel{
     //loading the proper opponent image
     public void loadOpponent(int intOpponentSelection){
         try{
+            //Iff opponent selected character 2
             if(intOpponentSelection == 2){
                 imgOpponentRight = ImageIO.read(new File("Dynamike.png"));
                 imgOpponentLeft = ImageIO.read(new File("Dynamike(Left).png"));
                 System.out.println("loaded dynamike");
+            //If opponent selected character 1
             }else if(intOpponentSelection == 1){
                 imgOpponentRight = ImageIO.read(new File("Colt.png"));
                 imgOpponentLeft = ImageIO.read(new File("Colt(Left).png"));
