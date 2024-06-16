@@ -584,15 +584,12 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				System.out.println("Host has selected map, character selection");
 			//Getting chat responses
 			}else if(ssmMessage[0].equals("chat")){
-				if(ssmMessage[1].equals("server")){
-					view.ChatArea.append("[ Server ]: "+ssmMessage[3] + " has died\n");
-				}else{
 					view.ChatArea.append(ssmMessage[1] + ": " + ssmMessage[2] + "\n");
-				}
 			//reseting game for both players
 			}else if(ssmMessage[0].equals("reset")){
 				view.PlaySplitPane.setLeftComponent(view.AniPanel);
 				view.PlaySplitPane.setDividerLocation(720);
+				view.ChatArea.setText("");
 				view.theframe.setContentPane(view.MenuPanel);
 				view.theframe.revalidate();
 
