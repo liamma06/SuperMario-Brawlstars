@@ -295,10 +295,15 @@ public class AnimationPanelTest extends JPanel{
             imgHardBlock = ImageIO.read(new File("imagefolder/HardBlock.png"));
             //try loading flag image
             imgFlag = ImageIO.read(new File("imagefolder/Flag.png"));
+            //try loading menu image
             MenuImage = new ImageIcon(ImageIO.read(new File("imagefolder/MenuImage.png")));
+            //try loading map 1 image
             Map1Image = new ImageIcon(ImageIO.read(new File("imagefolder/Map1Icon.png")));
+            //try loading map 2 image
             Map2Image = new ImageIcon(ImageIO.read(new File("imagefolder/Map2Icon.png")));
+            //try loading character 1 image
             Character1Image = new ImageIcon(ImageIO.read(new File("imagefolder/ColtIcon.png")));
+            //try loading character 2 image
             Character2Image = new ImageIcon(ImageIO.read(new File("imagefolder/DynamikeIcon.png")));
         }catch(IOException e){
             System.out.println("Error loading images");
