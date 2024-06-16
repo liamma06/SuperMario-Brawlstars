@@ -57,8 +57,6 @@ public class AnimationPanelTest extends JPanel{
     public int intMapWidth = 3600;
     //Height of the map
     public int intMapHeight =720;
-    //Tile pixels
-    public int intTilePixels = 36;
 
     //area that is being viewed
     public double dblViewportX = 0;
@@ -81,12 +79,8 @@ public class AnimationPanelTest extends JPanel{
     //Opponent direction
     public String strOpponentDir = "right";
   
-    //Map
-	public int intMapX = 0;
-	public int intMapY = 0;
+    
 
-    //Timer
-    Timer timer;
 
 
     //Methods
