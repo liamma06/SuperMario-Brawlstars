@@ -138,8 +138,10 @@ public class AnimationPanelTest extends JPanel{
 		
         //Load and draw character image according to which way he/she is facing.
         if (strCharacterDir.equals("right")){
+                //Chage character image to proper side
 				imgCharacter = imgCharacterRight;
 		} else if (strCharacterDir.equals("left")){
+                //Change character image to proper side
 				imgCharacter = imgCharacterLeft;
 		} else {
 				imgCharacter = imgCharacterRight;
@@ -147,11 +149,13 @@ public class AnimationPanelTest extends JPanel{
 
         //load and draw opponent image according to which way he/she is facing.
         if (strOpponentDir.equals("right")){
+            //Change opponent image to proper side
             imgOpponent = imgOpponentRight;
         } else if (strOpponentDir.equals("left")){
+            //Change opponent image to proper side
             imgOpponent = imgOpponentLeft;
         }
-
+        //if character dies
 		if (intCharacterHP > 0){
 			g.drawImage(imgCharacter,(int)((dblCharacterX - dblViewportX)), (int)((dblCharacterY)), 36, 36, null);
 		} else {
@@ -166,6 +170,7 @@ public class AnimationPanelTest extends JPanel{
     public void loadMap(int intMapSelection){
         chrMap = new char[intMapWidth][intMapHeight];
         try{
+            //If first map chosen
             if(intMapSelection == 1){
                 br = new BufferedReader(new FileReader("Map1.csv"));
                 System.out.println("map 1 shown");
@@ -178,6 +183,7 @@ public class AnimationPanelTest extends JPanel{
 				} catch (IOException e){
 					System.out.println("Error loading map terrain.");
 				}
+            //If second map chosen
             }else if(intMapSelection == 2){
                 br = new BufferedReader(new FileReader("Map2.csv"));
                 System.out.println("map 2 shown");
@@ -190,6 +196,7 @@ public class AnimationPanelTest extends JPanel{
                 } catch (IOException e){
 					System.out.println("Error loading map terrain.");
 				}
+            //If third map chosen
             }else if(intMapSelection == 3){
                 br = new BufferedReader(new FileReader("Map3.csv"));
                 System.out.println("map 3 shown");
