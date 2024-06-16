@@ -177,7 +177,7 @@ public class AnimationPanelTest extends JPanel{
         try{
             //If first map chosen
             if(intMapSelection == 1){
-                br = new BufferedReader(new FileReader("Map1.csv"));
+                br = new BufferedReader(new FileReader("mapfolder/Map1.csv"));
                 System.out.println("map 1 shown");
                 dblCharacterX = 324;
 				dblCharacterY = 612; 
@@ -190,7 +190,7 @@ public class AnimationPanelTest extends JPanel{
 				}
             //If second map chosen
             }else if(intMapSelection == 2){
-                br = new BufferedReader(new FileReader("Map2.csv"));
+                br = new BufferedReader(new FileReader("mapfolder/Map2.csv"));
                 System.out.println("map 2 shown");
                 dblCharacterX = 324;
                 dblCharacterY = 252;
@@ -203,7 +203,7 @@ public class AnimationPanelTest extends JPanel{
 				}
             //If third map chosen
             }else if(intMapSelection == 3){
-                br = new BufferedReader(new FileReader("Map3.csv"));
+                br = new BufferedReader(new FileReader("mapfolder/Map3.csv"));
                 System.out.println("map 3 shown");
                 dblCharacterX = 324;
                 dblCharacterY = 612;
