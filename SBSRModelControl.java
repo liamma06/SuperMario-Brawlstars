@@ -124,14 +124,21 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			try{
 				ssm = new SuperSocketMaster(Integer.parseInt(portField),this);
 				ssm.connect();
+				//Set host username to username entered
 				strHostUsername = UsernameField;
 				System.out.println("Host: "+strHostUsername);
 				strConnectionResult = "(HOST) Your IP:" + ssm.getMyAddress();
+				//You are host
 				blnHost = true;
+				//Enable play back button
 				view.PlayBackButton.setEnabled(true);
+				//Number of players are 1
 				intNumPlayers = 1;
+				//Disable username field
 				view.UsernameField.setEnabled(false);
+				//You are connected
 				blnConnect = true;
+				//Disable help menu button
 				view.HelpMenuButton.setEnabled(false);
 			}catch(NumberFormatException e){
 				strConnectionResult = "Invalid Port Number";
@@ -145,18 +152,26 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			try{
 				ssm = new SuperSocketMaster(ipField,Integer.parseInt(portField),this);
 				ssm.connect();
+				//Set client username to entered username
 				strClientUsername = UsernameField;
 				System.out.println("Client: " +strClientUsername);
 				strConnectionResult = "(Client) Connected to: " + ipField;
+				//You are not host
 				blnHost = false;
+				//disable play back button
 				view.PlayBackButton.setEnabled(false);
+				//increase number of players by 1
 				intNumPlayers +=1;
+				//disable username field
 				view.UsernameField.setEnabled(false);
+				//You have connected
 				blnConnect = true;
+				//disable help menu button
 				view.HelpMenuButton.setEnabled(false);
 			}catch(NumberFormatException e){
 				strConnectionResult = "Invalid Port Number";
 			}
+		//If IP is entered but port is not entered
 		}else if(!ipField.equals("") && portField.equals("")){
 			strConnectionResult.equals("Need a portnumber or port/ip \n");
 		}
@@ -170,8 +185,10 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		intRaceTime = 0;
 		ssm.sendText("server,death,"+playerUsername);
 		view.ChatArea.append("[ Server ]: "+playerUsername + " has died\n");
+		//Stop timers
 		theTimer.stop();
 		RaceTimer.stop();
+		//Show death panel on left screen
 		view.PlaySplitPane.setLeftComponent(view.DeathPanel);
 		view.PlaySplitPane.setDividerLocation(720);
 		view.theframe.revalidate();	
@@ -190,8 +207,10 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		} else if (blnDemo == true){
 			view.ChatArea.append("[ Server ]: You have reached the end!\n");
 		}
+		//stop the timers
 		theTimer.stop();
 		RaceTimer.stop();
+		//set left part of screen to win screen
 		view.PlaySplitPane.setLeftComponent(view.WinPanel);
 		view.PlaySplitPane.setDividerLocation(720);
 		view.theframe.revalidate();	
@@ -201,8 +220,11 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 	//check play method
 	/**Used to check if both players are ready so game can begin */
 	public void checkPlay(){
+		//If there are 2 ready players
 		if(intPlayersReady == 2){
+			//Host is ready
 			blnHostReady = true;
+			//Client is ready
 			blnClientReady = true;
 			System.out.println("Both players are ready");
 		}
@@ -312,12 +334,16 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			
 		//If connect button is pressed in the connect panel
 		}else if(evt.getSource() == view.BackConnectButton){
+			//Go back to menu panel
 			view.theframe.setContentPane(view.MenuPanel);
 			view.theframe.revalidate();
 	
 		}else if(evt.getSource() == view.ConnectButton){
+			//Get entered IP
 			strIp = view.ipField.getText();
+			//Get entered port
 			strPort = view.portField.getText();
+			//Get entered username
 			strUsername = view.UsernameField.getText();
 			//getting the status result from the connect method
 			String strResult = connect(strIp, strPort, strUsername);
@@ -328,7 +354,9 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 
 		//Play menu button
 		}else if(evt.getSource() == view.PlayMenuButton){
+			//If you are host
 			if(blnHost){
+				//Go to map panel
 				view.theframe.setContentPane(view.MapPanel);
 				view.theframe.revalidate();
 			} else{
@@ -338,8 +366,10 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		//Map selection
 		//Level 1
 		}else if (evt.getSource() == view.Map1Button){
+			//Load map 1
 			view.AniPanel.loadMap(1);
 			ssm.sendText("Map,1");
+			//Go to character panel
 			view.theframe.setContentPane(view.CharacterPanel);
 			view.theframe.revalidate();
 			ssm.sendText("character");
@@ -351,8 +381,10 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			view.ChatArea.setText("");
 		//Level 2
 		}else if(evt.getSource() == view.Map2Button){
+			//Load map 2
 			view.AniPanel.loadMap(2);
 			ssm.sendText("Map,2");
+			//Go to character panel
 			view.theframe.setContentPane(view.CharacterPanel);
 			view.theframe.revalidate();
 			ssm.sendText("character");
@@ -365,7 +397,9 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 		
 		//Tutorial (Demo) Map
 		}else if(evt.getSource()==view.HelpMenuButton && blnConnect != true){
+			//Load map 3
 			view.AniPanel.loadMap(3);
+			//Go to character panel
 			view.theframe.setContentPane(view.CharacterPanel);
 			view.theframe.revalidate();
 			theTimer.restart();
@@ -377,14 +411,20 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			} else {
 				intClientCharacter = 1;
 			}
+			//Load fist character
 			view.AniPanel.loadCharacter(1);
+			//Go to play split pane
 			view.theframe.setContentPane(view.PlaySplitPane);
 			view.theframe.revalidate();
 			view.AniPanel.requestFocusInWindow();
 			view.AniPanel.setFocusable(true);
+			//Add key listener
 			view.AniPanel.addKeyListener(this);
+			//Do not show chat input
 			view.ChatTextInput.setVisible(false);
+			//Do not enable chat input
 			view.ChatTextInput.setEnabled(false);
+			//Enable play back button
 			view.PlayBackButton.setEnabled(true);
 			intJumpCooldown = 0;
 			blnjump = false;
@@ -420,9 +460,10 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 				intClientCharacter = 1;
 				System.out.println("Client Character: Colt");
 			}
+			//Load charcter 1
 			view.AniPanel.loadCharacter(1);
 			ssm.sendText("characterChosen,1");
-
+			//Show play split pane
 			view.theframe.setContentPane(view.PlaySplitPane);
 			view.theframe.revalidate();
 			view.AniPanel.requestFocusInWindow();
@@ -435,6 +476,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 
 			view.ChatArea.append("[ Server ]: "+strUsername + " has connected\n");
 			view.ChatArea.append("[ Server ]: "+intPlayersReady + " players connected\n");
+			//run check play method above
 			checkPlay();
 			theTimer.restart();
 			RaceTimer.restart();
@@ -455,7 +497,7 @@ public class SBSRModelControl extends JPanel implements ActionListener, KeyListe
 			}
 			view.AniPanel.loadCharacter(2);
 			ssm.sendText("characterChosen,2");
-
+			//Show play split plane
 			view.theframe.setContentPane(view.PlaySplitPane);
 			view.theframe.revalidate();
 			view.AniPanel.requestFocusInWindow();
