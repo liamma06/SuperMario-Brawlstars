@@ -111,13 +111,9 @@ public class SBSRViewTest{
 		public JButton Character2Button;
 		public JLabel Map1ImageLabel;
 		public JLabel Map2ImageLabel;
-		public ImageIcon Map1Image;
-		public ImageIcon Map2Image;
 
 		public JLabel Character1ImageLabel;
 		public JLabel Character2ImageLabel;
-		public ImageIcon Character1Image;
-		public ImageIcon Character2Image;
 
 		//Help screen
 		public JPanel HelpPanel = new JPanel();
