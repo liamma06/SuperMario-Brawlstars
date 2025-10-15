@@ -52,7 +52,7 @@ java -jar ./SuperMarioBrawlStars.jar
 
 ## 📝 Documentation
 
-[Here is our Javadocs API documentation in HTML format] (file:///Users/boscozhang/Desktop/SuperMarioBrawlstars/doc/SBSRModelControl.html)
+[Here is our Javadocs API documentation in HTML format](file:///Users/boscozhang/Desktop/SuperMarioBrawlstars/doc/SBSRModelControl.html)
 
 ### ${}$
 
