@@ -60,4 +60,21 @@ java -jar ./SuperMarioBrawlStars.jar
 
 ```
 SuperMario-Brawlstars/
-
+ │ 
+ ├── SuperMarioBrawlStars.jar
+ ├── SuperSocketMaster.java
+ │    
+ ├── imagefolder/
+ │    ├── Air.png
+ │    ├── Brick.png
+ │    ├── Colt.png
+ │    ├── Colt(Left).png
+ │    ├── ColtIcon.png
+ │    ├── Dirt.png
+ │    ├── Dynamike.png
+ │    ├── Dynamike(Left).png
+ │    ├── DynamikeIcon.png
+ │    ├── Flag.png
+ │    ├── Grass.png
+ │    └──
+```
