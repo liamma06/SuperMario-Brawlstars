@@ -29,9 +29,9 @@ java -jar ./SuperMarioBrawlStars.jar
 4. **Tutorial:**
 
    
-Before connecting, if you want to play the tutorial press the tutorial button on the menu screen, which is only available on single-player modes.
+   Before connecting, if you want to play the tutorial press the tutorial button on the menu screen, which is only available on single-player modes.
 
-6. **Multiplayer Mode: **
+6. **Multiplayer Mode:**
 
    
 Racing against friends is available for multi-player once the user connects to a network server (via socket programming) using the "connect" button.
