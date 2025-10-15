@@ -27,9 +27,13 @@ java -jar ./SuperMarioBrawlStars.jar
 ```
 
 4. **Tutorial:**
+
+   
 Before connecting, if you want to play the tutorial press the tutorial button on the menu screen, which is only available on single-player modes.
 
-5. **Multiplayer Mode: **
+6. **Multiplayer Mode: **
+
+   
 Racing against friends is available for multi-player once the user connects to a network server (via socket programming) using the "connect" button.
 If you want to host, enter a username and port number in the designated fields then press connect
 If you want to connect to the host as a client, enter a username and the host's IP address and port number; then press connect.
