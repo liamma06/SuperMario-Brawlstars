@@ -14,6 +14,13 @@ Here are some instructions on how to navigate our game:
 git clone https://github.com/BoscoZhangers/SuperMario-Brawlstars.git
 ```
 
+#### 2. Enter the repo:
+```
+cd SuperMario-Brawlstars
+```
+
+#### 3.
+
    Before connecting, if you want to play the tutorial press the tutorial button on the menu screen, which is only available on single-player modes.
   
 4. Racing against friends is available for multi-player once the user connects to a network server (via socket programming) using the "connect" button.
