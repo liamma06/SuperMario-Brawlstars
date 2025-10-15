@@ -5,6 +5,8 @@ For our ICS 4U1 Computer Science culminating CPT, we present a crossover game of
 
 In this game, you can choose from two maps and two characters. 
 
+### ${}$
+
 ## ⚙️ Instructions & Setup
 
 Here are some instructions on how to navigate our game:
