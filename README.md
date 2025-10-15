@@ -19,7 +19,10 @@ git clone https://github.com/BoscoZhangers/SuperMario-Brawlstars.git
 cd SuperMario-Brawlstars
 ```
 
-#### 3.
+#### 3. Run: 
+```
+java -jar ./SuperMarioBrawlStars.jar 
+```
 
    Before connecting, if you want to play the tutorial press the tutorial button on the menu screen, which is only available on single-player modes.
   
