@@ -12,19 +12,19 @@ In this game, you can choose from two maps and two characters.
 Here are some instructions on how to navigate our game:
 
 1. **Clone the repository:**
-```
-git clone https://github.com/BoscoZhangers/SuperMario-Brawlstars.git
-```
+   ```
+   git clone https://github.com/BoscoZhangers/SuperMario-Brawlstars.git
+   ```
 
 2. **Enter the repo:**
-```
-cd SuperMario-Brawlstars
-```
+   ```
+   cd SuperMario-Brawlstars
+   ```
 
 3. **Run:**
-```
-java -jar ./SuperMarioBrawlStars.jar 
-```
+   ```
+   java -jar ./SuperMarioBrawlStars.jar 
+   ```
 
 4. **Tutorial:**
 
@@ -34,9 +34,9 @@ java -jar ./SuperMarioBrawlStars.jar
 6. **Multiplayer Mode:**
 
    
-Racing against friends is available for multi-player once the user connects to a network server (via socket programming) using the "connect" button.
-If you want to host, enter a username and port number in the designated fields then press connect
-If you want to connect to the host as a client, enter a username and the host's IP address and port number; then press connect.
+   Racing against friends is available for multi-player once the user connects to a network server (via socket programming) using the "connect" button.
+   If you want to host, enter a username and port number in the designated fields then press connect
+   If you want to connect to the host as a client, enter a username and the host's IP address and port number; then press connect.
 
 7. As the host, press the back button then the play button
 
