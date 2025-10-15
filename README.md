@@ -5,6 +5,8 @@ For our ICS 4U1 Computer Science culminating CPT, we present a crossover game of
 
 In this game, you can choose from two maps and two characters. 
 
+### ${}$
+
 ## ⚙️ Instructions & Setup
 
 Here are some instructions on how to navigate our game:
@@ -12,6 +14,16 @@ Here are some instructions on how to navigate our game:
 #### 1. Clone the repository:
 ```
 git clone https://github.com/BoscoZhangers/SuperMario-Brawlstars.git
+```
+
+#### 2. Enter the repo:
+```
+cd SuperMario-Brawlstars
+```
+
+#### 3. Run: 
+```
+java -jar ./SuperMarioBrawlStars.jar 
 ```
 
    Before connecting, if you want to play the tutorial press the tutorial button on the menu screen, which is only available on single-player modes.
