@@ -48,4 +48,4 @@ java -jar ./SuperMarioBrawlStars.jar
 
 13. You are now ready to play. Have fun!!
 
-Here is the link to the Javadocs API Documentation in HTML format: file:///Users/boscozhang/Desktop/SuperMario-Brawlstars/doc/SBSRModelControl.html
+Here is the link to the Javadocs API Documentation in HTML format: (https://liamma06.github.io/SuperMario-Brawlstars/package-summary.html)
