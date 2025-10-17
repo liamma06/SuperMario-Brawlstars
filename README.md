@@ -11,28 +11,32 @@ In this game, you can choose from two maps and two characters.
 
 Here are some instructions on how to navigate our game:
 
-#### 1. Clone the repository:
-```
-git clone https://github.com/BoscoZhangers/SuperMario-Brawlstars.git
-```
+1. **Clone the repository:**
+   ```
+   git clone https://github.com/BoscoZhangers/SuperMario-Brawlstars.git
+   ```
 
-#### 2. Enter the repo:
-```
-cd SuperMario-Brawlstars
-```
+2. **Enter the repo:**
+   ```
+   cd SuperMario-Brawlstars
+   ```
 
-#### 3. Run: 
-```
-java -jar ./SuperMarioBrawlStars.jar 
-```
+3. **Run:**
+   ```
+   java -jar ./SuperMarioBrawlStars.jar 
+   ```
 
-   Before connecting, if you want to play the tutorial press the tutorial button on the menu screen, which is only available on single-player modes.
-  
-4. Racing against friends is available for multi-player once the user connects to a network server (via socket programming) using the "connect" button.
+4. **Tutorial:**
+
    
-5. If you want to host, enter a username and port number in the designated fields then press connect
+   Before connecting, if you want to play the tutorial press the tutorial button on the menu screen, which is only available on single-player modes.
 
-6. If you want to connect to the host as a client, enter a username and the host's IP address and port number; then press connect.
+6. **Multiplayer Mode:**
+
+   
+   Racing against friends is available for multi-player once the user connects to a network server (via socket programming) using the "connect" button.
+   If you want to host, enter a username and port number in the designated fields then press connect
+   If you want to connect to the host as a client, enter a username and the host's IP address and port number; then press connect.
 
 7. As the host, press the back button then the play button
 
@@ -48,4 +52,35 @@ java -jar ./SuperMarioBrawlStars.jar
 
 13. You are now ready to play. Have fun!!
 
-Here is the link to the Javadocs API Documentation in HTML format: https://liamma06.github.io/SuperMario-Brawlstars/SBSRModelControl.html
+### ${}$
+
+## 📝 Documentation
+
+[![Demo preview](documentation.png)](https://boscozhangers.github.io/SuperMario-Brawlstars/SBSRModelControl.html)
+
+
+
+### ${}$
+
+## 🧱 File Structure
+
+```
+SuperMario-Brawlstars/
+ │ 
+ ├── SuperMarioBrawlStars.jar
+ ├── SuperSocketMaster.java
+ │    
+ ├── imagefolder/
+ │    ├── Air.png
+ │    ├── Brick.png
+ │    ├── Colt.png
+ │    ├── Colt(Left).png
+ │    ├── ColtIcon.png
+ │    ├── Dirt.png
+ │    ├── Dynamike.png
+ │    ├── Dynamike(Left).png
+ │    ├── DynamikeIcon.png
+ │    ├── Flag.png
+ │    ├── Grass.png
+ │    └──
+```
