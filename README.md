@@ -56,7 +56,8 @@ Here are some instructions on how to navigate our game:
 
 ## 📝 Documentation
 
-[Here is our Javadocs API documentation in HTML format](https://boscozhangers.github.io/SuperMario-Brawlstars/SBSRModelControl.html)
+[![Check out our documentation here](https://boscozhangers.github.io/SuperMario-Brawlstars/documentation.png)](https://boscozhangers.github.io/SuperMario-Brawlstars/SBSRModelControl.html)
+
 
 ### ${}$
 
